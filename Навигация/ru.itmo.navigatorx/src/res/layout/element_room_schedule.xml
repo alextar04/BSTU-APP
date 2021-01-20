@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:paddingTop="4dp" android:paddingBottom="2dp" android:layout_width="-1" android:layout_height="-2">
+	<View android:id="false" android:background="199bff" android:layout_width="3dp" android:layout_height="0dp" app:layout_constraintBottom_toBottomOf="0" app:layout_constraintStart_toStartOf="0" app:layout_constraintTop_toTopOf="0" />
+	<TextView android:textSize="12sp" android:textStyle="0x1" android:textColor="resourceId:0x106000c" android:ellipsize="3" android:id="false" android:layout_width="0dp" android:layout_height="-2" android:text="10:00 - 11:30" android:maxLines="1" android:layout_marginStart="6dp" app:layout_constraintStart_toEndOf="false" app:layout_constraintTop_toTopOf="0" />
+	<TextView android:textStyle="0x1" android:textColor="resourceId:0x106000c" android:ellipsize="3" android:id="false" android:layout_width="0dp" android:layout_height="-2" android:text="Киселев Алексей Дониславович" android:maxLines="1" android:layout_marginStart="6dp" app:layout_constraintStart_toEndOf="false" app:layout_constraintTop_toBottomOf="false" />
+</androidx.constraintlayout.widget.ConstraintLayout>

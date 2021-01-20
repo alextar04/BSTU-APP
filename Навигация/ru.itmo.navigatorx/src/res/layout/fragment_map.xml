@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="-1" android:layout_height="-1">
+	<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="-1" android:layout_height="-1">
+		<androidx.appcompat.widget.Toolbar android:id="false" android:background="resourceId:0x106000b" android:layout_width="-1" android:layout_height="-2" app:layout_constraintTop_toTopOf="0">
+			<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="-1" android:layout_height="-2">
+				<ImageView android:id="false" android:layout_width="24dp" android:layout_height="-2" android:src="res/drawable-anydpi-v24/ic_position.xml" android:adjustViewBounds="true" app:layout_constraintBottom_toBottomOf="0" app:layout_constraintStart_toStartOf="0" app:layout_constraintTop_toTopOf="0" />
+				<TextView android:textSize="18sp" android:textStyle="0x1" android:textColor="resourceId:0x106000c" android:ellipsize="3" android:id="false" android:layout_width="0dp" android:layout_height="-2" android:text="Ломоносово" android:maxLines="1" android:layout_marginStart="8dp" android:layout_marginEnd="8dp" app:layout_constraintBottom_toBottomOf="0" app:layout_constraintEnd_toStartOf="false" app:layout_constraintStart_toEndOf="false" app:layout_constraintTop_toTopOf="0" />
+				<ImageView android:id="false" android:layout_width="40dp" android:layout_height="-2" android:src="res/drawable-anydpi-v24/ic_dots.xml" android:adjustViewBounds="true" android:layout_marginEnd="16dp" app:layout_constraintBottom_toBottomOf="0" app:layout_constraintEnd_toEndOf="0" app:layout_constraintTop_toTopOf="0" />
+			</androidx.constraintlayout.widget.ConstraintLayout>
+		</androidx.appcompat.widget.Toolbar>
+		<com.otaliastudios.zoom.ZoomMap android:id="false" android:background="resourceId:0x106000b" android:paddingTop="48dp" android:paddingBottom="128dp" android:clipToPadding="false" android:layout_width="-1" android:layout_height="0dp" android:paddingStart="32dp" android:paddingEnd="32dp" app:animationDuration="420" app:background="res/drawable/kronv_1.jpg" app:hasClickableChildren="false" app:layout_constraintBottom_toBottomOf="0" app:layout_constraintTop_toBottomOf="false" app:mapHeight="5000" app:mapWidth="5000" app:maxZoom="{4:1086324736}" app:maxZoomType="0" app:minZoom="{4:1065353216}" app:minZoomType="0" app:oneFingerScrollEnabled="true" app:overPinchable="false" app:overScrollHorizontal="false" app:overScrollVertical="false" app:pathAnimationDuration="1000" app:pathColor="199bff" app:threeFingersScrollEnabled="false" app:transformation="1" app:transformationGravity="0x11" app:twoFingersScrollEnabled="true" />
+	</androidx.constraintlayout.widget.ConstraintLayout>
+	<LinearLayout android:layout_gravity="0x30" android:orientation="1" android:background="res/drawable/shape_floor_picker.xml" android:layout_width="-2" android:layout_height="-2" android:layout_margin="12dp" android:elevation="12dp" app:layout_anchor="false" app:layout_anchorGravity="0x800035">
+		<ImageView android:layout_gravity="0x11" android:id="false" android:paddingTop="10dp" android:paddingBottom="10dp" android:layout_width="48dp" android:layout_height="-2" android:src="res/drawable-anydpi-v24/ic_triangle.xml" android:adjustViewBounds="true" android:paddingStart="14dp" android:paddingEnd="14dp" />
+		<TextView android:textSize="22sp" android:textColor="resourceId:0x106000c" android:layout_gravity="0x11" android:id="false" android:layout_width="-2" android:layout_height="-2" android:text="1" android:fontFamily="sans-serif-medium" />
+		<ImageView android:layout_gravity="0x11" android:id="false" android:paddingTop="10dp" android:paddingBottom="10dp" android:layout_width="48dp" android:layout_height="-2" android:src="res/drawable-anydpi-v24/ic_triangle.xml" android:adjustViewBounds="true" android:rotation="{4:1127481344}" android:paddingStart="14dp" android:paddingEnd="14dp" />
+	</LinearLayout>
+	<include layout="res/layout/navigation_bottom_sheet.xml" />
+	<include layout="res/layout/room_info_bottom_sheet.xml" />
+	<include layout="res/layout/room_picker_bottom_sheet.xml" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
