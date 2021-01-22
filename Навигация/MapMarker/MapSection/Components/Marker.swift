@@ -109,7 +109,7 @@ class Marker: UIView{
     }
     
     @objc func markerTapped(sender: UITapGestureRecognizer){
-        self.statusSelected = !self.statusSelected
+        self.statusSelected = true
         
         UIView.animate(withDuration: 0.2,
             animations: {
@@ -122,13 +122,19 @@ class Marker: UIView{
         })
         
         // Действия по открытию нижнего бара с информацией
-        
-        if self.statusSelected{
-            //print("Открылся нижний бар: \((sender.view as! Marker).text)")
-            NotificationCenter.default.post(name: Notification.Name("OpenBottomBar"), object: nil)
-        } else {
-            //print("Закрылся нижний бар: \((sender.view as! Marker).text)")
-            NotificationCenter.default.post(name: Notification.Name("CloseBottomBar"), object: nil)
-        }
+        let userInfo: [String: Any] = ["stickerText": ((sender.view as! Marker).text),
+                                       "tapRecognizer": sender]
+        NotificationCenter.default.post(name: Notification.Name("OpenBottomBar"), object: nil, userInfo: userInfo)
+    }
+    
+    
+    func closeMarker(sender: UITapGestureRecognizer){
+        self.statusSelected = false
+        // Действия по закрытию нижнего бара с информацией
+        let userInfo: [String: Any] = ["stickerText": ((sender.view as! Marker).text),
+                                       "tapRecognizer": sender]
+
+        NotificationCenter.default.post(name: Notification.Name("CloseBottomBar"), object: nil, userInfo: userInfo)
     }
 }
+    
