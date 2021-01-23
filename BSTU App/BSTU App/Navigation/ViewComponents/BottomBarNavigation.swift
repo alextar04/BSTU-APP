@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import RxSwift
 import RxCocoa
+import RxGesture
 
 class BottomBarNavigation: UIView{
     
@@ -68,10 +69,13 @@ class BottomBarNavigation: UIView{
         self.destinationButton.rx.tap.bind{
             NotificationCenter.default.post(name: Notification.Name("FillFinishPlace"), object: nil)
         }.disposed(by: disposeBag)
+ 
+        self.rx.panGesture()
+            .when(.began, .changed, .ended)
+            .subscribe(onNext: { recognizer in
+                self.bottomBarMoving(recognizer: recognizer)
+        }).disposed(by: disposeBag)
         
-        
-        let swipeBarRecognizer = UIPanGestureRecognizer(target: self, action: #selector(bottomBarMoving(recognizer:)))
-        self.addGestureRecognizer(swipeBarRecognizer)
         initAnimationObject()
     }
     

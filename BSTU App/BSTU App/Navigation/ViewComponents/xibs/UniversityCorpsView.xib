@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="UniversityCorp" customModule="BSTU_App" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="239" height="180"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D4f-oy-lDi" customClass="UniversityCorp" customModule="BSTU_App" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="239" height="180"/>
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="9rc-CV-NDI">
+                            <rect key="frame" x="0.0" y="0.0" width="239" height="180"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="9rc-CV-NDI" secondAttribute="bottom" id="6Cy-YZ-IwR"/>
+                        <constraint firstAttribute="height" constant="180" id="gGD-cG-Ro9"/>
+                        <constraint firstItem="9rc-CV-NDI" firstAttribute="top" secondItem="D4f-oy-lDi" secondAttribute="top" id="jsd-Yt-Yvy"/>
+                        <constraint firstItem="9rc-CV-NDI" firstAttribute="leading" secondItem="D4f-oy-lDi" secondAttribute="leading" id="rZw-b3-avX"/>
+                        <constraint firstAttribute="trailing" secondItem="9rc-CV-NDI" secondAttribute="trailing" id="zF3-5U-rdD"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="D4f-oy-lDi" secondAttribute="trailing" id="2Mr-x8-ksx"/>
+                <constraint firstItem="D4f-oy-lDi" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="C9s-0C-xU5"/>
+                <constraint firstItem="D4f-oy-lDi" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="ymf-xA-Xc5"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="corpsTable" destination="9rc-CV-NDI" id="Av6-Ky-InZ"/>
+            </connections>
+            <point key="canvasLocation" x="23.199999999999999" y="-65.667166416791616"/>
+        </view>
+    </objects>
+</document>

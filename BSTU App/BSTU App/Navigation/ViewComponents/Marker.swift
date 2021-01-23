@@ -8,6 +8,9 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
+import RxGesture
 
 
 class Marker: UIView{
@@ -19,12 +22,11 @@ class Marker: UIView{
     var containerView = UIView()
     var labelView = UILabel()
     var pointerView = UIImageView()
+    let disposeBag = DisposeBag()
     
     var statusSelected: Bool = false{
         didSet{
-            removeAllSubviews()
             setupViews()
-            setupContainerView()
         }
     }
     
@@ -43,7 +45,7 @@ class Marker: UIView{
         self.yPosition = position.1
         
         setupViews()
-        setupContainerView()
+        setupTapContainerView()
     }
     
     
@@ -77,10 +79,6 @@ class Marker: UIView{
                               setLabelStyle(backgroundColor: .white, textColor: .black, tintColor: .white)
         
         self.labelView.makeRounding()
-    }
-     
-        
-    func setupContainerView() {
         
         let labelWidth = Int(self.labelView.intrinsicContentSize.width) + 15
         let labelHeight = 30
@@ -101,10 +99,15 @@ class Marker: UIView{
         self.addSubview(containerView)
         self.frame = CGRect(x: xPosition, y: yPosition,
                             width: labelWidth, height: startPointerYPosition + pointerHeight)
+    }
+     
         
-        
-        let tapMarkerRecognizer = UITapGestureRecognizer(target: self, action: #selector(markerTapped(sender:)))
-        self.addGestureRecognizer(tapMarkerRecognizer)
+    func setupTapContainerView() {
+        self.rx.tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { sender in
+                self.markerTapped(sender: sender)
+        }).disposed(by: disposeBag)
     }
     
     @objc func markerTapped(sender: UITapGestureRecognizer){
