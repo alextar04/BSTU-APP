@@ -1,0 +1,6 @@
+framework module Pods_BSTU_App {
+  umbrella header "Pods-BSTU App-umbrella.h"
+
+  export *
+  module * { export * }
+}

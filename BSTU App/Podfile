@@ -1,0 +1,7 @@
+# Podfile
+use_frameworks!
+
+target 'BSTU App' do
+  pod 'RxSwift', '5.1.1'
+  pod 'RxCocoa', '5.1.1'
+end
