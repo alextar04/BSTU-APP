@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class UniversityCorpsCell: UITableViewCell{
+class UniversityCorpCellTable: UITableViewCell{
     @IBOutlet weak var nameCorpLabel: UILabel!
     @IBOutlet weak var selectImageStatus: UIImageView!
 }

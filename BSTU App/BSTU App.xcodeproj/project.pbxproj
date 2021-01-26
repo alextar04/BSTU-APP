@@ -13,6 +13,7 @@
 		CE037E6D25BC425700C50C16 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE037E6B25BC425700C50C16 /* Main.storyboard */; };
 		CE037E6F25BC425E00C50C16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE037E6E25BC425E00C50C16 /* Assets.xcassets */; };
 		CE037E7225BC425E00C50C16 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE037E7025BC425E00C50C16 /* LaunchScreen.storyboard */; };
+		CE16978625C064F10040AE95 /* LabelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE16978525C064F10040AE95 /* LabelExtensions.swift */; };
 		CE380A1925BC4F910028622B /* cabinet.png in Resources */ = {isa = PBXBuildFile; fileRef = CE380A0325BC4F910028622B /* cabinet.png */; };
 		CE380A1A25BC4F910028622B /* rectangle.png in Resources */ = {isa = PBXBuildFile; fileRef = CE380A0425BC4F910028622B /* rectangle.png */; };
 		CE380A1B25BC4F910028622B /* buffet.png in Resources */ = {isa = PBXBuildFile; fileRef = CE380A0525BC4F910028622B /* buffet.png */; };
@@ -32,9 +33,9 @@
 		CE380A2A25BC4F910028622B /* Marker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE380A1725BC4F910028622B /* Marker.swift */; };
 		CE380A2B25BC4F910028622B /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE380A1825BC4F910028622B /* NavigationController.swift */; };
 		CE380A2D25BC6B590028622B /* UniversityCorpsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE380A2C25BC6B590028622B /* UniversityCorpsView.xib */; };
-		CE380A2F25BC6CF30028622B /* UniversityCorps.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE380A2E25BC6CF30028622B /* UniversityCorps.swift */; };
+		CE380A2F25BC6CF30028622B /* UniversityCorpsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE380A2E25BC6CF30028622B /* UniversityCorpsView.swift */; };
 		CE380A3125BC70930028622B /* UniversityCorpCellTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE380A3025BC70930028622B /* UniversityCorpCellTable.xib */; };
-		CE380A3425BC72390028622B /* UniversityCorpsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE380A3325BC72390028622B /* UniversityCorpsCell.swift */; };
+		CE380A3425BC72390028622B /* UniversityCorpCellTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE380A3325BC72390028622B /* UniversityCorpCellTable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		CE037E6E25BC425E00C50C16 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE037E7125BC425E00C50C16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE037E7325BC425E00C50C16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE16978525C064F10040AE95 /* LabelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelExtensions.swift; sourceTree = "<group>"; };
 		CE380A0325BC4F910028622B /* cabinet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cabinet.png; sourceTree = "<group>"; };
 		CE380A0425BC4F910028622B /* rectangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rectangle.png; sourceTree = "<group>"; };
 		CE380A0525BC4F910028622B /* buffet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buffet.png; sourceTree = "<group>"; };
@@ -66,9 +68,9 @@
 		CE380A1725BC4F910028622B /* Marker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Marker.swift; sourceTree = "<group>"; };
 		CE380A1825BC4F910028622B /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		CE380A2C25BC6B590028622B /* UniversityCorpsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UniversityCorpsView.xib; sourceTree = "<group>"; };
-		CE380A2E25BC6CF30028622B /* UniversityCorps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityCorps.swift; sourceTree = "<group>"; };
+		CE380A2E25BC6CF30028622B /* UniversityCorpsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityCorpsView.swift; sourceTree = "<group>"; };
 		CE380A3025BC70930028622B /* UniversityCorpCellTable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UniversityCorpCellTable.xib; sourceTree = "<group>"; };
-		CE380A3325BC72390028622B /* UniversityCorpsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityCorpsCell.swift; sourceTree = "<group>"; };
+		CE380A3325BC72390028622B /* UniversityCorpCellTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityCorpCellTable.swift; sourceTree = "<group>"; };
 		F96B8A8E8421A5DF88E0A7CF /* Pods_BSTU_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BSTU_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -166,6 +168,7 @@
 				CE380A0E25BC4F910028622B /* ImageExtensions.swift */,
 				CE380A0F25BC4F910028622B /* ButtonExtensions.swift */,
 				CE380A1025BC4F910028622B /* TextFieldExtensions.swift */,
+				CE16978525C064F10040AE95 /* LabelExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -196,8 +199,8 @@
 		CE380A3225BC71E80028622B /* UniversityCorps */ = {
 			isa = PBXGroup;
 			children = (
-				CE380A2E25BC6CF30028622B /* UniversityCorps.swift */,
-				CE380A3325BC72390028622B /* UniversityCorpsCell.swift */,
+				CE380A2E25BC6CF30028622B /* UniversityCorpsView.swift */,
+				CE380A3325BC72390028622B /* UniversityCorpCellTable.swift */,
 			);
 			path = UniversityCorps;
 			sourceTree = "<group>";
@@ -334,13 +337,14 @@
 				CE380A2525BC4F910028622B /* TextFieldExtensions.swift in Sources */,
 				CE380A2125BC4F910028622B /* ViewExtensions.swift in Sources */,
 				CE380A2825BC4F910028622B /* BottomBarNavigation.swift in Sources */,
-				CE380A3425BC72390028622B /* UniversityCorpsCell.swift in Sources */,
+				CE380A3425BC72390028622B /* UniversityCorpCellTable.swift in Sources */,
 				CE037E6625BC425700C50C16 /* AppDelegate.swift in Sources */,
 				CE380A2325BC4F910028622B /* ImageExtensions.swift in Sources */,
 				CE380A2B25BC4F910028622B /* NavigationController.swift in Sources */,
 				CE380A2425BC4F910028622B /* ButtonExtensions.swift in Sources */,
-				CE380A2F25BC6CF30028622B /* UniversityCorps.swift in Sources */,
+				CE380A2F25BC6CF30028622B /* UniversityCorpsView.swift in Sources */,
 				CE380A2A25BC4F910028622B /* Marker.swift in Sources */,
+				CE16978625C064F10040AE95 /* LabelExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

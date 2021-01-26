@@ -87,7 +87,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
-                <outlet property="chooseCorp" destination="zvp-bL-JBu" id="OhA-Dh-BFC"/>
+                <outlet property="chooseCorpButton" destination="zvp-bL-JBu" id="ZxF-Lh-ULW"/>
                 <outlet property="finishPlaceTextField" destination="obO-bQ-m5j" id="qQl-bT-tbV"/>
                 <outlet property="nameHousingLabel" destination="amj-tp-sSh" id="cbD-Z3-pKf"/>
                 <outlet property="startPlaceTextField" destination="yOu-py-U8S" id="vdZ-EG-cbk"/>
