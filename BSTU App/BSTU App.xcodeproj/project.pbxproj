@@ -14,6 +14,7 @@
 		CE037E6F25BC425E00C50C16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE037E6E25BC425E00C50C16 /* Assets.xcassets */; };
 		CE037E7225BC425E00C50C16 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE037E7025BC425E00C50C16 /* LaunchScreen.storyboard */; };
 		CE16978625C064F10040AE95 /* LabelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE16978525C064F10040AE95 /* LabelExtensions.swift */; };
+		CE16978825C151710040AE95 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE16978725C151710040AE95 /* ColorExtensions.swift */; };
 		CE380A1925BC4F910028622B /* cabinet.png in Resources */ = {isa = PBXBuildFile; fileRef = CE380A0325BC4F910028622B /* cabinet.png */; };
 		CE380A1A25BC4F910028622B /* rectangle.png in Resources */ = {isa = PBXBuildFile; fileRef = CE380A0425BC4F910028622B /* rectangle.png */; };
 		CE380A1B25BC4F910028622B /* buffet.png in Resources */ = {isa = PBXBuildFile; fileRef = CE380A0525BC4F910028622B /* buffet.png */; };
@@ -49,6 +50,7 @@
 		CE037E7125BC425E00C50C16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE037E7325BC425E00C50C16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE16978525C064F10040AE95 /* LabelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelExtensions.swift; sourceTree = "<group>"; };
+		CE16978725C151710040AE95 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		CE380A0325BC4F910028622B /* cabinet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cabinet.png; sourceTree = "<group>"; };
 		CE380A0425BC4F910028622B /* rectangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rectangle.png; sourceTree = "<group>"; };
 		CE380A0525BC4F910028622B /* buffet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buffet.png; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				CE380A0F25BC4F910028622B /* ButtonExtensions.swift */,
 				CE380A1025BC4F910028622B /* TextFieldExtensions.swift */,
 				CE16978525C064F10040AE95 /* LabelExtensions.swift */,
+				CE16978725C151710040AE95 /* ColorExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 				CE380A2F25BC6CF30028622B /* UniversityCorpsView.swift in Sources */,
 				CE380A2A25BC4F910028622B /* Marker.swift in Sources */,
 				CE16978625C064F10040AE95 /* LabelExtensions.swift in Sources */,
+				CE16978825C151710040AE95 /* ColorExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

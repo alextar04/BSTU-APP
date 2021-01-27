@@ -13,3 +13,10 @@ class UniversityCorpCellTable: UITableViewCell{
     @IBOutlet weak var nameCorpLabel: UILabel!
     @IBOutlet weak var selectImageStatus: UIImageView!
 }
+
+class UniversityCorp{
+    var name: String!
+    init(name: String) {
+        self.name = name
+    }
+}

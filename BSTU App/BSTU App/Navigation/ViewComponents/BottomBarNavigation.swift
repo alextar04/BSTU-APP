@@ -24,7 +24,7 @@ class BottomBarNavigation: UIView{
     @IBOutlet weak var destinationButton: UIButton!
 
     var maxHeightBar: CGFloat!
-    var animatorDown: UIViewPropertyAnimator!
+    var animator: UIViewPropertyAnimator!
     let disposeBag = DisposeBag()
     
     required init?(coder: NSCoder) {
@@ -40,7 +40,7 @@ class BottomBarNavigation: UIView{
     }
     
     func initAnimationObject(){
-        self.animatorDown = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
+        self.animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
             self.frame = self.frame.offsetBy(dx: 0, dy: self.maxHeightBar)
         }
     }
@@ -94,31 +94,30 @@ class BottomBarNavigation: UIView{
     }
     
     func startMovingAnimation(){
-        self.animatorDown.pauseAnimation()
+        self.animator.pauseAnimation()
     }
     
     func updateMovingAnimation(recognizer: UIPanGestureRecognizer) {
         let translation = recognizer.translation(in: self)
         let fractionComplete = translation.y / self.maxHeightBar
-        self.animatorDown.fractionComplete = fractionComplete
+        self.animator.fractionComplete = fractionComplete
     }
     
     func endAnimation() {
-        if animatorDown.fractionComplete > 0.2{
-            animatorDown.continueAnimation(withTimingParameters: nil, durationFactor: 0)
-            animatorDown.addCompletion{ _ in
+        if animator.fractionComplete > 0.2{
+            animator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
+            animator.addCompletion{ _ in
                 let userInfo: [String: Any] = ["staySelected": true]
                 NotificationCenter.default.post(name: Notification.Name("CloseBottomBar"), object: nil, userInfo: userInfo)
             }
         } else {
-            animatorDown.isReversed = true
-            animatorDown.continueAnimation(withTimingParameters: nil, durationFactor: 0)
+            animator.isReversed = true
+            animator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
         }
         initAnimationObject()
     }
     
 }
-
 
 
 class PremiseViewModel {

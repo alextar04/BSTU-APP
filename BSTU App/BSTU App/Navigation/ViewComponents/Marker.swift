@@ -26,6 +26,7 @@ class Marker: UIView{
     
     var statusSelected: Bool = false{
         didSet{
+            removeAllSubviews()
             setupViews()
         }
     }
@@ -92,7 +93,7 @@ class Marker: UIView{
                                         width: pointerWidth, height: pointerHeight)
         
         
-        containerView.makeShadow(width: labelWidth,
+        self.makeShadow(width: labelWidth,
                                  heigth: startPointerYPosition + pointerHeight)
         containerView.addSubview(self.labelView)
         containerView.addSubview(self.pointerView)

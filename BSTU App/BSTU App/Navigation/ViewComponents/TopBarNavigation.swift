@@ -14,7 +14,7 @@ import RxGesture
 
 class TopBarNavigation: UIView{
     
-    @IBOutlet weak var nameHousingLabel: UILabel!
+    @IBOutlet weak var nameCorpLabel: UILabel!
     @IBOutlet weak var chooseCorpButton: UIImageView!
     var chooseCorpButtonIsActive: Bool = false
     
@@ -22,6 +22,7 @@ class TopBarNavigation: UIView{
     @IBOutlet weak var finishPlaceTextField: UITextField!
     
     var universityCorpView: UniversityCorpsView!
+    var chooseCorpBackground: UIView!
     let disposeBag = DisposeBag()
     
     func setupView(){
@@ -31,45 +32,83 @@ class TopBarNavigation: UIView{
         self.chooseCorpButton.rx.tapGesture()
             .when(.recognized)
             .subscribe(onNext: { _ in
-                if !self.chooseCorpButtonIsActive{
+                    
+                // Экран под окном выбора корпуса
+                self.setGrayScreenUnderCorpChoosenView()
+                    
+                if self.universityCorpView == nil{
                     self.universityCorpView = Bundle.main.loadNibNamed("UniversityCorpsView", owner: self, options: nil)?.first as? UniversityCorpsView
-                    let parentVC = self.parentViewController
-                    let cellHeight: Int = 44
-                    let countCells: Int = 2
-                    self.universityCorpView?.frame = CGRect(x: (Double((parentVC?.view.frame.size.width)!) / 2) - 150,
+                    self.universityCorpView?.setupView()
+                }
+                
+                let cellHeight = self.universityCorpView.cellHeigth
+                let headerHeight = self.universityCorpView.headerHeigth
+                let countCells = self.universityCorpView.corpsCount
+                let parentVC = self.parentViewController
+                self.universityCorpView?.frame = CGRect(x: (Double((parentVC?.view.frame.size.width)!) / 2) - 150,
                                                        y: Double((parentVC?.view.frame.size.height)!),
                                                        width: 300,
-                                                       height: Double(cellHeight * countCells) + 26)
-                    self.universityCorpView?.setupView()
-                    self.parentViewController?.view.addSubview(self.universityCorpView!)
+                                                       height: Double(cellHeight * countCells) + Double(headerHeight))
+                
+                parentVC!.view.addSubview(self.universityCorpView!)
                     
-                    let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
-                        self.universityCorpView?.frame = self.universityCorpView?.frame
-                            .offsetBy(dx: 0, dy: -CGFloat((cellHeight * countCells) + 46)) as! CGRect
+                let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
+                    self.universityCorpView?.frame = self.universityCorpView?.frame
+                        .offsetBy(dx: 0, dy: -CGFloat((cellHeight * countCells) + headerHeight + 20)) as! CGRect
                     }
-                    animator.startAnimation()
-                    self.chooseCorpButtonIsActive = true
-                } else {
-                    let cellHeight: Int = 44
-                    let countCells: Int = 2
-                    let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
-                        self.universityCorpView?.frame = self.universityCorpView?.frame
-                            .offsetBy(dx: 0, dy: CGFloat((cellHeight * countCells) + 56)) as! CGRect
-                    }
-                    animator.startAnimation()
-                    animator.addCompletion({ _ in
-                        let subviews = self.parentViewController?.view.subviews
-                        for view in subviews!{
-                            if view is UniversityCorpsView{
-                                view.removeFromSuperview()
-                            }
-                        }
-                    })
-                    self.chooseCorpButtonIsActive = false
-                }
+                animator.startAnimation()
                 
         }).disposed(by: disposeBag)
     }
     
+    
+    // MARK: Экран под окном выбора корпуса
+    func setGrayScreenUnderCorpChoosenView(){
+        let parentVC = self.parentViewController
+        self.chooseCorpBackground = UIView()
+        chooseCorpBackground.frame = CGRect(x: 0, y: 0,
+                                            width: Double((parentVC?.view.frame.width)!),
+                                            height: Double((parentVC?.view.frame.height)!))
+        chooseCorpBackground.backgroundColor = .clear
+        parentVC!.view.addSubview(chooseCorpBackground)
+        
+        UIView.animate(withDuration: 0.3) {
+            self.chooseCorpBackground.backgroundColor = .corpBackgroundGrayColor
+        }
+        
+        chooseCorpBackground.rx.tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { _ in
+                let cellHeight = self.universityCorpView.cellHeigth
+                let headerHeight = self.universityCorpView.headerHeigth
+                let countCells = self.universityCorpView.corpsCount
+                let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
+                    self.universityCorpView?.frame = self.universityCorpView?.frame
+                        .offsetBy(dx: 0, dy: CGFloat((cellHeight * countCells) + headerHeight + 30)) as! CGRect
+                }
+                animator.startAnimation()
+                
+                UIView.animate(withDuration: 0.3,
+                               animations: {
+                                self.chooseCorpBackground.backgroundColor = .clear
+                },
+                               completion: { _ in
+                                self.chooseCorpBackground.removeFromSuperview()
+                })
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    
+    // MARK: Закрытие экрана под окном выбора корпуса
+    func closeGrayScreenUnderCorpChoosenView(){
+        UIView.animate(withDuration: 0.3,
+                       animations: {
+                        self.chooseCorpBackground.backgroundColor = .clear
+        },
+                       completion: { _ in
+                        self.chooseCorpBackground.removeFromSuperview()
+        })
+    }
     
 }

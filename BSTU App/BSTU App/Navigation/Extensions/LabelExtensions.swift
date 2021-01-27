@@ -13,7 +13,7 @@ extension UILabel{
     func setBoldText(placeholderText: String){
         self.attributedText = NSAttributedString(string: placeholderText, attributes: [
             .foregroundColor: UIColor.lightGray,
-            .font: UIFont.boldSystemFont(ofSize: 18.0)
+            .font: UIFont.boldSystemFont(ofSize: 15.0)
         ])
         self.textAlignment = .center
     }

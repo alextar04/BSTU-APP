@@ -8,6 +8,10 @@
 
 import UIKit
 
+import RxGesture
+import RxSwift
+import RxCocoa
+
 class NavigationController: UIViewController {
     
     var bottomBarView: BottomBarNavigation? = nil
@@ -38,6 +42,8 @@ class NavigationController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(fillStartPlaceLabel), name: Notification.Name("FillStartPlace"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(fillFinishPlaceLabel), name: Notification.Name("FillFinishPlace"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(changeCorp), name: Notification.Name("ChangeCorp"), object: nil)
         
         addTopBarView()
     }
@@ -123,6 +129,7 @@ class NavigationController: UIViewController {
     
     
     // MARK: Добавление верхнего бара
+    let disposeBag = DisposeBag()
     func addTopBarView(){
         self.topBarView = Bundle.main.loadNibNamed("TopBarView", owner: self, options: nil)?.first as? TopBarNavigation
         self.topBarView.setupView()
@@ -139,7 +146,7 @@ class NavigationController: UIViewController {
     }
     
     
-    // MARK: Функция выбора пункта назначение
+    // MARK: Функция выбора пункта назначения
     @objc func fillFinishPlaceLabel(){
         self.topBarView.finishPlaceTextField.text = self.currentSelectedName
         closeBottomBarAfterChoosingPlace()
@@ -157,4 +164,35 @@ class NavigationController: UIViewController {
         animator.startAnimation()
     }
     
+    
+    // MARK: Функция смены корпуса
+    @objc func changeCorp(_ notification: NSNotification){
+        if let nameCorp = notification.userInfo!["nameCorp"] as? String{
+            self.topBarView.nameCorpLabel.text = nameCorp
+        }
+        
+        // Загрузка карты!!
+        self.topBarView.chooseCorpBackground.isUserInteractionEnabled = false
+        
+        for view in self.view.subviews{
+            if let universityCorpsView = view as? UniversityCorpsView {
+                
+                let cellHeight = universityCorpsView.cellHeigth
+                let headerHeight = universityCorpsView.headerHeigth
+                let countCells = universityCorpsView.corpsCount
+                
+                let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
+                    universityCorpsView.frame = universityCorpsView.frame
+                        .offsetBy(dx: 0, dy: CGFloat((cellHeight * countCells) + headerHeight + 30)) as! CGRect
+                }
+                animator.startAnimation(afterDelay: 1)
+                
+                animator.addCompletion({ _ in
+                    self.topBarView.closeGrayScreenUnderCorpChoosenView()
+                    self.topBarView.chooseCorpBackground.isUserInteractionEnabled = true
+                    universityCorpsView.removeFromSuperview()
+                })
+            }
+        }
+   }
 }
