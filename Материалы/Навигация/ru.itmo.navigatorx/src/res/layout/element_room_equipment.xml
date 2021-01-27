@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:textColor="199bff" android:ellipsize="2" android:background="res/drawable/shape_environment.xml" android:layout_width="-2" android:layout_height="-2" android:singleLine="true" />

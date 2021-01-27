@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<transition xmlns:android="http://schemas.android.com/apk/res/android">
-	<item android:drawable="resourceId:0x7f070034" />
-	<item android:drawable="res/drawable-mdpi-v4/abc_list_longpressed_holo.9.png" />
-</transition>
