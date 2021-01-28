@@ -18,4 +18,8 @@ extension UIColor{
         let color: UIColor = .lightGray
         return color.withAlphaComponent(0.4)
     }
+    
+    static var cancelInputPremiseColor: UIColor{
+        return UIColor(red: 229.0/255.0, green: 229.0/255.0, blue: 234.0/255.0, alpha: 1.0)
+    }
 }

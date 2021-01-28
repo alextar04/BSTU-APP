@@ -14,4 +14,12 @@ extension UIButton{
         self.layer.cornerRadius = 5.0
         self.layer.masksToBounds = true
     }
+    
+    func makeCancelPremiseInputtingView(){
+        self.setTitle("Отмена", for: .normal)
+        self.setTitleColor(.black, for: .normal)
+        self.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18.0)
+        self.backgroundColor = .cancelInputPremiseColor
+        self.makeRoundingButton()
+    }
 }

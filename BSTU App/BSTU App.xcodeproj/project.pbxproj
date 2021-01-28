@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		149150BE2D4CA194A93C0868 /* Pods_BSTU_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F96B8A8E8421A5DF88E0A7CF /* Pods_BSTU_App.framework */; };
+		CE01CC9A25C29E59001388B9 /* SearchPremiseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE01CC9925C29E59001388B9 /* SearchPremiseView.xib */; };
+		CE01CC9C25C29F75001388B9 /* SearchPremiseCellTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE01CC9B25C29F75001388B9 /* SearchPremiseCellTable.xib */; };
+		CE01CC9F25C2A496001388B9 /* SearchPremiseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE01CC9E25C2A496001388B9 /* SearchPremiseView.swift */; };
+		CE01CCA125C2A4BB001388B9 /* SearchPremiseCellTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE01CCA025C2A4BB001388B9 /* SearchPremiseCellTable.swift */; };
 		CE037E6625BC425700C50C16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE037E6525BC425700C50C16 /* AppDelegate.swift */; };
 		CE037E6A25BC425700C50C16 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE037E6925BC425700C50C16 /* ViewController.swift */; };
 		CE037E6D25BC425700C50C16 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE037E6B25BC425700C50C16 /* Main.storyboard */; };
@@ -42,6 +46,10 @@
 /* Begin PBXFileReference section */
 		6D108528D00D09DA3E838396 /* Pods-BSTU App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BSTU App.release.xcconfig"; path = "Target Support Files/Pods-BSTU App/Pods-BSTU App.release.xcconfig"; sourceTree = "<group>"; };
 		ABF099B5FE0345803994AC74 /* Pods-BSTU App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BSTU App.debug.xcconfig"; path = "Target Support Files/Pods-BSTU App/Pods-BSTU App.debug.xcconfig"; sourceTree = "<group>"; };
+		CE01CC9925C29E59001388B9 /* SearchPremiseView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchPremiseView.xib; sourceTree = "<group>"; };
+		CE01CC9B25C29F75001388B9 /* SearchPremiseCellTable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchPremiseCellTable.xib; sourceTree = "<group>"; };
+		CE01CC9E25C2A496001388B9 /* SearchPremiseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPremiseView.swift; sourceTree = "<group>"; };
+		CE01CCA025C2A4BB001388B9 /* SearchPremiseCellTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPremiseCellTable.swift; sourceTree = "<group>"; };
 		CE037E6225BC425700C50C16 /* BSTU App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BSTU App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE037E6525BC425700C50C16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE037E6925BC425700C50C16 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +111,15 @@
 				F96B8A8E8421A5DF88E0A7CF /* Pods_BSTU_App.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE01CC9D25C2A457001388B9 /* SearchPremise */ = {
+			isa = PBXGroup;
+			children = (
+				CE01CC9E25C2A496001388B9 /* SearchPremiseView.swift */,
+				CE01CCA025C2A4BB001388B9 /* SearchPremiseCellTable.swift */,
+			);
+			path = SearchPremise;
 			sourceTree = "<group>";
 		};
 		CE037E5925BC425700C50C16 = {
@@ -179,6 +196,7 @@
 		CE380A1125BC4F910028622B /* ViewComponents */ = {
 			isa = PBXGroup;
 			children = (
+				CE01CC9D25C2A457001388B9 /* SearchPremise */,
 				CE380A3225BC71E80028622B /* UniversityCorps */,
 				CE380A1225BC4F910028622B /* xibs */,
 				CE380A1525BC4F910028622B /* BottomBarNavigation.swift */,
@@ -195,6 +213,8 @@
 				CE380A1425BC4F910028622B /* BottomBarView.xib */,
 				CE380A2C25BC6B590028622B /* UniversityCorpsView.xib */,
 				CE380A3025BC70930028622B /* UniversityCorpCellTable.xib */,
+				CE01CC9925C29E59001388B9 /* SearchPremiseView.xib */,
+				CE01CC9B25C29F75001388B9 /* SearchPremiseCellTable.xib */,
 			);
 			path = xibs;
 			sourceTree = "<group>";
@@ -272,6 +292,7 @@
 				CE380A1925BC4F910028622B /* cabinet.png in Resources */,
 				CE380A2025BC4F910028622B /* wardrobe.png in Resources */,
 				CE380A1B25BC4F910028622B /* buffet.png in Resources */,
+				CE01CC9C25C29F75001388B9 /* SearchPremiseCellTable.xib in Resources */,
 				CE380A2725BC4F910028622B /* BottomBarView.xib in Resources */,
 				CE380A1A25BC4F910028622B /* rectangle.png in Resources */,
 				CE380A1E25BC4F910028622B /* marker_pointer.png in Resources */,
@@ -280,6 +301,7 @@
 				CE380A1F25BC4F910028622B /* wc.png in Resources */,
 				CE380A1C25BC4F910028622B /* building.png in Resources */,
 				CE037E7225BC425E00C50C16 /* LaunchScreen.storyboard in Resources */,
+				CE01CC9A25C29E59001388B9 /* SearchPremiseView.xib in Resources */,
 				CE037E6F25BC425E00C50C16 /* Assets.xcassets in Resources */,
 				CE037E6D25BC425700C50C16 /* Main.storyboard in Resources */,
 				CE380A3125BC70930028622B /* UniversityCorpCellTable.xib in Resources */,
@@ -337,6 +359,7 @@
 			files = (
 				CE037E6A25BC425700C50C16 /* ViewController.swift in Sources */,
 				CE380A2925BC4F910028622B /* TopBarNavigation.swift in Sources */,
+				CE01CC9F25C2A496001388B9 /* SearchPremiseView.swift in Sources */,
 				CE380A2525BC4F910028622B /* TextFieldExtensions.swift in Sources */,
 				CE380A2125BC4F910028622B /* ViewExtensions.swift in Sources */,
 				CE380A2825BC4F910028622B /* BottomBarNavigation.swift in Sources */,
@@ -344,6 +367,7 @@
 				CE037E6625BC425700C50C16 /* AppDelegate.swift in Sources */,
 				CE380A2325BC4F910028622B /* ImageExtensions.swift in Sources */,
 				CE380A2B25BC4F910028622B /* NavigationController.swift in Sources */,
+				CE01CCA125C2A4BB001388B9 /* SearchPremiseCellTable.swift in Sources */,
 				CE380A2425BC4F910028622B /* ButtonExtensions.swift in Sources */,
 				CE380A2F25BC6CF30028622B /* UniversityCorpsView.swift in Sources */,
 				CE380A2A25BC4F910028622B /* Marker.swift in Sources */,

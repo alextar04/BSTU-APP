@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SearchPremiseView" customModule="BSTU_App" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="291" height="222"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="26" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="76q-l0-FDy">
+                    <rect key="frame" x="0.0" y="0.0" width="291" height="222"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="222" id="1rL-sZ-Yle"/>
+                    </constraints>
+                    <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="76q-l0-FDy" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="9GB-8C-tuW"/>
+                <constraint firstItem="76q-l0-FDy" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="RRM-UP-qGy"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="76q-l0-FDy" secondAttribute="trailing" id="W4P-az-rs8"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="premiseTableView" destination="76q-l0-FDy" id="R3A-E7-QLM"/>
+                <outlet property="premiseTableViewHeightConstraint" destination="1rL-sZ-Yle" id="4rz-6r-v2b"/>
+            </connections>
+            <point key="canvasLocation" x="44" y="-68.365817091454275"/>
+        </view>
+    </objects>
+</document>

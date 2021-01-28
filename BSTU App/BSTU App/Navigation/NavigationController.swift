@@ -42,6 +42,7 @@ class NavigationController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(fillStartPlaceLabel), name: Notification.Name("FillStartPlace"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(fillFinishPlaceLabel), name: Notification.Name("FillFinishPlace"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(changeCorp), name: Notification.Name("ChangeCorp"), object: nil)
         
@@ -129,11 +130,10 @@ class NavigationController: UIViewController {
     
     
     // MARK: Добавление верхнего бара
-    let disposeBag = DisposeBag()
     func addTopBarView(){
         self.topBarView = Bundle.main.loadNibNamed("TopBarView", owner: self, options: nil)?.first as? TopBarNavigation
-        self.topBarView.setupView()
-        self.topBarView?.frame = CGRect(x: 0, y: 0,
+        self.topBarView.setupView(navigationControllerHeight: self.view.frame.height)
+        self.topBarView?.frame = CGRect(x: 0, y: (UIApplication.shared.windows.first?.safeAreaInsets.top)!,
                                            width: self.view.frame.width, height: (topBarView?.frame.height)!)
         self.view.addSubview(self.topBarView)
     }
@@ -167,6 +167,7 @@ class NavigationController: UIViewController {
     
     // MARK: Функция смены корпуса
     @objc func changeCorp(_ notification: NSNotification){
+        
         if let nameCorp = notification.userInfo!["nameCorp"] as? String{
             self.topBarView.nameCorpLabel.text = nameCorp
         }
@@ -195,4 +196,12 @@ class NavigationController: UIViewController {
             }
         }
    }
+    
+    // MARK: Функция подсчета высоты клавиатуры
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            self.topBarView.keyboardHeight = keyboardRectangle.height
+        }
+    }
 }
