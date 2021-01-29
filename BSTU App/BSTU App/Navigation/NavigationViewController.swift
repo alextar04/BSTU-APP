@@ -17,6 +17,7 @@ class NavigationViewController: UIViewController {
     var viewModel: NavigationViewModel!
     var bottomBarView: BottomBarNavigation? = nil
     var topBarView: TopBarNavigation!
+    var storeySwitcherView: StoreySwitcherView!
     
     var currentSelectedName: String!
     var changeMarkerStatus = false
@@ -24,7 +25,6 @@ class NavigationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.viewModel = NavigationViewModel()
         
         let someView = Marker(position: (50, 100), text: "153a")
@@ -50,6 +50,7 @@ class NavigationViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(changeCorp), name: Notification.Name("ChangeCorp"), object: nil)
         
         self.addTopBarView()
+        self.addStoreySwitcherView()
     }
     
     
@@ -78,6 +79,14 @@ class NavigationViewController: UIViewController {
                     .offsetBy(dx: 0, dy: -heightBottomBar!) as! CGRect
             }
             animator.startAnimation()
+            
+            // Изменить положение переключателя этажей
+            let animatorSwitcherStorey = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
+                self.storeySwitcherView?.frame = self.storeySwitcherView?.frame
+                    .offsetBy(dx: 0, dy: -heightBottomBar!) as! CGRect
+            }
+            animatorSwitcherStorey.startAnimation(afterDelay: TimeInterval(0.3))
+            
         } else {
             self.bottomBarView?.frame = self.bottomBarView?.frame
                 .offsetBy(dx: 0, dy: -heightBottomBar!) as! CGRect
@@ -97,6 +106,15 @@ class NavigationViewController: UIViewController {
                 if let _ = notification.userInfo!["staySelected"] as? Bool{
                     view.removeFromSuperview()
                     self.bottomBarIsOpen = false
+                    
+                    // Изменить положение переключателя этажей
+                    let heightBottomBar = bottomBarView?.frame.height
+                    let animatorSwitcherStorey = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
+                        self.storeySwitcherView?.frame = self.storeySwitcherView?.frame
+                            .offsetBy(dx: 0, dy: heightBottomBar!) as! CGRect
+                    }
+                    animatorSwitcherStorey.startAnimation(afterDelay: TimeInterval(0.3))
+                     
                     continue
                 }
                 
@@ -160,11 +178,19 @@ class NavigationViewController: UIViewController {
     func closeBottomBarAfterChoosingPlace(){
         let heightBottomBar = bottomBarView?.frame.height
         self.bottomBarIsOpen = false
+        
         let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
             self.bottomBarView?.frame = self.bottomBarView?.frame
                 .offsetBy(dx: 0, dy: heightBottomBar!) as! CGRect
         }
         animator.startAnimation()
+        
+        // Изменить положение переключателя этажей
+        let animatorSwitcherStorey = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
+            self.storeySwitcherView?.frame = self.storeySwitcherView?.frame
+                .offsetBy(dx: 0, dy: heightBottomBar!) as! CGRect
+        }
+        animatorSwitcherStorey.startAnimation(afterDelay: TimeInterval(0.3))
     }
     
     
@@ -206,5 +232,15 @@ class NavigationViewController: UIViewController {
             let keyboardRectangle = keyboardFrame.cgRectValue
             self.topBarView.keyboardHeight = keyboardRectangle.height
         }
+    }
+    
+    // MARK: Функция добавления переключателя этажей
+    func addStoreySwitcherView(){
+        self.storeySwitcherView = Bundle.main.loadNibNamed("StoreySwitcherView", owner: self, options: nil)?.first as? StoreySwitcherView
+        self.storeySwitcherView.setupView(rangeStorey: 0...7)
+        self.storeySwitcherView?.frame = CGRect(x: 10, y: self.view.frame.height - 98,
+                                           width: 42, height: 88)
+        self.storeySwitcherView.makeRounding()
+        self.view.addSubview(self.storeySwitcherView)
     }
 }

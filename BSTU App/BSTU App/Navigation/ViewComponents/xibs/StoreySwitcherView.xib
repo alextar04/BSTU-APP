@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="DUF-6C-obO" customClass="StoreySwitcherView" customModule="BSTU_App" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="49" height="89"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uAk-Kf-i56">
+                    <rect key="frame" x="0.0" y="0.0" width="49" height="89"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="storeyUp" translatesAutoresizingMaskIntoConstraints="NO" id="Jyk-57-Zfg">
+                            <rect key="frame" x="0.0" y="0.0" width="49" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="49" id="c1I-jS-uSB"/>
+                                <constraint firstAttribute="height" constant="30" id="ncB-r5-Uxm"/>
+                            </constraints>
+                        </imageView>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="storeyDown" translatesAutoresizingMaskIntoConstraints="NO" id="d2e-CC-nRv">
+                            <rect key="frame" x="0.0" y="59" width="49" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="LIb-Gf-DUj"/>
+                                <constraint firstAttribute="width" constant="49" id="prh-mw-ONT"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="29" translatesAutoresizingMaskIntoConstraints="NO" id="f7e-eo-rVZ">
+                            <rect key="frame" x="0.0" y="30" width="49" height="29"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="29" id="3PA-mi-PUJ"/>
+                                <constraint firstAttribute="width" constant="49" id="viR-bC-5OG"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="f7e-eo-rVZ" secondAttribute="trailing" id="0FI-qV-vgY"/>
+                        <constraint firstItem="Jyk-57-Zfg" firstAttribute="top" secondItem="uAk-Kf-i56" secondAttribute="top" id="0PC-qn-dZs"/>
+                        <constraint firstAttribute="width" constant="49" id="21F-zo-UeY"/>
+                        <constraint firstAttribute="height" constant="89" id="7TY-JI-gqR"/>
+                        <constraint firstItem="d2e-CC-nRv" firstAttribute="top" secondItem="f7e-eo-rVZ" secondAttribute="bottom" id="D8V-t5-QXk"/>
+                        <constraint firstItem="f7e-eo-rVZ" firstAttribute="top" secondItem="Jyk-57-Zfg" secondAttribute="bottom" id="J3G-VP-IIs"/>
+                        <constraint firstItem="Jyk-57-Zfg" firstAttribute="leading" secondItem="uAk-Kf-i56" secondAttribute="leading" id="UY5-Ay-3HX"/>
+                        <constraint firstItem="d2e-CC-nRv" firstAttribute="top" secondItem="f7e-eo-rVZ" secondAttribute="bottom" id="W3H-tE-HCi"/>
+                        <constraint firstAttribute="trailing" secondItem="Jyk-57-Zfg" secondAttribute="trailing" id="XxI-Me-YGw"/>
+                        <constraint firstAttribute="bottom" secondItem="d2e-CC-nRv" secondAttribute="bottom" id="YUL-28-ZMO"/>
+                        <constraint firstItem="d2e-CC-nRv" firstAttribute="leading" secondItem="uAk-Kf-i56" secondAttribute="leading" id="j9T-hY-C3n"/>
+                        <constraint firstAttribute="trailing" secondItem="d2e-CC-nRv" secondAttribute="trailing" id="pnx-II-zbh"/>
+                        <constraint firstItem="f7e-eo-rVZ" firstAttribute="top" secondItem="Jyk-57-Zfg" secondAttribute="bottom" id="tVe-fl-X7t"/>
+                        <constraint firstItem="f7e-eo-rVZ" firstAttribute="leading" secondItem="uAk-Kf-i56" secondAttribute="leading" id="zWt-3G-cSt"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="uAk-Kf-i56" secondAttribute="bottom" id="5GM-j2-CmU"/>
+                <constraint firstAttribute="trailing" secondItem="uAk-Kf-i56" secondAttribute="trailing" id="Pvn-Xt-hDA"/>
+                <constraint firstItem="uAk-Kf-i56" firstAttribute="leading" secondItem="DUF-6C-obO" secondAttribute="leading" id="e1A-1T-XBT"/>
+                <constraint firstItem="uAk-Kf-i56" firstAttribute="top" secondItem="DUF-6C-obO" secondAttribute="top" id="wCn-0O-DgL"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="E8p-Ew-UkG"/>
+            <connections>
+                <outlet property="storeyDownButton" destination="d2e-CC-nRv" id="TEj-qP-lvg"/>
+                <outlet property="storeyNumberLabel" destination="f7e-eo-rVZ" id="N9j-G3-J0q"/>
+                <outlet property="storeyUpButton" destination="Jyk-57-Zfg" id="ImX-Bq-9N3"/>
+            </connections>
+            <point key="canvasLocation" x="-76" y="-497.00149925037488"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="storeyDown" width="100" height="100"/>
+        <image name="storeyUp" width="100" height="100"/>
+    </resources>
+</document>

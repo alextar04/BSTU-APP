@@ -42,6 +42,8 @@
 		CE380A3125BC70930028622B /* UniversityCorpCellTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE380A3025BC70930028622B /* UniversityCorpCellTable.xib */; };
 		CE380A3425BC72390028622B /* UniversityCorpCellTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE380A3325BC72390028622B /* UniversityCorpCellTable.swift */; };
 		CE91140525C3FA020096AB29 /* NavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91140425C3FA020096AB29 /* NavigationViewModel.swift */; };
+		CE91140725C437740096AB29 /* StoreySwitcherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE91140625C437740096AB29 /* StoreySwitcherView.xib */; };
+		CE91140925C439460096AB29 /* StoreySwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91140825C439460096AB29 /* StoreySwitcherView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +85,8 @@
 		CE380A3025BC70930028622B /* UniversityCorpCellTable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UniversityCorpCellTable.xib; sourceTree = "<group>"; };
 		CE380A3325BC72390028622B /* UniversityCorpCellTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityCorpCellTable.swift; sourceTree = "<group>"; };
 		CE91140425C3FA020096AB29 /* NavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModel.swift; sourceTree = "<group>"; };
+		CE91140625C437740096AB29 /* StoreySwitcherView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreySwitcherView.xib; sourceTree = "<group>"; };
+		CE91140825C439460096AB29 /* StoreySwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreySwitcherView.swift; sourceTree = "<group>"; };
 		F96B8A8E8421A5DF88E0A7CF /* Pods_BSTU_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BSTU_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -199,12 +203,12 @@
 		CE380A1125BC4F910028622B /* ViewComponents */ = {
 			isa = PBXGroup;
 			children = (
+				CE91140A25C439760096AB29 /* MapComponents */,
 				CE01CC9D25C2A457001388B9 /* SearchPremise */,
 				CE380A3225BC71E80028622B /* UniversityCorps */,
 				CE380A1225BC4F910028622B /* xibs */,
 				CE380A1525BC4F910028622B /* BottomBarNavigation.swift */,
 				CE380A1625BC4F910028622B /* TopBarNavigation.swift */,
-				CE380A1725BC4F910028622B /* Marker.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -218,6 +222,7 @@
 				CE380A3025BC70930028622B /* UniversityCorpCellTable.xib */,
 				CE01CC9925C29E59001388B9 /* SearchPremiseView.xib */,
 				CE01CC9B25C29F75001388B9 /* SearchPremiseCellTable.xib */,
+				CE91140625C437740096AB29 /* StoreySwitcherView.xib */,
 			);
 			path = xibs;
 			sourceTree = "<group>";
@@ -229,6 +234,15 @@
 				CE380A3325BC72390028622B /* UniversityCorpCellTable.swift */,
 			);
 			path = UniversityCorps;
+			sourceTree = "<group>";
+		};
+		CE91140A25C439760096AB29 /* MapComponents */ = {
+			isa = PBXGroup;
+			children = (
+				CE380A1725BC4F910028622B /* Marker.swift */,
+				CE91140825C439460096AB29 /* StoreySwitcherView.swift */,
+			);
+			path = MapComponents;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -306,6 +320,7 @@
 				CE037E7225BC425E00C50C16 /* LaunchScreen.storyboard in Resources */,
 				CE01CC9A25C29E59001388B9 /* SearchPremiseView.xib in Resources */,
 				CE037E6F25BC425E00C50C16 /* Assets.xcassets in Resources */,
+				CE91140725C437740096AB29 /* StoreySwitcherView.xib in Resources */,
 				CE037E6D25BC425700C50C16 /* Main.storyboard in Resources */,
 				CE380A3125BC70930028622B /* UniversityCorpCellTable.xib in Resources */,
 			);
@@ -375,6 +390,7 @@
 				CE380A2425BC4F910028622B /* ButtonExtensions.swift in Sources */,
 				CE380A2F25BC6CF30028622B /* UniversityCorpsView.swift in Sources */,
 				CE380A2A25BC4F910028622B /* Marker.swift in Sources */,
+				CE91140925C439460096AB29 /* StoreySwitcherView.swift in Sources */,
 				CE16978625C064F10040AE95 /* LabelExtensions.swift in Sources */,
 				CE16978825C151710040AE95 /* ColorExtensions.swift in Sources */,
 			);
