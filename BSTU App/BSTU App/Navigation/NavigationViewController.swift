@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  NavigationViewController.swift
 //  MapMarker
 //
 //  Created by Alexey Taran on 19.01.2021.
@@ -12,8 +12,9 @@ import RxGesture
 import RxSwift
 import RxCocoa
 
-class NavigationController: UIViewController {
+class NavigationViewController: UIViewController {
     
+    var viewModel: NavigationViewModel!
     var bottomBarView: BottomBarNavigation? = nil
     var topBarView: TopBarNavigation!
     
@@ -23,6 +24,8 @@ class NavigationController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.viewModel = NavigationViewModel()
         
         let someView = Marker(position: (50, 100), text: "153a")
         let someView1 = Marker(position: (200, 100), text: "Столовая")
@@ -46,7 +49,7 @@ class NavigationController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(changeCorp), name: Notification.Name("ChangeCorp"), object: nil)
         
-        addTopBarView()
+        self.addTopBarView()
     }
     
     

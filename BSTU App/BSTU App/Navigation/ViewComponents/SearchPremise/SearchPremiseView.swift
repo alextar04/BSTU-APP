@@ -16,6 +16,7 @@ class SearchPremiseView: UIView{
     
     @IBOutlet weak var premiseTableView: UITableView!
     @IBOutlet weak var premiseTableViewHeightConstraint: NSLayoutConstraint!
+    var sections = BehaviorRelay(value: [SearchPremiseView.SectionOfPremise]())
     let disposeBag = DisposeBag()
     
     struct SectionOfPremise: SectionModelType{
@@ -33,18 +34,12 @@ class SearchPremiseView: UIView{
         }
     }
     
-    func setupView(height: CGFloat){
+    func setupView(height: CGFloat, parentController: NavigationViewController){
         
-        let receivedData = [Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "153a"),
-                Premise(type: TypePremise(type: "Гардероб", image: "wardrobe"), name: "Гардероб"),
-                Premise(type: TypePremise(type: "Буфет", image: "buffet"), name: "Столовая"),
-                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "182"),
-                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "Преподавательская"),
-                Premise(type: TypePremise(type: "Туалет", image: "wc"), name: "Туалет"),
-        ]
-        let section = [SectionOfPremise(header: "Кабинеты", items: receivedData)]
+        let data = parentController.viewModel.allResults
+        self.sections.accept([SectionOfPremise(header: "Кабинеты", items: data)])
         
-        let dataSource = RxTableViewSectionedReloadDataSource<SectionOfPremise>(configureCell: { dataSource, table, index, item in
+        let dataSource = RxTableViewSectionedReloadDataSource<SectionOfPremise>(configureCell: { _, table, index, item in
             table.register(UINib(nibName: "SearchPremiseCellTable", bundle: nil), forCellReuseIdentifier: "SearchPremiseCellTable")
             let cell = table.dequeueReusableCell(withIdentifier: "SearchPremiseCellTable", for: index) as! SearchPremiseCellTable
             cell.namePremiseLabel.text = item.namePremise
@@ -62,9 +57,11 @@ class SearchPremiseView: UIView{
             return cell
         })
         
-        Observable.just(section)
+        self.sections
+            .asObservable()
             .bind(to: premiseTableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
+        
         
         self.premiseTableView.rx
             .itemSelected

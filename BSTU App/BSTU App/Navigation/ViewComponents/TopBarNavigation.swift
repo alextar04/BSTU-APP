@@ -20,6 +20,8 @@ class TopBarNavigation: UIView{
     
     @IBOutlet weak var startPlaceTextField: UITextField!
     @IBOutlet weak var finishPlaceTextField: UITextField!
+    var oldStartPlaceText: String!
+    var oldFinishPlaceText: String!
     
     var universityCorpView: UniversityCorpsView!
     var chooseCorpBackground: UIView!
@@ -132,8 +134,9 @@ class TopBarNavigation: UIView{
     
     // MARK: Обработка нажатия на форму выбора кабинета
     func customizationSelectionFormPlaceTap(){
-        [self.startPlaceTextField, self.finishPlaceTextField].map{
-            $0?.rx.tapGesture()
+        _ = [self.startPlaceTextField, self.finishPlaceTextField].map{ label in
+            // Начало редактирования
+            label!.rx.tapGesture()
                 .when(.recognized)
                 .subscribe(onNext: { _ in
                     
@@ -145,12 +148,15 @@ class TopBarNavigation: UIView{
                         self.finishPlaceTextField.text = ""
                     }
                     
+                    self.oldStartPlaceText = self.startPlaceTextField.text
+                    self.oldFinishPlaceText = self.finishPlaceTextField.text
+                    
                     let timeForBindings = self.tablePremiseView == nil
                     
                     if self.tablePremiseView == nil{
                         self.tablePremiseView = Bundle.main.loadNibNamed("SearchPremiseView", owner: self, options: nil)?.first as? SearchPremiseView
                         let tableHeight = self.navigationControllerHeight - self.keyboardHeight - (self.frame.height + (self.window?.safeAreaInsets.top)!)
-                        self.tablePremiseView?.setupView(height: tableHeight)
+                        self.tablePremiseView?.setupView(height: tableHeight, parentController: self.parentViewController as! NavigationViewController)
                         self.tablePremiseView?.frame = CGRect(x: 0, y: self.frame.height + (self.window?.safeAreaInsets.top)!,
                                                           width: self.frame.width,
                                                           height: tableHeight)
@@ -169,12 +175,31 @@ class TopBarNavigation: UIView{
                     
                     if timeForBindings{
                         self.backButton!.rx.tap.bind{
+                            if self.startPlaceTextField.text != ""{
+                                self.startPlaceTextField.text = self.oldStartPlaceText
+                            }
+                            if self.finishPlaceTextField.text != ""{
+                                self.finishPlaceTextField.text = self.oldFinishPlaceText
+                            }
                             self.endEditingData()
                         }.disposed(by: self.disposeBag)
                     }
-                }).disposed(by: disposeBag)
+                    }).disposed(by: disposeBag)
+            
+                    // Отслеживание набранного текста
+                    label?.rx
+                        .controlEvent(.editingChanged)
+                        .asObservable()
+                        .subscribe(onNext: { _ in
+                            let data = (self.parentViewController as! NavigationViewController)
+                                .viewModel
+                                .loadArrayPremise(prefix: (label?.text)!)
+                            
+                            self.tablePremiseView?.sections.accept([SearchPremiseView.SectionOfPremise(header: "Кабинеты",
+                                                                                                       items: data!)])
+                        }).disposed(by: disposeBag)
             }
-        }
+    }
     
     
     // MARK: Изменение точки отправления/назначения
