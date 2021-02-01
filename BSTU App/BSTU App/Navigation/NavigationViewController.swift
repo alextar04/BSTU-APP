@@ -17,6 +17,7 @@ class NavigationViewController: UIViewController {
     var viewModel: NavigationViewModel!
     var bottomBarView: BottomBarNavigation? = nil
     var topBarView: TopBarNavigation!
+    var map: Map!
     var storeySwitcherView: StoreySwitcherView!
     
     var currentSelectedName: String!
@@ -26,19 +27,6 @@ class NavigationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.viewModel = NavigationViewModel()
-        
-        let someView = Marker(position: (50, 100), text: "153a")
-        let someView1 = Marker(position: (200, 100), text: "Столовая")
-        let someView2 = Marker(position: (100, 200), text: "Гардероб")
-        let someView3 = Marker(position: (150, 300), text: "Преподавательская")
-        let someView4 = Marker(position: (300, 250), text: "182")
-        let someView5 = Marker(position: (150, 400), text: "Туалет")
-        self.view.addSubview(someView)
-        self.view.addSubview(someView1)
-        self.view.addSubview(someView2)
-        self.view.addSubview(someView3)
-        self.view.addSubview(someView4)
-        self.view.addSubview(someView5)
         
         NotificationCenter.default.addObserver(self, selector: #selector(openBottomBar), name: Notification.Name("OpenBottomBar"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(closeBottomBar), name: Notification.Name("CloseBottomBar"), object: nil)
@@ -50,7 +38,35 @@ class NavigationViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(changeCorp), name: Notification.Name("ChangeCorp"), object: nil)
         
         self.addTopBarView()
+        self.addMap()
         self.addStoreySwitcherView()
+        
+        let someView = Marker(position: (50, 150), text: "153a")
+        /*
+        let someView1 = Marker(position: (200, 150), text: "Столовая")
+        let someView2 = Marker(position: (100, 200), text: "Гардероб")
+        let someView3 = Marker(position: (150, 300), text: "Преподавательская")
+        let someView4 = Marker(position: (300, 250), text: "182")
+        let someView5 = Marker(position: (150, 400), text: "Туалет")
+        */
+        self.view.addSubview(someView)
+        /*
+        self.view.addSubview(someView1)
+        self.view.addSubview(someView2)
+        self.view.addSubview(someView3)
+        self.view.addSubview(someView4)
+        self.view.addSubview(someView5)
+        */
+    }
+    
+    
+    // MARK: Функция добавления карты
+    func addMap(){
+        let yStart = (UIApplication.shared.windows.first?.safeAreaInsets.top)! + topBarView.frame.height
+        self.map = Map(frame: CGRect(x: 0, y: yStart,
+                                     width: self.view.frame.width, height: self.view.frame.height - yStart))
+        self.map.setupView()
+        self.view.addSubview(self.map)
     }
     
     
@@ -226,6 +242,7 @@ class NavigationViewController: UIViewController {
         }
    }
     
+    
     // MARK: Функция подсчета высоты клавиатуры
     @objc func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
@@ -233,6 +250,7 @@ class NavigationViewController: UIViewController {
             self.topBarView.keyboardHeight = keyboardRectangle.height
         }
     }
+    
     
     // MARK: Функция добавления переключателя этажей
     func addStoreySwitcherView(){

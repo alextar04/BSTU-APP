@@ -44,6 +44,7 @@
 		CE91140525C3FA020096AB29 /* NavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91140425C3FA020096AB29 /* NavigationViewModel.swift */; };
 		CE91140725C437740096AB29 /* StoreySwitcherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE91140625C437740096AB29 /* StoreySwitcherView.xib */; };
 		CE91140925C439460096AB29 /* StoreySwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91140825C439460096AB29 /* StoreySwitcherView.swift */; };
+		CEACB2D925C7F2F900F4ADD3 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEACB2D825C7F2F900F4ADD3 /* Map.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +88,7 @@
 		CE91140425C3FA020096AB29 /* NavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModel.swift; sourceTree = "<group>"; };
 		CE91140625C437740096AB29 /* StoreySwitcherView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreySwitcherView.xib; sourceTree = "<group>"; };
 		CE91140825C439460096AB29 /* StoreySwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreySwitcherView.swift; sourceTree = "<group>"; };
+		CEACB2D825C7F2F900F4ADD3 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		F96B8A8E8421A5DF88E0A7CF /* Pods_BSTU_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BSTU_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -241,6 +243,7 @@
 			children = (
 				CE380A1725BC4F910028622B /* Marker.swift */,
 				CE91140825C439460096AB29 /* StoreySwitcherView.swift */,
+				CEACB2D825C7F2F900F4ADD3 /* Map.swift */,
 			);
 			path = MapComponents;
 			sourceTree = "<group>";
@@ -384,6 +387,7 @@
 				CE91140525C3FA020096AB29 /* NavigationViewModel.swift in Sources */,
 				CE380A3425BC72390028622B /* UniversityCorpCellTable.swift in Sources */,
 				CE037E6625BC425700C50C16 /* AppDelegate.swift in Sources */,
+				CEACB2D925C7F2F900F4ADD3 /* Map.swift in Sources */,
 				CE380A2325BC4F910028622B /* ImageExtensions.swift in Sources */,
 				CE380A2B25BC4F910028622B /* NavigationViewController.swift in Sources */,
 				CE01CCA125C2A4BB001388B9 /* SearchPremiseCellTable.swift in Sources */,

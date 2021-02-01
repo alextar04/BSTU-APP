@@ -198,6 +198,8 @@ class TopBarNavigation: UIView{
                             self.tablePremiseView?.sections.accept([SearchPremiseView.SectionOfPremise(header: "Кабинеты",
                                                                                                        items: data!)])
                         }).disposed(by: disposeBag)
+            
+                    label?.autocorrectionType = .no
             }
     }
     

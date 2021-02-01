@@ -830,8 +830,8 @@
             filePath = "BSTU App/Navigation/NavigationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
+            startingLineNumber = "195"
+            endingLineNumber = "195"
             landmarkName = "closeBottomBarAfterChoosingPlace()"
             landmarkType = "7">
          </BreakpointContent>
@@ -846,8 +846,8 @@
             filePath = "BSTU App/Navigation/NavigationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
             landmarkName = "closeOldMarker(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -862,8 +862,8 @@
             filePath = "BSTU App/Navigation/NavigationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
             landmarkName = "closeOldMarker(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -878,9 +878,57 @@
             filePath = "BSTU App/Navigation/NavigationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
             landmarkName = "closeOldMarker(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "88B1DC33-9A0D-4AB5-B348-0F1FBBBBECEB"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BSTU App/Navigation/ViewComponents/MapComponents/Map.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "init(frame:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "685FB25C-24BB-4683-AC40-69E7EE04077F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BSTU App/Navigation/ViewComponents/MapComponents/Map.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "viewForZooming(in:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CF9C2ECF-677B-46B5-994E-5A797CDF49EE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BSTU App/Navigation/ViewComponents/MapComponents/Map.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "setCurrentScale()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
