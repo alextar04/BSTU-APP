@@ -16,14 +16,24 @@ class Map: UIScrollView, UIScrollViewDelegate{
     var mapScheme: UIImageView!
     let disposeBag = DisposeBag()
     
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.showsHorizontalScrollIndicator = false
         self.showsVerticalScrollIndicator = false
         self.decelerationRate = .fast
+        //self.zoom(to: CGRect(x: 200, y: 200, width: 200, height: 200), animated: true)
+        self.bouncesZoom = false
         
         self.mapScheme = UIImageView(image: UIImage(named: "someStage"))
         self.addSubview(self.mapScheme)
+        
+        let someView = Marker(position: (50, 150), text: "153a")
+        let someView1 = Marker(position: (200, 150), text: "Столовая")
+        let someView2 = Marker(position: (100, 200), text: "Гардероб")
+        self.addSubview(someView)
+        self.addSubview(someView1)
+        self.addSubview(someView2)
     }
     
     
@@ -34,19 +44,21 @@ class Map: UIScrollView, UIScrollViewDelegate{
     
     func setupView(){
         self.delegate = self
-        self.zoomScale = 0.7
         setCurrentScale()
         
         self.rx.didZoom.subscribe(onNext: {
             self.setCenterMapScheme()
             }).disposed(by: disposeBag)
+        
     }
+    
     
     // MARK: При изменении размеров карты вызывается перерисовка
     override func layoutSubviews() {
         super.layoutSubviews()
         setCenterMapScheme()
     }
+    
     
     // MARK: Функция установки значения зума
     func setCurrentScale(){

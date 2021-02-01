@@ -41,7 +41,7 @@ class NavigationViewController: UIViewController {
         self.addMap()
         self.addStoreySwitcherView()
         
-        let someView = Marker(position: (50, 150), text: "153a")
+        //let someView = Marker(position: (50, 150), text: "153a")
         /*
         let someView1 = Marker(position: (200, 150), text: "Столовая")
         let someView2 = Marker(position: (100, 200), text: "Гардероб")
@@ -49,7 +49,7 @@ class NavigationViewController: UIViewController {
         let someView4 = Marker(position: (300, 250), text: "182")
         let someView5 = Marker(position: (150, 400), text: "Туалет")
         */
-        self.view.addSubview(someView)
+        //self.view.addSubview(someView)
         /*
         self.view.addSubview(someView1)
         self.view.addSubview(someView2)
