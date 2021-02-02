@@ -40,23 +40,6 @@ class NavigationViewController: UIViewController {
         self.addTopBarView()
         self.addMap()
         self.addStoreySwitcherView()
-        
-        //let someView = Marker(position: (50, 150), text: "153a")
-        /*
-        let someView1 = Marker(position: (200, 150), text: "Столовая")
-        let someView2 = Marker(position: (100, 200), text: "Гардероб")
-        let someView3 = Marker(position: (150, 300), text: "Преподавательская")
-        let someView4 = Marker(position: (300, 250), text: "182")
-        let someView5 = Marker(position: (150, 400), text: "Туалет")
-        */
-        //self.view.addSubview(someView)
-        /*
-        self.view.addSubview(someView1)
-        self.view.addSubview(someView2)
-        self.view.addSubview(someView3)
-        self.view.addSubview(someView4)
-        self.view.addSubview(someView5)
-        */
     }
     
     
@@ -145,7 +128,7 @@ class NavigationViewController: UIViewController {
         
     // MARK: Функция закрытия старого маркера
     func closeOldMarker(_ notification: NSNotification){
-        for view in self.view.subviews{
+        for view in self.map.mapScheme.subviews{
             if let currentMarkerView = view as? Marker {
                 let newMarkerName = notification.userInfo!["stickerText"] as! String
                 

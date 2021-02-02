@@ -16,8 +16,10 @@ import RxGesture
 class Marker: UIView{
     
     var text = String()
-    var xPosition: Int = 0
-    var yPosition: Int = 0
+    var xPosition: CGFloat = 0.0
+    var yPosition: CGFloat = 0.0
+    
+    var mapScale: CGFloat = 1.0
     
     var containerView = UIView()
     var labelView = UILabel()
@@ -42,8 +44,8 @@ class Marker: UIView{
     init(position: (Int, Int), text: String) {
         super.init(frame: CGRect())
         self.text = text
-        self.xPosition = position.0
-        self.yPosition = position.1
+        self.xPosition = CGFloat(position.0)
+        self.yPosition = CGFloat(position.1)
         
         setupViews()
         setupTapContainerView()
@@ -92,14 +94,16 @@ class Marker: UIView{
         self.pointerView.frame = CGRect(x: labelWidth/2 - pointerWidth/2, y: startPointerYPosition,
                                         width: pointerWidth, height: pointerHeight)
         
-        
         self.makeShadow(width: labelWidth,
                                  heigth: startPointerYPosition + pointerHeight)
         containerView.addSubview(self.labelView)
         containerView.addSubview(self.pointerView)
         self.addSubview(containerView)
-        self.frame = CGRect(x: xPosition, y: yPosition,
+        
+        if (self.frame == CGRect(x: 0, y: 0, width: 0, height: 0)){
+            self.frame = CGRect(x: Int(xPosition), y: Int(yPosition),
                             width: labelWidth, height: startPointerYPosition + pointerHeight)
+        }
     }
      
         
@@ -111,16 +115,17 @@ class Marker: UIView{
         }).disposed(by: disposeBag)
     }
     
+    
     @objc func markerTapped(sender: UITapGestureRecognizer){
         self.statusSelected = true
         
         UIView.animate(withDuration: 0.2,
             animations: {
-                self.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+                self.transform = CGAffineTransform(scaleX: 0.9 * self.mapScale, y: 0.9 * self.mapScale)
             },
             completion: { _ in
                 UIView.animate(withDuration: 0.2) {
-                    self.transform = CGAffineTransform.identity
+                    self.transform = CGAffineTransform(scaleX: self.mapScale, y: self.mapScale)
                 }
         })
         
@@ -133,6 +138,7 @@ class Marker: UIView{
     
     func closeMarker(sender: UITapGestureRecognizer){
         self.statusSelected = false
+        
         // Действия по закрытию нижнего бара с информацией
         let userInfo: [String: Any] = ["stickerText": ((sender.view as! Marker).text),
                                        "tapRecognizer": sender]

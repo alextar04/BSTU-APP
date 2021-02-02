@@ -14,6 +14,7 @@ import UIKit
 class Map: UIScrollView, UIScrollViewDelegate{
     
     var mapScheme: UIImageView!
+    var markers: [Marker]!
     let disposeBag = DisposeBag()
     
     
@@ -22,18 +23,24 @@ class Map: UIScrollView, UIScrollViewDelegate{
         self.showsHorizontalScrollIndicator = false
         self.showsVerticalScrollIndicator = false
         self.decelerationRate = .fast
-        //self.zoom(to: CGRect(x: 200, y: 200, width: 200, height: 200), animated: true)
         self.bouncesZoom = false
+        //self.zoom(to: CGRect(x: 200, y: 200, width: 200, height: 200), animated: true)
         
         self.mapScheme = UIImageView(image: UIImage(named: "someStage"))
+        self.mapScheme.isUserInteractionEnabled = true
         self.addSubview(self.mapScheme)
         
-        let someView = Marker(position: (50, 150), text: "153a")
-        let someView1 = Marker(position: (200, 150), text: "Столовая")
-        let someView2 = Marker(position: (100, 200), text: "Гардероб")
-        self.addSubview(someView)
-        self.addSubview(someView1)
-        self.addSubview(someView2)
+        let someView = Marker(position: (200, 200), text: "153a")
+        let someView1 = Marker(position: (300, 300), text: "Столовая")
+        let someView2 = Marker(position: (400, 400), text: "Гардероб")
+        let someView3 = Marker(position: (500, 500), text: "Преподавательская")
+        let someView4 = Marker(position: (600, 650), text: "182")
+        let someView5 = Marker(position: (700, 800), text: "Туалет")
+        
+        self.markers = [someView, someView1, someView2, someView3, someView4, someView5]
+        _ = markers.map{ marker in
+            self.mapScheme.addSubview(marker)
+        }
     }
     
     
@@ -47,9 +54,14 @@ class Map: UIScrollView, UIScrollViewDelegate{
         setCurrentScale()
         
         self.rx.didZoom.subscribe(onNext: {
-            self.setCenterMapScheme()
+            for marker in self.markers{
+                marker.transform = CGAffineTransform(scaleX: 1.0/self.zoomScale, y: 1.0/self.zoomScale)
+                marker.xPosition = marker.frame.minX
+                marker.yPosition = marker.frame.minY
+                marker.mapScale = 1.0/self.zoomScale
+            }
+                self.setCenterMapScheme()
             }).disposed(by: disposeBag)
-        
     }
     
     
