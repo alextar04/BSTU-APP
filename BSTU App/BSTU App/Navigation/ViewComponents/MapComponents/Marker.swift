@@ -106,7 +106,7 @@ class Marker: UIView{
         }
     }
      
-        
+    
     func setupTapContainerView() {
         self.rx.tapGesture()
             .when(.recognized)
@@ -114,6 +114,7 @@ class Marker: UIView{
                 self.markerTapped(sender: sender)
         }).disposed(by: disposeBag)
     }
+ 
     
     
     @objc func markerTapped(sender: UITapGestureRecognizer){
@@ -130,7 +131,7 @@ class Marker: UIView{
         })
         
         // Действия по открытию нижнего бара с информацией
-        let userInfo: [String: Any] = ["stickerText": ((sender.view as! Marker).text),
+        let userInfo: [String: Any] = ["stickerText": self.text,
                                        "tapRecognizer": sender]
         NotificationCenter.default.post(name: Notification.Name("OpenBottomBar"), object: nil, userInfo: userInfo)
     }
@@ -138,11 +139,9 @@ class Marker: UIView{
     
     func closeMarker(sender: UITapGestureRecognizer){
         self.statusSelected = false
-        
-        let senderMarker = sender.view as? Marker
         var userInfo = [String: Any]()
 
-        userInfo = ["stickerText": senderMarker?.text,
+        userInfo = ["stickerText": self.text,
                         "tapRecognizer": sender]
 
         NotificationCenter.default.post(name: Notification.Name("CloseBottomBar"), object: nil, userInfo: userInfo)

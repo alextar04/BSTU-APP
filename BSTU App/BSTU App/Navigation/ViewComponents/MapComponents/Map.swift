@@ -42,6 +42,13 @@ class Map: UIScrollView, UIScrollViewDelegate{
         self.markers = [someView, someView1, someView2, someView3, someView4, someView5]
         for marker in markers{
             self.mapScheme.addSubview(marker)
+            /*
+            marker.rx.tapGesture()
+                .when(.recognized)
+                .subscribe(onNext: { sender in
+                    marker.markerTapped(sender: sender)
+            }).disposed(by: disposeBag)
+            */
         }
     }
     
@@ -65,11 +72,32 @@ class Map: UIScrollView, UIScrollViewDelegate{
             }).disposed(by: disposeBag)
         
         // Закрытие маркеров при нажатии на экран
-        self.rx.tapGesture()
+        self.mapScheme.rx.tapGesture()
             .when(.recognized)
             .subscribe(onNext: { sender in
-                let userInfo: [String: Any] = ["tapRecognizer": sender]
-                NotificationCenter.default.post(name: Notification.Name("CloseMarkerAndBottomBar"), object: nil, userInfo: userInfo)
+                
+                let touchPoint = sender.location(in: self)
+                var isButton = false
+                var existSelectedMarker = false
+                
+                for marker in self.markers{
+                    if marker.frame.minX <= touchPoint.x && marker.frame.maxX >= touchPoint.x
+                        && marker.frame.minY <= touchPoint.y && marker.frame.maxY >= touchPoint.y{
+                        isButton = true
+                    }
+                    if marker.statusSelected{
+                        existSelectedMarker = true
+                    }
+                    
+                    if isButton && existSelectedMarker{
+                        break
+                    }
+                }
+                
+                if !isButton && existSelectedMarker{
+                    let userInfo: [String: Any] = ["tapRecognizer": sender]
+                    NotificationCenter.default.post(name: Notification.Name("CloseMarkerAndBottomBar"), object: nil, userInfo: userInfo)
+                }
         }).disposed(by: disposeBag)
     }
     

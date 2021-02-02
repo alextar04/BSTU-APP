@@ -133,21 +133,31 @@ class NavigationViewController: UIViewController {
         // Снять выделение маркера
         for view in self.map.mapScheme.subviews {
             if view is Marker {
-                (view as! Marker).setLabelStyle(backgroundColor: .white, textColor: .black, tintColor: .white)
+                (view as! Marker).statusSelected = false
             }
         }
         
         // Опустить нижнюю панель
-        let heightBottomBar = bottomBarView?.frame.height
-        let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
-            self.bottomBarView?.frame = self.bottomBarView?.frame
-                .offsetBy(dx: 0, dy: heightBottomBar!) as! CGRect
+        if self.bottomBarIsOpen{
+            let heightBottomBar = bottomBarView?.frame.height
+            let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
+                self.bottomBarView?.frame = self.bottomBarView?.frame
+                    .offsetBy(dx: 0, dy: heightBottomBar!) as! CGRect
+            }
+            animator.startAnimation()
+            animator.addCompletion{ _ in
+                self.bottomBarIsOpen = false
+                self.bottomBarView!.removeFromSuperview()
+            }
+            
+            // Изменить положение переключателя этажей
+            let animatorSwitcherStorey = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
+                self.storeySwitcherView?.frame = self.storeySwitcherView?.frame
+                    .offsetBy(dx: 0, dy: heightBottomBar!) as! CGRect
+            }
+            animatorSwitcherStorey.startAnimation(afterDelay: TimeInterval(0.3))
         }
-        animator.startAnimation()
-        animator.addCompletion{ _ in
-            self.bottomBarIsOpen = false
-            self.bottomBarView!.removeFromSuperview()
-        }
+        
     }
     
         
