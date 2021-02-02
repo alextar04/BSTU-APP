@@ -30,6 +30,7 @@ class NavigationViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(openBottomBar), name: Notification.Name("OpenBottomBar"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(closeBottomBar), name: Notification.Name("CloseBottomBar"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(closeMarkerAndBottomBar), name: Notification.Name("CloseMarkerAndBottomBar"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(fillStartPlaceLabel), name: Notification.Name("FillStartPlace"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(fillFinishPlaceLabel), name: Notification.Name("FillFinishPlace"), object: nil)
@@ -122,6 +123,30 @@ class NavigationViewController: UIViewController {
                     view.removeFromSuperview()
                 }
             }
+        }
+    }
+    
+    
+    // MARK: Функция закрытия маркера и нижнего бара при нажатии на экран
+    @objc func closeMarkerAndBottomBar(_ notification: NSNotification){
+        
+        // Снять выделение маркера
+        for view in self.map.mapScheme.subviews {
+            if view is Marker {
+                (view as! Marker).setLabelStyle(backgroundColor: .white, textColor: .black, tintColor: .white)
+            }
+        }
+        
+        // Опустить нижнюю панель
+        let heightBottomBar = bottomBarView?.frame.height
+        let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
+            self.bottomBarView?.frame = self.bottomBarView?.frame
+                .offsetBy(dx: 0, dy: heightBottomBar!) as! CGRect
+        }
+        animator.startAnimation()
+        animator.addCompletion{ _ in
+            self.bottomBarIsOpen = false
+            self.bottomBarView!.removeFromSuperview()
         }
     }
     

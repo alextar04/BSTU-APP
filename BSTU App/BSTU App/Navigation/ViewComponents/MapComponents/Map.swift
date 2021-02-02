@@ -24,12 +24,14 @@ class Map: UIScrollView, UIScrollViewDelegate{
         self.showsVerticalScrollIndicator = false
         self.decelerationRate = .fast
         self.bouncesZoom = false
-        //self.zoom(to: CGRect(x: 200, y: 200, width: 200, height: 200), animated: true)
         
         self.mapScheme = UIImageView(image: UIImage(named: "someStage"))
         self.mapScheme.isUserInteractionEnabled = true
         self.addSubview(self.mapScheme)
+        self.contentSize = CGSize(width: mapScheme.frame.width, height: mapScheme.frame.height)
         
+        // Стартовая позиция камеры
+        self.contentOffset = CGPoint(x: 400, y: 400)
         let someView = Marker(position: (200, 200), text: "153a")
         let someView1 = Marker(position: (300, 300), text: "Столовая")
         let someView2 = Marker(position: (400, 400), text: "Гардероб")
@@ -38,7 +40,7 @@ class Map: UIScrollView, UIScrollViewDelegate{
         let someView5 = Marker(position: (700, 800), text: "Туалет")
         
         self.markers = [someView, someView1, someView2, someView3, someView4, someView5]
-        _ = markers.map{ marker in
+        for marker in markers{
             self.mapScheme.addSubview(marker)
         }
     }
@@ -53,15 +55,22 @@ class Map: UIScrollView, UIScrollViewDelegate{
         self.delegate = self
         setCurrentScale()
         
+        // Пересчет координат при зуме
         self.rx.didZoom.subscribe(onNext: {
             for marker in self.markers{
                 marker.transform = CGAffineTransform(scaleX: 1.0/self.zoomScale, y: 1.0/self.zoomScale)
-                marker.xPosition = marker.frame.minX
-                marker.yPosition = marker.frame.minY
                 marker.mapScale = 1.0/self.zoomScale
             }
                 self.setCenterMapScheme()
             }).disposed(by: disposeBag)
+        
+        // Закрытие маркеров при нажатии на экран
+        self.rx.tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { sender in
+                let userInfo: [String: Any] = ["tapRecognizer": sender]
+                NotificationCenter.default.post(name: Notification.Name("CloseMarkerAndBottomBar"), object: nil, userInfo: userInfo)
+        }).disposed(by: disposeBag)
     }
     
     
@@ -70,7 +79,7 @@ class Map: UIScrollView, UIScrollViewDelegate{
         super.layoutSubviews()
         setCenterMapScheme()
     }
-    
+
     
     // MARK: Функция установки значения зума
     func setCurrentScale(){
@@ -102,14 +111,26 @@ class Map: UIScrollView, UIScrollViewDelegate{
         let boundsSize = self.bounds.size
         var frameToCenter = self.mapScheme.frame ?? CGRect.zero
         
-        if frameToCenter.size.width < boundsSize.width{
+        if (frameToCenter.size.width < boundsSize.width){
             frameToCenter.origin.x = (boundsSize.width - frameToCenter.size.width) / 2
+            
+            let absX = abs(frameToCenter.origin.x)
+            if absX > 0 && absX < 1{
+                frameToCenter.origin.x = 0
+            }
+            
         } else {
             frameToCenter.origin.x = 0
         }
         
-        if frameToCenter.size.height < boundsSize.height{
+        if (frameToCenter.size.height < boundsSize.height){
             frameToCenter.origin.y = (boundsSize.height - frameToCenter.size.height) / 2
+            
+            let absY = abs(frameToCenter.origin.y)
+            if absY > 0 && absY < 1{
+                frameToCenter.origin.y = 0
+            }
+             
         } else {
             frameToCenter.origin.y = 0
         }

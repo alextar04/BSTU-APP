@@ -139,9 +139,11 @@ class Marker: UIView{
     func closeMarker(sender: UITapGestureRecognizer){
         self.statusSelected = false
         
-        // Действия по закрытию нижнего бара с информацией
-        let userInfo: [String: Any] = ["stickerText": ((sender.view as! Marker).text),
-                                       "tapRecognizer": sender]
+        let senderMarker = sender.view as? Marker
+        var userInfo = [String: Any]()
+
+        userInfo = ["stickerText": senderMarker?.text,
+                        "tapRecognizer": sender]
 
         NotificationCenter.default.post(name: Notification.Name("CloseBottomBar"), object: nil, userInfo: userInfo)
     }
