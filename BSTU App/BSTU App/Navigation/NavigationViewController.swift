@@ -163,6 +163,7 @@ class NavigationViewController: UIViewController {
         
     // MARK: Функция закрытия старого маркера
     func closeOldMarker(_ notification: NSNotification){
+        //...............let mapscheme = self.map.mapScheme.subviews
         for view in self.map.mapScheme.subviews{
             if let currentMarkerView = view as? Marker {
                 let newMarkerName = notification.userInfo!["stickerText"] as! String

@@ -15,6 +15,11 @@ class Map: UIScrollView, UIScrollViewDelegate{
     
     var mapScheme: UIImageView!
     var markers: [Marker]!
+    
+    var firstDraw = true
+    var zoomLastDraw: CGFloat = 0.0
+    var paintedMarkersInZoom = [Marker]()
+    
     let disposeBag = DisposeBag()
     
     
@@ -25,30 +30,35 @@ class Map: UIScrollView, UIScrollViewDelegate{
         self.decelerationRate = .fast
         self.bouncesZoom = false
         
-        self.mapScheme = UIImageView(image: UIImage(named: "someStage"))
+        self.mapScheme = UIImageView(image: UIImage(named: "someMap3"))
         self.mapScheme.isUserInteractionEnabled = true
         self.addSubview(self.mapScheme)
         self.contentSize = CGSize(width: mapScheme.frame.width, height: mapScheme.frame.height)
         
         // Стартовая позиция камеры
-        self.contentOffset = CGPoint(x: 400, y: 400)
-        let someView = Marker(position: (200, 200), text: "153a")
-        let someView1 = Marker(position: (300, 300), text: "Столовая")
-        let someView2 = Marker(position: (400, 400), text: "Гардероб")
-        let someView3 = Marker(position: (500, 500), text: "Преподавательская")
-        let someView4 = Marker(position: (600, 650), text: "182")
-        let someView5 = Marker(position: (700, 800), text: "Туалет")
+        self.contentOffset = CGPoint(x: 800, y: 900)
+        let views = [Marker(position: (60 * 2 + 300, 270 * 2 + 300), text: "153a"),
+                     Marker(position: (300 * 2 + 300, 300 * 2 + 300), text: "Столовая"),
+                     Marker(position: (400 * 2 + 300, 400 * 2 + 300), text: "Гардероб1"),
+                     Marker(position: (475 * 2 + 300, 400 * 2 + 300), text: "Гардероб2"),
+                     Marker(position: (560 * 2 + 300, 1200), text: "Гардероб3"),
+                     Marker(position: (1460, 400 * 2 + 300), text: "Преподавательская"),
+                     Marker(position: (430 * 2 + 300, 550 * 2 + 300), text: "182"),
+                     Marker(position: (475 * 2 + 300, 550 * 2 + 300), text: "183"),
+                     Marker(position: (520 * 2 + 300, 550 * 2 + 300), text: "184"),
+                     Marker(position: (560 * 2 + 300, 550 * 2 + 300), text: "185"),
+                     Marker(position: (700 * 2 + 300, 30 * 2 + 300), text: "Туалет1"),
+                     Marker(position: (700 * 2 + 300, 100 * 2 + 300), text: "Туалет2"),
+                     Marker(position: (700 * 2 + 300, 150 * 2 + 300), text: "186"),
+                     Marker(position: (700 * 2 + 300, 200 * 2 + 300), text: "187"),
+                     Marker(position: (700 * 2 + 300, 250 * 2 + 300), text: "188"),
+                     Marker(position: (700 * 2 + 300, 280 * 2 + 300), text: "189"),
+                     Marker(position: (700 * 2 + 300, 330 * 2 + 300), text: "Туалет3"),
+        ]
         
-        self.markers = [someView, someView1, someView2, someView3, someView4, someView5]
+        self.markers = views
         for marker in markers{
             self.mapScheme.addSubview(marker)
-            /*
-            marker.rx.tapGesture()
-                .when(.recognized)
-                .subscribe(onNext: { sender in
-                    marker.markerTapped(sender: sender)
-            }).disposed(by: disposeBag)
-            */
         }
     }
     
@@ -77,13 +87,16 @@ class Map: UIScrollView, UIScrollViewDelegate{
             .subscribe(onNext: { sender in
                 
                 let touchPoint = sender.location(in: self)
+                
                 var isButton = false
                 var existSelectedMarker = false
                 
                 for marker in self.markers{
-                    if marker.frame.minX <= touchPoint.x && marker.frame.maxX >= touchPoint.x
-                        && marker.frame.minY <= touchPoint.y && marker.frame.maxY >= touchPoint.y{
-                        isButton = true
+                    if (marker.frame.minX * self.zoomScale) <= touchPoint.x && (marker.frame.maxX * self.zoomScale) >= touchPoint.x
+                        && (marker.frame.minY * self.zoomScale) <= touchPoint.y && (marker.frame.maxY * self.zoomScale) >= touchPoint.y{
+                        if !marker.isHidden{
+                            isButton = true
+                        }
                     }
                     if marker.statusSelected{
                         existSelectedMarker = true
@@ -105,29 +118,20 @@ class Map: UIScrollView, UIScrollViewDelegate{
     // MARK: При изменении размеров карты вызывается перерисовка
     override func layoutSubviews() {
         super.layoutSubviews()
+        if self.firstDraw{
+            self.zoomScale = 0.3
+            firstDraw = false
+        }
+
         setCenterMapScheme()
+        markerPainting()
     }
 
     
     // MARK: Функция установки значения зума
     func setCurrentScale(){
-        let boundsSize = self.bounds.size
-        let mapSchemeSize = self.mapScheme.bounds.size
-        
-        let xScale = boundsSize.width / mapSchemeSize.width
-        let yScale = boundsSize.height / mapSchemeSize.height
-        let minScale = min(xScale, yScale)
-        
-        var maxScale: CGFloat = 1.0
-        if minScale < 0.1{
-            maxScale = 0.3
-        }
-        if minScale >= 0.1 && minScale < 0.5{
-            maxScale = 1.2
-        }
-        if minScale >= 0.5{
-            maxScale = max(1.2, minScale)
-        }
+        let minScale: CGFloat = 0.3
+        let maxScale: CGFloat = 1.0
         
         self.minimumZoomScale = minScale
         self.maximumZoomScale = maxScale
@@ -164,6 +168,80 @@ class Map: UIScrollView, UIScrollViewDelegate{
         }
         
         self.mapScheme.frame = frameToCenter
+    }
+    
+    
+    // MARK: Отображение маркеров с изменением масштаба
+    func markerPainting(){
+        let deltaZoom = self.zoomScale - self.zoomLastDraw
+        
+        if deltaZoom > 0{
+            // Увеличение зума
+            // Сортировка неотрисованных маркеров в порядке убывания длин
+            var sortedMarkers = self.markers!.filter{ !self.paintedMarkersInZoom.contains($0) }
+            sortedMarkers = sortedMarkers.sorted(by: { marker1, marker2 in
+                return marker1.frame.width > marker2.frame.width
+            })
+            
+            // Отобразить маркеры, исключая перекрытий
+            for marker in sortedMarkers{
+                var statusHidden = false
+                for paintedMarker in self.paintedMarkersInZoom{
+                    if marker.frame.intersects(paintedMarker.frame){
+                        statusHidden = true
+                        break
+                    }
+                }
+                
+                if !statusHidden{
+                    UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut,
+                      animations: {
+                        marker.alpha = 1
+                        marker.isHidden = false
+                    })
+                    paintedMarkersInZoom.append(marker)
+                } else {
+                    marker.alpha = 0
+                    marker.isHidden = true
+                }
+            }
+        }
+        
+        if deltaZoom < 0 {
+            // Уменьшение зума
+            // Сортировка отрисованных маркеров в порядке убывания длин
+            var sortedMarkers = self.paintedMarkersInZoom.sorted(by: { marker1, marker2 in
+                return marker1.frame.width > marker2.frame.width
+            })
+            
+            // Убрать нарисованные маркеры, исключая перекрытий
+            for marker1 in sortedMarkers{
+                var statusHidden = false
+                for marker2 in self.paintedMarkersInZoom{
+                    if marker1 == marker2{
+                        break
+                    }
+                    if marker1.frame.intersects(marker2.frame){
+                        statusHidden = true
+                        break
+                    }
+                }
+                
+                if !statusHidden{
+                    UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut,
+                      animations: {
+                        marker1.alpha = 1
+                        marker1.isHidden = false
+                    })
+                } else {
+                    marker1.alpha = 0
+                    marker1.isHidden = true
+                    self.paintedMarkersInZoom = self.paintedMarkersInZoom.filter{ $0 != marker1}
+                }
+            }
+        }
+        
+        self.zoomLastDraw = self.zoomScale
     }
     
     

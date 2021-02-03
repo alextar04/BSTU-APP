@@ -145,11 +145,22 @@ class Premise {
     
     static func getPremises()->[Premise]{
         return [Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "153a"),
-                Premise(type: TypePremise(type: "Гардероб", image: "wardrobe"), name: "Гардероб"),
+                Premise(type: TypePremise(type: "Гардероб", image: "wardrobe"), name: "Гардероб1"),
+                Premise(type: TypePremise(type: "Гардероб", image: "wardrobe"), name: "Гардероб2"),
+                Premise(type: TypePremise(type: "Гардероб", image: "wardrobe"), name: "Гардероб3"),
                 Premise(type: TypePremise(type: "Буфет", image: "buffet"), name: "Столовая"),
                 Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "182"),
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "183"),
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "184"),
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "185"),
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "186"),
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "187"),
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "188"),
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "189"),
                 Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "Преподавательская"),
-                Premise(type: TypePremise(type: "Туалет", image: "wc"), name: "Туалет"),
+                Premise(type: TypePremise(type: "Туалет", image: "wc"), name: "Туалет1"),
+                Premise(type: TypePremise(type: "Туалет", image: "wc"), name: "Туалет2"),
+                Premise(type: TypePremise(type: "Туалет", image: "wc"), name: "Туалет3"),
         ]
     }
 }
