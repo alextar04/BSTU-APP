@@ -15,6 +15,7 @@ class Map: UIScrollView, UIScrollViewDelegate{
     
     var mapScheme: UIImageView!
     var markers: [Marker]!
+    var pathLayer: CAShapeLayer!
     
     var firstDraw = true
     var zoomLastDraw: CGFloat = 0.0
@@ -60,6 +61,8 @@ class Map: UIScrollView, UIScrollViewDelegate{
         for marker in markers{
             self.mapScheme.addSubview(marker)
         }
+        
+        drawPathBetweenAudience(v1: 1, v2: 14)
     }
     
     
@@ -242,6 +245,59 @@ class Map: UIScrollView, UIScrollViewDelegate{
         }
         
         self.zoomLastDraw = self.zoomScale
+    }
+    
+    
+    // MARK: Отображение пути между кабинетами на карте
+    func drawPathBetweenAudience(v1: Int, v2: Int){
+        
+        let temp = Path()
+        temp.searchShortestWays()
+        let pathVertex = temp.getPath(vertex1Index: v1, vertex2Index: v2)
+        
+        let path = UIBezierPath()
+        for (index, vertex) in pathVertex.enumerated(){
+            if index == 0{
+                path.move(to: temp.dotsPositions[vertex].toAudience!)
+                path.addLine(to: temp.dotsPositions[vertex].coordinates)
+            } else if index == pathVertex.count - 1{
+                path.addLine(to: temp.dotsPositions[vertex].coordinates)
+                path.addLine(to: temp.dotsPositions[vertex].toAudience!)
+            } else {
+                path.addLine(to: temp.dotsPositions[vertex].coordinates)
+            }
+            
+        }
+        /*
+        path.move(to: CGPoint(x: 700, y: 1000))
+        path.addLine(to: CGPoint(x: 800, y: 1000))
+        path.addLine(to: CGPoint(x: 800, y: 1100))
+        path.addLine(to: CGPoint(x: 900, y: 1100))
+        path.addLine(to: CGPoint(x: 1200, y: 1100))
+        */
+        
+
+        self.pathLayer = CAShapeLayer()
+        self.pathLayer.path = path.cgPath
+        self.pathLayer.strokeEnd = 0
+        self.pathLayer.lineWidth = 14
+        self.pathLayer.opacity = 0.7
+        self.pathLayer.lineCap = .round
+        self.pathLayer.strokeColor = UIColor.orangePathColor.cgColor
+        self.pathLayer.fillColor = UIColor.clear.cgColor
+        self.mapScheme.layer.insertSublayer(self.pathLayer, at: 0)
+        // Удаление перед рисованием нового пути!!
+        //self.pathLayer.removeFromSuperlayer()
+        //self.pathLayer.removeAllAnimations()
+        
+        
+        let animation = CABasicAnimation(keyPath: "strokeEnd")
+        animation.toValue = 1
+        animation.speed = 0.2
+        animation.fillMode = .forwards
+        animation.isRemovedOnCompletion = false
+        
+        self.pathLayer.add(animation, forKey: "line")
     }
     
     

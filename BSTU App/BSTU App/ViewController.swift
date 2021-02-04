@@ -15,6 +15,16 @@ class ViewController: UIViewController {
         let navigationController = NavigationViewController()
         self.addChild(navigationController)
         self.view.addSubview(navigationController.view)
+        
+        /*
+        let temp = Path()
+        temp.searchShortestWays()
+        _ = temp.getPath(vertex1Index: 0, vertex2Index: 10)
+        print()
+        _ = temp.getPath(vertex1Index: 7, vertex2Index: 12)
+        print()
+        _ = temp.getPath(vertex1Index: 7, vertex2Index: 14)
+        */
     }
 
 
