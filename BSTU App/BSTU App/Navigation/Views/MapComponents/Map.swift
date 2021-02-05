@@ -43,16 +43,16 @@ class Map: UIScrollView, UIScrollViewDelegate{
         
         // Стартовая позиция камеры
         UIView.animate(withDuration: 0.6, animations: {
-        self.setContentOffset(CGPoint(x: 300 * 2 + 300,
-                                      y: 300 * 2 + 300), animated: false)
+        self.setContentOffset(CGPoint(x: 1000,
+                                      y: 1000), animated: false)
         })
         // self.contentOffset = CGPoint(x: 429, y: 877)
         let views = [Marker(position: (429, 877), text: "153a"),
-                     Marker(position: (300 * 2 + 300, 300 * 2 + 300), text: "Столовая"),
+                     //Marker(position: (300 * 2 + 300, 300 * 2 + 300), text: "Столовая"),
                      Marker(position: (400 * 2 + 300, 400 * 2 + 300), text: "Гардероб1"),
                      Marker(position: (475 * 2 + 300, 400 * 2 + 300), text: "Гардероб2"),
                      Marker(position: (560 * 2 + 300, 1200), text: "Гардероб3"),
-                     Marker(position: (1460, 400 * 2 + 300), text: "Преподавательская"),
+                     Marker(position: (1460, 400 * 2 + 300), text: "Столовая"),
                      Marker(position: (430 * 2 + 300, 550 * 2 + 300), text: "182"),
                      Marker(position: (475 * 2 + 300, 550 * 2 + 300), text: "183"),
                      Marker(position: (520 * 2 + 300, 550 * 2 + 300), text: "184"),
@@ -64,6 +64,18 @@ class Map: UIScrollView, UIScrollViewDelegate{
                      Marker(position: (700 * 2 + 300, 250 * 2 + 300), text: "188"),
                      Marker(position: (700 * 2 + 300, 280 * 2 + 300), text: "189"),
                      Marker(position: (700 * 2 + 300, 330 * 2 + 300), text: "Туалет3"),
+                     Marker(position: (465, 900), text: "113"),
+                     Marker(position: (488, 1135), text: "114"),
+                     Marker(position: (596, 900), text: "115"),
+                     Marker(position: (675, 1135), text: "116"),
+                     Marker(position: (725, 900), text: "117"),
+                     Marker(position: (844, 900), text: "118"),
+                     Marker(position: (846, 1135), text: "119"),
+                     Marker(position: (1023, 900), text: "120"),
+                     Marker(position: (995, 1420), text: "121"),
+                     Marker(position: (1075, 1546), text: "122"),
+                     Marker(position: (1080, 1560), text: "123"),
+                     Marker(position: (1323, 1355), text: "124"),
         ]
         
         self.markers = views
@@ -283,10 +295,6 @@ class Map: UIScrollView, UIScrollViewDelegate{
         self.pathLayer.strokeColor = UIColor.orangePathColor.cgColor
         self.pathLayer.fillColor = UIColor.clear.cgColor
         self.mapScheme.layer.insertSublayer(self.pathLayer, at: 0)
-        // Удаление перед рисованием нового пути!!
-        //self.pathLayer.removeFromSuperlayer()
-        //self.pathLayer.removeAllAnimations()
-        
         
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.toValue = 1
@@ -302,6 +310,7 @@ class Map: UIScrollView, UIScrollViewDelegate{
     func getMarkerWithName(name: String)->Marker{
         return self.markers.filter{ $0.text == name }.first!
     }
+
     
     // MARK: - UIScrollViewDelegate
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {

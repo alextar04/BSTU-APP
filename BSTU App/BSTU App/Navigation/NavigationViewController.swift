@@ -199,6 +199,9 @@ class NavigationViewController: UIViewController {
     @objc func fillStartPlaceLabel(){
         self.topBarView.startPlaceTextField.text = self.currentSelectedName
         closeBottomBarAfterChoosingPlace()
+        if self.topBarView.startPlaceTextField.text != "" && self.topBarView.finishPlaceTextField.text != ""{
+            createWay()
+        }
     }
     
     
@@ -206,6 +209,24 @@ class NavigationViewController: UIViewController {
     @objc func fillFinishPlaceLabel(){
         self.topBarView.finishPlaceTextField.text = self.currentSelectedName
         closeBottomBarAfterChoosingPlace()
+        if self.topBarView.startPlaceTextField.text != "" && self.topBarView.finishPlaceTextField.text != ""{
+            createWay()
+        }
+    }
+    
+    
+    // MARK: Функция построения маршрута
+    func createWay(){
+        
+        // Удаление старого пути перед рисованием нового
+        if self.map.pathLayer != nil{
+            self.map.pathLayer.removeFromSuperlayer()
+            self.map.pathLayer.removeAllAnimations()
+        }
+
+        let inDot = self.map.viewModel.getIndexStorageByMarkerName(markerName: self.topBarView.startPlaceTextField.text!)
+        let outDot = self.map.viewModel.getIndexStorageByMarkerName(markerName: self.topBarView.finishPlaceTextField.text!)
+        self.map.drawPathBetweenAudience(v1: inDot, v2: outDot)
     }
     
     

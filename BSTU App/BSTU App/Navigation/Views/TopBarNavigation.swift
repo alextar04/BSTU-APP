@@ -39,6 +39,8 @@ class TopBarNavigation: UIView{
         self.startPlaceTextField.setPlaceholderBoldFont(placeholderText: "Откуда")
         self.finishPlaceTextField.setPlaceholderBoldFont(placeholderText: "Куда")
         NotificationCenter.default.addObserver(self, selector: #selector(changePremiseLabel), name: Notification.Name("ChangePremiseLabel"), object: nil)
+        self.startPlaceTextField.text = ""
+        self.finishPlaceTextField.text = ""
         
         self.chooseCorpButton.rx.tapGesture()
             .when(.recognized)
@@ -153,6 +155,7 @@ class TopBarNavigation: UIView{
                     
                     let timeForBindings = self.tablePremiseView == nil
                     
+                    // Инициализация таблицы
                     if self.tablePremiseView == nil{
                         self.tablePremiseView = Bundle.main.loadNibNamed("SearchPremiseView", owner: self, options: nil)?.first as? SearchPremiseView
                         let tableHeight = self.navigationControllerHeight - self.keyboardHeight - (self.frame.height + (self.window?.safeAreaInsets.top)!)
@@ -161,6 +164,13 @@ class TopBarNavigation: UIView{
                                                           width: self.frame.width,
                                                           height: tableHeight)
                         self.parentViewController?.view.addSubview(self.tablePremiseView!)
+                        
+                        // Базовая инициализация данными таблицу
+                        let data = (self.parentViewController as! NavigationViewController)
+                            .viewModel
+                            .loadArrayPremise(prefix: (label?.text)!)
+                        self.tablePremiseView?.sections.accept([SearchPremiseView.SectionOfPremise(header: "Кабинеты",
+                                                                                                   items: data!)])
                     }
                     
                     // Кнопка "Назад"
@@ -188,7 +198,7 @@ class TopBarNavigation: UIView{
             
                     // Отслеживание набранного текста
                     label?.rx
-                        .controlEvent(.editingChanged)
+                        .controlEvent([.editingChanged])
                         .asObservable()
                         .subscribe(onNext: { _ in
                             let data = (self.parentViewController as! NavigationViewController)
@@ -214,17 +224,23 @@ class TopBarNavigation: UIView{
         
         // Перемещение камеры и выбор маркера
         let parentVC = self.parentViewController as! NavigationViewController
-        let marker = parentVC.map.getMarkerWithName(name: labelText!)
-        
-        parentVC.map.zoomScale = 0.6
-        marker.statusSelected = true
-        let userInfo: [String: Any] = ["tapRecognizer": notification,
-                                       "stickerText": marker.text]
-        NotificationCenter.default.post(name: Notification.Name("OpenBottomBar"), object: nil, userInfo: userInfo)
-        UIView.animate(withDuration: 0.6, animations: {
-                parentVC.map.setContentOffset(CGPoint(x: marker.xPosition * parentVC.map.zoomScale - parentVC.map.frame.width/2,
-                                                      y: marker.yPosition * parentVC.map.zoomScale - parentVC.map.frame.height/2), animated: false)
-        })
+        // Выбор одного из пунктов отбытия/прибытия
+        if startPlaceTextField.text == "" || finishPlaceTextField.text == "" {
+            let marker = parentVC.map.getMarkerWithName(name: labelText!)
+            parentVC.map.zoomScale = 0.6
+            marker.statusSelected = true
+            let userInfo: [String: Any] = ["tapRecognizer": notification,
+                                           "stickerText": marker.text]
+            NotificationCenter.default.post(name: Notification.Name("OpenBottomBar"), object: nil, userInfo: userInfo)
+            UIView.animate(withDuration: 0.6, animations: {
+                    parentVC.map.setContentOffset(CGPoint(x: marker.xPosition * parentVC.map.zoomScale - parentVC.map.frame.width/2,
+                                                          y: marker.yPosition * parentVC.map.zoomScale - parentVC.map.frame.height/2), animated: false)
+            })
+        } else {
+            // Пункты отбытия/прибытия выбраны
+            // Построить маршрут
+            parentVC.createWay()
+        }
     }
     
     

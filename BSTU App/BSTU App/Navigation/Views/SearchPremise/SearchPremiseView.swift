@@ -36,9 +36,6 @@ class SearchPremiseView: UIView{
     
     func setupView(height: CGFloat, parentController: NavigationViewController){
         
-        let data = parentController.viewModel.allResults
-        self.sections.accept([SectionOfPremise(header: "Кабинеты", items: data)])
-        
         let dataSource = RxTableViewSectionedReloadDataSource<SectionOfPremise>(configureCell: { _, table, index, item in
             table.register(UINib(nibName: "SearchPremiseCellTable", bundle: nil), forCellReuseIdentifier: "SearchPremiseCellTable")
             let cell = table.dequeueReusableCell(withIdentifier: "SearchPremiseCellTable", for: index) as! SearchPremiseCellTable
