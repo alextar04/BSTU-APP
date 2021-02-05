@@ -163,7 +163,7 @@ class NavigationViewController: UIViewController {
         
     // MARK: Функция закрытия старого маркера
     func closeOldMarker(_ notification: NSNotification){
-        //...............let mapscheme = self.map.mapScheme.subviews
+        
         for view in self.map.mapScheme.subviews{
             if let currentMarkerView = view as? Marker {
                 let newMarkerName = notification.userInfo!["stickerText"] as! String
@@ -172,7 +172,7 @@ class NavigationViewController: UIViewController {
                 if (currentMarkerView.statusSelected == true) && (currentMarkerView.text == self.currentSelectedName)
                     && (newMarkerName != self.currentSelectedName){
                     self.changeMarkerStatus = true
-                    currentMarkerView.closeMarker(sender: notification.userInfo!["tapRecognizer"] as! UITapGestureRecognizer)
+                    currentMarkerView.closeMarker(sender: notification.userInfo!["tapRecognizer"])
                 }
                 // Удалить окно уже включенного маркера
                 if (currentMarkerView.statusSelected == true) && (currentMarkerView.text == self.currentSelectedName)

@@ -16,6 +16,7 @@ class Map: UIScrollView, UIScrollViewDelegate{
     var mapScheme: UIImageView!
     var markers: [Marker]!
     var pathLayer: CAShapeLayer!
+    var viewModel: MapViewModel!
     
     var firstDraw = true
     var zoomLastDraw: CGFloat = 0.0
@@ -36,9 +37,17 @@ class Map: UIScrollView, UIScrollViewDelegate{
         self.addSubview(self.mapScheme)
         self.contentSize = CGSize(width: mapScheme.frame.width, height: mapScheme.frame.height)
         
+        self.viewModel = MapViewModel()
+        // Поиск заменится получением матрицы из БД
+        self.viewModel.searchShortestWays()
+        
         // Стартовая позиция камеры
-        self.contentOffset = CGPoint(x: 800, y: 900)
-        let views = [Marker(position: (60 * 2 + 300, 270 * 2 + 300), text: "153a"),
+        UIView.animate(withDuration: 0.6, animations: {
+        self.setContentOffset(CGPoint(x: 300 * 2 + 300,
+                                      y: 300 * 2 + 300), animated: false)
+        })
+        // self.contentOffset = CGPoint(x: 429, y: 877)
+        let views = [Marker(position: (429, 877), text: "153a"),
                      Marker(position: (300 * 2 + 300, 300 * 2 + 300), text: "Столовая"),
                      Marker(position: (400 * 2 + 300, 400 * 2 + 300), text: "Гардероб1"),
                      Marker(position: (475 * 2 + 300, 400 * 2 + 300), text: "Гардероб2"),
@@ -61,8 +70,6 @@ class Map: UIScrollView, UIScrollViewDelegate{
         for marker in markers{
             self.mapScheme.addSubview(marker)
         }
-        
-        drawPathBetweenAudience(v1: 1, v2: 14)
     }
     
     
@@ -250,32 +257,22 @@ class Map: UIScrollView, UIScrollViewDelegate{
     
     // MARK: Отображение пути между кабинетами на карте
     func drawPathBetweenAudience(v1: Int, v2: Int){
-        
-        let temp = Path()
-        temp.searchShortestWays()
-        let pathVertex = temp.getPath(vertex1Index: v1, vertex2Index: v2)
+
+        let shortestPathVertexs = self.viewModel.getPath(vertex1Index: v1, vertex2Index: v2)
         
         let path = UIBezierPath()
-        for (index, vertex) in pathVertex.enumerated(){
+        for (index, vertex) in shortestPathVertexs.enumerated(){
             if index == 0{
-                path.move(to: temp.dotsPositions[vertex].toAudience!)
-                path.addLine(to: temp.dotsPositions[vertex].coordinates)
-            } else if index == pathVertex.count - 1{
-                path.addLine(to: temp.dotsPositions[vertex].coordinates)
-                path.addLine(to: temp.dotsPositions[vertex].toAudience!)
+                path.move(to: viewModel.dotsPositions[vertex].toAudience!)
+                path.addLine(to: viewModel.dotsPositions[vertex].coordinates)
+            } else if index == shortestPathVertexs.count - 1{
+                path.addLine(to: viewModel.dotsPositions[vertex].coordinates)
+                path.addLine(to: viewModel.dotsPositions[vertex].toAudience!)
             } else {
-                path.addLine(to: temp.dotsPositions[vertex].coordinates)
+                path.addLine(to: viewModel.dotsPositions[vertex].coordinates)
             }
             
         }
-        /*
-        path.move(to: CGPoint(x: 700, y: 1000))
-        path.addLine(to: CGPoint(x: 800, y: 1000))
-        path.addLine(to: CGPoint(x: 800, y: 1100))
-        path.addLine(to: CGPoint(x: 900, y: 1100))
-        path.addLine(to: CGPoint(x: 1200, y: 1100))
-        */
-        
 
         self.pathLayer = CAShapeLayer()
         self.pathLayer.path = path.cgPath
@@ -300,6 +297,11 @@ class Map: UIScrollView, UIScrollViewDelegate{
         self.pathLayer.add(animation, forKey: "line")
     }
     
+    
+    // MARK: Получение маркера с заданным именем
+    func getMarkerWithName(name: String)->Marker{
+        return self.markers.filter{ $0.text == name }.first!
+    }
     
     // MARK: - UIScrollViewDelegate
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {

@@ -1,5 +1,5 @@
 //
-//  Path.swift
+//  MapViewModel.swift
 //  BSTU App
 //
 //  Created by Alexey Taran on 04.02.2021.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class Path{
+class MapViewModel{
     
     var dotsPositions: [RoadDot] = [
         RoadDot(CGPoint(x: 341, y: 1090), audience: nil),

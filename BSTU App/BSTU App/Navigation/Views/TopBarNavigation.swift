@@ -200,6 +200,8 @@ class TopBarNavigation: UIView{
                         }).disposed(by: disposeBag)
             
                     label?.autocorrectionType = .no
+                    label?.clearButtonMode = .always
+                    label?.clearButtonMode = .whileEditing
             }
     }
     
@@ -210,7 +212,19 @@ class TopBarNavigation: UIView{
         self.startPlaceTextField.isEditing ? (self.startPlaceTextField.text = labelText) : (self.finishPlaceTextField.text = labelText)
         endEditingData()
         
-        // Камера!!!
+        // Перемещение камеры и выбор маркера
+        let parentVC = self.parentViewController as! NavigationViewController
+        let marker = parentVC.map.getMarkerWithName(name: labelText!)
+        
+        parentVC.map.zoomScale = 0.6
+        marker.statusSelected = true
+        let userInfo: [String: Any] = ["tapRecognizer": notification,
+                                       "stickerText": marker.text]
+        NotificationCenter.default.post(name: Notification.Name("OpenBottomBar"), object: nil, userInfo: userInfo)
+        UIView.animate(withDuration: 0.6, animations: {
+                parentVC.map.setContentOffset(CGPoint(x: marker.xPosition * parentVC.map.zoomScale - parentVC.map.frame.width/2,
+                                                      y: marker.yPosition * parentVC.map.zoomScale - parentVC.map.frame.height/2), animated: false)
+        })
     }
     
     

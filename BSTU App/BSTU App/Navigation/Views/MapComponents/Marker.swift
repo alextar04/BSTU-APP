@@ -114,7 +114,6 @@ class Marker: UIView{
                 self.markerTapped(sender: sender)
         }).disposed(by: disposeBag)
     }
- 
     
     
     @objc func markerTapped(sender: UITapGestureRecognizer){
@@ -137,12 +136,12 @@ class Marker: UIView{
     }
     
     
-    func closeMarker(sender: UITapGestureRecognizer){
+    func closeMarker(sender: Any){
         self.statusSelected = false
         var userInfo = [String: Any]()
 
         userInfo = ["stickerText": self.text,
-                        "tapRecognizer": sender]
+                    "tapRecognizer": sender]
 
         NotificationCenter.default.post(name: Notification.Name("CloseBottomBar"), object: nil, userInfo: userInfo)
     }
