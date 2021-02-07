@@ -73,7 +73,7 @@ class TopBarNavigation: UIView{
                     
                 let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
                     self.universityCorpView?.frame = self.universityCorpView?.frame
-                        .offsetBy(dx: 0, dy: -CGFloat((cellHeight * countCells) + headerHeight + 20)) as! CGRect
+                        .offsetBy(dx: 0, dy: -CGFloat((cellHeight * countCells) + headerHeight + 30)) as! CGRect
                     }
                 animator.startAnimation(afterDelay: TimeInterval(delay))
                 
@@ -106,7 +106,7 @@ class TopBarNavigation: UIView{
                 let countCells = self.universityCorpView.corpsCount
                 let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
                     self.universityCorpView?.frame = self.universityCorpView?.frame
-                        .offsetBy(dx: 0, dy: CGFloat((cellHeight * countCells) + headerHeight + 30)) as! CGRect
+                        .offsetBy(dx: 0, dy: CGFloat((cellHeight * countCells) + headerHeight + 50)) as! CGRect
                 }
                 animator.startAnimation()
                 
@@ -116,6 +116,7 @@ class TopBarNavigation: UIView{
                 },
                                completion: { _ in
                                 self.chooseCorpBackground.removeFromSuperview()
+                                self.universityCorpView.removeFromSuperview()
                 })
             })
             .disposed(by: disposeBag)
@@ -141,7 +142,7 @@ class TopBarNavigation: UIView{
             label!.rx.tapGesture()
                 .when(.recognized)
                 .subscribe(onNext: { _ in
-                    
+
                     if self.startPlaceTextField.text == "Откуда"{
                         self.startPlaceTextField.text = ""
                     }
@@ -158,14 +159,24 @@ class TopBarNavigation: UIView{
                     // Инициализация таблицы
                     if self.tablePremiseView == nil{
                         self.tablePremiseView = Bundle.main.loadNibNamed("SearchPremiseView", owner: self, options: nil)?.first as? SearchPremiseView
-                        let tableHeight = self.navigationControllerHeight - self.keyboardHeight - (self.frame.height + (self.window?.safeAreaInsets.top)!)
+                        
+                        var tableHeight: CGFloat = 0.0
+                        var yStartTable: CGFloat = 0.0
+                        if !(self.parentViewController as! NavigationViewController).isEnabledTopBarInInit{
+                            tableHeight = (self.parentViewController?.view.frame.height)! - self.keyboardHeight - (self.frame.height + ((UIApplication.shared.windows.first?.safeAreaInsets.top)!))
+                            yStartTable = self.frame.height + (self.window?.safeAreaInsets.top)!
+                        } else {
+                            tableHeight = (UIApplication.shared.windows.first?.safeAreaLayoutGuide.layoutFrame.height)! - self.keyboardHeight - self.frame.height
+                            yStartTable = self.frame.height
+                        }
+                        
                         self.tablePremiseView?.setupView(height: tableHeight, parentController: self.parentViewController as! NavigationViewController)
-                        self.tablePremiseView?.frame = CGRect(x: 0, y: self.frame.height + (self.window?.safeAreaInsets.top)!,
+                        self.tablePremiseView?.frame = CGRect(x: 0, y: yStartTable,
                                                           width: self.frame.width,
                                                           height: tableHeight)
                         self.parentViewController?.view.addSubview(self.tablePremiseView!)
                         
-                        // Базовая инициализация данными таблицу
+                        // Базовая инициализация данными таблицы
                         let data = (self.parentViewController as! NavigationViewController)
                             .viewModel
                             .loadArrayPremise(prefix: (label?.text)!)
@@ -178,7 +189,13 @@ class TopBarNavigation: UIView{
                         self.backButton = UIButton()
                         self.backButton!.makeCancelPremiseInputtingView()
                         
-                        self.backButton!.frame = CGRect(x: self.center.x - 60, y: self.navigationControllerHeight - self.keyboardHeight - 50,
+                        var yStartBackButton: CGFloat = 0.0
+                        if !(self.parentViewController as! NavigationViewController).isEnabledTopBarInInit{
+                            yStartBackButton = (self.parentViewController?.view.frame.height)! - self.keyboardHeight - 50
+                        } else {
+                            yStartBackButton = (UIApplication.shared.windows.first?.safeAreaLayoutGuide.layoutFrame.height)! - self.keyboardHeight - 50
+                        }
+                        self.backButton!.frame = CGRect(x: self.center.x - 60, y: yStartBackButton,
                                                   width: 120, height: 40)
                         self.parentViewController?.view.addSubview(self.backButton!)
                     }

@@ -12,6 +12,14 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        /*
+        let navigationViewControllerStoryboard = UIStoryboard(name: "NavigationViewController", bundle: nil)
+        let navigationViewController = navigationViewControllerStoryboard.instantiateViewController(withIdentifier: "vc")
+        self.addChild(navigationViewController)
+        self.view.addSubview(navigationViewController.view)
+        */
+        
         let navigationController = NavigationViewController()
         self.addChild(navigationController)
         self.view.addSubview(navigationController.view)

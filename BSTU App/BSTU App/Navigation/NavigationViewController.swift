@@ -24,6 +24,12 @@ class NavigationViewController: UIViewController {
     var changeMarkerStatus = false
     var bottomBarIsOpen = false
     
+    var firstDraw = true
+    var isEnabledTopBarInInit: Bool!
+    var normalStartTopBarHeight: CGFloat!
+    var currentStartTopBarHeight: CGFloat!
+    var currentTopBarHeight = (UIApplication.shared.windows.first?.safeAreaInsets.top)!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.viewModel = NavigationViewModel()
@@ -60,36 +66,37 @@ class NavigationViewController: UIViewController {
         
         // Загрузка информации на бар
         bottomBarView = Bundle.main.loadNibNamed("BottomBarView", owner: self, options: nil)?.first as? BottomBarNavigation
-        let heightBottomBar = bottomBarView?.frame.height
+        let heightBottomBar = (bottomBarView?.frame.height)! + (self.currentStartTopBarHeight - self.normalStartTopBarHeight)
         bottomBarView?.makeShadow(width: Int(self.view.frame.width),
-                                  heigth: Int(heightBottomBar!))
+                                  heigth: Int(heightBottomBar))
         bottomBarView?.setupView(namePremise: notification.userInfo!["stickerText"] as! String,
-                                 heightBar: heightBottomBar!)
+                                 heightBar: heightBottomBar)
         
         // Положение бара на странице
         self.bottomBarView?.frame = CGRect(x: 0, y: self.view.frame.height,
-                                           width: self.view.frame.width, height: heightBottomBar!)
+                                           width: self.view.frame.width, height: (bottomBarView?.frame.height)!)
         self.view.addSubview(bottomBarView!)
         
         // "Смена маркера" или "Бар открыт": нет анимации открытия
         // "Не смена маркера" или "Бар закрыт": есть анимация открытия
         if !self.changeMarkerStatus || !self.bottomBarIsOpen{
+            
             let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
                 self.bottomBarView?.frame = self.bottomBarView?.frame
-                    .offsetBy(dx: 0, dy: -heightBottomBar!) as! CGRect
+                    .offsetBy(dx: 0, dy: -heightBottomBar) as! CGRect
             }
             animator.startAnimation()
             
             // Изменить положение переключателя этажей
             let animatorSwitcherStorey = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
                 self.storeySwitcherView?.frame = self.storeySwitcherView?.frame
-                    .offsetBy(dx: 0, dy: -heightBottomBar!) as! CGRect
+                    .offsetBy(dx: 0, dy:  -heightBottomBar) as! CGRect
             }
             animatorSwitcherStorey.startAnimation(afterDelay: TimeInterval(0.3))
             
         } else {
             self.bottomBarView?.frame = self.bottomBarView?.frame
-                .offsetBy(dx: 0, dy: -heightBottomBar!) as! CGRect
+                .offsetBy(dx: 0, dy:  -heightBottomBar) as! CGRect
             self.changeMarkerStatus = false
         }
         self.bottomBarIsOpen = true
@@ -108,10 +115,10 @@ class NavigationViewController: UIViewController {
                     self.bottomBarIsOpen = false
                     
                     // Изменить положение переключателя этажей
-                    let heightBottomBar = bottomBarView?.frame.height
+                    let heightBottomBar = (bottomBarView?.frame.height)! + (self.currentStartTopBarHeight - self.normalStartTopBarHeight)
                     let animatorSwitcherStorey = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
                         self.storeySwitcherView?.frame = self.storeySwitcherView?.frame
-                            .offsetBy(dx: 0, dy: heightBottomBar!) as! CGRect
+                            .offsetBy(dx: 0, dy: heightBottomBar) as! CGRect
                     }
                     animatorSwitcherStorey.startAnimation(afterDelay: TimeInterval(0.3))
                      
@@ -139,10 +146,10 @@ class NavigationViewController: UIViewController {
         
         // Опустить нижнюю панель
         if self.bottomBarIsOpen{
-            let heightBottomBar = bottomBarView?.frame.height
+            let heightBottomBar = (bottomBarView?.frame.height)! + (self.currentStartTopBarHeight - self.normalStartTopBarHeight)
             let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
                 self.bottomBarView?.frame = self.bottomBarView?.frame
-                    .offsetBy(dx: 0, dy: heightBottomBar!) as! CGRect
+                    .offsetBy(dx: 0, dy: heightBottomBar) as! CGRect
             }
             animator.startAnimation()
             animator.addCompletion{ _ in
@@ -153,7 +160,7 @@ class NavigationViewController: UIViewController {
             // Изменить положение переключателя этажей
             let animatorSwitcherStorey = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
                 self.storeySwitcherView?.frame = self.storeySwitcherView?.frame
-                    .offsetBy(dx: 0, dy: heightBottomBar!) as! CGRect
+                    .offsetBy(dx: 0, dy: heightBottomBar) as! CGRect
             }
             animatorSwitcherStorey.startAnimation(afterDelay: TimeInterval(0.3))
         }
@@ -232,19 +239,19 @@ class NavigationViewController: UIViewController {
     
     // MARK: Функция закрытия нижнего бара после выбора пункта
     func closeBottomBarAfterChoosingPlace(){
-        let heightBottomBar = bottomBarView?.frame.height
+        let heightBottomBar = (bottomBarView?.frame.height)! + (self.currentStartTopBarHeight - self.normalStartTopBarHeight)
         self.bottomBarIsOpen = false
         
         let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
             self.bottomBarView?.frame = self.bottomBarView?.frame
-                .offsetBy(dx: 0, dy: heightBottomBar!) as! CGRect
+                .offsetBy(dx: 0, dy: heightBottomBar) as! CGRect
         }
         animator.startAnimation()
         
         // Изменить положение переключателя этажей
         let animatorSwitcherStorey = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
             self.storeySwitcherView?.frame = self.storeySwitcherView?.frame
-                .offsetBy(dx: 0, dy: heightBottomBar!) as! CGRect
+                .offsetBy(dx: 0, dy: heightBottomBar) as! CGRect
         }
         animatorSwitcherStorey.startAnimation(afterDelay: TimeInterval(0.3))
     }
@@ -269,7 +276,7 @@ class NavigationViewController: UIViewController {
                 
                 let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
                     universityCorpsView.frame = universityCorpsView.frame
-                        .offsetBy(dx: 0, dy: CGFloat((cellHeight * countCells) + headerHeight + 30)) as! CGRect
+                        .offsetBy(dx: 0, dy: CGFloat((cellHeight * countCells) + headerHeight + 50)) as! CGRect
                 }
                 animator.startAnimation(afterDelay: 1)
                 
@@ -296,9 +303,55 @@ class NavigationViewController: UIViewController {
     func addStoreySwitcherView(){
         self.storeySwitcherView = Bundle.main.loadNibNamed("StoreySwitcherView", owner: self, options: nil)?.first as? StoreySwitcherView
         self.storeySwitcherView.setupView(rangeStorey: 0...7)
-        self.storeySwitcherView?.frame = CGRect(x: 10, y: self.view.frame.height - 98,
+        
+        let yStart = self.view.frame.height - 98
+        self.storeySwitcherView?.frame = CGRect(x: 10, y: yStart,
                                            width: 42, height: 88)
         self.storeySwitcherView.makeRounding()
         self.view.addSubview(self.storeySwitcherView)
+    }
+    
+    
+    // MARK: Перерисовка объектов при включении режима модема, записи аудио и тд.
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        self.view.autoresizesSubviews = false
+        var yStartTopBar: CGFloat = 0.0
+        var yStartMap: CGFloat = 0.0
+        var yStartSwitcher: CGFloat = 0.0
+        let firstDrawOnThisCall = self.firstDraw
+        
+        // При первой прорисовке запомнить, был ли запущен бар
+        if self.firstDraw{
+            
+            self.normalStartTopBarHeight = self.view.frame.height - (UIApplication.shared.windows.first?.safeAreaLayoutGuide.layoutFrame.height)!
+            self.currentStartTopBarHeight = UIApplication.shared.windows.first?.safeAreaInsets.top
+            
+            self.isEnabledTopBarInInit = currentStartTopBarHeight != normalStartTopBarHeight
+            self.firstDraw = false
+        }
+        
+        if self.isEnabledTopBarInInit{
+            yStartTopBar = 0
+            yStartSwitcher = (UIApplication.shared.windows.first?.safeAreaLayoutGuide.layoutFrame.height)! - 98
+            yStartMap = topBarView.frame.height
+        } else {
+            yStartTopBar = 0
+            yStartSwitcher = self.view.frame.height - 98
+            yStartMap = (UIApplication.shared.windows.first?.safeAreaInsets.top)! + topBarView.frame.height
+        }
+        
+        // Если был изменен размер Safe area -> перерисовать объекты
+        if ((UIApplication.shared.windows.first?.safeAreaInsets.top)! - self.currentTopBarHeight != 0) || firstDrawOnThisCall{
+            self.topBarView?.frame = CGRect(x: 0, y: yStartTopBar,
+                                            width: self.view.frame.width, height: (topBarView?.frame.height)!)
+            self.storeySwitcherView?.frame = CGRect(x: 10, y: yStartSwitcher,
+                                                    width: 42, height: 88)
+            self.map.frame = CGRect(x: 0, y: yStartMap,
+                                    width: self.view.frame.width, height: self.view.frame.height - yStartMap)
+        }
+        
+        self.currentTopBarHeight = (UIApplication.shared.windows.first?.safeAreaInsets.top)!
     }
 }

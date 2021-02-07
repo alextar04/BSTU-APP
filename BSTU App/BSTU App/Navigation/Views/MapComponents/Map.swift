@@ -27,6 +27,7 @@ class Map: UIScrollView, UIScrollViewDelegate{
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         self.showsHorizontalScrollIndicator = false
         self.showsVerticalScrollIndicator = false
         self.decelerationRate = .fast
@@ -46,7 +47,7 @@ class Map: UIScrollView, UIScrollViewDelegate{
         self.setContentOffset(CGPoint(x: 1000,
                                       y: 1000), animated: false)
         })
-        // self.contentOffset = CGPoint(x: 429, y: 877)
+       
         let views = [Marker(position: (429, 877), text: "153a"),
                      //Marker(position: (300 * 2 + 300, 300 * 2 + 300), text: "Столовая"),
                      Marker(position: (400 * 2 + 300, 400 * 2 + 300), text: "Гардероб1"),

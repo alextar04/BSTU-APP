@@ -23,7 +23,6 @@
                     <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                 </tableView>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="76q-l0-FDy" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="9GB-8C-tuW"/>
                 <constraint firstItem="76q-l0-FDy" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="RRM-UP-qGy"/>
