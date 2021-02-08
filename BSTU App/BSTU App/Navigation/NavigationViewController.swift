@@ -324,6 +324,12 @@ class NavigationViewController: UIViewController {
         var yStartTopBar: CGFloat = 0.0
         var yStartMap: CGFloat = 0.0
         var yStartSwitcher: CGFloat = 0.0
+        
+        var yStartTable: CGFloat = 0.0
+        var tableHeight: CGFloat = 0.0
+        
+        var yStartBackButton: CGFloat = 0.0
+        
         let firstDrawOnThisCall = self.firstDraw
         
         // При первой прорисовке запомнить, был ли запущен бар
@@ -340,10 +346,20 @@ class NavigationViewController: UIViewController {
             yStartTopBar = 0
             yStartSwitcher = (UIApplication.shared.windows.first?.safeAreaLayoutGuide.layoutFrame.height)! - 98
             yStartMap = topBarView.frame.height
+            if self.topBarView.keyboardHeight != nil{
+                tableHeight = (UIApplication.shared.windows.first?.safeAreaLayoutGuide.layoutFrame.height)! - self.topBarView.keyboardHeight - self.topBarView.frame.height
+                yStartTable = self.topBarView.frame.height
+                yStartBackButton = (UIApplication.shared.windows.first?.safeAreaLayoutGuide.layoutFrame.height)! - self.topBarView.keyboardHeight - 50
+            }
         } else {
             yStartTopBar = 0
             yStartSwitcher = self.view.frame.height - 98
             yStartMap = (UIApplication.shared.windows.first?.safeAreaInsets.top)! + topBarView.frame.height
+            if self.topBarView.keyboardHeight != nil{
+                tableHeight = self.view.frame.height - self.topBarView.keyboardHeight - (self.topBarView.frame.height + ((UIApplication.shared.windows.first?.safeAreaInsets.top)!))
+                yStartTable = self.topBarView.frame.height + (self.topBarView.window?.safeAreaInsets.top)!
+                yStartBackButton = self.view.frame.height - self.topBarView.keyboardHeight - 50
+            }
         }
         
         // Если был изменен размер Safe area -> перерисовать объекты
@@ -354,6 +370,13 @@ class NavigationViewController: UIViewController {
                                                     width: 42, height: 88)
             self.map.frame = CGRect(x: 0, y: yStartMap,
                                     width: self.view.frame.width, height: self.view.frame.height - yStartMap)
+            if self.topBarView.backButton != nil{
+                self.topBarView.backButton?.frame = CGRect(x: self.topBarView.center.x - 60, y: yStartBackButton,
+                                                           width: 120, height: 40)
+                self.topBarView.tablePremiseView?.frame = CGRect(x: 0, y: yStartTable,
+                                                                 width: self.topBarView.frame.width, height: tableHeight)
+                self.topBarView.tablePremiseView?.premiseTableViewHeightConstraint.constant = tableHeight
+            }
         }
         
         self.currentTopBarHeight = (UIApplication.shared.windows.first?.safeAreaInsets.top)!
