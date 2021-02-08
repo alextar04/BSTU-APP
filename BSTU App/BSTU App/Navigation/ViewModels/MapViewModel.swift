@@ -30,11 +30,14 @@ class MapViewModel{
         RoadDot(CGPoint(x: 1035, y: 1560), audience: CGPoint(x: 1073, y: 1560), markerText: "123"),
         // Горизонтальный коридор (14 индекс)
         RoadDot(CGPoint(x: 1323, y: 1308), audience: CGPoint(x: 1323, y: 1351), markerText: "124"),
+        // Крайняя правая точка (15 индекс)
+        RoadDot(CGPoint(x: 1900, y: 1308), audience: CGPoint(x: 1980, y: 1400), markerText: "130"),
     ]
     
     let indexes: [(Int, Int)] = [(0, 1), (1, 2), (2, 3), (3, 4), (4, 5), (5, 6), (6, 7), (7, 8), (8, 9), (9, 10),
                                  (10, 14),
-                                 (10, 11), (11, 12), (12, 13)]
+                                 (10, 11), (11, 12), (12, 13),
+                                 (14, 15)]
     
     
     // MARK: Расстояние между точками

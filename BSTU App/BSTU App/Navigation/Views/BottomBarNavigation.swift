@@ -172,6 +172,7 @@ class Premise {
                 Premise(type: TypePremise(type: "Туалет", image: "wc"), name: "Туалет1"),
                 Premise(type: TypePremise(type: "Туалет", image: "wc"), name: "Туалет2"),
                 Premise(type: TypePremise(type: "Туалет", image: "wc"), name: "Туалет3"),
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "130"),
         ]
     }
 }

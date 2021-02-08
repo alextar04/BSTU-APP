@@ -16,7 +16,7 @@ extension UIButton{
     }
     
     func makeCancelPremiseInputtingView(){
-        self.setTitle("Отмена", for: .normal)
+        self.setTitle("Назад", for: .normal)
         self.setTitleColor(.black, for: .normal)
         self.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18.0)
         self.backgroundColor = .cancelInputPremiseColor

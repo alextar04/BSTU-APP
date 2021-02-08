@@ -66,17 +66,18 @@ class Map: UIScrollView, UIScrollViewDelegate{
                      Marker(position: (700 * 2 + 300, 280 * 2 + 300), text: "189"),
                      Marker(position: (700 * 2 + 300, 330 * 2 + 300), text: "Туалет3"),
                      Marker(position: (465, 900), text: "113"),
-                     Marker(position: (488, 1135), text: "114"),
+                     Marker(position: (488, 1150), text: "114"),
                      Marker(position: (596, 900), text: "115"),
-                     Marker(position: (675, 1135), text: "116"),
+                     Marker(position: (675, 1150), text: "116"),
                      Marker(position: (725, 900), text: "117"),
                      Marker(position: (844, 900), text: "118"),
-                     Marker(position: (846, 1135), text: "119"),
+                     Marker(position: (846, 1150), text: "119"),
                      Marker(position: (1023, 900), text: "120"),
-                     Marker(position: (995, 1420), text: "121"),
+                     Marker(position: (980, 1420), text: "121"),
                      Marker(position: (1075, 1546), text: "122"),
                      Marker(position: (1080, 1560), text: "123"),
                      Marker(position: (1323, 1355), text: "124"),
+                     Marker(position: (2100, 1400), text: "130"),
         ]
         
         self.markers = views
@@ -232,15 +233,24 @@ class Map: UIScrollView, UIScrollViewDelegate{
         
         if deltaZoom < 0 {
             // Уменьшение зума
-            // Сортировка отрисованных маркеров в порядке убывания длин
+            // Сортировка отрисованных маркеров в порядке убывания длин и приоритетов отрисовки
             var sortedMarkers = self.paintedMarkersInZoom.sorted(by: { marker1, marker2 in
+                if marker1.paintingPriority > marker2.paintingPriority{
+                    return true
+                }
                 return marker1.frame.width > marker2.frame.width
             })
             
             // Убрать нарисованные маркеры, исключая перекрытий
             for marker1 in sortedMarkers{
                 var statusHidden = false
-                for marker2 in self.paintedMarkersInZoom{
+                for marker2 in self.paintedMarkersInZoom.sorted(by: { marker1, marker2 in
+                    if marker1.paintingPriority > marker2.paintingPriority{
+                        return true
+                    }
+                    return marker1.frame.width > marker2.frame.width
+                }){
+
                     if marker1 == marker2{
                         break
                     }

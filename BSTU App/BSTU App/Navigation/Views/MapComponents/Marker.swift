@@ -24,6 +24,7 @@ class Marker: UIView{
     var containerView = UIView()
     var labelView = UILabel()
     var pointerView = UIImageView()
+    var paintingPriority = 0
     let disposeBag = DisposeBag()
     
     var statusSelected: Bool = false{
@@ -118,6 +119,7 @@ class Marker: UIView{
     
     @objc func markerTapped(sender: UITapGestureRecognizer){
         self.statusSelected = true
+        self.paintingPriority = 1
         
         UIView.animate(withDuration: 0.2,
             animations: {
@@ -138,6 +140,8 @@ class Marker: UIView{
     
     func closeMarker(sender: Any){
         self.statusSelected = false
+        self.paintingPriority = 0
+        
         var userInfo = [String: Any]()
 
         userInfo = ["stickerText": self.text,

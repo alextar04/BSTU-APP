@@ -208,6 +208,14 @@ class TopBarNavigation: UIView{
                             if self.finishPlaceTextField.text != ""{
                                 self.finishPlaceTextField.text = self.oldFinishPlaceText
                             }
+                            if self.startPlaceTextField.text == "" || self.finishPlaceTextField.text == ""{
+                                // Удаление старого нарисованного пути
+                                let parentVC = self.parentViewController as! NavigationViewController
+                                if parentVC.map.pathLayer != nil{
+                                    parentVC.map.pathLayer.removeFromSuperlayer()
+                                    parentVC.map.pathLayer.removeAllAnimations()
+                                }
+                            }
                             self.endEditingData()
                         }.disposed(by: self.disposeBag)
                     }
@@ -255,9 +263,40 @@ class TopBarNavigation: UIView{
             })
         } else {
             // Пункты отбытия/прибытия выбраны
-            // Построить маршрут
+            cameraMovement()
             parentVC.createWay()
         }
+    }
+    
+    
+    // MARK: Перемещение камеры
+    func cameraMovement(){
+        
+        let parentVC = self.parentViewController as! NavigationViewController
+        let marker1 = parentVC.map.getMarkerWithName(name: self.startPlaceTextField.text!)
+        let marker2 = parentVC.map.getMarkerWithName(name: self.finishPlaceTextField.text!)
+        
+        let xChanging = abs(marker2.xPosition - marker1.xPosition)
+        let yChanging = abs(marker2.yPosition - marker1.yPosition)
+        // Если невозможно отобразить оба пункта одновременно,
+        // то перейти камерой в пункт отправления
+        if xChanging * parentVC.map.zoomScale > parentVC.view.frame.width || yChanging * parentVC.map.zoomScale > parentVC.map.frame.height{
+            parentVC.map.zoomScale = 0.6
+            UIView.animate(withDuration: 0.6, animations: {
+                    parentVC.map.setContentOffset(CGPoint(x: marker1.xPosition * parentVC.map.zoomScale - parentVC.map.frame.width/2,
+                                                          y: marker1.yPosition * parentVC.map.zoomScale - parentVC.map.frame.height/2), animated: false)
+            })
+        } else {
+            // Иначе, перейти в позицию между ними
+            let xMiddleBetweenMarkers = marker1.xPosition + (marker2.xPosition - marker1.xPosition)/2
+            let yMiddleBetweenMarkers = marker1.yPosition + (marker2.yPosition - marker1.yPosition)/2
+            UIView.animate(withDuration: 0.6, animations: {
+                    parentVC.map.setContentOffset(CGPoint(x: xMiddleBetweenMarkers * parentVC.map.zoomScale - parentVC.map.frame.width/2,
+                                                          y: yMiddleBetweenMarkers * parentVC.map.zoomScale - parentVC.map.frame.height/2), animated: false)
+            })
+        }
+        
+        
     }
     
     
