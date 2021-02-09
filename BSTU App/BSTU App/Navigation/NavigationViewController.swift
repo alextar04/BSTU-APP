@@ -207,7 +207,6 @@ class NavigationViewController: UIViewController {
     @objc func fillStartPlaceLabel(){
         self.topBarView.startPlaceTextField.text = self.currentSelectedName
         closeBottomBarAfterChoosingPlace()
-        let marker = self.map.getMarkerWithName(name: self.topBarView.startPlaceTextField.text!)
         if self.topBarView.startPlaceTextField.text != "" && self.topBarView.finishPlaceTextField.text != ""{
             createWay()
         }
@@ -218,7 +217,6 @@ class NavigationViewController: UIViewController {
     @objc func fillFinishPlaceLabel(){
         self.topBarView.finishPlaceTextField.text = self.currentSelectedName
         closeBottomBarAfterChoosingPlace()
-        let marker = self.map.getMarkerWithName(name: self.topBarView.startPlaceTextField.text!)
         if self.topBarView.startPlaceTextField.text != "" && self.topBarView.finishPlaceTextField.text != ""{
             createWay()
         }
@@ -251,6 +249,9 @@ class NavigationViewController: UIViewController {
                 .offsetBy(dx: 0, dy: heightBottomBar) as! CGRect
         }
         animator.startAnimation()
+        animator.addCompletion{ _ in
+            self.bottomBarView?.removeFromSuperview()
+        }
         
         // Изменить положение переключателя этажей
         let animatorSwitcherStorey = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){

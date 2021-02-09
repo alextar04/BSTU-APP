@@ -294,7 +294,6 @@ class Map: UIScrollView, UIScrollViewDelegate{
             } else {
                 path.addLine(to: viewModel.dotsPositions[vertex].coordinates)
             }
-            
         }
 
         self.pathLayer = CAShapeLayer()

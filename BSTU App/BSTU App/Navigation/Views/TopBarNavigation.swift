@@ -254,6 +254,7 @@ class TopBarNavigation: UIView{
             let marker = parentVC.map.getMarkerWithName(name: labelText!)
             parentVC.map.zoomScale = 0.6
             marker.statusSelected = true
+            marker.paintingPriority = 1
             let userInfo: [String: Any] = ["tapRecognizer": notification,
                                            "stickerText": marker.text]
             NotificationCenter.default.post(name: Notification.Name("OpenBottomBar"), object: nil, userInfo: userInfo)
