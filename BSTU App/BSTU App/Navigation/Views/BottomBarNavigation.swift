@@ -144,7 +144,7 @@ class Premise {
     }
     
     static func getPremises()->[Premise]{
-        return [Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "153a"),
+        /*[Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "153a"),
                 Premise(type: TypePremise(type: "Гардероб", image: "wardrobe"), name: "Гардероб1"),
                 Premise(type: TypePremise(type: "Гардероб", image: "wardrobe"), name: "Гардероб2"),
                 Premise(type: TypePremise(type: "Гардероб", image: "wardrobe"), name: "Гардероб3"),
@@ -173,6 +173,42 @@ class Premise {
                 Premise(type: TypePremise(type: "Туалет", image: "wc"), name: "Туалет2"),
                 Premise(type: TypePremise(type: "Туалет", image: "wc"), name: "Туалет3"),
                 Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "130"),
+        ]*/
+        return [
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "122"),
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "124"),
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "125"),
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "120"),
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "119"),
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "118"),
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "117"),
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "116"),
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "115"),
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "114"),
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "113"),
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "111"),
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "109"),
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "108"),
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "107"),
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "106"),
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "105"),
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "104"),
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "101"),
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "138"),
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "128"),
+                Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "131"),
+                Premise(type: TypePremise(type: "Кабинет", image: "wc"), name: "Вход"),
+                Premise(type: TypePremise(type: "Туалет", image: "wc"), name: "WC"),
+                Premise(type: TypePremise(type: "Туалет", image: "wc"), name: "WC"),
+                Premise(type: TypePremise(type: "Кабинет", image: "wc"), name: "Лифт"),
+                Premise(type: TypePremise(type: "Кабинет", image: "wc"), name: "137"),
+                Premise(type: TypePremise(type: "Кабинет", image: "wc"), name: "136а"),
+                Premise(type: TypePremise(type: "Кабинет", image: "wc"), name: "136"),
+                Premise(type: TypePremise(type: "Кабинет", image: "wc"), name: "135"),
+                Premise(type: TypePremise(type: "Кабинет", image: "wc"), name: "134"),
+                Premise(type: TypePremise(type: "Кабинет", image: "wc"), name: "133"),
+                Premise(type: TypePremise(type: "Кабинет", image: "wc"), name: "132"),
+                Premise(type: TypePremise(type: "Кабинет", image: "wc"), name: "132а"),
         ]
     }
 }

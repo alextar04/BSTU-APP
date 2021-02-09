@@ -1518,8 +1518,8 @@
             filePath = "BSTU App/Navigation/Views/MapComponents/Map.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
             landmarkName = "setupView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1534,8 +1534,8 @@
             filePath = "BSTU App/Navigation/Views/MapComponents/Map.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
             landmarkName = "setupView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1806,8 +1806,8 @@
             filePath = "BSTU App/Navigation/Views/MapComponents/Map.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "245"
-            endingLineNumber = "245"
+            startingLineNumber = "283"
+            endingLineNumber = "283"
             landmarkName = "markerPainting()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1822,8 +1822,8 @@
             filePath = "BSTU App/Navigation/Views/MapComponents/Map.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "211"
-            endingLineNumber = "211"
+            startingLineNumber = "249"
+            endingLineNumber = "249"
             landmarkName = "markerPainting()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1838,8 +1838,8 @@
             filePath = "BSTU App/Navigation/Views/MapComponents/Map.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "212"
-            endingLineNumber = "212"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
             landmarkName = "markerPainting()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1854,8 +1854,8 @@
             filePath = "BSTU App/Navigation/Views/MapComponents/Map.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "239"
-            endingLineNumber = "239"
+            startingLineNumber = "277"
+            endingLineNumber = "277"
             landmarkName = "markerPainting()"
             landmarkType = "7">
             <Locations>
@@ -1902,8 +1902,8 @@
             filePath = "BSTU App/Navigation/Views/MapComponents/Map.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "255"
-            endingLineNumber = "255"
+            startingLineNumber = "293"
+            endingLineNumber = "293"
             landmarkName = "markerPainting()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1918,8 +1918,8 @@
             filePath = "BSTU App/Navigation/Views/MapComponents/Map.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "258"
-            endingLineNumber = "258"
+            startingLineNumber = "296"
+            endingLineNumber = "296"
             landmarkName = "markerPainting()"
             landmarkType = "7">
          </BreakpointContent>

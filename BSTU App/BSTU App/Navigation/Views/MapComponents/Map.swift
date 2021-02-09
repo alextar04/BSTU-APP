@@ -33,7 +33,7 @@ class Map: UIScrollView, UIScrollViewDelegate{
         self.decelerationRate = .fast
         self.bouncesZoom = false
         
-        self.mapScheme = UIImageView(image: UIImage(named: "someMap3"))
+        self.mapScheme = UIImageView(image: UIImage(named: "guk_1_result"))
         self.mapScheme.isUserInteractionEnabled = true
         self.addSubview(self.mapScheme)
         self.contentSize = CGSize(width: mapScheme.frame.width, height: mapScheme.frame.height)
@@ -48,8 +48,8 @@ class Map: UIScrollView, UIScrollViewDelegate{
                                       y: 1000), animated: false)
         })
        
+        /*
         let views = [Marker(position: (429, 877), text: "153a"),
-                     //Marker(position: (300 * 2 + 300, 300 * 2 + 300), text: "Столовая"),
                      Marker(position: (400 * 2 + 300, 400 * 2 + 300), text: "Гардероб1"),
                      Marker(position: (475 * 2 + 300, 400 * 2 + 300), text: "Гардероб2"),
                      Marker(position: (560 * 2 + 300, 1200), text: "Гардероб3"),
@@ -78,7 +78,45 @@ class Map: UIScrollView, UIScrollViewDelegate{
                      Marker(position: (1080, 1560), text: "123"),
                      Marker(position: (1323, 1355), text: "124"),
                      Marker(position: (2100, 1400), text: "130"),
+        ]*/
+        
+        let views = [Marker(position: (490, 900), text: "122"),
+                     Marker(position: (700, 900), text: "124"),
+                     Marker(position: (975, 900), text: "125"),
+                     Marker(position: (450, 1158), text: "120"),
+                     Marker(position: (767, 1158), text: "119"),
+                     Marker(position: (790, 1573), text: "118"),
+                     Marker(position: (767, 1884), text: "117"),
+                     Marker(position: (975, 1900), text: "116"),
+                     Marker(position: (1100, 1792), text: "115"),
+                     Marker(position: (1100, 1594), text: "114"),
+                     Marker(position: (1100, 1490), text: "113"),
+                     Marker(position: (1050, 1370), text: "WC"),
+                     Marker(position: (1140, 1370), text: "WC"),
+                     Marker(position: (1220, 1370), text: "111"),
+                     Marker(position: (1450, 1370), text: "109"),
+                     Marker(position: (1615, 1370), text: "108"),
+                     Marker(position: (1685, 1370), text: "107"),
+                     Marker(position: (1770, 1370), text: "106"),
+                     Marker(position: (1720, 1570), text: "105"),
+                     Marker(position: (1720, 1700), text: "104"),
+                     Marker(position: (1720, 1942), text: "101"),
+                     Marker(position: (2100, 1375), text: "138"),
+                     Marker(position: (1335, 1120), text: "128"),
+                     Marker(position: (1500, 1120), text: "131"),
+                     Marker(position: (1980, 957), text: "Вход"),
+                     Marker(position: (1980, 811), text: "137"),
+                     Marker(position: (1980, 539), text: "136а"),
+                     Marker(position: (1980, 392), text: "136"),
+                     Marker(position: (1720, 340), text: "135"),
+                     Marker(position: (1720, 450), text: "134"),
+                     Marker(position: (1720, 620), text: "133"),
+                     Marker(position: (1720, 811), text: "132"),
+                     Marker(position: (1720, 935), text: "132а"),
+                     Marker(position: (1650, 1050), text: "Лифт"),
         ]
+        
+        
         
         self.markers = views
         for marker in markers{
