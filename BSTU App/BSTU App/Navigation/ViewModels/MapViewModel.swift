@@ -13,8 +13,8 @@ class MapViewModel{
     
     var nextMatrix: [[Int?]]!
     var dotsPositions: [RoadDot] = [
-        RoadDot(CGPoint(x: 556, y: 1035), audience: CGPoint(x: 556, y: 1008), markerText: "122"),
-        RoadDot(CGPoint(x: 570, y: 1035), audience: CGPoint(x: 570, y: 1074), markerText: "120"),
+        RoadDot(CGPoint(x: 575, y: 1035), audience: CGPoint(x: 575, y: 1008), markerText: "122"),
+        RoadDot(CGPoint(x: 580, y: 1035), audience: CGPoint(x: 580, y: 1074), markerText: "120"),
         RoadDot(CGPoint(x: 819, y: 1035), audience: CGPoint(x: 819, y: 1074), markerText: "119"),
         RoadDot(CGPoint(x: 825, y: 1035), audience: CGPoint(x: 825, y: 1008), markerText: "124"),
         RoadDot(CGPoint(x: 958, y: 1035), audience: CGPoint(x: 958, y: 1008), markerText: "125"),
@@ -36,7 +36,7 @@ class MapViewModel{
         RoadDot(CGPoint(x: 1562, y: 1268), audience: CGPoint(x: 1562, y: 1313), markerText: "109"),
         RoadDot(CGPoint(x: 1637, y: 1268), audience: CGPoint(x: 1637, y: 1313), markerText: "108"),
         RoadDot(CGPoint(x: 1712, y: 1268), audience: CGPoint(x: 1712, y: 1313), markerText: "107"),// 20
-        RoadDot(CGPoint(x: 1713, y: 1268), audience: CGPoint(x: 1713, y: 1140), markerText: "Лифт"),// 21
+        RoadDot(CGPoint(x: 1713, y: 1132), audience: CGPoint(x: 1713, y: 1132), markerText: "Лифт"),// 21
         RoadDot(CGPoint(x: 1892, y: 1268), audience: nil, markerText: nil),
         // Верхний коридор прав. (23 индекс)
         RoadDot(CGPoint(x: 1892, y: 1132), audience: nil, markerText: nil),
@@ -53,17 +53,17 @@ class MapViewModel{
         RoadDot(CGPoint(x: 1892, y: 1408), audience: CGPoint(x: 1835, y: 1408), markerText: "106"),
         RoadDot(CGPoint(x: 1892, y: 1641), audience: CGPoint(x: 1835, y: 1641), markerText: "105"),
         RoadDot(CGPoint(x: 1892, y: 1722), audience: CGPoint(x: 1835, y: 1722), markerText: "104"),
-        RoadDot(CGPoint(x: 1892, y: 1837), audience: CGPoint(x: 1835, y: 1837), markerText: "101"),
+        RoadDot(CGPoint(x: 1892, y: 1946), audience: CGPoint(x: 1835, y: 1946), markerText: "101"),
         // Точки, прямо от входа (37 индекс)
         RoadDot(CGPoint(x: 1980, y: 1085), audience: CGPoint(x: 1980, y: 1085), markerText: "Вход"),
         RoadDot(CGPoint(x: 1980, y: 1132), audience: nil, markerText: nil),
         RoadDot(CGPoint(x: 1980, y: 1268), audience: nil, markerText: nil),
     ]
     
-    let indexes: [(Int, Int)] = [(0, 1), (1, 2), (2, 3), (3, 4), (4, 5), (5, 6), (6, 7),
-                                 (7, 8), (8, 9), (10, 11), (11, 12),
-                                 (7, 13), (13, 14), (14, 15), (16, 17), (17, 18), (18, 19), (19, 20), (20, 21), (20, 22), (21, 23), (22, 39),
-                                 (22, 23), (23, 24), (24, 25), (26, 27), (27, 28), (28, 29), (29, 30), (30, 31),
+    let indexes: [(Int, Int)] = [(0, 1), (1, 2), (2, 3), (3, 4), (4, 5), (5, 6), (6, 7), (6, 13),
+                                 (7, 8), (8, 9), (9, 10), (10, 11), (11, 12),
+                                 (7, 13), (13, 14), (14, 15), (15, 16), (16, 17), (17, 18), (18, 19), (19, 20), (20, 21), (20, 22), (20, 23), (21, 23), (22, 23), (22, 39),
+                                 (22, 23), (23, 24), (24, 25), (25, 26), (26, 27), (27, 28), (28, 29), (29, 30), (30, 31),
                                  (22, 32), (32, 33), (33, 34), (34, 35), (35, 36),
                                  (37, 38), (38, 39), (38, 23)]
     
