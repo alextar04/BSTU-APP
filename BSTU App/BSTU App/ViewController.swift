@@ -13,26 +13,31 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /*
-        let navigationViewControllerStoryboard = UIStoryboard(name: "NavigationViewController", bundle: nil)
-        let navigationViewController = navigationViewControllerStoryboard.instantiateViewController(withIdentifier: "vc")
-        self.addChild(navigationViewController)
-        self.view.addSubview(navigationViewController.view)
-        */
+        /******/
+        // Инициализация БД
+        let pathOnDevice = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first!, isDirectory: true).appendingPathComponent("bstuDB.sqlite3")
+        let bundleUrl = Bundle.main.url(forResource: "bstuDB.sqlite3", withExtension: nil)!
+
+        if FileManager.default.fileExists(atPath: pathOnDevice.path) {
+            try! FileManager.default.removeItem(at: pathOnDevice)
+        }
+        try! FileManager.default.copyItem(at: bundleUrl, to: pathOnDevice)
+        /******/
+        
+        /******/
+        let configuration = Realm.Configuration(fileURL: pathOnDevice, schemaVersion: 7)
+        let realm = try! Realm(configuration: configuration)
+        let qoq = realm.objects(QOQ.self)
+        print(qoq[0].name)
+        print(qoq[0].qwerty)
+        print(qoq[0].value)
+        /******/
+        
         
         let navigationController = NavigationViewController()
         self.addChild(navigationController)
         self.view.addSubview(navigationController.view)
         
-        /*
-        let temp = Path()
-        temp.searchShortestWays()
-        _ = temp.getPath(vertex1Index: 0, vertex2Index: 10)
-        print()
-        _ = temp.getPath(vertex1Index: 7, vertex2Index: 12)
-        print()
-        _ = temp.getPath(vertex1Index: 7, vertex2Index: 14)
-        */
     }
 
 

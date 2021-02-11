@@ -296,8 +296,6 @@ class TopBarNavigation: UIView{
                                                           y: yMiddleBetweenMarkers * parentVC.map.zoomScale - parentVC.map.frame.height/2), animated: false)
             })
         }
-        
-        
     }
     
     

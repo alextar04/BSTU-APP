@@ -47,38 +47,6 @@ class Map: UIScrollView, UIScrollViewDelegate{
         self.setContentOffset(CGPoint(x: 1000,
                                       y: 1000), animated: false)
         })
-       
-        /*
-        let views = [Marker(position: (429, 877), text: "153a"),
-                     Marker(position: (400 * 2 + 300, 400 * 2 + 300), text: "Гардероб1"),
-                     Marker(position: (475 * 2 + 300, 400 * 2 + 300), text: "Гардероб2"),
-                     Marker(position: (560 * 2 + 300, 1200), text: "Гардероб3"),
-                     Marker(position: (1460, 400 * 2 + 300), text: "Столовая"),
-                     Marker(position: (430 * 2 + 300, 550 * 2 + 300), text: "182"),
-                     Marker(position: (475 * 2 + 300, 550 * 2 + 300), text: "183"),
-                     Marker(position: (520 * 2 + 300, 550 * 2 + 300), text: "184"),
-                     Marker(position: (560 * 2 + 300, 550 * 2 + 300), text: "185"),
-                     Marker(position: (700 * 2 + 300, 30 * 2 + 300), text: "Туалет1"),
-                     Marker(position: (700 * 2 + 300, 100 * 2 + 300), text: "Туалет2"),
-                     Marker(position: (700 * 2 + 300, 150 * 2 + 300), text: "186"),
-                     Marker(position: (700 * 2 + 300, 200 * 2 + 300), text: "187"),
-                     Marker(position: (700 * 2 + 300, 250 * 2 + 300), text: "188"),
-                     Marker(position: (700 * 2 + 300, 280 * 2 + 300), text: "189"),
-                     Marker(position: (700 * 2 + 300, 330 * 2 + 300), text: "Туалет3"),
-                     Marker(position: (465, 900), text: "113"),
-                     Marker(position: (488, 1150), text: "114"),
-                     Marker(position: (596, 900), text: "115"),
-                     Marker(position: (675, 1150), text: "116"),
-                     Marker(position: (725, 900), text: "117"),
-                     Marker(position: (844, 900), text: "118"),
-                     Marker(position: (846, 1150), text: "119"),
-                     Marker(position: (1023, 900), text: "120"),
-                     Marker(position: (980, 1420), text: "121"),
-                     Marker(position: (1075, 1546), text: "122"),
-                     Marker(position: (1080, 1560), text: "123"),
-                     Marker(position: (1323, 1355), text: "124"),
-                     Marker(position: (2100, 1400), text: "130"),
-        ]*/
         
         let views = [Marker(position: (490, 900), text: "122"),
                      Marker(position: (700, 900), text: "124"),

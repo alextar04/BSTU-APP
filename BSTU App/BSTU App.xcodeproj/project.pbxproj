@@ -42,6 +42,7 @@
 		CE380A2F25BC6CF30028622B /* UniversityCorpsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE380A2E25BC6CF30028622B /* UniversityCorpsView.swift */; };
 		CE380A3125BC70930028622B /* UniversityCorpCellTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE380A3025BC70930028622B /* UniversityCorpCellTable.xib */; };
 		CE380A3425BC72390028622B /* UniversityCorpCellTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE380A3325BC72390028622B /* UniversityCorpCellTable.swift */; };
+		CE42A5AC25D41CD800CDDCA5 /* NavigationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42A5AB25D41CD800CDDCA5 /* NavigationModels.swift */; };
 		CE91140525C3FA020096AB29 /* NavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91140425C3FA020096AB29 /* NavigationViewModel.swift */; };
 		CE91140725C437740096AB29 /* StoreySwitcherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE91140625C437740096AB29 /* StoreySwitcherView.xib */; };
 		CE91140925C439460096AB29 /* StoreySwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91140825C439460096AB29 /* StoreySwitcherView.swift */; };
@@ -87,6 +88,7 @@
 		CE380A2E25BC6CF30028622B /* UniversityCorpsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityCorpsView.swift; sourceTree = "<group>"; };
 		CE380A3025BC70930028622B /* UniversityCorpCellTable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UniversityCorpCellTable.xib; sourceTree = "<group>"; };
 		CE380A3325BC72390028622B /* UniversityCorpCellTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityCorpCellTable.swift; sourceTree = "<group>"; };
+		CE42A5AB25D41CD800CDDCA5 /* NavigationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationModels.swift; sourceTree = "<group>"; };
 		CE91140425C3FA020096AB29 /* NavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModel.swift; sourceTree = "<group>"; };
 		CE91140625C437740096AB29 /* StoreySwitcherView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreySwitcherView.xib; sourceTree = "<group>"; };
 		CE91140825C439460096AB29 /* StoreySwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreySwitcherView.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 		CE037E6425BC425700C50C16 /* BSTU App */ = {
 			isa = PBXGroup;
 			children = (
+				CE9E00CD25D3FFDB00CF13C0 /* Database */,
 				CE380A0025BC4F070028622B /* Navigation */,
 				CE037E6525BC425700C50C16 /* AppDelegate.swift */,
 				CE037E6925BC425700C50C16 /* ViewController.swift */,
@@ -167,6 +170,7 @@
 		CE380A0025BC4F070028622B /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				CE42A5AA25D41CB900CDDCA5 /* Models */,
 				CE380A0225BC4F910028622B /* Images */,
 				CE380A0B25BC4F910028622B /* Extensions */,
 				CE380A1125BC4F910028622B /* Views */,
@@ -240,6 +244,14 @@
 			path = UniversityCorps;
 			sourceTree = "<group>";
 		};
+		CE42A5AA25D41CB900CDDCA5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CE42A5AB25D41CD800CDDCA5 /* NavigationModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		CE5A9D6025CD3B2E000AE913 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,6 +269,13 @@
 				CEACB2D825C7F2F900F4ADD3 /* Map.swift */,
 			);
 			path = MapComponents;
+			sourceTree = "<group>";
+		};
+		CE9E00CD25D3FFDB00CF13C0 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Database;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -392,6 +411,7 @@
 				CE037E6A25BC425700C50C16 /* ViewController.swift in Sources */,
 				CE380A2925BC4F910028622B /* TopBarNavigation.swift in Sources */,
 				CE01CC9F25C2A496001388B9 /* SearchPremiseView.swift in Sources */,
+				CE42A5AC25D41CD800CDDCA5 /* NavigationModels.swift in Sources */,
 				CE380A2525BC4F910028622B /* TextFieldExtensions.swift in Sources */,
 				CE380A2125BC4F910028622B /* ViewExtensions.swift in Sources */,
 				CE380A2825BC4F910028622B /* BottomBarNavigation.swift in Sources */,
