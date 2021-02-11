@@ -47,6 +47,7 @@
 		CE91140725C437740096AB29 /* StoreySwitcherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE91140625C437740096AB29 /* StoreySwitcherView.xib */; };
 		CE91140925C439460096AB29 /* StoreySwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91140825C439460096AB29 /* StoreySwitcherView.swift */; };
 		CEACB2D925C7F2F900F4ADD3 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEACB2D825C7F2F900F4ADD3 /* Map.swift */; };
+		CED3903625D5AFFC004409CF /* bstuDB.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = CED3903525D5AFFC004409CF /* bstuDB.sqlite3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +94,7 @@
 		CE91140625C437740096AB29 /* StoreySwitcherView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreySwitcherView.xib; sourceTree = "<group>"; };
 		CE91140825C439460096AB29 /* StoreySwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreySwitcherView.swift; sourceTree = "<group>"; };
 		CEACB2D825C7F2F900F4ADD3 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
+		CED3903525D5AFFC004409CF /* bstuDB.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = bstuDB.sqlite3; sourceTree = "<group>"; };
 		F96B8A8E8421A5DF88E0A7CF /* Pods_BSTU_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BSTU_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -274,6 +276,7 @@
 		CE9E00CD25D3FFDB00CF13C0 /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				CED3903525D5AFFC004409CF /* bstuDB.sqlite3 */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				CE037E7225BC425E00C50C16 /* LaunchScreen.storyboard in Resources */,
 				CE01CC9A25C29E59001388B9 /* SearchPremiseView.xib in Resources */,
 				CE037E6F25BC425E00C50C16 /* Assets.xcassets in Resources */,
+				CED3903625D5AFFC004409CF /* bstuDB.sqlite3 in Resources */,
 				CE91140725C437740096AB29 /* StoreySwitcherView.xib in Resources */,
 				CE037E6D25BC425700C50C16 /* Main.storyboard in Resources */,
 				CE380A3125BC70930028622B /* UniversityCorpCellTable.xib in Resources */,

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SQLite
 
 class ViewController: UIViewController {
 
@@ -25,12 +26,14 @@ class ViewController: UIViewController {
         /******/
         
         /******/
-        let configuration = Realm.Configuration(fileURL: pathOnDevice, schemaVersion: 7)
-        let realm = try! Realm(configuration: configuration)
-        let qoq = realm.objects(QOQ.self)
-        print(qoq[0].name)
-        print(qoq[0].qwerty)
-        print(qoq[0].value)
+        print("Точки")
+        print(pathOnDevice)
+        let db = try! Connection(pathOnDevice.absoluteString)
+        let dots = Table("MapRoadDotDB")
+        let id = Expression<Int64>("id")
+        for dot in try! db.prepare(dots) {
+            print(dot[id])
+        }
         /******/
         
         
