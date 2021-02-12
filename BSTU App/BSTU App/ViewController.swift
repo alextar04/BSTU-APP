@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        /*
         /******/
         // Инициализация БД
         let pathOnDevice = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first!, isDirectory: true).appendingPathComponent("bstuDB.sqlite3")
@@ -35,6 +36,10 @@ class ViewController: UIViewController {
             print(dot[id])
         }
         /******/
+        */
+        Database.copyDatabaseToDevice()
+        let mapper = CorpMapper()
+        mapper.getCorpList()
         
         
         let navigationController = NavigationViewController()
