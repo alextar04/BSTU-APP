@@ -37,11 +37,35 @@ class NavigationViewModel{
     }
     
     
-    //  MARK: Получение помещения с заданным названием
-    func getPremise(withName: String){
+    // MARK: Получение помещения с заданным названием
+    func getPremise(withName: String)->PremiseDB{
         
         let mapper = PremiseMapper()
-        let acceptedData = mapper.getPremise(withName: withName)
+        let acceptedData = mapper.getPremise(withName: withName).first!
+        
+        let premise = PremiseDB()
+        premise.id = acceptedData[mapper.idQuery]
+        premise.idMap = acceptedData[mapper.idMapQuery]
+        premise.idTypePremise = acceptedData[mapper.idTypePremiseQuery]
+        premise.name = acceptedData[mapper.nameQuery]
+        premise.description = acceptedData[mapper.descriptionQuery]
+        
+        return premise
+    }
+    
+    
+    // MARK: Получение типа помещения с заданным id
+    func getTypePremiseById(id: Int)->TypePremiseDB{
+        
+        let mapper = TypePremiseMapper()
+        let acceptedData = mapper.getTypePremiseById(withId: id).first!
+        
+        let typePremise = TypePremiseDB()
+        typePremise.id = acceptedData[mapper.idQuery]
+        typePremise.name = acceptedData[mapper.nameQuery]
+        typePremise.picture = acceptedData[mapper.pictureQuery]
+        
+        return typePremise
     }
     
     /*

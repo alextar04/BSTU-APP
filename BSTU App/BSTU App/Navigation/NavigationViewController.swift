@@ -70,7 +70,8 @@ class NavigationViewController: UIViewController {
         bottomBarView?.makeShadow(width: Int(self.view.frame.width),
                                   heigth: Int(heightBottomBar))
         bottomBarView?.setupView(namePremise: notification.userInfo!["stickerText"] as! String,
-                                 heightBar: heightBottomBar)
+                                 heightBar: heightBottomBar,
+                                 viewController: self)
         
         // Положение бара на странице
         self.bottomBarView?.frame = CGRect(x: 0, y: self.view.frame.height,

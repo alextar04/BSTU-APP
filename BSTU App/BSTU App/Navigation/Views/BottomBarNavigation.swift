@@ -45,18 +45,19 @@ class BottomBarNavigation: UIView{
         }
     }
     
-    func setupView(namePremise: String, heightBar: CGFloat) {
+    func setupView(namePremise: String, heightBar: CGFloat, viewController: NavigationViewController) {
         
         self.maxHeightBar = heightBar
         self.namePremise = namePremise
         
-        let premise = (self.parentViewController as! NavigationViewController).viewModel.getPremise(withName: self.namePremise)
+        let premise = viewController.viewModel.getPremise(withName: self.namePremise)
+        let typePremise = viewController.viewModel.getTypePremiseById(id: premise.idTypePremise)
         //PremiseViewModel(name: namePremise)
            
-        self.typePremiseLabel.text = "Замена"//premise.typePremise.nameTypePremise
-        self.namePremiseLabel.text = "Замена"//premise.namePremise
+        self.typePremiseLabel.text = typePremise.name//"Замена"//premise.typePremise.nameTypePremise
+        self.namePremiseLabel.text = premise.description//premise.namePremise
         
-        self.imagePremiseView.image = UIImage(named: "Замена")//premise.typePremise.nameImagePremise!)
+        self.imagePremiseView.image = UIImage(data: typePremise.picture)//UIImage(named: "Замена")//premise.typePremise.nameImagePremise!)
         self.imagePremiseView.makeRoundingImage()
         
         _ = [self.departureButton, self.destinationButton].map{
@@ -186,6 +187,7 @@ class Premise {
 }*/
 
 
+/*
 // Класс "Тип помещения" (model-бд)
 class TypePremise {
     var nameTypePremise: String? = nil
@@ -220,3 +222,4 @@ class TypePremise {
     }
     */
 }
+*/

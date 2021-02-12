@@ -10,8 +10,7 @@ import Foundation
 import SQLite
 
 class TypePremiseDB{
-    static let table = Table("TypePremiseDB")
-    static let id = Expression<Int>("id")
-    static let name = Expression<String>("name")
-    static let picture = Expression<String>("picture")
+    var id: Int!
+    var name: String!
+    var picture: Data!
 }

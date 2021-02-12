@@ -24,7 +24,6 @@ class MapViewModel{
         let acceptedData = markerMapper.getMarkerList(idMap: idMap)
         self.markerList.removeAll()
         
-        
         for row in acceptedData{
             let marker = MarkerDB()
             marker.id = row[markerMapper.idQuery]

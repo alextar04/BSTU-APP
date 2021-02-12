@@ -12,6 +12,7 @@
 		CE009EED25D6AC8B00CA8604 /* MarkerMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE009EEC25D6AC8B00CA8604 /* MarkerMapper.swift */; };
 		CE009EEF25D6B35D00CA8604 /* PremiseMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE009EEE25D6B35D00CA8604 /* PremiseMapper.swift */; };
 		CE009EF125D6C18100CA8604 /* admin_bstuDB.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = CE009EF025D6C18000CA8604 /* admin_bstuDB.sqlite3 */; };
+		CE009EF325D6F88B00CA8604 /* TypePremiseMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE009EF225D6F88B00CA8604 /* TypePremiseMapper.swift */; };
 		CE01CC9A25C29E59001388B9 /* SearchPremiseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE01CC9925C29E59001388B9 /* SearchPremiseView.xib */; };
 		CE01CC9C25C29F75001388B9 /* SearchPremiseCellTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE01CC9B25C29F75001388B9 /* SearchPremiseCellTable.xib */; };
 		CE01CC9F25C2A496001388B9 /* SearchPremiseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE01CC9E25C2A496001388B9 /* SearchPremiseView.swift */; };
@@ -68,6 +69,7 @@
 		CE009EEC25D6AC8B00CA8604 /* MarkerMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerMapper.swift; sourceTree = "<group>"; };
 		CE009EEE25D6B35D00CA8604 /* PremiseMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiseMapper.swift; sourceTree = "<group>"; };
 		CE009EF025D6C18000CA8604 /* admin_bstuDB.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; name = admin_bstuDB.sqlite3; path = DatabaseManagement/admin_bstuDB.sqlite3; sourceTree = "<group>"; };
+		CE009EF225D6F88B00CA8604 /* TypePremiseMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypePremiseMapper.swift; sourceTree = "<group>"; };
 		CE01CC9925C29E59001388B9 /* SearchPremiseView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchPremiseView.xib; sourceTree = "<group>"; };
 		CE01CC9B25C29F75001388B9 /* SearchPremiseCellTable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchPremiseCellTable.xib; sourceTree = "<group>"; };
 		CE01CC9E25C2A496001388B9 /* SearchPremiseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPremiseView.swift; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 				CEE5B68125D674CB0023D640 /* CorpMapper.swift */,
 				CE009EEC25D6AC8B00CA8604 /* MarkerMapper.swift */,
 				CE009EEE25D6B35D00CA8604 /* PremiseMapper.swift */,
+				CE009EF225D6F88B00CA8604 /* TypePremiseMapper.swift */,
 			);
 			path = TableMappers;
 			sourceTree = "<group>";
@@ -476,6 +479,7 @@
 				CE380A3425BC72390028622B /* UniversityCorpCellTable.swift in Sources */,
 				CE037E6625BC425700C50C16 /* AppDelegate.swift in Sources */,
 				CEACB2D925C7F2F900F4ADD3 /* Map.swift in Sources */,
+				CE009EF325D6F88B00CA8604 /* TypePremiseMapper.swift in Sources */,
 				CE009EED25D6AC8B00CA8604 /* MarkerMapper.swift in Sources */,
 				CEE5B67825D66AAB0023D640 /* MapRoadDotDB.swift in Sources */,
 				CE380A2325BC4F910028622B /* ImageExtensions.swift in Sources */,
