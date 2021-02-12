@@ -9,8 +9,12 @@
 import Foundation
 import SQLite
 
-class CorpDB{
-    static let table = Table("CorpDB")
-    static let id = Expression<Int>("id")
-    static let name = Expression<String>("name")
+class CorpDB {
+    
+    var id: Int!
+    var name: String!
+    
+    static let tableQuery = Table("CorpDB")
+    static let idQuery = Expression<Int>("id")
+    static let nameQuery = Expression<String>("name")
 }

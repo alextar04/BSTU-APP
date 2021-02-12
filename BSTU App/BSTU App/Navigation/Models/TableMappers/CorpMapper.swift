@@ -15,8 +15,8 @@ class CorpMapper{
     func getCorpList()->[SQLite.Row]{
         let database = Database.connect()
         var result = [SQLite.Row]()
-        for corpItem in try! database.prepare(CorpDB.table){
-            print(corpItem[CorpDB.name])
+        
+        for corpItem in try! database.prepare(CorpDB.tableQuery){
             result.append(corpItem)
         }
         return result

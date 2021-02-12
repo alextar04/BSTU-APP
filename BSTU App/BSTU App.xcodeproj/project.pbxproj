@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		149150BE2D4CA194A93C0868 /* Pods_BSTU_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F96B8A8E8421A5DF88E0A7CF /* Pods_BSTU_App.framework */; };
+		CE009EEB25D6A20D00CA8604 /* UniversityCorpsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE009EEA25D6A20D00CA8604 /* UniversityCorpsViewModel.swift */; };
 		CE01CC9A25C29E59001388B9 /* SearchPremiseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE01CC9925C29E59001388B9 /* SearchPremiseView.xib */; };
 		CE01CC9C25C29F75001388B9 /* SearchPremiseCellTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE01CC9B25C29F75001388B9 /* SearchPremiseCellTable.xib */; };
 		CE01CC9F25C2A496001388B9 /* SearchPremiseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE01CC9E25C2A496001388B9 /* SearchPremiseView.swift */; };
@@ -60,6 +61,7 @@
 /* Begin PBXFileReference section */
 		6D108528D00D09DA3E838396 /* Pods-BSTU App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BSTU App.release.xcconfig"; path = "Target Support Files/Pods-BSTU App/Pods-BSTU App.release.xcconfig"; sourceTree = "<group>"; };
 		ABF099B5FE0345803994AC74 /* Pods-BSTU App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BSTU App.debug.xcconfig"; path = "Target Support Files/Pods-BSTU App/Pods-BSTU App.debug.xcconfig"; sourceTree = "<group>"; };
+		CE009EEA25D6A20D00CA8604 /* UniversityCorpsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityCorpsViewModel.swift; sourceTree = "<group>"; };
 		CE01CC9925C29E59001388B9 /* SearchPremiseView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchPremiseView.xib; sourceTree = "<group>"; };
 		CE01CC9B25C29F75001388B9 /* SearchPremiseCellTable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchPremiseCellTable.xib; sourceTree = "<group>"; };
 		CE01CC9E25C2A496001388B9 /* SearchPremiseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPremiseView.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 			children = (
 				CE91140425C3FA020096AB29 /* NavigationViewModel.swift */,
 				CE37A08C25CBFC540046C1F1 /* MapViewModel.swift */,
+				CE009EEA25D6A20D00CA8604 /* UniversityCorpsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 				CE037E6A25BC425700C50C16 /* ViewController.swift in Sources */,
 				CE380A2925BC4F910028622B /* TopBarNavigation.swift in Sources */,
 				CE01CC9F25C2A496001388B9 /* SearchPremiseView.swift in Sources */,
+				CE009EEB25D6A20D00CA8604 /* UniversityCorpsViewModel.swift in Sources */,
 				CE42A5AC25D41CD800CDDCA5 /* CorpDB.swift in Sources */,
 				CE380A2525BC4F910028622B /* TextFieldExtensions.swift in Sources */,
 				CE380A2125BC4F910028622B /* ViewExtensions.swift in Sources */,

@@ -14,6 +14,7 @@ import UIKit
 
 class UniversityCorpsView: UIView, UITableViewDelegate{
     
+    let viewModel = UniversityCorpViewModel()
     @IBOutlet weak var corpsTable: UITableView!
     @IBOutlet weak var heightTable: NSLayoutConstraint!
     
@@ -25,15 +26,15 @@ class UniversityCorpsView: UIView, UITableViewDelegate{
     
     struct SectionOfCorps: SectionModelType{
         var header: String
-        var items: [UniversityCorp]
+        var items: [CorpDB]
         
         
-        init(original: UniversityCorpsView.SectionOfCorps, items: [UniversityCorp]) {
+        init(original: UniversityCorpsView.SectionOfCorps, items: [CorpDB]) {
             self = original
             self.items = items
         }
         
-        init(header: String, items: [UniversityCorp]){
+        init(header: String, items: [CorpDB]){
             self.header = header
             self.items = items
         }
@@ -41,8 +42,7 @@ class UniversityCorpsView: UIView, UITableViewDelegate{
     
     func setupView(){
         
-        let receivedData = [UniversityCorp(name: "Главный корпус"),
-                            UniversityCorp(name: "Механический корпус")]
+        let receivedData = viewModel.corpsList
         self.corpsCount = receivedData.count
         let section = [SectionOfCorps(header: "Корпуса", items: receivedData)]
         

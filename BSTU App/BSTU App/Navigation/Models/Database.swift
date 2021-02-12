@@ -26,7 +26,7 @@ class Database{
     // MARK: Подключение к БД
     static func connect()->Connection{
         let pathOnDevice = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first!, isDirectory: true).appendingPathComponent("bstuDB.sqlite3")
-        return(try! Connection(pathOnDevice.absoluteString, readonly: true))
+        return(try! Connection(pathOnDevice.absoluteString))
     }
     
 }
