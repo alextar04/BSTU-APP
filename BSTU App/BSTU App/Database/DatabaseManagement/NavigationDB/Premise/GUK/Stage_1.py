@@ -30,7 +30,7 @@ def PremiseAdd():
     Premise.create(id=18, idMap=0, idTypePremise=0, name="101", description="Кабинет 101")
     Premise.create(id=19, idMap=0, idTypePremise=0, name="138", description="Кабинет 138")
     Premise.create(id=20, idMap=0, idTypePremise=0, name="128", description="Кабинет 128")
-    Premise.create(id=21, idMap=0, idTypePremise=0, name="128", description="Кабинет 131")
+    Premise.create(id=21, idMap=0, idTypePremise=0, name="131", description="Кабинет 131")
     Premise.create(id=22, idMap=0, idTypePremise=4, name="Вход", description="Главный вход")
     Premise.create(id=23, idMap=0, idTypePremise=3, name="WC", description="Туалет мужской")
     Premise.create(id=24, idMap=0, idTypePremise=3, name="WC", description="Туалет женский")
@@ -48,7 +48,7 @@ def PremiseAdd():
 
 
 def PremiseRemove():
-    query = Premise.delete()
+    query = Premise.delete().where(Premise.idMap == 0)
     query.execute()
 
 os.chdir('../..')

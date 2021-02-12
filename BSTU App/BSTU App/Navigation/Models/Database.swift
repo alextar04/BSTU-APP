@@ -13,8 +13,8 @@ class Database{
     
     // MARK: Перезапись файла с базой данных на устройстве
     static func copyDatabaseToDevice(){
-        let pathOnDevice = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first!, isDirectory: true).appendingPathComponent("bstuDB.sqlite3")
-        let bundleUrl = Bundle.main.url(forResource: "bstuDB.sqlite3", withExtension: nil)!
+        let pathOnDevice = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first!, isDirectory: true).appendingPathComponent("admin_bstuDB.sqlite3")
+        let bundleUrl = Bundle.main.url(forResource: "admin_bstuDB.sqlite3", withExtension: nil)!
 
         if FileManager.default.fileExists(atPath: pathOnDevice.path) {
             try! FileManager.default.removeItem(at: pathOnDevice)
@@ -25,7 +25,7 @@ class Database{
     
     // MARK: Подключение к БД
     static func connect()->Connection{
-        let pathOnDevice = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first!, isDirectory: true).appendingPathComponent("bstuDB.sqlite3")
+        let pathOnDevice = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first!, isDirectory: true).appendingPathComponent("admin_bstuDB.sqlite3")
         return(try! Connection(pathOnDevice.absoluteString))
     }
     

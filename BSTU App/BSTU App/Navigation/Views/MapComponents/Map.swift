@@ -48,6 +48,7 @@ class Map: UIScrollView, UIScrollViewDelegate{
                                       y: 1000), animated: false)
         })
         
+        /*
         let views = [Marker(position: (490, 900), text: "122"),
                      Marker(position: (700, 900), text: "124"),
                      Marker(position: (975, 900), text: "125"),
@@ -82,11 +83,9 @@ class Map: UIScrollView, UIScrollViewDelegate{
                      Marker(position: (1720, 811), text: "132"),
                      Marker(position: (1720, 935), text: "132а"),
                      Marker(position: (1650, 1050), text: "Лифт"),
-        ]
+        ]*/
         
-        
-        
-        self.markers = views
+        self.markers = self.viewModel.markerList
         for marker in markers{
             self.mapScheme.addSubview(marker)
         }

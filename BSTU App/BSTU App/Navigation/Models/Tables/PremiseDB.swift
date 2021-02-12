@@ -10,10 +10,9 @@ import Foundation
 import SQLite
 
 class PremiseDB{
-    static let table = Table("PremiseDB")
-    static let id = Expression<Int>("id")
-    static let idMap = Expression<Int>("idMap")
-    static let idTypePremise = Expression<Int>("idTypePremise")
-    static let name = Expression<String>("name")
-    static let description = Expression<String>("description")
+    var id: Int!
+    var idMap: Int!
+    var idTypePremise: Int!
+    var name: String!
+    var description: String!
 }

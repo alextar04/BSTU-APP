@@ -11,12 +11,16 @@ import SQLite
 
 class CorpMapper{
     
+    let tableQuery = Table("CorpDB")
+    let idQuery = Expression<Int>("id")
+    let nameQuery = Expression<String>("name")
+    
     // MARK: Получение списка корпусов
     func getCorpList()->[SQLite.Row]{
         let database = Database.connect()
         var result = [SQLite.Row]()
         
-        for corpItem in try! database.prepare(CorpDB.tableQuery){
+        for corpItem in try! database.prepare(self.tableQuery){
             result.append(corpItem)
         }
         return result

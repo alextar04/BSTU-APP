@@ -10,6 +10,41 @@ import Foundation
 import UIKit
 
 class NavigationViewModel{
+    
+    lazy var premiseList = [PremiseDB]()
+    
+    init() {
+        getPremises(idMap: 0)
+    }
+    
+    // MARK: Получение списка помещений
+    func getPremises(idMap: Int){
+
+        let mapper = PremiseMapper()
+        let acceptedData = mapper.getPremiseList(idMap: idMap)
+        self.premiseList.removeAll()
+        
+        for row in acceptedData{
+            let premise = PremiseDB()
+            premise.id = row[mapper.idQuery]
+            premise.idMap = row[mapper.idMapQuery]
+            premise.idTypePremise = row[mapper.idTypePremiseQuery]
+            premise.name = row[mapper.nameQuery]
+            premise.description = row[mapper.descriptionQuery]
+            
+            self.premiseList.append(premise)
+        }
+    }
+    
+    
+    //  MARK: Получение помещения с заданным названием
+    func getPremise(withName: String){
+        
+        let mapper = PremiseMapper()
+        let acceptedData = mapper.getPremise(withName: withName)
+    }
+    
+    /*
     var allResults = [
             Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "122"),
             Premise(type: TypePremise(type: "Кабинет", image: "cabinet"), name: "124"),
@@ -45,18 +80,18 @@ class NavigationViewModel{
             Premise(type: TypePremise(type: "Кабинет", image: "wc"), name: "133"),
             Premise(type: TypePremise(type: "Кабинет", image: "wc"), name: "132"),
             Premise(type: TypePremise(type: "Кабинет", image: "wc"), name: "132а"),
-    ]
+    ]*/
     
     
     // MARK: Загрузка помещений, имеющих заданный префикс
-    func loadArrayPremise(prefix: String)->[Premise]?{
+    func loadArrayPremise(prefix: String)->[PremiseDB]?{
         
         if prefix == ""{
-            return self.allResults
+            return self.premiseList
         }
         
-        let result = try? allResults.filter{ premise in
-            premise.namePremise.lowercased().hasPrefix(prefix.lowercased())
+        let result = try? premiseList.filter{ premise in
+            premise.name.lowercased().hasPrefix(prefix.lowercased())
         }
         return result
     }

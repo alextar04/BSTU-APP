@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		149150BE2D4CA194A93C0868 /* Pods_BSTU_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F96B8A8E8421A5DF88E0A7CF /* Pods_BSTU_App.framework */; };
 		CE009EEB25D6A20D00CA8604 /* UniversityCorpsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE009EEA25D6A20D00CA8604 /* UniversityCorpsViewModel.swift */; };
+		CE009EED25D6AC8B00CA8604 /* MarkerMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE009EEC25D6AC8B00CA8604 /* MarkerMapper.swift */; };
+		CE009EEF25D6B35D00CA8604 /* PremiseMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE009EEE25D6B35D00CA8604 /* PremiseMapper.swift */; };
+		CE009EF125D6C18100CA8604 /* admin_bstuDB.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = CE009EF025D6C18000CA8604 /* admin_bstuDB.sqlite3 */; };
 		CE01CC9A25C29E59001388B9 /* SearchPremiseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE01CC9925C29E59001388B9 /* SearchPremiseView.xib */; };
 		CE01CC9C25C29F75001388B9 /* SearchPremiseCellTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE01CC9B25C29F75001388B9 /* SearchPremiseCellTable.xib */; };
 		CE01CC9F25C2A496001388B9 /* SearchPremiseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE01CC9E25C2A496001388B9 /* SearchPremiseView.swift */; };
@@ -62,6 +65,9 @@
 		6D108528D00D09DA3E838396 /* Pods-BSTU App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BSTU App.release.xcconfig"; path = "Target Support Files/Pods-BSTU App/Pods-BSTU App.release.xcconfig"; sourceTree = "<group>"; };
 		ABF099B5FE0345803994AC74 /* Pods-BSTU App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BSTU App.debug.xcconfig"; path = "Target Support Files/Pods-BSTU App/Pods-BSTU App.debug.xcconfig"; sourceTree = "<group>"; };
 		CE009EEA25D6A20D00CA8604 /* UniversityCorpsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityCorpsViewModel.swift; sourceTree = "<group>"; };
+		CE009EEC25D6AC8B00CA8604 /* MarkerMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerMapper.swift; sourceTree = "<group>"; };
+		CE009EEE25D6B35D00CA8604 /* PremiseMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiseMapper.swift; sourceTree = "<group>"; };
+		CE009EF025D6C18000CA8604 /* admin_bstuDB.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; name = admin_bstuDB.sqlite3; path = DatabaseManagement/admin_bstuDB.sqlite3; sourceTree = "<group>"; };
 		CE01CC9925C29E59001388B9 /* SearchPremiseView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchPremiseView.xib; sourceTree = "<group>"; };
 		CE01CC9B25C29F75001388B9 /* SearchPremiseCellTable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchPremiseCellTable.xib; sourceTree = "<group>"; };
 		CE01CC9E25C2A496001388B9 /* SearchPremiseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPremiseView.swift; sourceTree = "<group>"; };
@@ -295,6 +301,7 @@
 		CE9E00CD25D3FFDB00CF13C0 /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				CE009EF025D6C18000CA8604 /* admin_bstuDB.sqlite3 */,
 				CED3903525D5AFFC004409CF /* bstuDB.sqlite3 */,
 			);
 			path = Database;
@@ -304,6 +311,8 @@
 			isa = PBXGroup;
 			children = (
 				CEE5B68125D674CB0023D640 /* CorpMapper.swift */,
+				CE009EEC25D6AC8B00CA8604 /* MarkerMapper.swift */,
+				CE009EEE25D6B35D00CA8604 /* PremiseMapper.swift */,
 			);
 			path = TableMappers;
 			sourceTree = "<group>";
@@ -388,6 +397,7 @@
 				CE01CC9C25C29F75001388B9 /* SearchPremiseCellTable.xib in Resources */,
 				CE380A2725BC4F910028622B /* BottomBarView.xib in Resources */,
 				CE380A1A25BC4F910028622B /* rectangle.png in Resources */,
+				CE009EF125D6C18100CA8604 /* admin_bstuDB.sqlite3 in Resources */,
 				CE380A1E25BC4F910028622B /* marker_pointer.png in Resources */,
 				CE380A1D25BC4F910028622B /* showMore.png in Resources */,
 				CE380A2625BC4F910028622B /* TopBarView.xib in Resources */,
@@ -466,6 +476,7 @@
 				CE380A3425BC72390028622B /* UniversityCorpCellTable.swift in Sources */,
 				CE037E6625BC425700C50C16 /* AppDelegate.swift in Sources */,
 				CEACB2D925C7F2F900F4ADD3 /* Map.swift in Sources */,
+				CE009EED25D6AC8B00CA8604 /* MarkerMapper.swift in Sources */,
 				CEE5B67825D66AAB0023D640 /* MapRoadDotDB.swift in Sources */,
 				CE380A2325BC4F910028622B /* ImageExtensions.swift in Sources */,
 				CE380A2B25BC4F910028622B /* NavigationViewController.swift in Sources */,
@@ -473,6 +484,7 @@
 				CE380A2425BC4F910028622B /* ButtonExtensions.swift in Sources */,
 				CE380A2F25BC6CF30028622B /* UniversityCorpsView.swift in Sources */,
 				CEE5B67A25D66AB70023D640 /* MarkerDB.swift in Sources */,
+				CE009EEF25D6B35D00CA8604 /* PremiseMapper.swift in Sources */,
 				CEE5B67625D66A9D0023D640 /* MapDB.swift in Sources */,
 				CE380A2A25BC4F910028622B /* Marker.swift in Sources */,
 				CEE5B67E25D66AD80023D640 /* TypePremiseDB.swift in Sources */,

@@ -11,6 +11,35 @@ import UIKit
 
 class MapViewModel{
     
+    lazy var markerList = [Marker]()
+    
+    init() {
+        getMarkers(idMap: 0)
+    }
+    
+    // MARK: Получение списка маркеров
+    func getMarkers(idMap: Int){
+        let premiseMapper = PremiseMapper()
+        let markerMapper = MarkerMapper()
+        let acceptedData = markerMapper.getMarkerList(idMap: idMap)
+        self.markerList.removeAll()
+        
+        
+        for row in acceptedData{
+            let marker = MarkerDB()
+            marker.id = row[markerMapper.idQuery]
+            marker.idMap = row[markerMapper.idMapQuery]
+            marker.idOnMap = row[markerMapper.idOnMapQuery]
+            marker.idPremise = row[markerMapper.idPremiseQuery]
+            marker.x = row[markerMapper.xQuery]
+            marker.y = row[markerMapper.yQuery]
+            let text = premiseMapper.getPremiseById(withId: marker.idPremise).first!
+            
+            self.markerList.append(Marker(position: (marker.x, marker.y), text: text))
+        }
+    }
+    
+    
     var nextMatrix: [[Int?]]!
     var dotsPositions: [RoadDot] = [
         RoadDot(CGPoint(x: 575, y: 1035), audience: CGPoint(x: 575, y: 1008), markerText: "122"),

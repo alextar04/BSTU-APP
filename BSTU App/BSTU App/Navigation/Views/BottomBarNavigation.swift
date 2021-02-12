@@ -50,12 +50,13 @@ class BottomBarNavigation: UIView{
         self.maxHeightBar = heightBar
         self.namePremise = namePremise
         
-        let premise = PremiseViewModel(name: namePremise)
+        let premise = (self.parentViewController as! NavigationViewController).viewModel.getPremise(withName: self.namePremise)
+        //PremiseViewModel(name: namePremise)
            
-        self.typePremiseLabel.text = premise.typePremise.nameTypePremise
-        self.namePremiseLabel.text = premise.namePremise
+        self.typePremiseLabel.text = "Замена"//premise.typePremise.nameTypePremise
+        self.namePremiseLabel.text = "Замена"//premise.namePremise
         
-        self.imagePremiseView.image = UIImage(named: premise.typePremise.nameImagePremise!)
+        self.imagePremiseView.image = UIImage(named: "Замена")//premise.typePremise.nameImagePremise!)
         self.imagePremiseView.makeRoundingImage()
         
         _ = [self.departureButton, self.destinationButton].map{
@@ -119,7 +120,7 @@ class BottomBarNavigation: UIView{
     
 }
 
-
+/*
 class PremiseViewModel {
     var namePremise: String!
     var typePremise: TypePremise!
@@ -130,10 +131,11 @@ class PremiseViewModel {
         }?.typePremise
         self.namePremise = "\(name) \(self.typePremise.nameTypePremise!)"
     }
-}
+}*/
 
 
 // Класс "Помещение" (model-бд)
+/*
 class Premise {
     var namePremise: String!
     var typePremise: TypePremise!
@@ -181,7 +183,7 @@ class Premise {
                 Premise(type: TypePremise(type: "Кабинет", image: "wc"), name: "132а"),
         ]
     }
-}
+}*/
 
 
 // Класс "Тип помещения" (model-бд)

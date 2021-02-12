@@ -21,14 +21,14 @@ class SearchPremiseView: UIView{
     
     struct SectionOfPremise: SectionModelType{
         var header: String
-        var items: [Premise]
+        var items: [PremiseDB]
         
-        init(original: SearchPremiseView.SectionOfPremise, items: [Premise]) {
+        init(original: SearchPremiseView.SectionOfPremise, items: [PremiseDB]) {
             self = original
             self.items = items
         }
         
-        init(header: String, items: [Premise]){
+        init(header: String, items: [PremiseDB]){
             self.header = header
             self.items = items
         }
@@ -39,8 +39,8 @@ class SearchPremiseView: UIView{
         let dataSource = RxTableViewSectionedReloadDataSource<SectionOfPremise>(configureCell: { _, table, index, item in
             table.register(UINib(nibName: "SearchPremiseCellTable", bundle: nil), forCellReuseIdentifier: "SearchPremiseCellTable")
             let cell = table.dequeueReusableCell(withIdentifier: "SearchPremiseCellTable", for: index) as! SearchPremiseCellTable
-            cell.namePremiseLabel.text = item.namePremise
-            cell.typePremiseLabel.text = item.typePremise.nameTypePremise
+            cell.namePremiseLabel.text = item.name
+            cell.typePremiseLabel.text = "Замена"//item.typePremise.nameTypePremise
             
             cell.storeyLabel.text = "1 этаж"
             cell.storeyLabel.makeRounding()
@@ -48,7 +48,7 @@ class SearchPremiseView: UIView{
             cell.storeyLabel.layer.borderColor = UIColor.lightGray.cgColor
             cell.storeyLabel.backgroundColor = .clear
             
-            cell.typePremiseImage.image = UIImage(named: item.typePremise.nameImagePremise!)
+            cell.typePremiseImage.image = UIImage(named: "Замена")//item.typePremise.nameImagePremise!)
             cell.typePremiseImage.makeRoundingImage()
             
             return cell

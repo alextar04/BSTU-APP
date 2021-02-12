@@ -14,7 +14,4 @@ class CorpDB {
     var id: Int!
     var name: String!
     
-    static let tableQuery = Table("CorpDB")
-    static let idQuery = Expression<Int>("id")
-    static let nameQuery = Expression<String>("name")
 }

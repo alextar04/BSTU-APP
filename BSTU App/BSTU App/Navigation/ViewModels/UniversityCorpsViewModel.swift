@@ -23,8 +23,8 @@ class UniversityCorpViewModel{
         
         for row in acceptedData{
             let corp = CorpDB()
-            corp.id = row[CorpDB.idQuery]
-            corp.name = row[CorpDB.nameQuery]
+            corp.id = row[mapper.idQuery]
+            corp.name = row[mapper.nameQuery]
             
             corpsList.append(corp)
         }
