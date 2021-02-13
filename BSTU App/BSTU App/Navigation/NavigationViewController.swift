@@ -31,6 +31,7 @@ class NavigationViewController: UIViewController {
     var currentStartTopBarHeight: CGFloat!
     var currentTopBarHeight = (UIApplication.shared.windows.first?.safeAreaInsets.top)!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.viewModel = NavigationViewModel()

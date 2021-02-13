@@ -33,14 +33,14 @@ class Map: UIScrollView, UIScrollViewDelegate{
         self.decelerationRate = .fast
         self.bouncesZoom = false
         
+        self.viewModel = MapViewModel()
+        // Поиск заменится получением матрицы из БД
+        self.viewModel.searchShortestWays()
+        
         self.mapScheme = UIImageView(image: UIImage(named: "guk_1_result"))
         self.mapScheme.isUserInteractionEnabled = true
         self.addSubview(self.mapScheme)
         self.contentSize = CGSize(width: mapScheme.frame.width, height: mapScheme.frame.height)
-        
-        self.viewModel = MapViewModel()
-        // Поиск заменится получением матрицы из БД
-        self.viewModel.searchShortestWays()
         
         // Стартовая позиция камеры
         UIView.animate(withDuration: 0.6, animations: {

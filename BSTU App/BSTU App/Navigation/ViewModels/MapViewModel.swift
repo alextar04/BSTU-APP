@@ -68,34 +68,11 @@ class MapViewModel{
     // MARK: Получение маркера
     // Входные параметры: id-помещения
     func getMarkerByIdPremise(id: Int)->Marker{
-        /*
-        let markerMapper = MarkerMapper()
-        let premiseMapper = PremiseMapper()
-        let acceptedData = markerMapper.getMarkerByPremiseId(id: id)
-        var result = [MarkerDB]()
-        
-        for row in acceptedData{
-            let marker = MarkerDB()
-            marker.id = row[markerMapper.idQuery]
-            marker.idMap = row[markerMapper.idMapQuery]
-            marker.idOnMap = row[markerMapper.idOnMapQuery]
-            marker.idPremise = row[markerMapper.idPremiseQuery]
-            marker.x = row[markerMapper.xQuery]
-            marker.y = row[markerMapper.yQuery]
-            result.append(marker)
-        }
-        
-        let marker = result.first!
-        return Marker(position: (marker.x, marker.y),
-                      text: premiseMapper.getPremiseNameById(withId: marker.idPremise).first!,
-                      idPremise: marker.idPremise)
-        */
-        
         return self.markerList.filter{$0.idPremise == id}.first!
     }
     
     
-    // MARK: Полчение карты
+    // MARK: Получение карты
     // Входные параметры: id-карты
     func getMapById(id: Int)->MapDB{
         let mapMapper = MapMapper()
@@ -115,6 +92,30 @@ class MapViewModel{
         }
         
         return result.first!
+    }
+    
+    
+    // MARK: Парсер "матрицы лучших маршрутов" из записи БД
+    func matrixBestWaysParser(matrix: String)->[[CGFloat]]{
+        // Тестируемая строка
+        // [[1, 2, 4],[6, 7]]
+        // Регулярка для получения строк матрицы
+        // "\[[0-9, ]*\]"
+        // Регулярка для получения значений для заполнения матрицы
+        // "[0-9]+"
+        return [[CGFloat]]()
+    }
+    
+    
+    // MARK: Парсер "матрицы лучших расстояний" из записи БД
+    func matrixBestDistanceParser(matrix: String)->[[Int?]]{
+        // Тестируемая строка
+        // [[1.0, 2.3, 4.5],[6.0, 7.0]]
+        // Регулярка для получения строк матрицы
+        // "\[[0-9., ]*\]"
+        // Регулярка для получения значений для заполнения матрицы
+        // "[0-9]+\.[0-9]+"
+        return [[Int?]]()
     }
     
     
@@ -237,6 +238,7 @@ class MapViewModel{
         }
         //printMatrix(nextMatrix)
     }
+    
     
     /*
     func printMatrix(_ matrix: [[CGFloat]]){

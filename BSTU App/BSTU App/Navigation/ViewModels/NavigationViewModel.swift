@@ -126,13 +126,13 @@ class NavigationViewModel{
     
     // MARK: Загрузка помещений, имеющих заданный префикс
     func loadArrayPremise(prefix: String)->[PremiseDB]?{
-        
+    
         if prefix == ""{
-            return self.premiseList
+            return Array(self.premiseList.prefix(10))
         }
         
         let result = try? premiseList.filter{ premise in
-            premise.name.lowercased().hasPrefix(prefix.lowercased())
+            premise.description.lowercased().hasPrefix(prefix.lowercased())
         }
         return result
     }
