@@ -53,6 +53,8 @@
 		CE91140925C439460096AB29 /* StoreySwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91140825C439460096AB29 /* StoreySwitcherView.swift */; };
 		CEACB2D925C7F2F900F4ADD3 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEACB2D825C7F2F900F4ADD3 /* Map.swift */; };
 		CED3903625D5AFFC004409CF /* bstuDB.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = CED3903525D5AFFC004409CF /* bstuDB.sqlite3 */; };
+		CEE3AFC325D7D5D8007B1814 /* MapRoadDotMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3AFC225D7D5D8007B1814 /* MapRoadDotMapper.swift */; };
+		CEE3AFC525D7D699007B1814 /* MapMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3AFC425D7D699007B1814 /* MapMapper.swift */; };
 		CEE5B67625D66A9D0023D640 /* MapDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5B67525D66A9D0023D640 /* MapDB.swift */; };
 		CEE5B67825D66AAB0023D640 /* MapRoadDotDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5B67725D66AAB0023D640 /* MapRoadDotDB.swift */; };
 		CEE5B67A25D66AB70023D640 /* MarkerDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5B67925D66AB70023D640 /* MarkerDB.swift */; };
@@ -112,6 +114,8 @@
 		CE91140825C439460096AB29 /* StoreySwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreySwitcherView.swift; sourceTree = "<group>"; };
 		CEACB2D825C7F2F900F4ADD3 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		CED3903525D5AFFC004409CF /* bstuDB.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = bstuDB.sqlite3; sourceTree = "<group>"; };
+		CEE3AFC225D7D5D8007B1814 /* MapRoadDotMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRoadDotMapper.swift; sourceTree = "<group>"; };
+		CEE3AFC425D7D699007B1814 /* MapMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMapper.swift; sourceTree = "<group>"; };
 		CEE5B67525D66A9D0023D640 /* MapDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDB.swift; sourceTree = "<group>"; };
 		CEE5B67725D66AAB0023D640 /* MapRoadDotDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRoadDotDB.swift; sourceTree = "<group>"; };
 		CEE5B67925D66AB70023D640 /* MarkerDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerDB.swift; sourceTree = "<group>"; };
@@ -316,6 +320,8 @@
 				CE009EEC25D6AC8B00CA8604 /* MarkerMapper.swift */,
 				CE009EEE25D6B35D00CA8604 /* PremiseMapper.swift */,
 				CE009EF225D6F88B00CA8604 /* TypePremiseMapper.swift */,
+				CEE3AFC225D7D5D8007B1814 /* MapRoadDotMapper.swift */,
+				CEE3AFC425D7D699007B1814 /* MapMapper.swift */,
 			);
 			path = TableMappers;
 			sourceTree = "<group>";
@@ -488,9 +494,11 @@
 				CE380A2425BC4F910028622B /* ButtonExtensions.swift in Sources */,
 				CE380A2F25BC6CF30028622B /* UniversityCorpsView.swift in Sources */,
 				CEE5B67A25D66AB70023D640 /* MarkerDB.swift in Sources */,
+				CEE3AFC325D7D5D8007B1814 /* MapRoadDotMapper.swift in Sources */,
 				CE009EEF25D6B35D00CA8604 /* PremiseMapper.swift in Sources */,
 				CEE5B67625D66A9D0023D640 /* MapDB.swift in Sources */,
 				CE380A2A25BC4F910028622B /* Marker.swift in Sources */,
+				CEE3AFC525D7D699007B1814 /* MapMapper.swift in Sources */,
 				CEE5B67E25D66AD80023D640 /* TypePremiseDB.swift in Sources */,
 				CE91140925C439460096AB29 /* StoreySwitcherView.swift in Sources */,
 				CE16978625C064F10040AE95 /* LabelExtensions.swift in Sources */,

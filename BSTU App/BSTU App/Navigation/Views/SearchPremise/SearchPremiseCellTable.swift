@@ -15,4 +15,5 @@ class SearchPremiseCellTable: UITableViewCell{
     @IBOutlet weak var typePremiseImage: UIImageView!
     @IBOutlet weak var namePremiseLabel: UILabel!
     @IBOutlet weak var storeyLabel: UILabel!
+    var premiseId: Int!
 }

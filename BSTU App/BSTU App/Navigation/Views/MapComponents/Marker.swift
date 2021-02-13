@@ -16,6 +16,7 @@ import RxGesture
 class Marker: UIView{
     
     var text = String()
+    var idPremise: Int!
     var xPosition: CGFloat = 0.0
     var yPosition: CGFloat = 0.0
     
@@ -42,9 +43,10 @@ class Marker: UIView{
         super.init(frame: frame)
     }
     
-    init(position: (Int, Int), text: String) {
+    init(position: (Int, Int), text: String, idPremise: Int) {
         super.init(frame: CGRect())
         self.text = text
+        self.idPremise = idPremise
         self.xPosition = CGFloat(position.0)
         self.yPosition = CGFloat(position.1)
         
@@ -132,7 +134,7 @@ class Marker: UIView{
         })
         
         // Действия по открытию нижнего бара с информацией
-        let userInfo: [String: Any] = ["stickerText": self.text,
+        let userInfo: [String: Any] = ["idPremise": self.idPremise,//"stickerText": self.text,
                                        "tapRecognizer": sender]
         NotificationCenter.default.post(name: Notification.Name("OpenBottomBar"), object: nil, userInfo: userInfo)
     }
@@ -144,7 +146,7 @@ class Marker: UIView{
         
         var userInfo = [String: Any]()
 
-        userInfo = ["stickerText": self.text,
+        userInfo = ["idPremise": self.idPremise,//"stickerText": self.text,
                     "tapRecognizer": sender]
 
         NotificationCenter.default.post(name: Notification.Name("CloseBottomBar"), object: nil, userInfo: userInfo)

@@ -20,6 +20,8 @@ class TopBarNavigation: UIView{
     
     @IBOutlet weak var startPlaceTextField: UITextField!
     @IBOutlet weak var finishPlaceTextField: UITextField!
+    var startPlacePremiseId: Int!
+    var finishPlacePremiseId: Int!
     var oldStartPlaceText: String!
     var oldFinishPlaceText: String!
     
@@ -243,20 +245,26 @@ class TopBarNavigation: UIView{
     
     // MARK: Изменение точки отправления/назначения
     @objc func changePremiseLabel(_ notification: NSNotification){
-        let labelText = notification.userInfo!["namePremise"] as? String
-        self.startPlaceTextField.isEditing ? (self.startPlaceTextField.text = labelText) : (self.finishPlaceTextField.text = labelText)
+        
+        let parentVC = self.parentViewController as! NavigationViewController
+        let idPremise = notification.userInfo!["idPremise"] as! Int
+        self.startPlaceTextField.isEditing ?
+            (self.startPlacePremiseId = idPremise) :
+            (self.finishPlacePremiseId = idPremise)
+        self.startPlaceTextField.isEditing ?
+            (self.startPlaceTextField.text = parentVC.viewModel.getPremiseById(withId: self.startPlacePremiseId).description) :
+            (self.finishPlaceTextField.text = parentVC.viewModel.getPremiseById(withId: self.finishPlacePremiseId).description)
         endEditingData()
         
         // Перемещение камеры и выбор маркера
-        let parentVC = self.parentViewController as! NavigationViewController
         // Выбор одного из пунктов отбытия/прибытия
         if startPlaceTextField.text == "" || finishPlaceTextField.text == "" {
-            let marker = parentVC.map.getMarkerWithName(name: labelText!)
+            let marker = parentVC.map.viewModel.getMarkerByIdPremise(id: idPremise)
             parentVC.map.zoomScale = 0.6
             marker.statusSelected = true
             marker.paintingPriority = 1
             let userInfo: [String: Any] = ["tapRecognizer": notification,
-                                           "stickerText": marker.text]
+                                           "idPremise": marker.idPremise]
             NotificationCenter.default.post(name: Notification.Name("OpenBottomBar"), object: nil, userInfo: userInfo)
             UIView.animate(withDuration: 0.6, animations: {
                     parentVC.map.setContentOffset(CGPoint(x: marker.xPosition * parentVC.map.zoomScale - parentVC.map.frame.width/2,
@@ -274,8 +282,8 @@ class TopBarNavigation: UIView{
     func cameraMovement(){
         
         let parentVC = self.parentViewController as! NavigationViewController
-        let marker1 = parentVC.map.getMarkerWithName(name: self.startPlaceTextField.text!)
-        let marker2 = parentVC.map.getMarkerWithName(name: self.finishPlaceTextField.text!)
+        let marker1 = parentVC.map.viewModel.getMarkerByIdPremise(id: self.startPlacePremiseId)//getMarkerWithName(name: self.startPlaceTextField.text!)
+        let marker2 = parentVC.map.viewModel.getMarkerByIdPremise(id: self.finishPlacePremiseId)//parentVC.map.getMarkerWithName(name: self.finishPlaceTextField.text!)
         
         let xChanging = abs(marker2.xPosition - marker1.xPosition)
         let yChanging = abs(marker2.yPosition - marker1.yPosition)

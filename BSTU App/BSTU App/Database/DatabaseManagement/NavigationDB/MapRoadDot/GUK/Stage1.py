@@ -45,7 +45,7 @@ roadDotsArray = [
     MapRoadDot(id=35, idMap=0, idOnMap=35, idPremise=17, x=1892, y=1722, audienceX=1835, audienceY=1722),
     MapRoadDot(id=36, idMap=0, idOnMap=36, idPremise=18, x=1892, y=1946, audienceX=1835, audienceY=1946),
     # Точки прямо от входа. (37 индекс)
-    MapRoadDot(id=37, idMap=0, idOnMap=37, idPremise=34, x=1980, y=1085, audienceX=1980, audienceY=1085),
+    MapRoadDot(id=37, idMap=0, idOnMap=37, idPremise=22, x=1980, y=1085, audienceX=1980, audienceY=1085),
     MapRoadDot(id=38, idMap=0, idOnMap=38, x=1980, y=1132),
     MapRoadDot(id=39, idMap=0, idOnMap=39, x=1980, y=1268)]
 
@@ -56,7 +56,7 @@ def MapRoadDotAdd():
 
 
 def MopRoadDotRemove():
-    query = MapRoadDot.delete()
+    query = MapRoadDot.delete().where(MapRoadDot.idMap == 0)
     query.execute()
 
 os.chdir('../../..')

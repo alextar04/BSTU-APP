@@ -12,12 +12,15 @@ import UIKit
 class MapViewModel{
     
     lazy var markerList = [Marker]()
+    lazy var dotsPositions = [MapRoadDotDB]()
     
     init() {
         getMarkers(idMap: 0)
+        getDotsPositions(idMap: 0)
     }
     
     // MARK: Получение списка маркеров
+    // Входные параметры: id-карты
     func getMarkers(idMap: Int){
         let premiseMapper = PremiseMapper()
         let markerMapper = MarkerMapper()
@@ -32,14 +35,91 @@ class MapViewModel{
             marker.idPremise = row[markerMapper.idPremiseQuery]
             marker.x = row[markerMapper.xQuery]
             marker.y = row[markerMapper.yQuery]
-            let text = premiseMapper.getPremiseById(withId: marker.idPremise).first!
+            let text = premiseMapper.getPremiseNameById(withId: marker.idPremise).first!
             
-            self.markerList.append(Marker(position: (marker.x, marker.y), text: text))
+            self.markerList.append(Marker(position: (marker.x, marker.y), text: text, idPremise: marker.idPremise))
         }
     }
     
     
+    // MARK: Полчение списка точек дороги на карте
+    // Входные параметры: id-карты
+    func getDotsPositions(idMap: Int){
+        let mapRoadDotMapper = MapRoadDotMapper()
+        let acceptedData = mapRoadDotMapper.getRoadDotList(idMap: idMap)
+        self.dotsPositions.removeAll()
+        
+        for row in acceptedData{
+            let roadDot = MapRoadDotDB()
+            roadDot.id = row[mapRoadDotMapper.idQuery]
+            roadDot.idMap = row[mapRoadDotMapper.idMapQuery]
+            roadDot.idOnMap = row[mapRoadDotMapper.idOnMapQuery]
+            roadDot.idPremise = row[mapRoadDotMapper.idPremiseQuery]
+            roadDot.x = row[mapRoadDotMapper.xQuery]
+            roadDot.y = row[mapRoadDotMapper.yQuery]
+            roadDot.audienceX = row[mapRoadDotMapper.audienceXQuery]
+            roadDot.audienceY = row[mapRoadDotMapper.audienceYQuery]
+            
+            self.dotsPositions.append(roadDot)
+        }
+    }
+    
+    
+    // MARK: Получение маркера
+    // Входные параметры: id-помещения
+    func getMarkerByIdPremise(id: Int)->Marker{
+        /*
+        let markerMapper = MarkerMapper()
+        let premiseMapper = PremiseMapper()
+        let acceptedData = markerMapper.getMarkerByPremiseId(id: id)
+        var result = [MarkerDB]()
+        
+        for row in acceptedData{
+            let marker = MarkerDB()
+            marker.id = row[markerMapper.idQuery]
+            marker.idMap = row[markerMapper.idMapQuery]
+            marker.idOnMap = row[markerMapper.idOnMapQuery]
+            marker.idPremise = row[markerMapper.idPremiseQuery]
+            marker.x = row[markerMapper.xQuery]
+            marker.y = row[markerMapper.yQuery]
+            result.append(marker)
+        }
+        
+        let marker = result.first!
+        return Marker(position: (marker.x, marker.y),
+                      text: premiseMapper.getPremiseNameById(withId: marker.idPremise).first!,
+                      idPremise: marker.idPremise)
+        */
+        
+        return self.markerList.filter{$0.idPremise == id}.first!
+    }
+    
+    
+    // MARK: Полчение карты
+    // Входные параметры: id-карты
+    func getMapById(id: Int)->MapDB{
+        let mapMapper = MapMapper()
+        let acceptedData = mapMapper.getMapById(idMap: id)
+        var result = [MapDB]()
+        
+        for row in acceptedData{
+            let map = MapDB()
+            map.id = row[mapMapper.idQuery]
+            map.idCorp = row[mapMapper.idCorpQuery]
+            map.storey = row[mapMapper.storeyQuery]
+            map.plan = row[mapMapper.planQuery]
+            map.matrixBestWays = row[mapMapper.matrixBestWaysQuery]
+            map.matrixBestDistance = row[mapMapper.matrixBestDistanceQuery]
+            
+            result.append(map)
+        }
+        
+        return result.first!
+    }
+    
+    
     var nextMatrix: [[Int?]]!
+    /*
     var dotsPositions: [RoadDot] = [
         RoadDot(CGPoint(x: 575, y: 1035), audience: CGPoint(x: 575, y: 1008), markerText: "122"),
         RoadDot(CGPoint(x: 580, y: 1035), audience: CGPoint(x: 580, y: 1074), markerText: "120"),
@@ -86,7 +166,7 @@ class MapViewModel{
         RoadDot(CGPoint(x: 1980, y: 1085), audience: CGPoint(x: 1980, y: 1085), markerText: "Вход"),
         RoadDot(CGPoint(x: 1980, y: 1132), audience: nil, markerText: nil),
         RoadDot(CGPoint(x: 1980, y: 1268), audience: nil, markerText: nil),
-    ]
+    ] */
     
     let indexes: [(Int, Int)] = [(0, 1), (1, 2), (2, 3), (3, 4), (4, 5), (5, 6), (6, 7), (6, 13),
                                  (7, 8), (8, 9), (9, 10), (10, 11), (11, 12),
@@ -108,8 +188,8 @@ class MapViewModel{
                                                  count: self.dotsPositions.count)
         
         for index in self.indexes{
-            adjacenciesMatrix[index.0][index.1] = distancePoints(self.dotsPositions[index.0].coordinates,
-                                                                 self.dotsPositions[index.1].coordinates)
+            adjacenciesMatrix[index.0][index.1] = distancePoints(CGPoint(x: self.dotsPositions[index.0].x, y: self.dotsPositions[index.0].y),
+                                                                 CGPoint(x: self.dotsPositions[index.1].x, y: self.dotsPositions[index.1].y))
             adjacenciesMatrix[index.1][index.0] = adjacenciesMatrix[index.0][index.1]
         }
         
@@ -208,13 +288,14 @@ class MapViewModel{
     }
     
     
-    // MARK: Получение индекса точки в хранилище по названию маркера
-    func getIndexStorageByMarkerName(markerName: String)->Int{
-        return self.dotsPositions.firstIndex{ $0.markerText == markerName }!
+    // MARK: Получение индекса точки в хранилище по id-помещения
+    func getIndexStorageByPremiseId(id: Int)->Int{
+        return self.dotsPositions.firstIndex{
+            return $0.idPremise == id
+            }!
     }
 }
-
-
+/*
 class RoadDot{
     var coordinates: CGPoint!
     var toAudience: CGPoint? = nil
@@ -225,4 +306,4 @@ class RoadDot{
         self.toAudience = toAudience
         self.markerText = markerText
     }
-}
+}*/

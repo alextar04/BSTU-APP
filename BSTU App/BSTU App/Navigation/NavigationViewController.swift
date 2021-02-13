@@ -21,6 +21,7 @@ class NavigationViewController: UIViewController {
     var storeySwitcherView: StoreySwitcherView!
     
     var currentSelectedName: String!
+    var currentSelectedPremiseId: Int!
     var changeMarkerStatus = false
     var bottomBarIsOpen = false
     
@@ -69,7 +70,7 @@ class NavigationViewController: UIViewController {
         let heightBottomBar = (bottomBarView?.frame.height)! + (self.currentStartTopBarHeight - self.normalStartTopBarHeight)
         bottomBarView?.makeShadow(width: Int(self.view.frame.width),
                                   heigth: Int(heightBottomBar))
-        bottomBarView?.setupView(namePremise: notification.userInfo!["stickerText"] as! String,
+        bottomBarView?.setupView(idPremise: notification.userInfo!["idPremise"] as! Int,
                                  heightBar: heightBottomBar,
                                  viewController: self)
         
@@ -102,6 +103,7 @@ class NavigationViewController: UIViewController {
         }
         self.bottomBarIsOpen = true
         self.currentSelectedName = bottomBarView?.namePremise
+        self.currentSelectedPremiseId = notification.userInfo!["idPremise"] as! Int?
     }
     
     
@@ -175,17 +177,18 @@ class NavigationViewController: UIViewController {
         
         for view in self.map.mapScheme.subviews{
             if let currentMarkerView = view as? Marker {
-                let newMarkerName = notification.userInfo!["stickerText"] as! String
+                let newPremise = viewModel.getPremiseById(withId: notification.userInfo!["idPremise"] as! Int)
+                let newMarkerId = newPremise.id
                 
                 // Закрытие старого маркера
-                if (currentMarkerView.statusSelected == true) && (currentMarkerView.text == self.currentSelectedName)
-                    && (newMarkerName != self.currentSelectedName){
+                if (currentMarkerView.statusSelected == true) && (currentMarkerView.idPremise == self.currentSelectedPremiseId)
+                    && (newMarkerId != self.currentSelectedPremiseId){
                     self.changeMarkerStatus = true
                     currentMarkerView.closeMarker(sender: notification.userInfo!["tapRecognizer"])
                 }
                 // Удалить окно уже включенного маркера
-                if (currentMarkerView.statusSelected == true) && (currentMarkerView.text == self.currentSelectedName)
-                    && (newMarkerName == self.currentSelectedName){
+                if (currentMarkerView.statusSelected == true) && (currentMarkerView.idPremise == self.currentSelectedPremiseId)
+                    && (newMarkerId == self.currentSelectedPremiseId){
                     self.changeMarkerStatus = self.bottomBarIsOpen
                     self.bottomBarView?.removeFromSuperview()
                 }
@@ -206,7 +209,9 @@ class NavigationViewController: UIViewController {
     
     // MARK: Функция выбора пункта отбытия
     @objc func fillStartPlaceLabel(){
-        self.topBarView.startPlaceTextField.text = self.currentSelectedName
+        let description = self.viewModel.getPremiseById(withId: self.currentSelectedPremiseId).description
+        self.topBarView.startPlaceTextField.text = description
+        self.topBarView.startPlacePremiseId = self.currentSelectedPremiseId
         closeBottomBarAfterChoosingPlace()
         if self.topBarView.startPlaceTextField.text != "" && self.topBarView.finishPlaceTextField.text != ""{
             createWay()
@@ -216,7 +221,9 @@ class NavigationViewController: UIViewController {
     
     // MARK: Функция выбора пункта назначения
     @objc func fillFinishPlaceLabel(){
-        self.topBarView.finishPlaceTextField.text = self.currentSelectedName
+        let description = self.viewModel.getPremiseById(withId: self.currentSelectedPremiseId).description
+        self.topBarView.finishPlaceTextField.text = description
+        self.topBarView.finishPlacePremiseId = self.currentSelectedPremiseId
         closeBottomBarAfterChoosingPlace()
         if self.topBarView.startPlaceTextField.text != "" && self.topBarView.finishPlaceTextField.text != ""{
             createWay()
@@ -233,8 +240,8 @@ class NavigationViewController: UIViewController {
             self.map.pathLayer.removeAllAnimations()
         }
 
-        let inDot = self.map.viewModel.getIndexStorageByMarkerName(markerName: self.topBarView.startPlaceTextField.text!)
-        let outDot = self.map.viewModel.getIndexStorageByMarkerName(markerName: self.topBarView.finishPlaceTextField.text!)
+        let inDot = self.map.viewModel.getIndexStorageByPremiseId(id:  self.topBarView.startPlacePremiseId!)
+        let outDot = self.map.viewModel.getIndexStorageByPremiseId(id: self.topBarView.finishPlacePremiseId!)
         self.topBarView.cameraMovement()
         self.map.drawPathBetweenAudience(v1: inDot, v2: outDot)
     }

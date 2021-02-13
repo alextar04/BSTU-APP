@@ -10,13 +10,12 @@ import Foundation
 import SQLite
 
 class MapRoadDotDB{
-    static let table = Table("MapRoadDotDB")
-    static let id = Expression<Int>("id")
-    static let idMap = Expression<Int>("idMap")
-    static let idOnMap = Expression<Int>("idOnMap")
-    static let idPremise = Expression<Int>("idPremise")
-    static let x = Expression<Int>("x")
-    static let y = Expression<Int>("y")
-    static let audienceX = Expression<Int>("audienceX")
-    static let audiencey = Expression<Int>("audienceY")
+    var id: Int!
+    var idMap: Int!
+    var idOnMap: Int!
+    var idPremise: Int?
+    var x: Int!
+    var y: Int!
+    var audienceX: Int?
+    var audienceY: Int?
 }

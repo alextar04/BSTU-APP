@@ -10,8 +10,6 @@ import Foundation
 import SQLite
 
 class CorpDB {
-    
     var id: Int!
     var name: String!
-    
 }

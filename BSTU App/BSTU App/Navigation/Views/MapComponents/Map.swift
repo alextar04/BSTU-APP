@@ -291,13 +291,13 @@ class Map: UIScrollView, UIScrollViewDelegate{
         let path = UIBezierPath()
         for (index, vertex) in shortestPathVertexs.enumerated(){
             if index == 0{
-                path.move(to: viewModel.dotsPositions[vertex].toAudience!)
-                path.addLine(to: viewModel.dotsPositions[vertex].coordinates)
+                path.move(to: CGPoint(x: viewModel.dotsPositions[vertex].audienceX!, y: viewModel.dotsPositions[vertex].audienceY!))
+                path.addLine(to: CGPoint(x: viewModel.dotsPositions[vertex].x, y: viewModel.dotsPositions[vertex].y))
             } else if index == shortestPathVertexs.count - 1{
-                path.addLine(to: viewModel.dotsPositions[vertex].coordinates)
-                path.addLine(to: viewModel.dotsPositions[vertex].toAudience!)
+                path.addLine(to: CGPoint(x: viewModel.dotsPositions[vertex].x, y: viewModel.dotsPositions[vertex].y))
+                path.addLine(to: CGPoint(x: viewModel.dotsPositions[vertex].audienceX!, y: viewModel.dotsPositions[vertex].audienceY!))
             } else {
-                path.addLine(to: viewModel.dotsPositions[vertex].coordinates)
+                path.addLine(to: CGPoint(x: viewModel.dotsPositions[vertex].x, y: viewModel.dotsPositions[vertex].y))
             }
         }
 
@@ -320,11 +320,11 @@ class Map: UIScrollView, UIScrollViewDelegate{
         self.pathLayer.add(animation, forKey: "line")
     }
     
-    
+    /*
     // MARK: Получение маркера с заданным именем
-    func getMarkerWithName(name: String)->Marker{
+    func getMarkerWith(name: String)->Marker{
         return self.markers.filter{ $0.text == name }.first!
-    }
+    }*/
 
     
     // MARK: - UIScrollViewDelegate

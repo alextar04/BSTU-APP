@@ -31,4 +31,17 @@ class MarkerMapper{
         return result
     }
     
+    
+    // MARK: Получение маркера
+    // Входные параметры: id-помещения
+    func getMarkerByPremiseId(id: Int)->[SQLite.Row]{
+        let database = Database.connect()
+        var result = [SQLite.Row]()
+        
+        for markerItem in try! database.prepare(self.tableQuery.filter(self.idPremiseQuery == id)){
+            result.append(markerItem)
+        }
+        return result
+    }
+    
 }

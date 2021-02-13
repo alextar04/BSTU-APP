@@ -39,16 +39,18 @@ class SearchPremiseView: UIView{
         let dataSource = RxTableViewSectionedReloadDataSource<SectionOfPremise>(configureCell: { _, table, index, item in
             table.register(UINib(nibName: "SearchPremiseCellTable", bundle: nil), forCellReuseIdentifier: "SearchPremiseCellTable")
             let cell = table.dequeueReusableCell(withIdentifier: "SearchPremiseCellTable", for: index) as! SearchPremiseCellTable
-            cell.namePremiseLabel.text = item.name
-            cell.typePremiseLabel.text = "Замена"//item.typePremise.nameTypePremise
+            let typePremise = parentController.viewModel.getTypePremiseById(id: item.idTypePremise)
+            cell.premiseId = item.id
+            cell.namePremiseLabel.text = item.description
+            cell.typePremiseLabel.text = typePremise.name
             
-            cell.storeyLabel.text = "1 этаж"
+            cell.storeyLabel.text = String("\(parentController.map.viewModel.getMapById(id: item.idMap).storey!) этаж")
             cell.storeyLabel.makeRounding()
             cell.storeyLabel.layer.borderWidth = 3
             cell.storeyLabel.layer.borderColor = UIColor.lightGray.cgColor
             cell.storeyLabel.backgroundColor = .clear
             
-            cell.typePremiseImage.image = UIImage(named: "Замена")//item.typePremise.nameImagePremise!)
+            cell.typePremiseImage.image = UIImage(data: typePremise.picture)
             cell.typePremiseImage.makeRoundingImage()
             
             return cell
@@ -64,7 +66,7 @@ class SearchPremiseView: UIView{
             .itemSelected
             .subscribe(onNext: { selectedRowIndex in
                 let selectedCell = self.premiseTableView.cellForRow(at: selectedRowIndex) as! SearchPremiseCellTable
-                let userInfo: [String: Any] = ["namePremise": selectedCell.namePremiseLabel.text]
+                let userInfo: [String: Any] = ["idPremise": selectedCell.premiseId]
                 NotificationCenter.default.post(name: Notification.Name("ChangePremiseLabel"), object: nil, userInfo: userInfo)
             }
         ).disposed(by: disposeBag)

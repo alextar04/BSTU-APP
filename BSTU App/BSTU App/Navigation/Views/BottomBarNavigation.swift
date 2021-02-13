@@ -45,19 +45,18 @@ class BottomBarNavigation: UIView{
         }
     }
     
-    func setupView(namePremise: String, heightBar: CGFloat, viewController: NavigationViewController) {
+    func setupView(idPremise: Int, heightBar: CGFloat, viewController: NavigationViewController) {
         
         self.maxHeightBar = heightBar
-        self.namePremise = namePremise
         
-        let premise = viewController.viewModel.getPremise(withName: self.namePremise)
+        let premise = viewController.viewModel.getPremiseById(withId: idPremise)
         let typePremise = viewController.viewModel.getTypePremiseById(id: premise.idTypePremise)
-        //PremiseViewModel(name: namePremise)
+        self.namePremise = premise.name
            
-        self.typePremiseLabel.text = typePremise.name//"Замена"//premise.typePremise.nameTypePremise
-        self.namePremiseLabel.text = premise.description//premise.namePremise
+        self.typePremiseLabel.text = typePremise.name
+        self.namePremiseLabel.text = premise.description
         
-        self.imagePremiseView.image = UIImage(data: typePremise.picture)//UIImage(named: "Замена")//premise.typePremise.nameImagePremise!)
+        self.imagePremiseView.image = UIImage(data: typePremise.picture)
         self.imagePremiseView.makeRoundingImage()
         
         _ = [self.departureButton, self.destinationButton].map{
