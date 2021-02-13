@@ -44,7 +44,7 @@ class SearchPremiseView: UIView{
             cell.namePremiseLabel.text = item.description
             cell.typePremiseLabel.text = typePremise.name
             
-            cell.storeyLabel.text = String("\(parentController.map.viewModel.getMapById(id: item.idMap).storey!) этаж")
+            cell.storeyLabel.text = String("\(parentController.map.viewModel.getMapStoreyById(id: item.idMap)) этаж")
             cell.storeyLabel.makeRounding()
             cell.storeyLabel.layer.borderWidth = 3
             cell.storeyLabel.layer.borderColor = UIColor.lightGray.cgColor

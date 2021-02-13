@@ -90,8 +90,17 @@ class MapViewModel{
             
             result.append(map)
         }
-        
         return result.first!
+    }
+    
+    
+    // MARK: Получение этажа карты
+    // Входные параметры: id-карты
+    func getMapStoreyById(id: Int)->Int{
+        let mapMapper = MapMapper()
+        let acceptedData = mapMapper.getMapById(idMap: id).first
+        
+        return acceptedData![mapMapper.storeyQuery]
     }
     
     
