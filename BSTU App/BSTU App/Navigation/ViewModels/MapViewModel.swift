@@ -85,7 +85,7 @@ class MapViewModel{
             map.idCorp = row[mapMapper.idCorpQuery]
             map.storey = row[mapMapper.storeyQuery]
             map.plan = row[mapMapper.planQuery]
-            map.matrixBestWays = row[mapMapper.matrixBestWaysQuery]
+            map.matrixBestWays = matrixBestWaysParser(matrixString: row[mapMapper.matrixBestWaysQuery])
             map.matrixBestDistance = row[mapMapper.matrixBestDistanceQuery]
             
             result.append(map)
@@ -96,26 +96,41 @@ class MapViewModel{
     
     
     // MARK: Парсер "матрицы лучших маршрутов" из записи БД
-    func matrixBestWaysParser(matrix: String)->[[CGFloat]]{
+    func matrixBestWaysParser(matrixString: String)->[[Int?]]{
+        var result = [[Int?]]()
         // Тестируемая строка
         // [[1, 2, 4],[6, 7]]
         // Регулярка для получения строк матрицы
         // "\[[0-9, ]*\]"
-        // Регулярка для получения значений для заполнения матрицы
-        // "[0-9]+"
-        return [[CGFloat]]()
+        let regex1 = try! NSRegularExpression(pattern: "\\[[0-9, ]*\\]")
+        let regex1Matches = regex1.matches(in: matrixString, range: NSRange(location: 0, length: matrixString.utf16.count))
+        let matchStrings = regex1Matches.map{
+            String(matrixString[Range($0.range, in: matrixString)!])
+        }
+        for matchString in matchStrings{
+            var stringMatrix = [Int]()
+            // Регулярка для получения значений строки для заполнения матрицы
+            // "[0-9]+"
+            let regex2 = try! NSRegularExpression(pattern: "[0-9]+")
+            let regex2Matches = regex2.matches(in: matchString, range: NSRange(location: 0, length: matchString.utf16.count))
+            for matchItem in regex2Matches{
+                stringMatrix.append(Int(String(matchString[Range(matchItem.range, in: matchString)!]))!)
+            }
+            result.append(stringMatrix)
+        }
+        return result
     }
     
     
     // MARK: Парсер "матрицы лучших расстояний" из записи БД
-    func matrixBestDistanceParser(matrix: String)->[[Int?]]{
+    func matrixBestDistanceParser(matrixString: String)->[[CGFloat?]]{
         // Тестируемая строка
         // [[1.0, 2.3, 4.5],[6.0, 7.0]]
         // Регулярка для получения строк матрицы
         // "\[[0-9., ]*\]"
         // Регулярка для получения значений для заполнения матрицы
         // "[0-9]+\.[0-9]+"
-        return [[Int?]]()
+        return [[CGFloat?]]()
     }
     
     

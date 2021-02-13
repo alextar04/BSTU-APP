@@ -8,14 +8,14 @@ from NavigationDB.MapRoadDot.GUK.Stage1 import *
 
 def MapAdd():
     result = searchShortestWays(roadDotsArray, connectedDots)
-    matrixBestWays = result[0]
-    matrixBestDistance = result[1]
+    matrixBestDistance = result[0]
+    matrixBestWays = result[1]
     Map.create(id=0, idCorp=0, storey=1, plan=pictureToBinary(os.getcwd()+"/NavigationDB/Map/GUK/images/Stage_1.png"),
                matrixBestWays=matrixBestWays,
                matrixBestDistance=matrixBestDistance)
 
 def MapRemove():
-    query = Map.delete()
+    query = Map.delete().where(Map.id == 0)
     query.execute()
 
 

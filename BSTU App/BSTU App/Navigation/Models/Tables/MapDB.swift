@@ -14,6 +14,6 @@ class MapDB{
     var idCorp: Int!
     var storey: Int!
     var plan: Data!
-    var matrixBestWays: String!
+    var matrixBestWays: [[Int?]]!
     var matrixBestDistance: String!
 }
