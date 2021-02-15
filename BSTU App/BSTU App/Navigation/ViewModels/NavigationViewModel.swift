@@ -12,10 +12,13 @@ import UIKit
 class NavigationViewModel{
     
     lazy var premiseList = [PremiseDB]()
+    lazy var premisesTypesList = [TypePremiseDB]()
     
-    init() {
-        getPremises(idMap: 0)
+    init(idMap: Int) {
+        getPremises(idMap: idMap)
+        getTypesPremises()
     }
+    
     
     // MARK: Получение списка помещений
     func getPremises(idMap: Int){
@@ -36,22 +39,23 @@ class NavigationViewModel{
         }
     }
     
-    /*
-    // MARK: Получение помещения с заданным названием
-    func getPremise(withName: String)->PremiseDB{
+    
+    // MARK: Получение списка типов помещений
+    func getTypesPremises(){
+
+        let mapper = TypePremiseMapper()
+        let acceptedData = mapper.getTypePremiseList()
+        self.premisesTypesList.removeAll()
         
-        let mapper = PremiseMapper()
-        let acceptedData = mapper.getPremiseByName(withName: withName).first!
-        
-        let premise = PremiseDB()
-        premise.id = acceptedData[mapper.idQuery]
-        premise.idMap = acceptedData[mapper.idMapQuery]
-        premise.idTypePremise = acceptedData[mapper.idTypePremiseQuery]
-        premise.name = acceptedData[mapper.nameQuery]
-        premise.description = acceptedData[mapper.descriptionQuery]
-        
-        return premise
-    }*/
+        for row in acceptedData{
+            let typePremise = TypePremiseDB()
+            typePremise.id = row[mapper.idQuery]
+            typePremise.name = row[mapper.nameQuery]
+            typePremise.picture = row[mapper.pictureQuery]
+            
+            self.premisesTypesList.append(typePremise)
+        }
+    }
     
     
     // MARK: Получение помещения по id
@@ -73,16 +77,9 @@ class NavigationViewModel{
     
     // MARK: Получение типа помещения с заданным id
     func getTypePremiseById(id: Int)->TypePremiseDB{
-        
-        let mapper = TypePremiseMapper()
-        let acceptedData = mapper.getTypePremiseById(withId: id).first!
-        
-        let typePremise = TypePremiseDB()
-        typePremise.id = acceptedData[mapper.idQuery]
-        typePremise.name = acceptedData[mapper.nameQuery]
-        typePremise.picture = acceptedData[mapper.pictureQuery]
-        
-        return typePremise
+        return self.premisesTypesList.filter{
+            $0.id == id
+        }.first!
     }
     
     /*

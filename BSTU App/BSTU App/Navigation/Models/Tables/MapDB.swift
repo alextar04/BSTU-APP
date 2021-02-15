@@ -15,5 +15,5 @@ class MapDB{
     var storey: Int!
     var plan: Data!
     var matrixBestWays: [[Int?]]!
-    var matrixBestDistance: String!
+    var matrixBestDistance: [[CGFloat]]!
 }

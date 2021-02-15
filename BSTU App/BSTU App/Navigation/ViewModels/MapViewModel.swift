@@ -11,13 +11,22 @@ import UIKit
 
 class MapViewModel{
     
+    lazy var mapScheme = UIImageView()
     lazy var markerList = [Marker]()
     lazy var dotsPositions = [MapRoadDotDB]()
+    lazy var bestWaysMatrix = [[Int?]]()
+    lazy var bestDistanceMatrix = [[CGFloat]]()
     
-    init() {
-        getMarkers(idMap: 0)
-        getDotsPositions(idMap: 0)
+    
+    init(idMap: Int) {
+        getMarkers(idMap: idMap)
+        getDotsPositions(idMap: idMap)
+        let map = getMapById(id: idMap)
+        self.bestWaysMatrix = map.matrixBestWays
+        self.bestDistanceMatrix = map.matrixBestDistance
+        self.mapScheme = UIImageView(image: UIImage(data: map.plan))
     }
+    
     
     // MARK: Получение списка маркеров
     // Входные параметры: id-карты
@@ -86,7 +95,7 @@ class MapViewModel{
             map.storey = row[mapMapper.storeyQuery]
             map.plan = row[mapMapper.planQuery]
             map.matrixBestWays = matrixBestWaysParser(matrixString: row[mapMapper.matrixBestWaysQuery])
-            map.matrixBestDistance = row[mapMapper.matrixBestDistanceQuery]
+            map.matrixBestDistance = matrixBestDistanceParser(matrixString: row[mapMapper.matrixBestDistanceQuery])
             
             result.append(map)
         }
@@ -107,8 +116,6 @@ class MapViewModel{
     // MARK: Парсер "матрицы лучших маршрутов" из записи БД
     func matrixBestWaysParser(matrixString: String)->[[Int?]]{
         var result = [[Int?]]()
-        // Тестируемая строка
-        // [[1, 2, 4],[6, 7]]
         // Регулярка для получения строк матрицы
         // "\[[0-9, ]*\]"
         let regex1 = try! NSRegularExpression(pattern: "\\[[0-9, ]*\\]")
@@ -132,18 +139,37 @@ class MapViewModel{
     
     
     // MARK: Парсер "матрицы лучших расстояний" из записи БД
-    func matrixBestDistanceParser(matrixString: String)->[[CGFloat?]]{
-        // Тестируемая строка
-        // [[1.0, 2.3, 4.5],[6.0, 7.0]]
+    func matrixBestDistanceParser(matrixString: String)->[[CGFloat]]{
+        var result = [[CGFloat]]()
         // Регулярка для получения строк матрицы
         // "\[[0-9., ]*\]"
-        // Регулярка для получения значений для заполнения матрицы
-        // "[0-9]+\.[0-9]+"
-        return [[CGFloat?]]()
+        let regex1 = try! NSRegularExpression(pattern: "\\[[0-9., ]*\\]")
+        let regex1Matches = regex1.matches(in: matrixString, range: NSRange(location: 0, length: matrixString.utf16.count))
+        let matchStrings = regex1Matches.map{
+            String(matrixString[Range($0.range, in: matrixString)!])
+        }
+        for matchString in matchStrings{
+            var stringMatrix = [CGFloat]()
+            // Регулярка для получения значений строки для заполнения матрицы
+            // "[0-9]+\.[0-9]+"
+            let regex2 = try! NSRegularExpression(pattern: "[0-9]+\\.[0-9]+")
+            let regex2Matches = regex2.matches(in: matchString, range: NSRange(location: 0, length: matchString.utf16.count))
+            for matchItem in regex2Matches{
+                stringMatrix.append(CGFloat(Double(String(matchString[Range(matchItem.range, in: matchString)!]))!))
+            }
+            result.append(stringMatrix)
+        }
+        return result
     }
     
     
-    var nextMatrix: [[Int?]]!
+    // MARK: Получение индекса точки в хранилище по id-помещения
+    func getIndexStorageByPremiseId(id: Int)->Int{
+        return self.dotsPositions.firstIndex{
+            return $0.idPremise == id
+            }!
+    }
+    
     /*
     var dotsPositions: [RoadDot] = [
         RoadDot(CGPoint(x: 575, y: 1035), audience: CGPoint(x: 575, y: 1008), markerText: "122"),
@@ -193,6 +219,7 @@ class MapViewModel{
         RoadDot(CGPoint(x: 1980, y: 1268), audience: nil, markerText: nil),
     ] */
     
+    /*
     let indexes: [(Int, Int)] = [(0, 1), (1, 2), (2, 3), (3, 4), (4, 5), (5, 6), (6, 7), (6, 13),
                                  (7, 8), (8, 9), (9, 10), (10, 11), (11, 12),
                                  (7, 13), (13, 14), (14, 15), (15, 16), (16, 17), (17, 18), (18, 19), (19, 20), (20, 21), (20, 22), (20, 23), (21, 23), (22, 23), (22, 39),
@@ -261,7 +288,7 @@ class MapViewModel{
             }
         }
         //printMatrix(nextMatrix)
-    }
+    }*/
     
     
     /*
@@ -300,26 +327,19 @@ class MapViewModel{
         let v2 = vertex2Index
         
         var pathArray = [Int]()
-        if self.nextMatrix[v1][v2] == nil{
+        if self.bestWaysMatrix[v1][v2] == nil{
             return pathArray
         }
         
         pathArray.append(v1)
         while v1 != v2{
-            v1 = self.nextMatrix[v1][v2]!
+            v1 = self.bestWaysMatrix[v1][v2]!
             pathArray.append(v1)
         }
         
         return pathArray
     }
     
-    
-    // MARK: Получение индекса точки в хранилище по id-помещения
-    func getIndexStorageByPremiseId(id: Int)->Int{
-        return self.dotsPositions.firstIndex{
-            return $0.idPremise == id
-            }!
-    }
 }
 /*
 class RoadDot{

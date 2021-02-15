@@ -30,7 +30,7 @@ def createAdjacenciesMatrix(roadDotsArray, connectedDots):
         adjacenciesMatrix[index[1]][index[0]] = adjacenciesMatrix[index[0]][index[1]]
 
     for index in range(0, len(adjacenciesMatrix)):
-        adjacenciesMatrix[index][index] = 0
+        adjacenciesMatrix[index][index] = float(0)
 
     return adjacenciesMatrix
 

@@ -282,8 +282,8 @@ class TopBarNavigation: UIView{
     func cameraMovement(){
         
         let parentVC = self.parentViewController as! NavigationViewController
-        let marker1 = parentVC.map.viewModel.getMarkerByIdPremise(id: self.startPlacePremiseId)//getMarkerWithName(name: self.startPlaceTextField.text!)
-        let marker2 = parentVC.map.viewModel.getMarkerByIdPremise(id: self.finishPlacePremiseId)//parentVC.map.getMarkerWithName(name: self.finishPlaceTextField.text!)
+        let marker1 = parentVC.map.viewModel.getMarkerByIdPremise(id: self.startPlacePremiseId)
+        let marker2 = parentVC.map.viewModel.getMarkerByIdPremise(id: self.finishPlacePremiseId)
         
         let xChanging = abs(marker2.xPosition - marker1.xPosition)
         let yChanging = abs(marker2.yPosition - marker1.yPosition)

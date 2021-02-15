@@ -36,7 +36,6 @@ class ViewController: UIViewController {
         let navigationController = NavigationViewController()
         self.addChild(navigationController)
         self.view.addSubview(navigationController.view)
-        navigationController.map.viewModel.getMapById(id: 0)
     }
 
 
