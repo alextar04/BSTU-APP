@@ -272,8 +272,8 @@ class TopBarNavigation: UIView{
             })
         } else {
             // Пункты отбытия/прибытия выбраны
-            cameraMovement()
             parentVC.createWay()
+            cameraMovement()
         }
     }
     

@@ -35,6 +35,11 @@ class StoreySwitcherView: UIView{
                 } else {
                     currentValue! += 1
                     self.storeyNumberLabel.text = String(currentValue!)
+                    
+                    // Загрузка карты этажа
+                    let data: [String: Int] = ["storey": currentValue!]
+                    NotificationCenter.default.post(name: Notification.Name("ChangeStorey"), object: nil, userInfo: data)
+                    
                     if (currentValue! + 1) > rangeStorey.max()!{
                         self.storeyUpButton.image = UIImage(named: "storeyUpNoMore")
                         self.noMoreUp = true
@@ -57,6 +62,11 @@ class StoreySwitcherView: UIView{
             } else {
                 currentValue! -= 1
                 self.storeyNumberLabel.text = String(currentValue!)
+                
+                // Загрузка карты этажа
+                let data: [String: Int] = ["storey": currentValue!]
+                NotificationCenter.default.post(name: Notification.Name("ChangeStorey"), object: nil, userInfo: data)
+                
                 if (currentValue! - 1) < rangeStorey.min()!{
                     self.storeyDownButton.image = UIImage(named: "storeyDownNoMore")
                     self.noMoreDown = true

@@ -83,6 +83,87 @@ class NavigationViewModel{
     }
     
     
+    // MARK: Получение id-карты и индекс точки в списке точек карты по id-помещения
+    func getIndexInStorageByPremiseId(idPremise: Int)->(Int, Int){
+        
+        let mapper = PremiseMapper()
+        let idMap = mapper.getMapIdByPremiseId(withId: idPremise)
+        let mapperDotsPositions = MapRoadDotMapper()
+        let dotsPositions = mapperDotsPositions.getRoadDotList(idMap: idMap)
+        
+        return (idMap, (dotsPositions.firstIndex{
+            return $0[mapperDotsPositions.idPremiseQuery] == idPremise
+            }!))
+    }
+    
+    
+    // MARK: Поиск оптимального пути для помещений на разных этажах
+    // Входные параметры: Пункт отправления, пункт прибытия - mapId, idOnMap
+    func getOptimalWayForPremiseFromDifferentStoreys(inPremise: (Int, Int), outPremise: (Int, Int)){
+        
+        // Получение id-помещений "Входа 1" и "Входа 2" этажей in, out
+        let localIdInMapOneExitOne = searchLocalIdInMap(idMap: inPremise.0, description: "Вход 1")
+        let localIdInMapOneExitTwo = searchLocalIdInMap(idMap: inPremise.0, description: "Вход 2")
+        let localIdInMapTwoExitOne = searchLocalIdInMap(idMap: outPremise.0, description: "Вход 1")
+        let localIdInMapTwoExitTwo = searchLocalIdInMap(idMap: outPremise.0, description: "Вход 2")
+        
+        // Получение матриц кратчайших расстояний двух карт
+        let mapMapper = MapMapper()
+        let matrixBestDistanceMapOne = matrixBestDistanceParser(matrixString: mapMapper.getMatrixBestDistanceById(idMap: inPremise.0))
+        let matrixBestDistanceMapTwo = matrixBestDistanceParser(matrixString: mapMapper.getMatrixBestDistanceById(idMap: outPremise.0))
+        
+        // Путь 1: точка1->вход1 + вход1->точка2
+        let pathOneLength = matrixBestDistanceMapOne[inPremise.1][localIdInMapOneExitOne] +
+                            matrixBestDistanceMapTwo[localIdInMapTwoExitOne][outPremise.1]
+        
+        // Путь 2: точка1->вход2 + вход2->точка2
+        let pathTwoLength = matrixBestDistanceMapOne[inPremise.1][localIdInMapOneExitTwo] +
+                            matrixBestDistanceMapTwo[localIdInMapTwoExitTwo][outPremise.1]
+        
+        print("Путь через Вход 1: ")
+        print(pathOneLength)
+        print("Путь через Вход 2: ")
+        print(pathTwoLength)
+    }
+    
+    
+    // MARK: Вспомогательная функция для получения индексов точек на карте
+    //Входные параметры: id-карты, описание карты
+    func searchLocalIdInMap(idMap: Int, description: String)->Int{
+        
+        let mapper = PremiseMapper()
+        let dataExit = mapper.getPremiseIdByIdMapAndDescription(idMap: idMap, description: description)
+        let premiseIdExit = dataExit[mapper.idQuery]
+        let localIdInMapExit =  getIndexInStorageByPremiseId(idPremise: premiseIdExit).1
+        return localIdInMapExit
+    }
+    
+    
+    // MARK: Парсер "матрицы лучших расстояний" из записи БД
+    func matrixBestDistanceParser(matrixString: String)->[[CGFloat]]{
+        var result = [[CGFloat]]()
+        // Регулярка для получения строк матрицы
+        // "\[[0-9., ]*\]"
+        let regex1 = try! NSRegularExpression(pattern: "\\[[0-9., ]*\\]")
+        let regex1Matches = regex1.matches(in: matrixString, range: NSRange(location: 0, length: matrixString.utf16.count))
+        let matchStrings = regex1Matches.map{
+            String(matrixString[Range($0.range, in: matrixString)!])
+        }
+        for matchString in matchStrings{
+            var stringMatrix = [CGFloat]()
+            // Регулярка для получения значений строки для заполнения матрицы
+            // "[0-9]+\.[0-9]+"
+            let regex2 = try! NSRegularExpression(pattern: "[0-9]+\\.[0-9]+")
+            let regex2Matches = regex2.matches(in: matchString, range: NSRange(location: 0, length: matchString.utf16.count))
+            for matchItem in regex2Matches{
+                stringMatrix.append(CGFloat(Double(String(matchString[Range(matchItem.range, in: matchString)!]))!))
+            }
+            result.append(stringMatrix)
+        }
+        return result
+    }
+    
+    
     // MARK: Загрузка помещений, имеющих заданный префикс
     func loadArrayPremise(prefix: String)->[PremiseDB]?{
     

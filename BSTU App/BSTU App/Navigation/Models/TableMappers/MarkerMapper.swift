@@ -14,7 +14,6 @@ class MarkerMapper{
     let tableQuery = Table("MarkerDB")
     let idQuery = Expression<Int>("id")
     let idMapQuery = Expression<Int>("idMap")
-    let idOnMapQuery = Expression<Int>("idOnMap")
     let idPremiseQuery = Expression<Int>("idPremise")
     let xQuery = Expression<Int>("x")
     let yQuery = Expression<Int>("y")

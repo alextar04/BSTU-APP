@@ -30,18 +30,18 @@ class PremiseMapper{
         return result
     }
     
-    /*
-    // MARK: Получение помещения по названию
-    // Входные параметры: название
-    func getPremiseByName(withName: String)->[SQLite.Row]{
+    
+    // MARK: Получение id-карты
+    // Входные параметры: id-помещения
+    func getMapIdByPremiseId(withId: Int)->Int{
         let database = Database.connect()
         var result = [SQLite.Row]()
         
-        for premiseItem in try! database.prepare(self.tableQuery.filter(self.nameQuery == withName)){
+        for premiseItem in try! database.prepare(self.tableQuery.filter(self.idQuery == withId)){
             result.append(premiseItem)
         }
-        return result
-    }*/
+        return result.first![idMapQuery]
+    }
     
     
     // MARK: Получение помещения по id
@@ -70,4 +70,16 @@ class PremiseMapper{
         return result
     }
     
+    
+    // MARK: Получение помещения по id-карты и описанию
+    func getPremiseIdByIdMapAndDescription(idMap: Int, description: String)->SQLite.Row{
+        let database = Database.connect()
+        var result = [SQLite.Row]()
+        
+        for premiseItem in try! database.prepare(self.tableQuery.filter(self.idMapQuery == idMap && self.descriptionQuery == description)){
+            result.append(premiseItem)
+        }
+        return result.first!
+        
+    }
 }

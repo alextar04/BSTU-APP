@@ -34,7 +34,7 @@ class NavigationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewModel = NavigationViewModel(idMap: 2)
+        self.viewModel = NavigationViewModel(idMap: 1)
         
         NotificationCenter.default.addObserver(self, selector: #selector(openBottomBar), name: Notification.Name("OpenBottomBar"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(closeBottomBar), name: Notification.Name("CloseBottomBar"), object: nil)
@@ -45,20 +45,25 @@ class NavigationViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(changeCorp), name: Notification.Name("ChangeCorp"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(changeStorey), name: Notification.Name("ChangeStorey"), object: nil)
         
         self.addTopBarView()
-        self.addMap()
+        self.addMap(idMap: 1)
         self.addStoreySwitcherView()
     }
     
     
     // MARK: Функция добавления карты
-    func addMap(){
+    func addMap(idMap: Int){
         let yStart = (UIApplication.shared.windows.first?.safeAreaInsets.top)! + topBarView.frame.height
         self.map = Map(frame: CGRect(x: 0, y: yStart,
-                                     width: self.view.frame.width, height: self.view.frame.height - yStart))
+                                     width: self.view.frame.width, height: self.view.frame.height - yStart), idMap: idMap)
         self.map.setupView()
-        self.view.addSubview(self.map)
+        if self.storeySwitcherView == nil{
+            self.view.addSubview(self.map)
+        } else{
+            self.view.insertSubview(self.map, belowSubview: self.storeySwitcherView)
+        }
     }
     
     
@@ -240,11 +245,24 @@ class NavigationViewController: UIViewController {
             self.map.pathLayer.removeFromSuperlayer()
             self.map.pathLayer.removeAllAnimations()
         }
-
-        let inDot = self.map.viewModel.getIndexStorageByPremiseId(id:  self.topBarView.startPlacePremiseId!)
-        let outDot = self.map.viewModel.getIndexStorageByPremiseId(id: self.topBarView.finishPlacePremiseId!)
-        self.topBarView.cameraMovement()
-        self.map.drawPathBetweenAudience(v1: inDot, v2: outDot)
+        
+        let startResult = self.viewModel.getIndexInStorageByPremiseId(idPremise: self.topBarView.startPlacePremiseId!)
+        let finishResult = self.viewModel.getIndexInStorageByPremiseId(idPremise: self.topBarView.finishPlacePremiseId!)
+        
+        let inMapId = startResult.0
+        let inDot = startResult.1
+        
+        let outMapId = finishResult.0
+        let outDot = finishResult.1
+        
+        // Случай 1: этажи совпадают
+        if inMapId == outMapId{
+            self.topBarView.cameraMovement()
+            self.map.drawPathBetweenAudience(v1: inDot, v2: outDot)
+        } else{
+            print("Нужно строить оптимальный путь!")
+            self.viewModel.getOptimalWayForPremiseFromDifferentStoreys(inPremise: startResult, outPremise: finishResult)
+        }
     }
     
     
@@ -302,6 +320,19 @@ class NavigationViewController: UIViewController {
             }
         }
    }
+    
+    
+    // MARK: Функция смены этажа
+    @objc func changeStorey(_ notification: NSNotification){
+        
+        if let storey = notification.userInfo!["storey"] as? Int{
+            if self.map != nil{
+                self.map.removeFromSuperview()
+            }
+            self.viewModel = NavigationViewModel(idMap: storey)
+            self.addMap(idMap: storey)
+        }
+    }
     
     
     // MARK: Функция подсчета высоты клавиатуры

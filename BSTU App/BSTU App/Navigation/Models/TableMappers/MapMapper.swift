@@ -32,4 +32,19 @@ class MapMapper{
         }
         return result
     }
+    
+    
+    // MARK: Получение матрицы кратчайших расстояний
+    // Входные параметры: id-карты
+    func getMatrixBestDistanceById(idMap: Int)->String{
+        let database = Database.connect()
+        var result = [String]()
+        
+        for map in try! database.prepare(self.tableQuery.filter(self.idQuery == idMap)){
+            result.append(map[matrixBestDistanceQuery])
+        }
+        return result.first!
+    }
+    
+    
 }

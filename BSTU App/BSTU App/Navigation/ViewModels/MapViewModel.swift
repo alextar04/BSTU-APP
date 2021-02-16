@@ -40,7 +40,6 @@ class MapViewModel{
             let marker = MarkerDB()
             marker.id = row[markerMapper.idQuery]
             marker.idMap = row[markerMapper.idMapQuery]
-            marker.idOnMap = row[markerMapper.idOnMapQuery]
             marker.idPremise = row[markerMapper.idPremiseQuery]
             marker.x = row[markerMapper.xQuery]
             marker.y = row[markerMapper.yQuery]
@@ -103,7 +102,7 @@ class MapViewModel{
     }
     
     
-    // MARK: Получение этажа карты
+    // MARK: Получение карты этажа
     // Входные параметры: id-карты
     func getMapStoreyById(id: Int)->Int{
         let mapMapper = MapMapper()
@@ -160,14 +159,6 @@ class MapViewModel{
             result.append(stringMatrix)
         }
         return result
-    }
-    
-    
-    // MARK: Получение индекса точки в хранилище по id-помещения
-    func getIndexStorageByPremiseId(id: Int)->Int{
-        return self.dotsPositions.firstIndex{
-            return $0.idPremise == id
-            }!
     }
     
     
