@@ -33,9 +33,9 @@ class Map: UIScrollView, UIScrollViewDelegate{
         self.decelerationRate = .fast
         self.bouncesZoom = false
         
-        self.viewModel = MapViewModel(idMap: 1)
+        self.viewModel = MapViewModel(idMap: 2)
         
-        self.mapScheme = self.viewModel.mapScheme//UIImageView(image: UIImage(named: "guk_1_result"))
+        self.mapScheme = self.viewModel.mapScheme
         self.mapScheme.isUserInteractionEnabled = true
         self.addSubview(self.mapScheme)
         self.contentSize = CGSize(width: mapScheme.frame.width, height: mapScheme.frame.height)

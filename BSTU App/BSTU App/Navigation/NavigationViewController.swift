@@ -34,7 +34,7 @@ class NavigationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewModel = NavigationViewModel(idMap: 1)
+        self.viewModel = NavigationViewModel(idMap: 2)
         
         NotificationCenter.default.addObserver(self, selector: #selector(openBottomBar), name: Notification.Name("OpenBottomBar"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(closeBottomBar), name: Notification.Name("CloseBottomBar"), object: nil)
