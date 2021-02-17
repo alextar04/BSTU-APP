@@ -39,6 +39,12 @@ class StoreySwitcherView: UIView{
                     // Загрузка карты этажа
                     let data: [String: Any] = ["storey": currentValue!, "needsOpenNewMap": true]
                     NotificationCenter.default.post(name: Notification.Name("ChangeStorey"), object: nil, userInfo: data)
+                    // Удалить нарисованный путь
+                    let parentVC = self.parentViewController as! NavigationViewController
+                    if parentVC.topBarView.startPlaceTextField.text != "" && parentVC.topBarView.finishPlaceTextField.text != ""{
+                        parentVC.topBarView.startPlaceTextField.text = ""
+                        parentVC.topBarView.finishPlaceTextField.text = ""
+                    }
                     
                     if (currentValue! + 1) > rangeStorey.max()!{
                         self.storeyUpButton.image = UIImage(named: "storeyUpNoMore")
@@ -66,6 +72,12 @@ class StoreySwitcherView: UIView{
                 // Загрузка карты этажа
                 let data: [String: Any] = ["storey": currentValue!, "needsOpenNewMap": true]
                 NotificationCenter.default.post(name: Notification.Name("ChangeStorey"), object: nil, userInfo: data)
+                // Удалить нарисованный путь
+                let parentVC = self.parentViewController as! NavigationViewController
+                if parentVC.topBarView.startPlaceTextField.text != "" && parentVC.topBarView.finishPlaceTextField.text != ""{
+                    parentVC.topBarView.startPlaceTextField.text = ""
+                    parentVC.topBarView.finishPlaceTextField.text = ""
+                }
                 
                 if (currentValue! - 1) < rangeStorey.min()!{
                     self.storeyDownButton.image = UIImage(named: "storeyDownNoMore")
