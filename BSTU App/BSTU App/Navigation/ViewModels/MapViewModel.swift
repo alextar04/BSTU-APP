@@ -11,6 +11,7 @@ import UIKit
 
 class MapViewModel{
     
+    var idMap: Int!
     lazy var mapScheme = UIImageView()
     lazy var markerList = [Marker]()
     lazy var dotsPositions = [MapRoadDotDB]()
@@ -19,6 +20,7 @@ class MapViewModel{
     
     
     init(idMap: Int) {
+        self.idMap = idMap
         getMarkers(idMap: idMap)
         getDotsPositions(idMap: idMap)
         let map = getMapById(id: idMap)

@@ -19,11 +19,13 @@ class NavigationViewController: UIViewController {
     var topBarView: TopBarNavigation!
     var map: Map!
     var storeySwitcherView: StoreySwitcherView!
+    var anotherStageButton: UIButton!
     
     var currentSelectedName: String!
     var currentSelectedPremiseId: Int!
     var changeMarkerStatus = false
     var bottomBarIsOpen = false
+    var anotherStageButtonData: [(Int, Int, Int)]!
     
     var firstDraw = true
     var isEnabledTopBarInInit: Bool!
@@ -50,6 +52,7 @@ class NavigationViewController: UIViewController {
         self.addTopBarView()
         self.addMap(idMap: 1)
         self.addStoreySwitcherView()
+        self.setupSwapStoreyButtonAfterCreateWay()
     }
     
     
@@ -257,11 +260,68 @@ class NavigationViewController: UIViewController {
         
         // Случай 1: этажи совпадают
         if inMapId == outMapId{
-            self.topBarView.cameraMovement()
+            self.topBarView.cameraMovement(startPremiseId: self.topBarView.startPlacePremiseId!,
+                                           finishPremiseId: self.topBarView.finishPlacePremiseId!,
+                                           changeStorey: false)
             self.map.drawPathBetweenAudience(v1: inDot, v2: outDot)
         } else{
-            print("Нужно строить оптимальный путь!")
-            self.viewModel.getOptimalWayForPremiseFromDifferentStoreys(inPremise: startResult, outPremise: finishResult)
+            // Случай 2: Пункты расположены на разных этажах
+            let optimalWay = self.viewModel.getOptimalWayForPremiseFromDifferentStoreys(inPremise: startResult, outPremise: finishResult)
+            
+            // Загрузка карты пункта отправления
+            let data: [String: Any] = ["storey": inMapId, "closure": {
+                self.storeySwitcherView.storeyNumberLabel.text! = String(inMapId)
+                // Построение пути на карте пункта отправления
+                self.topBarView.cameraMovement(startPremiseId: self.viewModel.getIdPremiseByIdMapAndIdOnMap(inMapId, optimalWay.0),
+                                               finishPremiseId: self.viewModel.getIdPremiseByIdMapAndIdOnMap(inMapId, optimalWay.1),
+                                               changeStorey: false)
+                self.map.drawPathBetweenAudience(v1: optimalWay.0, v2: optimalWay.1)
+                
+                // Кнопка для загрузки карты прибытия и построения пути
+                self.anotherStageButton.setTitle("На \(outMapId) этаж", for: .normal)
+                self.anotherStageButton.isHidden = false
+                self.storeySwitcherView.isHidden = true
+                // Данные: id-карты, пункты отправления и назначения
+                self.anotherStageButtonData = [(Int, Int, Int)].init(arrayLiteral: (inMapId, optimalWay.0, optimalWay.1),
+                                                                                   (outMapId, optimalWay.2, optimalWay.3))
+                }]
+            NotificationCenter.default.post(name: Notification.Name("ChangeStorey"), object: nil, userInfo: data)
+        }
+    }
+    
+    
+    // MARK: Кнопка смены этажа, если маршрут включает несколько этажей
+    func setupSwapStoreyButtonAfterCreateWay(){
+        
+        self.anotherStageButton = UIButton(frame: CGRect(x: self.view.frame.width - 120, y: self.view.frame.height - 60,
+                                                         width: 110, height: 50))
+        self.anotherStageButton.makeRounding()
+        self.anotherStageButton.setTitle("На ... этаж", for: .normal)
+        self.anotherStageButton.setTitleColor(.black, for: .normal)
+        self.anotherStageButton.backgroundColor = .cancelInputPremiseColor
+        self.anotherStageButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18.0)
+        self.anotherStageButton.isHidden = true
+        self.view.addSubview(self.anotherStageButton)
+        
+        self.anotherStageButton.rx.tap.bind{
+            // Загрузка карты пункта назначения/отправления
+            let data: [String: Any] = ["storey": (self.anotherStageButtonData.last?.0)!, "closure": {
+                    
+                self.storeySwitcherView.storeyNumberLabel.text! = String((self.anotherStageButtonData.last?.0)!)
+                self.anotherStageButton.setTitle("На \((self.anotherStageButtonData.first?.0)!) этаж", for: .normal)
+                
+                // Построение пути на карте пункта назначения/отправления
+                self.topBarView.cameraMovement(startPremiseId: self.viewModel.getIdPremiseByIdMapAndIdOnMap((self.anotherStageButtonData.last?.0)!,
+                                                                                                            (self.anotherStageButtonData.last?.1)!),
+                                               finishPremiseId: self.viewModel.getIdPremiseByIdMapAndIdOnMap((self.anotherStageButtonData.last?.0)!,
+                                                                                                             (self.anotherStageButtonData.last?.2)!),
+                                               changeStorey: true)
+                self.map.drawPathBetweenAudience(v1: (self.anotherStageButtonData.last?.1)!,
+                                                 v2: (self.anotherStageButtonData.last?.2)!)
+                self.anotherStageButtonData.swapAt(0, 1)
+            }]
+            
+            NotificationCenter.default.post(name: Notification.Name("ChangeStorey"), object: nil, userInfo: data)
         }
     }
     
@@ -331,6 +391,13 @@ class NavigationViewController: UIViewController {
             }
             self.viewModel = NavigationViewModel(idMap: storey)
             self.addMap(idMap: storey)
+            self.map.layoutSubviews()
+            
+            // Смена этажа с рисованием необходимого пути
+            let closure = notification.userInfo!["closure"] as? ()->Void
+            if let unwarpedClosure = closure{
+                unwarpedClosure()
+            }
         }
     }
     
@@ -365,6 +432,7 @@ class NavigationViewController: UIViewController {
         var yStartTopBar: CGFloat = 0.0
         var yStartMap: CGFloat = 0.0
         var yStartSwitcher: CGFloat = 0.0
+        var yStartAnotherStorey: CGFloat = 0.0
         
         var yStartTable: CGFloat = 0.0
         var tableHeight: CGFloat = 0.0
@@ -387,6 +455,7 @@ class NavigationViewController: UIViewController {
             yStartTopBar = 0
             yStartSwitcher = (UIApplication.shared.windows.first?.safeAreaLayoutGuide.layoutFrame.height)! - 98
             yStartMap = topBarView.frame.height
+            yStartAnotherStorey = (UIApplication.shared.windows.first?.safeAreaLayoutGuide.layoutFrame.height)! - 60
             if self.topBarView.keyboardHeight != nil{
                 tableHeight = (UIApplication.shared.windows.first?.safeAreaLayoutGuide.layoutFrame.height)! - self.topBarView.keyboardHeight - self.topBarView.frame.height
                 yStartTable = self.topBarView.frame.height
@@ -395,6 +464,7 @@ class NavigationViewController: UIViewController {
         } else {
             yStartTopBar = 0
             yStartSwitcher = self.view.frame.height - 98
+            yStartAnotherStorey = self.view.frame.height - 60
             yStartMap = (UIApplication.shared.windows.first?.safeAreaInsets.top)! + topBarView.frame.height
             if self.topBarView.keyboardHeight != nil{
                 tableHeight = self.view.frame.height - self.topBarView.keyboardHeight - (self.topBarView.frame.height + ((UIApplication.shared.windows.first?.safeAreaInsets.top)!))
@@ -409,6 +479,8 @@ class NavigationViewController: UIViewController {
                                             width: self.view.frame.width, height: (topBarView?.frame.height)!)
             self.storeySwitcherView?.frame = CGRect(x: 10, y: yStartSwitcher,
                                                     width: 42, height: 88)
+            self.anotherStageButton.frame = CGRect(x: self.view.frame.width - 120, y: yStartAnotherStorey,
+                                                     width: 110, height: 50)
             self.map.frame = CGRect(x: 0, y: yStartMap,
                                     width: self.view.frame.width, height: self.view.frame.height - yStartMap)
             if self.topBarView.backButton != nil{

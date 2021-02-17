@@ -14,6 +14,7 @@ class NavigationViewModel{
     lazy var premiseList = [PremiseDB]()
     lazy var premisesTypesList = [TypePremiseDB]()
     
+    
     init(idMap: Int) {
         getPremises(idMap: idMap)
         getTypesPremises()
@@ -99,7 +100,7 @@ class NavigationViewModel{
     
     // MARK: Поиск оптимального пути для помещений на разных этажах
     // Входные параметры: Пункт отправления, пункт прибытия - mapId, idOnMap
-    func getOptimalWayForPremiseFromDifferentStoreys(inPremise: (Int, Int), outPremise: (Int, Int)){
+    func getOptimalWayForPremiseFromDifferentStoreys(inPremise: (Int, Int), outPremise: (Int, Int))->(Int, Int, Int, Int){
         
         // Получение id-помещений "Входа 1" и "Входа 2" этажей in, out
         let localIdInMapOneExitOne = searchLocalIdInMap(idMap: inPremise.0, description: "Вход 1")
@@ -120,22 +121,41 @@ class NavigationViewModel{
         let pathTwoLength = matrixBestDistanceMapOne[inPremise.1][localIdInMapOneExitTwo] +
                             matrixBestDistanceMapTwo[localIdInMapTwoExitTwo][outPremise.1]
         
-        print("Путь через Вход 1: ")
-        print(pathOneLength)
-        print("Путь через Вход 2: ")
-        print(pathTwoLength)
+        // Выбор кратчайшего пути из двух
+        if pathOneLength < pathTwoLength{
+            return (inPremise.1, localIdInMapOneExitOne, localIdInMapTwoExitOne, outPremise.1)
+        }
+        return (inPremise.1, localIdInMapOneExitTwo, localIdInMapTwoExitTwo, outPremise.1)
     }
     
     
     // MARK: Вспомогательная функция для получения индексов точек на карте
-    //Входные параметры: id-карты, описание карты
+    // Входные параметры: id-карты, описание карты
     func searchLocalIdInMap(idMap: Int, description: String)->Int{
+        
+        let premiseIdExit = getPremiseIdByIdMapAndDescription(idMap: idMap, description: description)
+        let localIdInMapExit = getIndexInStorageByPremiseId(idPremise: premiseIdExit).1
+        return localIdInMapExit
+    }
+    
+    
+    // MARK: Вспомогательная функция для получения id-помещения
+    // Входные параметры: id-карты, описание карты
+    func getPremiseIdByIdMapAndDescription(idMap: Int, description: String)->Int{
         
         let mapper = PremiseMapper()
         let dataExit = mapper.getPremiseIdByIdMapAndDescription(idMap: idMap, description: description)
-        let premiseIdExit = dataExit[mapper.idQuery]
-        let localIdInMapExit =  getIndexInStorageByPremiseId(idPremise: premiseIdExit).1
-        return localIdInMapExit
+        return dataExit[mapper.idQuery]
+    }
+    
+    
+    // MARK: Вспомогательная функция для получения id-помещения
+    // Входные параметры: id-карты, idOnMap
+    func getIdPremiseByIdMapAndIdOnMap(_ idMap: Int, _ idOnMap: Int)->Int{
+        
+        let mapper = MapRoadDotMapper()
+        let data = mapper.getIdPremiseByIdMapAndIdOnMap(idMap, idOnMap)
+        return data
     }
     
     

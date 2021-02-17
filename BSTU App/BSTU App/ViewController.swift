@@ -14,24 +14,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /*
-        /******/
-        print("Точки")
-        print(pathOnDevice)
-        let db = try! Connection(pathOnDevice.absoluteString)
-        let dots = Table("MapRoadDotDB")
-        let id = Expression<Int64>("id")
-        for dot in try! db.prepare(dots) {
-            print(dot[id])
-        }
-        /******/
-        */
         Database.copyDatabaseToDevice()
-        /*
-        let mapper = CorpMapper()
-        mapper.getCorpList()
-         */
-        
         
         let navigationController = NavigationViewController()
         self.addChild(navigationController)

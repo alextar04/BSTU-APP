@@ -34,5 +34,16 @@ class MapRoadDotMapper{
         return result
     }
     
+    // MARK: Вспомогательная функция для получения id-помещения
+    // Входные параметры: id-карты, idOnMap
+    func getIdPremiseByIdMapAndIdOnMap(_ idMap: Int, _ idOnMap: Int)->Int{
+        let database = Database.connect()
+        var result = [Int]()
+        
+        for roadDot in try! database.prepare(self.tableQuery.filter(self.idMapQuery == idMap &&  self.idOnMapQuery == idOnMap)){
+            result.append(roadDot[idPremiseQuery]!)
+        }
+        return result.first!
+    }
     
 }

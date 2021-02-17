@@ -134,7 +134,7 @@ class Marker: UIView{
         })
         
         // Действия по открытию нижнего бара с информацией
-        let userInfo: [String: Any] = ["idPremise": self.idPremise,//"stickerText": self.text,
+        let userInfo: [String: Any] = ["idPremise": self.idPremise,
                                        "tapRecognizer": sender]
         NotificationCenter.default.post(name: Notification.Name("OpenBottomBar"), object: nil, userInfo: userInfo)
     }
@@ -146,7 +146,7 @@ class Marker: UIView{
         
         var userInfo = [String: Any]()
 
-        userInfo = ["idPremise": self.idPremise,//"stickerText": self.text,
+        userInfo = ["idPremise": self.idPremise,
                     "tapRecognizer": sender]
 
         NotificationCenter.default.post(name: Notification.Name("CloseBottomBar"), object: nil, userInfo: userInfo)
