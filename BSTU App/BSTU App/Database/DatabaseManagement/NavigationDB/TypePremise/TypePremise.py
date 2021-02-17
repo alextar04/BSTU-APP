@@ -24,8 +24,8 @@ def TypePremiseAdd():
     TypePremise.create(id=1, name="Буфет", picture=pictureToBinary('buffet.png'))
     TypePremise.create(id=2, name="Гардероб", picture=pictureToBinary('wardrobe.png'))
     TypePremise.create(id=3, name="Туалет", picture=pictureToBinary('wc.png'))
-    TypePremise.create(id=4, name="Вход", picture=pictureToBinary('wc.png'))
-    TypePremise.create(id=5, name="Лифт", picture=pictureToBinary('wc.png'))
+    TypePremise.create(id=4, name="Вход", picture=pictureToBinary('entry.png'))
+    TypePremise.create(id=5, name="Лифт", picture=pictureToBinary('elevator.png'))
 
 def TypePremiseRemove():
     query = TypePremise.delete()
