@@ -288,6 +288,8 @@ class TopBarNavigation: UIView{
             }
         } else {
             // Пункты отбытия/прибытия выбраны
+            let userInfo: [String: Any] = ["tapRecognizer": notification]
+            NotificationCenter.default.post(name: Notification.Name("CloseMarkerAndBottomBar"), object: nil, userInfo: userInfo)
             parentVC.createWay()
         }
     }
