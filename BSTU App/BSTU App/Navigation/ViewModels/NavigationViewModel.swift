@@ -41,6 +41,27 @@ class NavigationViewModel{
     }
     
     
+    // MARK: Получение списка помещений
+    func getAllPremises()->[PremiseDB]{
+
+        let mapper = PremiseMapper()
+        let acceptedData = mapper.getPremiseList()
+        var result = [PremiseDB]()
+        
+        for row in acceptedData{
+            let premise = PremiseDB()
+            premise.id = row[mapper.idQuery]
+            premise.idMap = row[mapper.idMapQuery]
+            premise.idTypePremise = row[mapper.idTypePremiseQuery]
+            premise.name = row[mapper.nameQuery]
+            premise.description = row[mapper.descriptionQuery]
+            
+            result.append(premise)
+        }
+        return result
+    }
+    
+    
     // MARK: Получение списка типов помещений
     func getTypesPremises(){
 
@@ -188,10 +209,10 @@ class NavigationViewModel{
     func loadArrayPremise(prefix: String)->[PremiseDB]?{
     
         if prefix == ""{
-            return Array(self.premiseList.prefix(10))
+            return Array(self.getAllPremises().prefix(10))
         }
         
-        let result = try? premiseList.filter{ premise in
+        let result = try? getAllPremises().filter{ premise in
             premise.description.lowercased().hasPrefix(prefix.lowercased())
         }
         return result

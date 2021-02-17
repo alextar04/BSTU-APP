@@ -37,7 +37,7 @@ class StoreySwitcherView: UIView{
                     self.storeyNumberLabel.text = String(currentValue!)
                     
                     // Загрузка карты этажа
-                    let data: [String: Int] = ["storey": currentValue!]
+                    let data: [String: Any] = ["storey": currentValue!, "needsOpenNewMap": true]
                     NotificationCenter.default.post(name: Notification.Name("ChangeStorey"), object: nil, userInfo: data)
                     
                     if (currentValue! + 1) > rangeStorey.max()!{
@@ -64,7 +64,7 @@ class StoreySwitcherView: UIView{
                 self.storeyNumberLabel.text = String(currentValue!)
                 
                 // Загрузка карты этажа
-                let data: [String: Int] = ["storey": currentValue!]
+                let data: [String: Any] = ["storey": currentValue!, "needsOpenNewMap": true]
                 NotificationCenter.default.post(name: Notification.Name("ChangeStorey"), object: nil, userInfo: data)
                 
                 if (currentValue! - 1) < rangeStorey.min()!{

@@ -222,6 +222,9 @@ class NavigationViewController: UIViewController {
         self.topBarView.startPlaceTextField.text = description
         self.topBarView.startPlacePremiseId = self.currentSelectedPremiseId
         closeBottomBarAfterChoosingPlace()
+        
+        self.anotherStageButton.isHidden = true
+        self.storeySwitcherView.isHidden = false
         if self.topBarView.startPlaceTextField.text != "" && self.topBarView.finishPlaceTextField.text != ""{
             createWay()
         }
@@ -234,6 +237,9 @@ class NavigationViewController: UIViewController {
         self.topBarView.finishPlaceTextField.text = description
         self.topBarView.finishPlacePremiseId = self.currentSelectedPremiseId
         closeBottomBarAfterChoosingPlace()
+        
+        self.anotherStageButton.isHidden = true
+        self.storeySwitcherView.isHidden = false
         if self.topBarView.startPlaceTextField.text != "" && self.topBarView.finishPlaceTextField.text != ""{
             createWay()
         }
@@ -260,16 +266,23 @@ class NavigationViewController: UIViewController {
         
         // Случай 1: этажи совпадают
         if inMapId == outMapId{
+            let data: [String: Any] = ["storey": inMapId, "needsOpenNewMap": self.map.viewModel.idMap != inMapId]
+            NotificationCenter.default.post(name: Notification.Name("ChangeStorey"), object: nil, userInfo: data)
             self.topBarView.cameraMovement(startPremiseId: self.topBarView.startPlacePremiseId!,
                                            finishPremiseId: self.topBarView.finishPlacePremiseId!,
                                            changeStorey: false)
             self.map.drawPathBetweenAudience(v1: inDot, v2: outDot)
+            self.anotherStageButton.isHidden = true
+            self.storeySwitcherView.isHidden = false
+            self.storeySwitcherView.storeyNumberLabel.text! = String(inMapId)
         } else{
             // Случай 2: Пункты расположены на разных этажах
             let optimalWay = self.viewModel.getOptimalWayForPremiseFromDifferentStoreys(inPremise: startResult, outPremise: finishResult)
+            // Данные: id-карты, пункты отправления и назначения
+            self.anotherStageButtonData = [(Int, Int, Int)].init(arrayLiteral: (inMapId, optimalWay.0, optimalWay.1),
+                                                                               (outMapId, optimalWay.2, optimalWay.3))
             
-            // Загрузка карты пункта отправления
-            let data: [String: Any] = ["storey": inMapId, "closure": {
+            let closure = {
                 self.storeySwitcherView.storeyNumberLabel.text! = String(inMapId)
                 // Построение пути на карте пункта отправления
                 self.topBarView.cameraMovement(startPremiseId: self.viewModel.getIdPremiseByIdMapAndIdOnMap(inMapId, optimalWay.0),
@@ -281,10 +294,9 @@ class NavigationViewController: UIViewController {
                 self.anotherStageButton.setTitle("На \(outMapId) этаж", for: .normal)
                 self.anotherStageButton.isHidden = false
                 self.storeySwitcherView.isHidden = true
-                // Данные: id-карты, пункты отправления и назначения
-                self.anotherStageButtonData = [(Int, Int, Int)].init(arrayLiteral: (inMapId, optimalWay.0, optimalWay.1),
-                                                                                   (outMapId, optimalWay.2, optimalWay.3))
-                }]
+                }
+            
+            let data: [String: Any] = ["storey": inMapId, "closure": closure, "needsOpenNewMap": self.map.viewModel.idMap != inMapId]
             NotificationCenter.default.post(name: Notification.Name("ChangeStorey"), object: nil, userInfo: data)
         }
     }
@@ -319,7 +331,7 @@ class NavigationViewController: UIViewController {
                 self.map.drawPathBetweenAudience(v1: (self.anotherStageButtonData.last?.1)!,
                                                  v2: (self.anotherStageButtonData.last?.2)!)
                 self.anotherStageButtonData.swapAt(0, 1)
-            }]
+                }, "needsOpenNewMap": true]
             
             NotificationCenter.default.post(name: Notification.Name("ChangeStorey"), object: nil, userInfo: data)
         }
@@ -386,14 +398,20 @@ class NavigationViewController: UIViewController {
     @objc func changeStorey(_ notification: NSNotification){
         
         if let storey = notification.userInfo!["storey"] as? Int{
-            if self.map != nil{
-                self.map.removeFromSuperview()
-            }
-            self.viewModel = NavigationViewModel(idMap: storey)
-            self.addMap(idMap: storey)
-            self.map.layoutSubviews()
             
-            // Смена этажа с рисованием необходимого пути
+            // Загрузить новый этаж по информации о текущем этаже
+            if notification.userInfo!["needsOpenNewMap"] as? Bool == true{
+                if self.map != nil{
+                    self.map.removeFromSuperview()
+                }
+                self.viewModel = NavigationViewModel(idMap: storey)
+                self.addMap(idMap: storey)
+                self.map.layoutSubviews()
+            }
+            
+            // Смена этажа с вариантами 1 или 2:
+            // 1) Рисованием необходимого пути
+            // 2) Фокусе на определенном маркере
             let closure = notification.userInfo!["closure"] as? ()->Void
             if let unwarpedClosure = closure{
                 unwarpedClosure()

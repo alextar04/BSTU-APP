@@ -1550,8 +1550,8 @@
             filePath = "BSTU App/Navigation/NavigationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "376"
-            endingLineNumber = "376"
+            startingLineNumber = "388"
+            endingLineNumber = "388"
             landmarkName = "changeCorp(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1566,8 +1566,8 @@
             filePath = "BSTU App/Navigation/NavigationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "371"
-            endingLineNumber = "371"
+            startingLineNumber = "383"
+            endingLineNumber = "383"
             landmarkName = "changeCorp(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1582,8 +1582,8 @@
             filePath = "BSTU App/Navigation/NavigationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "377"
-            endingLineNumber = "377"
+            startingLineNumber = "389"
+            endingLineNumber = "389"
             landmarkName = "changeCorp(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1918,8 +1918,8 @@
             filePath = "BSTU App/Navigation/NavigationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "487"
-            endingLineNumber = "487"
+            startingLineNumber = "505"
+            endingLineNumber = "505"
             landmarkName = "viewDidLayoutSubviews()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1934,8 +1934,8 @@
             filePath = "BSTU App/Navigation/NavigationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "460"
-            endingLineNumber = "460"
+            startingLineNumber = "478"
+            endingLineNumber = "478"
             landmarkName = "viewDidLayoutSubviews()"
             landmarkType = "7">
             <Locations>
@@ -1982,8 +1982,8 @@
             filePath = "BSTU App/Navigation/NavigationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "470"
-            endingLineNumber = "470"
+            startingLineNumber = "488"
+            endingLineNumber = "488"
             landmarkName = "viewDidLayoutSubviews()"
             landmarkType = "7">
             <Locations>
@@ -2046,8 +2046,8 @@
             filePath = "BSTU App/Navigation/NavigationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
+            startingLineNumber = "237"
+            endingLineNumber = "237"
             landmarkName = "fillFinishPlaceLabel()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2174,8 +2174,8 @@
             filePath = "BSTU App/Navigation/NavigationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "236"
-            endingLineNumber = "236"
+            startingLineNumber = "239"
+            endingLineNumber = "239"
             landmarkName = "fillFinishPlaceLabel()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2206,8 +2206,8 @@
             filePath = "BSTU App/Navigation/Views/TopBarNavigation.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "264"
-            endingLineNumber = "264"
+            startingLineNumber = "282"
+            endingLineNumber = "282"
             landmarkName = "changePremiseLabel(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2350,8 +2350,8 @@
             filePath = "BSTU App/Navigation/NavigationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "389"
-            endingLineNumber = "389"
+            startingLineNumber = "404"
+            endingLineNumber = "404"
             landmarkName = "changeStorey(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2366,8 +2366,8 @@
             filePath = "BSTU App/Navigation/NavigationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "388"
-            endingLineNumber = "388"
+            startingLineNumber = "400"
+            endingLineNumber = "400"
             landmarkName = "changeStorey(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2398,8 +2398,8 @@
             filePath = "BSTU App/Navigation/NavigationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "263"
-            endingLineNumber = "263"
+            startingLineNumber = "271"
+            endingLineNumber = "271"
             landmarkName = "createWay()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2414,8 +2414,8 @@
             filePath = "BSTU App/Navigation/NavigationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
+            startingLineNumber = "236"
+            endingLineNumber = "236"
             landmarkName = "fillFinishPlaceLabel()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2430,8 +2430,8 @@
             filePath = "BSTU App/Navigation/NavigationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "296"
-            endingLineNumber = "296"
+            startingLineNumber = "308"
+            endingLineNumber = "308"
             landmarkName = "setupSwapStoreyButtonAfterCreateWay()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2446,8 +2446,8 @@
             filePath = "BSTU App/Navigation/NavigationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "397"
-            endingLineNumber = "397"
+            startingLineNumber = "415"
+            endingLineNumber = "415"
             landmarkName = "changeStorey(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2462,8 +2462,8 @@
             filePath = "BSTU App/Navigation/NavigationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "393"
-            endingLineNumber = "393"
+            startingLineNumber = "408"
+            endingLineNumber = "408"
             landmarkName = "changeStorey(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2478,8 +2478,8 @@
             filePath = "BSTU App/Navigation/NavigationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "399"
-            endingLineNumber = "399"
+            startingLineNumber = "417"
+            endingLineNumber = "417"
             landmarkName = "changeStorey(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2494,8 +2494,8 @@
             filePath = "BSTU App/Navigation/NavigationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "314"
-            endingLineNumber = "314"
+            startingLineNumber = "326"
+            endingLineNumber = "326"
             landmarkName = "setupSwapStoreyButtonAfterCreateWay()"
             landmarkType = "7">
             <Locations>
@@ -2542,8 +2542,8 @@
             filePath = "BSTU App/Navigation/Views/TopBarNavigation.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "286"
-            endingLineNumber = "286"
+            startingLineNumber = "299"
+            endingLineNumber = "299"
             landmarkName = "cameraMovement(startPremiseId:finishPremiseId:changeStorey:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2558,8 +2558,8 @@
             filePath = "BSTU App/Navigation/Views/TopBarNavigation.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "287"
-            endingLineNumber = "287"
+            startingLineNumber = "300"
+            endingLineNumber = "300"
             landmarkName = "cameraMovement(startPremiseId:finishPremiseId:changeStorey:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2590,10 +2590,42 @@
             filePath = "BSTU App/Navigation/NavigationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "310"
-            endingLineNumber = "310"
+            startingLineNumber = "322"
+            endingLineNumber = "322"
             landmarkName = "setupSwapStoreyButtonAfterCreateWay()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "DF570FAC-D6D3-4A21-98E5-FBDD3B36D07C - c7fb578049c4df37"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #1 () -&gt; () in BSTU_App.NavigationViewController.setupSwapStoreyButtonAfterCreateWay() -&gt; ()"
+                  moduleName = "BSTU App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/user/Documents/GitHub/BSTU-APP/BSTU%20App/BSTU%20App/Navigation/NavigationViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "311"
+                  endingLineNumber = "311"
+                  offsetFromSymbolStart = "92">
+               </Location>
+               <Location
+                  uuid = "DF570FAC-D6D3-4A21-98E5-FBDD3B36D07C - c7fb578049c4df37"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #1 () -&gt; () in BSTU_App.NavigationViewController.setupSwapStoreyButtonAfterCreateWay() -&gt; ()"
+                  moduleName = "BSTU App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/user/Documents/GitHub/BSTU-APP/BSTU%20App/BSTU%20App/Navigation/NavigationViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "311"
+                  endingLineNumber = "311"
+                  offsetFromSymbolStart = "772">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2622,8 +2654,8 @@
             filePath = "BSTU App/Navigation/Views/TopBarNavigation.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "303"
-            endingLineNumber = "303"
+            startingLineNumber = "316"
+            endingLineNumber = "316"
             landmarkName = "cameraMovement(startPremiseId:finishPremiseId:changeStorey:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2638,8 +2670,8 @@
             filePath = "BSTU App/Navigation/Views/TopBarNavigation.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "297"
-            endingLineNumber = "297"
+            startingLineNumber = "310"
+            endingLineNumber = "310"
             landmarkName = "cameraMovement(startPremiseId:finishPremiseId:changeStorey:)"
             landmarkType = "7">
             <Locations>
@@ -2702,8 +2734,8 @@
             filePath = "BSTU App/Navigation/Views/TopBarNavigation.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "295"
-            endingLineNumber = "295"
+            startingLineNumber = "308"
+            endingLineNumber = "308"
             landmarkName = "cameraMovement(startPremiseId:finishPremiseId:changeStorey:)"
             landmarkType = "7">
          </BreakpointContent>

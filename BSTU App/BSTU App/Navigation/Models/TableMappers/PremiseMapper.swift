@@ -18,6 +18,7 @@ class PremiseMapper{
     let nameQuery = Expression<String>("name")
     let descriptionQuery = Expression<String>("description")
     
+    
     // MARK: Получение списка помещений
     // Входные параметры: id карты
     func getPremiseList(idMap: Int)->[SQLite.Row]{
@@ -25,6 +26,18 @@ class PremiseMapper{
         var result = [SQLite.Row]()
         
         for premiseItem in try! database.prepare(self.tableQuery.filter(self.idMapQuery == idMap)){
+            result.append(premiseItem)
+        }
+        return result
+    }
+    
+    
+    // MARK: Получение списка помещений
+    func getPremiseList()->[SQLite.Row]{
+        let database = Database.connect()
+        var result = [SQLite.Row]()
+        
+        for premiseItem in try! database.prepare(self.tableQuery){
             result.append(premiseItem)
         }
         return result

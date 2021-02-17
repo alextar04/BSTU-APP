@@ -9,7 +9,7 @@ class Corp(BaseModel):
         table_name = 'CorpDB'
 
 def CorpAdd():
-    Corp.create(id=0, name="Главный учебный корпус")
+    Corp.create(id=0, name="Главный корпус")
 
 def CorpRemove():
     query = Corp.delete()

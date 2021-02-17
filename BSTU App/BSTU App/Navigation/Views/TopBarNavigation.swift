@@ -261,21 +261,34 @@ class TopBarNavigation: UIView{
         // Перемещение камеры и выбор маркера
         // Выбор одного из пунктов отбытия/прибытия
         if startPlaceTextField.text == "" || finishPlaceTextField.text == "" {
-            let marker = parentVC.map.viewModel.getMarkerByIdPremise(id: idPremise)
-            parentVC.map.zoomScale = 0.6
-            marker.statusSelected = true
-            marker.paintingPriority = 1
-            let userInfo: [String: Any] = ["tapRecognizer": notification,
-                                           "idPremise": marker.idPremise]
-            NotificationCenter.default.post(name: Notification.Name("OpenBottomBar"), object: nil, userInfo: userInfo)
-            UIView.animate(withDuration: 0.6, animations: {
-                    parentVC.map.setContentOffset(CGPoint(x: marker.xPosition * parentVC.map.zoomScale - parentVC.map.frame.width/2,
-                                                          y: marker.yPosition * parentVC.map.zoomScale - parentVC.map.frame.height/2), animated: false)
-            })
+            let needsOpenNewMap = parentVC.map.viewModel.idMap != parentVC.viewModel.getPremiseById(withId: idPremise).idMap
+            
+            let closureToPremise = {
+                let marker = parentVC.map.viewModel.getMarkerByIdPremise(id: idPremise)
+                marker.statusSelected = true
+                parentVC.map.zoomScale = 0.5
+                marker.paintingPriority = 1
+                let userInfo: [String: Any] = ["tapRecognizer": notification,
+                                               "idPremise": marker.idPremise]
+                NotificationCenter.default.post(name: Notification.Name("OpenBottomBar"), object: nil, userInfo: userInfo)
+                UIView.animate(withDuration: 0.6, animations: {
+                        parentVC.map.setContentOffset(CGPoint(x: marker.xPosition * parentVC.map.zoomScale - parentVC.map.frame.width/2,
+                                                              y: marker.yPosition * parentVC.map.zoomScale - parentVC.map.frame.height/2), animated: false)
+                })
+            }
+            // Если помещение принадлежит текущей карте, то: перейти к маркеру помещению
+            // Если помещение не принадлежит текущей карте, то: открыть новую карту и перейти к помещению
+            if !needsOpenNewMap{
+                closureToPremise()
+            } else {
+                // Загрузка карты пункта отправления/назначения
+                let data: [String: Any] = ["storey": parentVC.viewModel.getPremiseById(withId: idPremise).idMap, "closure": closureToPremise, "needsOpenNewMap": true]
+                NotificationCenter.default.post(name: Notification.Name("ChangeStorey"), object: nil, userInfo: data)
+                parentVC.storeySwitcherView.storeyNumberLabel.text! = String(parentVC.viewModel.getPremiseById(withId: idPremise).idMap)
+            }
         } else {
             // Пункты отбытия/прибытия выбраны
             parentVC.createWay()
-            //cameraMovement()
         }
     }
     
