@@ -36,7 +36,7 @@ class NavigationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewModel = NavigationViewModel(idMap: 4)
+        self.viewModel = NavigationViewModel(idMap: 5)
         
         NotificationCenter.default.addObserver(self, selector: #selector(openBottomBar), name: Notification.Name("OpenBottomBar"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(closeBottomBar), name: Notification.Name("CloseBottomBar"), object: nil)
@@ -50,7 +50,7 @@ class NavigationViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(changeStorey), name: Notification.Name("ChangeStorey"), object: nil)
         
         self.addTopBarView()
-        self.addMap(idMap: 4)
+        self.addMap(idMap: 5)
         self.addStoreySwitcherView()
         self.setupSwapStoreyButtonAfterCreateWay()
     }
