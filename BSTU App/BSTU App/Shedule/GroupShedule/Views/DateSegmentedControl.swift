@@ -99,7 +99,7 @@ class DateSegmentedControl{
             .selectedSegmentIndex
             .subscribe(onNext: { index in
                 if !self.firstDraw{
-                    self.changeSegmentedControlLinePosition(stackView: stackView)
+                    self.changeSegmentedControlLinePosition(stackView: stackView, index: index)
                 }
                 self.firstDraw = false
             }).disposed(by: disposeBag)
@@ -108,14 +108,45 @@ class DateSegmentedControl{
     
     
     // Смена позиции линии под датой
-    private func changeSegmentedControlLinePosition(stackView: UIStackView) {
-        let segmentIndex = CGFloat(numbersOfCalendarSegmentedControl.selectedSegmentIndex)
-        let segmentWidth = numbersOfCalendarSegmentedControl.frame.width / CGFloat(numbersOfCalendarSegmentedControl.numberOfSegments)
-        let leadingDistance = segmentWidth * segmentIndex
+    public func changeSegmentedControlLinePosition(stackView: UIStackView, index: Int? = nil, direction: Direction? = nil) {
+       
+        var segmentIndex: CGFloat!
+        if index != nil{
+            segmentIndex = CGFloat(index!)
+        }
+        if direction != nil{
+            let currentSelectedIndex = numbersOfCalendarSegmentedControl.selectedSegmentIndex
+            
+            switch direction{
+            case .right:
+                if currentSelectedIndex != 0{
+                    segmentIndex = CGFloat(currentSelectedIndex - 1)
+                    numbersOfCalendarSegmentedControl.selectedSegmentIndex = Int(segmentIndex)
+                }
+            case .left:
+                if currentSelectedIndex != numbersOfCalendarSegmentedControl.numberOfSegments-1{
+                    segmentIndex = CGFloat(currentSelectedIndex + 1)
+                    numbersOfCalendarSegmentedControl.selectedSegmentIndex = Int(segmentIndex)
+                }
+            default:
+                fatalError()
+            }
+        }
         
-        UIView.animate(withDuration: 0.2, animations: { [weak self] in
-            self!.constraintBottomUnderlineLeftOffset.constant = leadingDistance
-            stackView.layoutIfNeeded()
-        })
+        if segmentIndex != nil{
+            let segmentWidth = numbersOfCalendarSegmentedControl.frame.width / CGFloat(numbersOfCalendarSegmentedControl.numberOfSegments)
+            let leadingDistance = segmentWidth * segmentIndex
+            
+            UIView.animate(withDuration: 0.2, animations: { [weak self] in
+                self!.constraintBottomUnderlineLeftOffset.constant = leadingDistance
+                stackView.layoutIfNeeded()
+            })
+        }
     }
+}
+
+
+enum Direction{
+    case left
+    case right
 }

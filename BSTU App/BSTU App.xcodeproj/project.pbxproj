@@ -44,7 +44,7 @@
 		CE380A3125BC70930028622B /* UniversityCorpCellTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE380A3025BC70930028622B /* UniversityCorpCellTable.xib */; };
 		CE380A3425BC72390028622B /* UniversityCorpCellTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE380A3325BC72390028622B /* UniversityCorpCellTable.swift */; };
 		CE3DC49725E1607600E8B8D7 /* DateSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3DC49625E1607600E8B8D7 /* DateSegmentedControl.swift */; };
-		CE3DC49C25E1690300E8B8D7 /* GroupSheduleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3DC49B25E1690300E8B8D7 /* GroupSheduleCell.xib */; };
+		CE3DC49C25E1690300E8B8D7 /* GroupSheduleCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3DC49B25E1690300E8B8D7 /* GroupSheduleCard.xib */; };
 		CE42A5AC25D41CD800CDDCA5 /* CorpDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42A5AB25D41CD800CDDCA5 /* CorpDB.swift */; };
 		CE91140525C3FA020096AB29 /* NavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91140425C3FA020096AB29 /* NavigationViewModel.swift */; };
 		CE91140725C437740096AB29 /* StoreySwitcherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE91140625C437740096AB29 /* StoreySwitcherView.xib */; };
@@ -53,6 +53,8 @@
 		CEB1CBD825E14C1E00B9CF76 /* GroupSheduleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB1CBD725E14C1E00B9CF76 /* GroupSheduleViewController.storyboard */; };
 		CEB1CBDB25E15D9300B9CF76 /* GroupSheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1CBDA25E15D9300B9CF76 /* GroupSheduleViewController.swift */; };
 		CED3903625D5AFFC004409CF /* bstuDB.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = CED3903525D5AFFC004409CF /* bstuDB.sqlite3 */; };
+		CEDE465225E280C600EB7672 /* GroupSheduleCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDE465125E280C600EB7672 /* GroupSheduleCard.swift */; };
+		CEDE465425E2823300EB7672 /* SheduleColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDE465325E2823300EB7672 /* SheduleColorExtensions.swift */; };
 		CEE3AFC325D7D5D8007B1814 /* MapRoadDotMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3AFC225D7D5D8007B1814 /* MapRoadDotMapper.swift */; };
 		CEE3AFC525D7D699007B1814 /* MapMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3AFC425D7D699007B1814 /* MapMapper.swift */; };
 		CEE5B67625D66A9D0023D640 /* MapDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5B67525D66A9D0023D640 /* MapDB.swift */; };
@@ -105,7 +107,7 @@
 		CE380A3025BC70930028622B /* UniversityCorpCellTable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UniversityCorpCellTable.xib; sourceTree = "<group>"; };
 		CE380A3325BC72390028622B /* UniversityCorpCellTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityCorpCellTable.swift; sourceTree = "<group>"; };
 		CE3DC49625E1607600E8B8D7 /* DateSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSegmentedControl.swift; sourceTree = "<group>"; };
-		CE3DC49B25E1690300E8B8D7 /* GroupSheduleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupSheduleCell.xib; sourceTree = "<group>"; };
+		CE3DC49B25E1690300E8B8D7 /* GroupSheduleCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupSheduleCard.xib; sourceTree = "<group>"; };
 		CE42A5AB25D41CD800CDDCA5 /* CorpDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorpDB.swift; sourceTree = "<group>"; };
 		CE91140425C3FA020096AB29 /* NavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModel.swift; sourceTree = "<group>"; };
 		CE91140625C437740096AB29 /* StoreySwitcherView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreySwitcherView.xib; sourceTree = "<group>"; };
@@ -114,6 +116,8 @@
 		CEB1CBD725E14C1E00B9CF76 /* GroupSheduleViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GroupSheduleViewController.storyboard; sourceTree = "<group>"; };
 		CEB1CBDA25E15D9300B9CF76 /* GroupSheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSheduleViewController.swift; sourceTree = "<group>"; };
 		CED3903525D5AFFC004409CF /* bstuDB.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = bstuDB.sqlite3; sourceTree = "<group>"; };
+		CEDE465125E280C600EB7672 /* GroupSheduleCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSheduleCard.swift; sourceTree = "<group>"; };
+		CEDE465325E2823300EB7672 /* SheduleColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheduleColorExtensions.swift; sourceTree = "<group>"; };
 		CEE3AFC225D7D5D8007B1814 /* MapRoadDotMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRoadDotMapper.swift; sourceTree = "<group>"; };
 		CEE3AFC425D7D699007B1814 /* MapMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMapper.swift; sourceTree = "<group>"; };
 		CEE5B67525D66A9D0023D640 /* MapDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDB.swift; sourceTree = "<group>"; };
@@ -274,10 +278,9 @@
 		CE3DC49A25E1674E00E8B8D7 /* GroupShedule */ = {
 			isa = PBXGroup;
 			children = (
-				CEB1CBD725E14C1E00B9CF76 /* GroupSheduleViewController.storyboard */,
+				CEEF6FF325E2780D00E412E3 /* Storyboards */,
+				CEEF6FF225E2780000E412E3 /* Views */,
 				CEB1CBDA25E15D9300B9CF76 /* GroupSheduleViewController.swift */,
-				CE3DC49625E1607600E8B8D7 /* DateSegmentedControl.swift */,
-				CE3DC49B25E1690300E8B8D7 /* GroupSheduleCell.xib */,
 			);
 			path = GroupShedule;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 		CEB1CBD625E14B9500B9CF76 /* Shedule */ = {
 			isa = PBXGroup;
 			children = (
+				CEDE465525E2827100EB7672 /* Extensions */,
 				CE3DC49A25E1674E00E8B8D7 /* GroupShedule */,
 				CEB1CBD925E1538100B9CF76 /* images */,
 			);
@@ -335,6 +339,14 @@
 			children = (
 			);
 			path = images;
+			sourceTree = "<group>";
+		};
+		CEDE465525E2827100EB7672 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CEDE465325E2823300EB7672 /* SheduleColorExtensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		CEE5B67F25D674520023D640 /* TableMappers */ = {
@@ -361,6 +373,24 @@
 				CEE5B67D25D66AD80023D640 /* TypePremiseDB.swift */,
 			);
 			path = Tables;
+			sourceTree = "<group>";
+		};
+		CEEF6FF225E2780000E412E3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CE3DC49625E1607600E8B8D7 /* DateSegmentedControl.swift */,
+				CEDE465125E280C600EB7672 /* GroupSheduleCard.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CEEF6FF325E2780D00E412E3 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				CEB1CBD725E14C1E00B9CF76 /* GroupSheduleViewController.storyboard */,
+				CE3DC49B25E1690300E8B8D7 /* GroupSheduleCard.xib */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -434,7 +464,7 @@
 				CE380A1C25BC4F910028622B /* building.png in Resources */,
 				CE037E7225BC425E00C50C16 /* LaunchScreen.storyboard in Resources */,
 				CE01CC9A25C29E59001388B9 /* SearchPremiseView.xib in Resources */,
-				CE3DC49C25E1690300E8B8D7 /* GroupSheduleCell.xib in Resources */,
+				CE3DC49C25E1690300E8B8D7 /* GroupSheduleCard.xib in Resources */,
 				CE037E6F25BC425E00C50C16 /* Assets.xcassets in Resources */,
 				CED3903625D5AFFC004409CF /* bstuDB.sqlite3 in Resources */,
 				CE91140725C437740096AB29 /* StoreySwitcherView.xib in Resources */,
@@ -507,10 +537,12 @@
 				CE380A3425BC72390028622B /* UniversityCorpCellTable.swift in Sources */,
 				CE037E6625BC425700C50C16 /* AppDelegate.swift in Sources */,
 				CEACB2D925C7F2F900F4ADD3 /* Map.swift in Sources */,
+				CEDE465225E280C600EB7672 /* GroupSheduleCard.swift in Sources */,
 				CE009EF325D6F88B00CA8604 /* TypePremiseMapper.swift in Sources */,
 				CE009EED25D6AC8B00CA8604 /* MarkerMapper.swift in Sources */,
 				CE3DC49725E1607600E8B8D7 /* DateSegmentedControl.swift in Sources */,
 				CEE5B67825D66AAB0023D640 /* MapRoadDotDB.swift in Sources */,
+				CEDE465425E2823300EB7672 /* SheduleColorExtensions.swift in Sources */,
 				CE380A2325BC4F910028622B /* ImageExtensions.swift in Sources */,
 				CE380A2B25BC4F910028622B /* NavigationViewController.swift in Sources */,
 				CE01CCA125C2A4BB001388B9 /* SearchPremiseCellTable.swift in Sources */,
