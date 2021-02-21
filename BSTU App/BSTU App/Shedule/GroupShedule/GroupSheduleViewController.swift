@@ -13,6 +13,7 @@ class GroupSheduleViewController: UIViewController{
     
     @IBOutlet weak var currentDayOfWeek: UILabel!
     
+    @IBOutlet weak var dateStackView: UIStackView!
     @IBOutlet weak var parityDropdownButton: UIImageView!
     @IBOutlet weak var parityOfWeek: UILabel!
     
@@ -24,7 +25,7 @@ class GroupSheduleViewController: UIViewController{
     
     // MARK: Настройки для панели дат
     func setSettingsForDateSegmentedControl(){
-        
+        let dateSegmentedControl = DateSegmentedControl()
+        dateSegmentedControl.setupView(stackView: self.dateStackView)
     }
-    
 }
