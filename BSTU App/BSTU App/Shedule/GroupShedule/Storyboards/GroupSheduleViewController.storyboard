@@ -57,7 +57,7 @@
                                     <constraint firstAttribute="height" constant="82" id="ibP-GI-DgN"/>
                                 </constraints>
                             </stackView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OCP-us-MVp">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OCP-us-MVp">
                                 <rect key="frame" x="0.0" y="153" width="375" height="514"/>
                             </scrollView>
                         </subviews>
@@ -90,7 +90,7 @@
                         <outlet property="dateStackView" destination="Qj2-wI-Vnp" id="MMZ-0A-2Zy"/>
                         <outlet property="parityDropdownButton" destination="KGF-3f-a32" id="OnS-XH-6mr"/>
                         <outlet property="parityOfWeek" destination="eqX-AB-2I2" id="Kn3-66-hHr"/>
-                        <outlet property="sheduleTable" destination="OCP-us-MVp" id="ymb-KS-T7u"/>
+                        <outlet property="sheduleTable" destination="OCP-us-MVp" id="qcj-j7-3Fh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Gg-Op-FEc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

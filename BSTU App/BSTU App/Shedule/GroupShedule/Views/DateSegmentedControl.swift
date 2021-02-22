@@ -19,7 +19,7 @@ class DateSegmentedControl{
     let disposeBag = DisposeBag()
     
     // Горизонтальная полоса "Дни недели"
-    private lazy var weekDaysSegmentedControl: UISegmentedControl = {
+    public lazy var weekDaysSegmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl()
         
         // Стандартное состояние
@@ -40,7 +40,7 @@ class DateSegmentedControl{
     
     
     // Горизонтальная полоса "Числа календаря"
-    private lazy var numbersOfCalendarSegmentedControl: UISegmentedControl = {
+    public lazy var numbersOfCalendarSegmentedControl: UISegmentedControl = {
         
         let segmentedControl = UISegmentedControl()
         segmentedControl.backgroundColor = .clear
@@ -68,7 +68,7 @@ class DateSegmentedControl{
     
     
     // Горизонтальная полоса под "Числа календаря"
-    private lazy var bottomUnderlineView: UIView = {
+    public lazy var bottomUnderlineView: UIView = {
         let underlineView = UIView()
         underlineView.backgroundColor = .blue
         underlineView.translatesAutoresizingMaskIntoConstraints = false
@@ -100,32 +100,34 @@ class DateSegmentedControl{
             .subscribe(onNext: { index in
                 if !self.firstDraw{
                     self.changeSegmentedControlLinePosition(stackView: stackView, index: index)
+                    let data: [String: Any] = ["dayIndex": index]
+                    NotificationCenter.default.post(name: Notification.Name("ChangeDay"), object: nil, userInfo: data)
                 }
                 self.firstDraw = false
             }).disposed(by: disposeBag)
-
     }
     
     
     // Смена позиции линии под датой
-    public func changeSegmentedControlLinePosition(stackView: UIStackView, index: Int? = nil, direction: Direction? = nil) {
+    public func changeSegmentedControlLinePosition(stackView: UIStackView, index: Int? = nil, direction: direction? = nil) {
        
         var segmentIndex: CGFloat!
         if index != nil{
             segmentIndex = CGFloat(index!)
         }
+        
         if direction != nil{
             let currentSelectedIndex = numbersOfCalendarSegmentedControl.selectedSegmentIndex
             
-            switch direction{
-            case .right:
-                if currentSelectedIndex != 0{
-                    segmentIndex = CGFloat(currentSelectedIndex - 1)
-                    numbersOfCalendarSegmentedControl.selectedSegmentIndex = Int(segmentIndex)
-                }
-            case .left:
+            switch direction! {
+            case .increment:
                 if currentSelectedIndex != numbersOfCalendarSegmentedControl.numberOfSegments-1{
                     segmentIndex = CGFloat(currentSelectedIndex + 1)
+                    numbersOfCalendarSegmentedControl.selectedSegmentIndex = Int(segmentIndex)
+                }
+            case .decrement:
+                if currentSelectedIndex != 0{
+                    segmentIndex = CGFloat(currentSelectedIndex - 1)
                     numbersOfCalendarSegmentedControl.selectedSegmentIndex = Int(segmentIndex)
                 }
             default:
@@ -145,8 +147,7 @@ class DateSegmentedControl{
     }
 }
 
-
-enum Direction{
-    case left
-    case right
+enum direction{
+    case increment
+    case decrement
 }
