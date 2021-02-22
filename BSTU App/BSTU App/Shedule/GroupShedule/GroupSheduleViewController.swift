@@ -20,12 +20,19 @@ class GroupSheduleViewController: UIViewController{
     @IBOutlet weak var parityDropdownButton: UIImageView!
     
     @IBOutlet weak var dateStackView: UIStackView!
-    @IBOutlet weak var sheduleTable: UIScrollView!
-    
     var dateSegmentedControl: DateSegmentedControl!
-    let disposeBag = DisposeBag()
     var currentPage: UIView!
     var currentSelectedIndex: Int!
+    
+    @IBOutlet weak var sheduleTable: UIScrollView!
+    lazy var templateCard: GroupSheduleCard = {
+        let card = Bundle.main.loadNibNamed("GroupSheduleCard", owner: self, options: nil)?.first as? GroupSheduleCard
+        return card!
+    }()
+    lazy var cardHeight = templateCard.frame.height
+    lazy var offsetBetweenCards: CGFloat = 14
+    
+    let disposeBag = DisposeBag()
     
     
     override func viewDidLoad() {
@@ -47,10 +54,6 @@ class GroupSheduleViewController: UIViewController{
         
         NotificationCenter.default.addObserver(self, selector: #selector(changeDay), name: Notification.Name("ChangeDay"), object: nil)
         
-        let templateCard = Bundle.main.loadNibNamed("GroupSheduleCard", owner: self, options: nil)?.first as? GroupSheduleCard
-        let cardHeight = (templateCard?.frame.height)!
-        let offsetBetweenCards: CGFloat = 8
-        
         self.currentPage = createViewForSheduleTable(number: "0",
                                                      frame: CGRect(x: 0, y: 0,
                                                                    width: self.sheduleTable.frame.width,
@@ -67,20 +70,17 @@ class GroupSheduleViewController: UIViewController{
         
         let outputView = UIView(frame: frame)
         
-        // Получение параметров карточки
-        let templateCard = Bundle.main.loadNibNamed("GroupSheduleCard", owner: self, options: nil)?.first as? GroupSheduleCard
-        let cardHeight = (templateCard?.frame.height)!
-        let offsetBetweenCards: CGFloat = 8
-        
         // Загрузка карточек
         for index in 0...5{
             let subjectCard = Bundle.main.loadNibNamed("GroupSheduleCard", owner: self, options: nil)?.first as? GroupSheduleCard
-            var yStart: CGFloat = 8
+            var yStart: CGFloat = 14
             index != 0 ? (yStart = offsetBetweenCards + (offsetBetweenCards + cardHeight) * CGFloat(index)) : (yStart = offsetBetweenCards)
             subjectCard!.frame = CGRect(x: 10, y: yStart,
                                             width: self.sheduleTable.frame.width - 20,
                                             height: cardHeight)
-            subjectCard!.setupView()
+            
+            let typeLessons: [TypeLesson] = [.laboratory, .lection, .practice]
+            subjectCard!.setupView(typeLesson: typeLessons.randomElement()!)
             subjectCard?.typeLesson.text! += number
             outputView.addSubview(subjectCard!)
         }
@@ -127,10 +127,6 @@ class GroupSheduleViewController: UIViewController{
     // MARK: Открытие представления с левой стороны
     func loadViewFromLeftSide(){
         
-        let templateCard = Bundle.main.loadNibNamed("GroupSheduleCard", owner: self, options: nil)?.first as? GroupSheduleCard
-        let cardHeight = (templateCard?.frame.height)!
-        let offsetBetweenCards: CGFloat = 8
-        
         // Анимация: Текущее расписание перемещается вправо
         // На его месте появляется новое
         let preventPage = createViewForSheduleTable(number: String(Int.random(in: 0...10)),
@@ -140,6 +136,7 @@ class GroupSheduleViewController: UIViewController{
         self.sheduleTable.addSubview(preventPage)
             
         let animatorSwitcherTableSheduleContent = UIViewPropertyAnimator(duration: 0.4, dampingRatio: 10.0){
+            self.dateSegmentedControl.numbersOfCalendarSegmentedControl.isUserInteractionEnabled = false
             self.currentPage.isUserInteractionEnabled = false
             preventPage.isUserInteractionEnabled = false
             self.currentPage?.frame = self.currentPage?.frame
@@ -154,16 +151,13 @@ class GroupSheduleViewController: UIViewController{
             self.currentPage.removeFromSuperview()
             self.currentPage = preventPage
             self.currentPage.isUserInteractionEnabled = true
+            self.dateSegmentedControl.numbersOfCalendarSegmentedControl.isUserInteractionEnabled = true
         }
     }
     
     
     // MARK: Открытие представления с правой стороны
     func loadViewFromRightSide(){
-        
-        let templateCard = Bundle.main.loadNibNamed("GroupSheduleCard", owner: self, options: nil)?.first as? GroupSheduleCard
-        let cardHeight = (templateCard?.frame.height)!
-        let offsetBetweenCards: CGFloat = 8
         
         // Анимация: Текущее расписание перемещается влево
         // На его месте появляется новое
@@ -174,6 +168,7 @@ class GroupSheduleViewController: UIViewController{
         self.sheduleTable.addSubview(nextPage)
         
         let animatorSwitcherTableSheduleContent = UIViewPropertyAnimator(duration: 0.4, dampingRatio: 10.0){
+            self.dateSegmentedControl.numbersOfCalendarSegmentedControl.isUserInteractionEnabled = false
             self.currentPage.isUserInteractionEnabled = false
             nextPage.isUserInteractionEnabled = false
             self.currentPage?.frame = self.currentPage?.frame
@@ -188,6 +183,7 @@ class GroupSheduleViewController: UIViewController{
             self.currentPage.removeFromSuperview()
             self.currentPage = nextPage
             self.currentPage.isUserInteractionEnabled = true
+            self.dateSegmentedControl.numbersOfCalendarSegmentedControl.isUserInteractionEnabled = true
         }
     }
     

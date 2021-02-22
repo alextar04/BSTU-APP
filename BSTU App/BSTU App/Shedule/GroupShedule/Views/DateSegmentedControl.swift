@@ -54,7 +54,7 @@ class DateSegmentedControl{
 
         // Состояние сегодняшней даты
         segmentedControl.setTitleTextAttributes([
-            NSAttributedString.Key.foregroundColor: UIColor.blue,
+            NSAttributedString.Key.foregroundColor: UIColor.lectionsSubjectColor,
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .bold)],
             for: .selected)
         
@@ -70,7 +70,7 @@ class DateSegmentedControl{
     // Горизонтальная полоса под "Числа календаря"
     public lazy var bottomUnderlineView: UIView = {
         let underlineView = UIView()
-        underlineView.backgroundColor = .blue
+        underlineView.backgroundColor = .lectionsSubjectColor
         underlineView.translatesAutoresizingMaskIntoConstraints = false
         return underlineView
     }()
@@ -108,7 +108,7 @@ class DateSegmentedControl{
     }
     
     
-    // Смена позиции линии под датой
+    // MARK: Смена позиции линии под датой
     public func changeSegmentedControlLinePosition(stackView: UIStackView, index: Int? = nil, direction: direction? = nil) {
        
         var segmentIndex: CGFloat!

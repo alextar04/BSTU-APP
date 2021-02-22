@@ -46,6 +46,8 @@
 		CE3DC49725E1607600E8B8D7 /* DateSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3DC49625E1607600E8B8D7 /* DateSegmentedControl.swift */; };
 		CE3DC49C25E1690300E8B8D7 /* GroupSheduleCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3DC49B25E1690300E8B8D7 /* GroupSheduleCard.xib */; };
 		CE42A5AC25D41CD800CDDCA5 /* CorpDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42A5AB25D41CD800CDDCA5 /* CorpDB.swift */; };
+		CE74CC4B25E4065100C1FDA0 /* SheduleImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE74CC4A25E4065100C1FDA0 /* SheduleImageExtensions.swift */; };
+		CE74CC4D25E4137B00C1FDA0 /* SheduleViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE74CC4C25E4137B00C1FDA0 /* SheduleViewExtensions.swift */; };
 		CE91140525C3FA020096AB29 /* NavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91140425C3FA020096AB29 /* NavigationViewModel.swift */; };
 		CE91140725C437740096AB29 /* StoreySwitcherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE91140625C437740096AB29 /* StoreySwitcherView.xib */; };
 		CE91140925C439460096AB29 /* StoreySwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91140825C439460096AB29 /* StoreySwitcherView.swift */; };
@@ -109,6 +111,8 @@
 		CE3DC49625E1607600E8B8D7 /* DateSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSegmentedControl.swift; sourceTree = "<group>"; };
 		CE3DC49B25E1690300E8B8D7 /* GroupSheduleCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupSheduleCard.xib; sourceTree = "<group>"; };
 		CE42A5AB25D41CD800CDDCA5 /* CorpDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorpDB.swift; sourceTree = "<group>"; };
+		CE74CC4A25E4065100C1FDA0 /* SheduleImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheduleImageExtensions.swift; sourceTree = "<group>"; };
+		CE74CC4C25E4137B00C1FDA0 /* SheduleViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheduleViewExtensions.swift; sourceTree = "<group>"; };
 		CE91140425C3FA020096AB29 /* NavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModel.swift; sourceTree = "<group>"; };
 		CE91140625C437740096AB29 /* StoreySwitcherView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreySwitcherView.xib; sourceTree = "<group>"; };
 		CE91140825C439460096AB29 /* StoreySwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreySwitcherView.swift; sourceTree = "<group>"; };
@@ -345,6 +349,8 @@
 			isa = PBXGroup;
 			children = (
 				CEDE465325E2823300EB7672 /* SheduleColorExtensions.swift */,
+				CE74CC4A25E4065100C1FDA0 /* SheduleImageExtensions.swift */,
+				CE74CC4C25E4137B00C1FDA0 /* SheduleViewExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -534,6 +540,7 @@
 				CE380A2125BC4F910028622B /* ViewExtensions.swift in Sources */,
 				CE380A2825BC4F910028622B /* BottomBarNavigation.swift in Sources */,
 				CE91140525C3FA020096AB29 /* NavigationViewModel.swift in Sources */,
+				CE74CC4D25E4137B00C1FDA0 /* SheduleViewExtensions.swift in Sources */,
 				CE380A3425BC72390028622B /* UniversityCorpCellTable.swift in Sources */,
 				CE037E6625BC425700C50C16 /* AppDelegate.swift in Sources */,
 				CEACB2D925C7F2F900F4ADD3 /* Map.swift in Sources */,
@@ -549,6 +556,7 @@
 				CE380A2425BC4F910028622B /* ButtonExtensions.swift in Sources */,
 				CE380A2F25BC6CF30028622B /* UniversityCorpsView.swift in Sources */,
 				CEE5B67A25D66AB70023D640 /* MarkerDB.swift in Sources */,
+				CE74CC4B25E4065100C1FDA0 /* SheduleImageExtensions.swift in Sources */,
 				CEE3AFC325D7D5D8007B1814 /* MapRoadDotMapper.swift in Sources */,
 				CEB1CBDB25E15D9300B9CF76 /* GroupSheduleViewController.swift in Sources */,
 				CE009EEF25D6B35D00CA8604 /* PremiseMapper.swift in Sources */,

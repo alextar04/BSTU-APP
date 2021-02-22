@@ -17,12 +17,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Воскресенье" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e7v-CH-RDX">
-                                <rect key="frame" x="61" y="7" width="135" height="37"/>
+                                <rect key="frame" x="61" y="7" width="172" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="PbT-KF-u2M"/>
-                                    <constraint firstAttribute="width" constant="135" id="buI-a2-F35"/>
+                                    <constraint firstAttribute="width" constant="172" id="buI-a2-F35"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>

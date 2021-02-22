@@ -11,35 +11,92 @@ import UIKit
 
 class GroupSheduleCard: UIView{
     
-    @IBOutlet weak var typeLesson: UILabel!
+    @IBOutlet weak var contentView: UIView!
     
-    func setupView(){
+    @IBOutlet weak var nameSubject: UILabel!
+    @IBOutlet weak var typeLesson: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var audienceLabel: UILabel!
+    
+    @IBOutlet weak var photoTeacher: UIImageView!
+    @IBOutlet weak var nameAndPatronymicTeacher: UILabel!
+    @IBOutlet weak var surnameTeacher: UILabel!
+    
+    func setupView(typeLesson: TypeLesson){
         
-        self.makeGradient()
-        self.makeRounding()
-        self.updateStyleTypeLesson()
+        self.contentView.makeRounding()
+        self.makeGradient(typeLesson: typeLesson)
+        self.updateStyleTypeLesson(typeLesson: typeLesson)
+        self.updateStyleNameSubject(typeLesson: typeLesson)
+        self.updateTeacherData()
+        
+        self.sheduleMakeShadow(width: Int(self.frame.width), heigth: Int(self.frame.height))
     }
     
     
     // Градиент для карточки
-    func makeGradient(){
+    func makeGradient(typeLesson: TypeLesson){
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.bounds
-        gradientLayer.colors = [UIColor.lightGray.cgColor, UIColor.sheduleLightGrayColor.cgColor]
-        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
-        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+        switch typeLesson {
+        case .lection:
+            gradientLayer.colors = [UIColor.lectionsBackgroundColorStart.cgColor, UIColor.lectionsBackgroundColorFinish.cgColor]
+        case .laboratory:
+            gradientLayer.colors = [UIColor.laboratoryBackgroundColorStart.cgColor, UIColor.laboratoryBackgroundColorFinish.cgColor]
+        case .practice:
+            gradientLayer.colors = [UIColor.practiceBackgroundColorStart.cgColor, UIColor.practiceBackgroundColorFinish.cgColor]
+        }
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
         
-        self.layer.insertSublayer(gradientLayer, at: 0)
+        self.contentView.layer.insertSublayer(gradientLayer, at: 0)
     }
     
     
     // Установка стиля label типа урока
-    func updateStyleTypeLesson(){
+    func updateStyleTypeLesson(typeLesson: TypeLesson){
         self.typeLesson.makeRounding()
-        self.typeLesson.layer.borderWidth = 3
-        self.typeLesson.layer.borderColor = UIColor.lightGray.cgColor
-        self.typeLesson.font = UIFont.boldSystemFont(ofSize: 14.0)
-        self.typeLesson.backgroundColor = .clear
+        self.typeLesson.font = UIFont.boldSystemFont(ofSize: 11.0)
+        self.typeLesson.textColor = .white
+        
+        switch typeLesson {
+        case .lection:
+            self.typeLesson.backgroundColor = .lectionsSubjectColor
+            self.typeLesson.text = "Лекция"
+        case .laboratory:
+            self.typeLesson.backgroundColor = .practiceSubjectColor
+            self.typeLesson.text = "Практика"
+        case .practice:
+            self.typeLesson.backgroundColor = .laboratorySubjectColor
+            self.typeLesson.text = "Лабораторная"
+        }
     }
     
+    
+    // Установка стиля label названия предмета
+    func updateStyleNameSubject(typeLesson: TypeLesson){
+        
+        switch typeLesson {
+        case .lection:
+            self.nameSubject.textColor = .lectionsSubjectColor
+        case .laboratory:
+            self.nameSubject.textColor = .practiceSubjectColor
+        case .practice:
+            self.nameSubject.textColor = .laboratorySubjectColor
+        }
+    }
+    
+    
+    // Установка информации о преподавателе
+    func updateTeacherData(){
+        self.photoTeacher.image = UIImage(named: "someImage")
+        self.photoTeacher.sheduleMakeRoundingImage()
+    }
+    
+}
+
+enum TypeLesson{
+    case lection
+    case laboratory
+    case practice
 }
