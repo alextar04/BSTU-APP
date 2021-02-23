@@ -139,11 +139,14 @@ class GroupSheduleViewController: UIViewController{
             .subscribe(
                 onNext: {selectedItem in
                     self.parityDropdownButton.image = UIImage(named: "dropdown")
-                    self.parityOfWeek.titleLabel?.text = selectedItem.name
-                    self.parityOfWeek.setTitle(selectedItem.name, for: .normal)
-                    self.view.layoutIfNeeded()
+                    UIView.performWithoutAnimation {
+                        self.parityOfWeek.setTitle(selectedItem.name, for: [.normal])
+                        self.parityOfWeek.layoutIfNeeded()
+                        self.view.layoutIfNeeded()
+                    }
                 
-                UIView.animate(
+                    
+                    UIView.animate(
                       withDuration: 0.4,
                       delay: 0,
                       usingSpringWithDamping: 1,
