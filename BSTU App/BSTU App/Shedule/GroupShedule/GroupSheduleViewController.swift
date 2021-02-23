@@ -11,18 +11,24 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxGesture
+import RxDataSources
+
 
 class GroupSheduleViewController: UIViewController{
     
     @IBOutlet weak var currentDayOfWeek: UILabel!
     
-    @IBOutlet weak var parityOfWeek: UILabel!
+    @IBOutlet weak var parityOfWeek: UIButton!
+    //@IBOutlet weak var parityOfWeek: UILabel!
+    @IBOutlet weak var tableTypeWeek: UITableView!
+    @IBOutlet weak var shadowTableTypeWeek: UIView!
     @IBOutlet weak var parityDropdownButton: UIImageView!
     
     @IBOutlet weak var dateStackView: UIStackView!
     var dateSegmentedControl: DateSegmentedControl!
     var currentPage: UIView!
     var currentSelectedIndex: Int!
+    
     
     @IBOutlet weak var sheduleTable: UIScrollView!
     lazy var templateCard: GroupSheduleCard = {
@@ -39,6 +45,7 @@ class GroupSheduleViewController: UIViewController{
         super.viewDidLoad()
         setSettingsForDateSegmentedControl()
         setSettingsSheduleTable()
+        setSettingsWeekType()
     }
     
     
@@ -46,6 +53,126 @@ class GroupSheduleViewController: UIViewController{
     func setSettingsForDateSegmentedControl(){
         self.dateSegmentedControl = DateSegmentedControl()
         dateSegmentedControl.setupView(stackView: self.dateStackView)
+    }
+    
+    
+    // MARK: Настройки окна типа недели
+    func setSettingsWeekType(){
+        
+        // Заполнение таблицы данными
+        let data: [TypeWeek] = [TypeWeek("Числитель", true),
+                                TypeWeek("Знаменатель", false)]
+        let dataBehaviorRelay = BehaviorRelay<[TypeWeek]>(value: data)
+        dataBehaviorRelay.bind(to: self.tableTypeWeek.rx.items){
+            table, row, item in
+            let cellTable = table.dequeueReusableCell(withIdentifier: "typeWeekCell", for: IndexPath.init(row: row, section: 0)) as! TypeWeekCell
+            
+            cellTable.nameTypeWeek.text = item.name
+            cellTable.selectionTypeWeekStatus.isHidden = !item.status
+            return cellTable
+        }.disposed(by: disposeBag)
+        
+        
+        // Открытие/Закрытие таблицы
+        self.parityOfWeek.rx
+            .tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { _ in
+                self.parityOfWeek.setTitleColor(.darkGray, for: .normal)
+                
+                // Таблица скрыта - бар закрыт
+                if self.tableTypeWeek.isHidden{
+                    self.parityDropdownButton.image = UIImage(named: "dropup")
+                    self.tableTypeWeek.frame = CGRect(x: 0, y: self.tableTypeWeek.frame.minY,
+                                                      width: self.tableTypeWeek.frame.width, height: 0)
+                    self.shadowTableTypeWeek.frame = CGRect(x: 0, y: self.shadowTableTypeWeek.frame.minY,
+                                                      width: self.shadowTableTypeWeek.frame.width, height: 0)
+                    
+                // Таблица открыта - бар открыт
+                } else {
+                    self.parityDropdownButton.image = UIImage(named: "dropdown")
+                    self.tableTypeWeek.frame = CGRect(x: 0, y: self.tableTypeWeek.frame.minY,
+                                                      width: self.tableTypeWeek.frame.width, height: 88)
+                    self.shadowTableTypeWeek.frame = CGRect(x: 0, y: self.shadowTableTypeWeek.frame.minY,
+                                                      width: self.shadowTableTypeWeek.frame.width, height: 89)
+                }
+                let isHiddenTableTypeWeek = self.tableTypeWeek.isHidden
+                self.tableTypeWeek.isHidden = false
+                self.shadowTableTypeWeek.isHidden = false
+                
+                
+                // Анимация движения таблицы
+                UIView.animate(
+                        withDuration: 0.4,
+                        delay: 0,
+                        usingSpringWithDamping: 1,
+                        initialSpringVelocity: 1,
+                        options: .curveEaseInOut,
+                        animations: {
+                            var heightTable: CGFloat!
+                            var heightShadow: CGFloat!
+                            if isHiddenTableTypeWeek{
+                                heightTable = 88
+                                heightShadow = 89
+                            } else {
+                                heightTable = 0
+                                heightShadow = 0
+                            }
+                            self.tableTypeWeek.frame = CGRect(x: self.tableTypeWeek.frame.minX, y: self.tableTypeWeek.frame.minY,
+                                                                       width: self.tableTypeWeek.frame.width, height: heightTable)
+                            self.shadowTableTypeWeek.frame = CGRect(x: self.shadowTableTypeWeek.frame.minX, y: self.shadowTableTypeWeek.frame.minY,
+                                                              width: self.shadowTableTypeWeek.frame.width, height: heightShadow)
+                            self.tableTypeWeek.layoutIfNeeded()
+                            self.shadowTableTypeWeek.layoutIfNeeded()
+                          },
+                          completion: { _ in
+                            self.tableTypeWeek.isHidden = !isHiddenTableTypeWeek
+                            self.shadowTableTypeWeek.isHidden = self.tableTypeWeek.isHidden
+                    })
+                })
+                .disposed(by: disposeBag)
+        
+        
+        // Обработка нажатия на тип недели
+        self.tableTypeWeek.rx
+            .modelSelected(TypeWeek.self)
+            .subscribe(
+                onNext: {selectedItem in
+                    self.parityDropdownButton.image = UIImage(named: "dropdown")
+                    self.parityOfWeek.titleLabel?.text = selectedItem.name
+                    self.parityOfWeek.setTitle(selectedItem.name, for: .normal)
+                    self.view.layoutIfNeeded()
+                
+                UIView.animate(
+                      withDuration: 0.4,
+                      delay: 0,
+                      usingSpringWithDamping: 1,
+                      initialSpringVelocity: 1,
+                      options: .curveEaseInOut,
+                      animations: {
+                        self.tableTypeWeek.frame = CGRect(x: self.tableTypeWeek.frame.minX, y: self.tableTypeWeek.frame.minY,
+                                                          width: self.tableTypeWeek.frame.width, height: 0)
+                        self.shadowTableTypeWeek.frame = CGRect(x: self.shadowTableTypeWeek.frame.minX, y: self.shadowTableTypeWeek.frame.minY,
+                                                          width: self.shadowTableTypeWeek.frame.width, height: 0)
+                        self.tableTypeWeek.layoutIfNeeded()
+                        self.shadowTableTypeWeek.layoutIfNeeded()
+                      },
+                      completion: { _ in
+                        self.tableTypeWeek.isHidden = true
+                        self.shadowTableTypeWeek.isHidden = true
+                        selectedItem.status = false
+                        
+                        _ = data.map{ typeWeek in
+                            typeWeek.status = false
+                        }
+                        
+                        let index = data.firstIndex(where: { dataItem in
+                            return dataItem.name == selectedItem.name
+                        })
+                        data[index!].status = true
+                        dataBehaviorRelay.accept(data)
+                })
+        }).disposed(by: disposeBag)
     }
     
     
