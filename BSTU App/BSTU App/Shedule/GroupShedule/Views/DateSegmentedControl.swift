@@ -18,6 +18,11 @@ class DateSegmentedControl{
     var constraintBottomUnderlineLeftOffset: NSLayoutConstraint!
     let disposeBag = DisposeBag()
     
+    var numbersData: [Int]!
+    var todayNumber: Int!
+    var indexTodayNumber: Int!
+    
+    
     // Горизонтальная полоса "Дни недели"
     public lazy var weekDaysSegmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl()
@@ -58,11 +63,12 @@ class DateSegmentedControl{
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .bold)],
             for: .selected)
         
-        for (index, day) in ["15", "16", "17", "18", "19", "20", "21"].enumerated(){
-            segmentedControl.insertSegment(withTitle: day, at: index, animated: true)
+        for (index, day) in self.numbersData.enumerated(){
+            segmentedControl.insertSegment(withTitle: String(day), at: index, animated: true)
         }
         
-        segmentedControl.selectedSegmentIndex = 0
+        self.indexTodayNumber = self.numbersData.firstIndex(of: self.todayNumber)!
+        segmentedControl.selectedSegmentIndex = self.indexTodayNumber
         return segmentedControl
     }()
     
@@ -76,12 +82,21 @@ class DateSegmentedControl{
     }()
     
     
+    // MARK: Смена списка чисел на новые
+    func changeContent(){
+        for (index, day) in self.numbersData.enumerated(){
+            self.numbersOfCalendarSegmentedControl.setTitle(String(day), forSegmentAt: index)
+        }
+    }
+    
+    
     // MARK: Установка вида с датой
     func setupView(stackView: UIStackView){
         
         stackView.addArrangedSubview(weekDaysSegmentedControl)
         stackView.addArrangedSubview(numbersOfCalendarSegmentedControl)
         stackView.addArrangedSubview(bottomUnderlineView)
+
         
         let underlineViewHeight = 2.0
         NSLayoutConstraint.activate([
@@ -89,8 +104,11 @@ class DateSegmentedControl{
             bottomUnderlineView.widthAnchor.constraint(equalTo: numbersOfCalendarSegmentedControl.widthAnchor,
                                                        multiplier: 1 / CGFloat(numbersOfCalendarSegmentedControl.numberOfSegments)),
             ])
+        
+        let segmentWidth = stackView.frame.width / CGFloat(numbersOfCalendarSegmentedControl.numberOfSegments)
+        let leadingDistance = segmentWidth * CGFloat(self.indexTodayNumber)
         self.constraintBottomUnderlineLeftOffset = bottomUnderlineView.leftAnchor.constraint(equalTo: numbersOfCalendarSegmentedControl.leftAnchor,
-                                                                                             constant: 0)
+                                                                                             constant: leadingDistance)
         self.constraintBottomUnderlineLeftOffset.isActive = true
         
         
@@ -102,6 +120,7 @@ class DateSegmentedControl{
                     self.changeSegmentedControlLinePosition(stackView: stackView, index: index)
                     let data: [String: Any] = ["dayIndex": index]
                     NotificationCenter.default.post(name: Notification.Name("ChangeDay"), object: nil, userInfo: data)
+                    NotificationCenter.default.post(name: Notification.Name("ChangeDayText"), object: nil, userInfo: data)
                 }
                 self.firstDraw = false
             }).disposed(by: disposeBag)
@@ -124,11 +143,17 @@ class DateSegmentedControl{
                 if currentSelectedIndex != numbersOfCalendarSegmentedControl.numberOfSegments-1{
                     segmentIndex = CGFloat(currentSelectedIndex + 1)
                     numbersOfCalendarSegmentedControl.selectedSegmentIndex = Int(segmentIndex)
+                    weekDaysSegmentedControl.selectedSegmentIndex = Int(segmentIndex)
+                    let data: [String: Int] = ["dayIndex": Int(segmentIndex)]
+                    NotificationCenter.default.post(name: Notification.Name("ChangeDayText"), object: nil, userInfo: data)
                 }
             case .decrement:
                 if currentSelectedIndex != 0{
                     segmentIndex = CGFloat(currentSelectedIndex - 1)
                     numbersOfCalendarSegmentedControl.selectedSegmentIndex = Int(segmentIndex)
+                    weekDaysSegmentedControl.selectedSegmentIndex = Int(segmentIndex)
+                    let data: [String: Int] = ["dayIndex": Int(segmentIndex)]
+                    NotificationCenter.default.post(name: Notification.Name("ChangeDayText"), object: nil, userInfo: data)
                 }
             default:
                 fatalError()

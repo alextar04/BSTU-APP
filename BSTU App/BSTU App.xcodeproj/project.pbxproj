@@ -67,6 +67,7 @@
 		CEE5B67E25D66AD80023D640 /* TypePremiseDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5B67D25D66AD80023D640 /* TypePremiseDB.swift */; };
 		CEE5B68225D674CB0023D640 /* CorpMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5B68125D674CB0023D640 /* CorpMapper.swift */; };
 		CEE5B68625D67AEC0023D640 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5B68525D67AEC0023D640 /* Database.swift */; };
+		CEE5B85625E635DF0024C7A9 /* GroupSheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5B85525E635DF0024C7A9 /* GroupSheduleViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -133,6 +134,7 @@
 		CEE5B67D25D66AD80023D640 /* TypePremiseDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypePremiseDB.swift; sourceTree = "<group>"; };
 		CEE5B68125D674CB0023D640 /* CorpMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorpMapper.swift; sourceTree = "<group>"; };
 		CEE5B68525D67AEC0023D640 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		CEE5B85525E635DF0024C7A9 /* GroupSheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSheduleViewModel.swift; sourceTree = "<group>"; };
 		F96B8A8E8421A5DF88E0A7CF /* Pods_BSTU_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BSTU_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -287,6 +289,7 @@
 				CEEF6FF325E2780D00E412E3 /* Storyboards */,
 				CEEF6FF225E2780000E412E3 /* Views */,
 				CEB1CBDA25E15D9300B9CF76 /* GroupSheduleViewController.swift */,
+				CEE5B85525E635DF0024C7A9 /* GroupSheduleViewModel.swift */,
 			);
 			path = GroupShedule;
 			sourceTree = "<group>";
@@ -565,6 +568,7 @@
 				CEB1CBDB25E15D9300B9CF76 /* GroupSheduleViewController.swift in Sources */,
 				CE009EEF25D6B35D00CA8604 /* PremiseMapper.swift in Sources */,
 				CEE5B67625D66A9D0023D640 /* MapDB.swift in Sources */,
+				CEE5B85625E635DF0024C7A9 /* GroupSheduleViewModel.swift in Sources */,
 				CE380A2A25BC4F910028622B /* Marker.swift in Sources */,
 				CEE3AFC525D7D699007B1814 /* MapMapper.swift in Sources */,
 				CEE5B67E25D66AD80023D640 /* TypePremiseDB.swift in Sources */,

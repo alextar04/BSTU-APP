@@ -19,15 +19,16 @@ class GroupSheduleViewController: UIViewController{
     @IBOutlet weak var currentDayOfWeek: UILabel!
     
     @IBOutlet weak var parityOfWeek: UIButton!
-    //@IBOutlet weak var parityOfWeek: UILabel!
     @IBOutlet weak var tableTypeWeek: UITableView!
     @IBOutlet weak var shadowTableTypeWeek: UIView!
     @IBOutlet weak var parityDropdownButton: UIImageView!
     
     @IBOutlet weak var dateStackView: UIStackView!
     var dateSegmentedControl: DateSegmentedControl!
+    var numberOfCalendarDates: ([Int], [Int])!
     var currentPage: UIView!
     var currentSelectedIndex: Int!
+    var currentDay: Int!
     
     
     @IBOutlet weak var sheduleTable: UIScrollView!
@@ -38,22 +39,41 @@ class GroupSheduleViewController: UIViewController{
     lazy var cardHeight = templateCard.frame.height
     lazy var offsetBetweenCards: CGFloat = 14
     
+    let viewModel = GroupSheduleViewModel()
     let disposeBag = DisposeBag()
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setSettingsForDateSegmentedControl()
+        
+        setSettingsCurrentDayOfWeek()
+        setSettingsNumbersOfWeeks()
         setSettingsSheduleTable()
         setSettingsWeekType()
     }
     
     
-    // MARK: Настройки для панели дат
-    func setSettingsForDateSegmentedControl(){
+    // MARK: Настройка отображения текущего дня
+    func setSettingsCurrentDayOfWeek(){
+        NotificationCenter.default.addObserver(self, selector: #selector(changeDayText), name: Notification.Name("ChangeDayText"), object: nil)
+        let result = viewModel.getCurrentDayOfWeek()
+        
+        self.currentDayOfWeek.text = result.1
+        self.currentDay = result.0
+    }
+    
+    
+    // MARK: Получение чисел для недель числителя и знаменателя
+    func setSettingsNumbersOfWeeks(){
+        self.numberOfCalendarDates = viewModel.getNumbersOfCalendarDates()
+        
         self.dateSegmentedControl = DateSegmentedControl()
+        dateSegmentedControl.numbersData = self.numberOfCalendarDates.0
+        dateSegmentedControl.todayNumber = self.currentDay
         dateSegmentedControl.setupView(stackView: self.dateStackView)
     }
+    
     
     
     // MARK: Настройки окна типа недели
@@ -142,9 +162,29 @@ class GroupSheduleViewController: UIViewController{
                     UIView.performWithoutAnimation {
                         self.parityOfWeek.setTitle(selectedItem.name, for: [.normal])
                         self.parityOfWeek.layoutIfNeeded()
-                        self.view.layoutIfNeeded()
+                        
+                        switch selectedItem.name{
+                        case "Числитель":
+                            self.dateSegmentedControl.numbersData = self.numberOfCalendarDates.0
+                            self.dateSegmentedControl.todayNumber = self.currentDay
+                            self.dateSegmentedControl.changeContent()
+                            let index = self.dateSegmentedControl.numbersData.firstIndex(of: self.currentDay)!
+                            self.dateSegmentedControl.numbersOfCalendarSegmentedControl.selectedSegmentIndex = index
+                            self.dateSegmentedControl.changeSegmentedControlLinePosition(stackView: self.dateStackView, index: index, direction: nil)
+                            self.currentDayOfWeek.text = self.viewModel.getNameOfDayByIndex(index: index)
+                        case "Знаменатель":
+                            self.dateSegmentedControl.numbersData = self.numberOfCalendarDates.1
+                            self.dateSegmentedControl.todayNumber = self.numberOfCalendarDates.1.first
+                            self.dateSegmentedControl.changeContent()
+                            self.dateSegmentedControl.numbersOfCalendarSegmentedControl.selectedSegmentIndex = 0
+                            self.dateSegmentedControl.changeSegmentedControlLinePosition(stackView: self.dateStackView, index: 0, direction: nil)
+                            self.currentDayOfWeek.text = self.viewModel.getNameOfDayByIndex(index: 0)
+                        default:
+                            fatalError()
+                        }
                     }
-                
+                    self.view.layoutIfNeeded()
+                    
                     
                     UIView.animate(
                       withDuration: 0.4,
@@ -329,6 +369,13 @@ class GroupSheduleViewController: UIViewController{
                 loadViewFromRightSide()
             }
             self.currentSelectedIndex = self.dateSegmentedControl.numbersOfCalendarSegmentedControl.selectedSegmentIndex
+        }
+    }
+    
+    
+    @objc func changeDayText(_ notification: NSNotification) {
+        if let dayIndex = notification.userInfo!["dayIndex"] as? Int{
+            self.currentDayOfWeek.text = self.viewModel.getNameOfDayByIndex(index: dayIndex)
         }
     }
 }
