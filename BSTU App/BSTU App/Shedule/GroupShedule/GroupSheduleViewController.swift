@@ -25,6 +25,7 @@ class GroupSheduleViewController: UIViewController{
     
     @IBOutlet weak var dateStackView: UIStackView!
     var dateSegmentedControl: DateSegmentedControl!
+    var currentServerTypeWeek: String!
     var numberOfCalendarDates: ([Int], [Int])!
     var currentPage: UIView!
     var currentSelectedIndex: Int!
@@ -80,17 +81,35 @@ class GroupSheduleViewController: UIViewController{
     func setSettingsWeekType(){
         
         // Заполнение таблицы данными
-        let data: [TypeWeek] = [TypeWeek("Числитель", true),
-                                TypeWeek("Знаменатель", false)]
+        var data = [TypeWeek]()
+        self.currentServerTypeWeek = self.viewModel.getCurrentWeekType()
+        self.parityOfWeek.setTitle(currentServerTypeWeek, for: [.normal])
+        let typeWeekName = ["Числитель", "Знаменатель"]
+        
+        for weekName in typeWeekName{
+            var status: Bool!
+            (weekName == currentServerTypeWeek) ? (status = true) : (status = false)
+            data.append(TypeWeek(weekName, status))
+        }
+        
         let dataBehaviorRelay = BehaviorRelay<[TypeWeek]>(value: data)
         dataBehaviorRelay.bind(to: self.tableTypeWeek.rx.items){
             table, row, item in
             let cellTable = table.dequeueReusableCell(withIdentifier: "typeWeekCell", for: IndexPath.init(row: row, section: 0)) as! TypeWeekCell
             
-            cellTable.nameTypeWeek.text = item.name
+            var additionalText = ""
+            (self.currentServerTypeWeek == item.name) ? (additionalText += ": Текущая неделя") : (additionalText = "")
+            cellTable.nameTypeWeek.text = item.name + additionalText
             cellTable.selectionTypeWeekStatus.isHidden = !item.status
             return cellTable
         }.disposed(by: disposeBag)
+        
+        
+        // Каждую секунду определять день недели
+        var timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true){ _ in
+            self.currentServerTypeWeek = self.viewModel.getCurrentWeekType()
+            dataBehaviorRelay.accept(data)
+        }
         
         
         // Открытие/Закрытие таблицы
@@ -99,6 +118,8 @@ class GroupSheduleViewController: UIViewController{
             .when(.recognized)
             .subscribe(onNext: { _ in
                 self.parityOfWeek.setTitleColor(.darkGray, for: .normal)
+                self.currentServerTypeWeek = self.viewModel.getCurrentWeekType()
+                dataBehaviorRelay.accept(data)
                 
                 // Таблица скрыта - бар закрыт
                 if self.tableTypeWeek.isHidden{
@@ -119,16 +140,17 @@ class GroupSheduleViewController: UIViewController{
                 let isHiddenTableTypeWeek = self.tableTypeWeek.isHidden
                 self.tableTypeWeek.isHidden = false
                 self.shadowTableTypeWeek.isHidden = false
-                
-                
+        
                 // Анимация движения таблицы
                 UIView.animate(
                         withDuration: 0.4,
                         delay: 0,
-                        usingSpringWithDamping: 1,
-                        initialSpringVelocity: 1,
+                        usingSpringWithDamping: 1.0,
+                        initialSpringVelocity: 1.0,
                         options: .curveEaseInOut,
                         animations: {
+                            // Остановка таймера счетчика дня недели
+                            timer.invalidate()
                             var heightTable: CGFloat!
                             var heightShadow: CGFloat!
                             if isHiddenTableTypeWeek{
@@ -148,6 +170,12 @@ class GroupSheduleViewController: UIViewController{
                           completion: { _ in
                             self.tableTypeWeek.isHidden = !isHiddenTableTypeWeek
                             self.shadowTableTypeWeek.isHidden = self.tableTypeWeek.isHidden
+                            
+                            // Переинициализация таймера обновления дня недели
+                            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true){ _ in
+                                self.currentServerTypeWeek = self.viewModel.getCurrentWeekType()
+                                dataBehaviorRelay.accept(data)
+                            }
                     })
                 })
                 .disposed(by: disposeBag)
@@ -158,29 +186,43 @@ class GroupSheduleViewController: UIViewController{
             .modelSelected(TypeWeek.self)
             .subscribe(
                 onNext: {selectedItem in
+                    let weekTypeTitle = String((selectedItem.name.split(separator: ":").first)!)
                     self.parityDropdownButton.image = UIImage(named: "dropdown")
+                    
+                    if weekTypeTitle != self.parityOfWeek.titleLabel?.text{
+                        self.loadViewFromRightSide()
+                    }
+                    
                     UIView.performWithoutAnimation {
-                        self.parityOfWeek.setTitle(selectedItem.name, for: [.normal])
+                        self.parityOfWeek.setTitle(weekTypeTitle, for: [.normal])
                         self.parityOfWeek.layoutIfNeeded()
                         
-                        switch selectedItem.name{
-                        case "Числитель":
+                        switch weekTypeTitle{
+                        case self.currentServerTypeWeek:
+                            self.numberOfCalendarDates = self.viewModel.getNumbersOfCalendarDates()
                             self.dateSegmentedControl.numbersData = self.numberOfCalendarDates.0
-                            self.dateSegmentedControl.todayNumber = self.currentDay
+                            self.dateSegmentedControl.todayNumber = self.numberOfCalendarDates.0.first
+                            let result = self.viewModel.getCurrentDayOfWeek()
+                            self.currentDayOfWeek.text = result.1
+                            self.currentDay = result.0
+
                             self.dateSegmentedControl.changeContent()
                             let index = self.dateSegmentedControl.numbersData.firstIndex(of: self.currentDay)!
                             self.dateSegmentedControl.numbersOfCalendarSegmentedControl.selectedSegmentIndex = index
                             self.dateSegmentedControl.changeSegmentedControlLinePosition(stackView: self.dateStackView, index: index, direction: nil)
                             self.currentDayOfWeek.text = self.viewModel.getNameOfDayByIndex(index: index)
-                        case "Знаменатель":
+                        default:
+                            self.numberOfCalendarDates = self.viewModel.getNumbersOfCalendarDates()
                             self.dateSegmentedControl.numbersData = self.numberOfCalendarDates.1
                             self.dateSegmentedControl.todayNumber = self.numberOfCalendarDates.1.first
+                            let result = self.viewModel.getCurrentDayOfWeek()
+                            self.currentDayOfWeek.text = result.1
+                            self.currentDay = result.0
+
                             self.dateSegmentedControl.changeContent()
                             self.dateSegmentedControl.numbersOfCalendarSegmentedControl.selectedSegmentIndex = 0
                             self.dateSegmentedControl.changeSegmentedControlLinePosition(stackView: self.dateStackView, index: 0, direction: nil)
                             self.currentDayOfWeek.text = self.viewModel.getNameOfDayByIndex(index: 0)
-                        default:
-                            fatalError()
                         }
                     }
                     self.view.layoutIfNeeded()
@@ -214,7 +256,7 @@ class GroupSheduleViewController: UIViewController{
                         })
                         data[index!].status = true
                         dataBehaviorRelay.accept(data)
-                })
+                    })
         }).disposed(by: disposeBag)
     }
     

@@ -39,6 +39,18 @@ class GroupSheduleViewModel{
         }
     }
     
+    func getCurrentWeekType()->String{
+        let date = Date()
+        let calendar = Calendar.current
+        let weekNumber = calendar.component(.weekOfMonth, from: date)
+        
+        if weekNumber == 1{
+            return "Числитель"
+        }
+        
+        return "Знаменатель"
+    }
+    
     
     // MARK: Получение чисел текущей и следующей недели
     func getNumbersOfCalendarDates()->([Int], [Int]){
