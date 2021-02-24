@@ -40,9 +40,22 @@ class GroupSheduleViewController: UIViewController{
     lazy var cardHeight = templateCard.frame.height
     lazy var offsetBetweenCards: CGFloat = 14
     
+    
+    var additionalStatusBar: UIView  = {
+        let statusBarView = UIView(frame: UIApplication.shared.statusBarFrame)
+        statusBarView.backgroundColor = .examBackgroundColor
+        return statusBarView
+    }()
+    @IBOutlet weak var examMenuButton: UIButton!
+    @IBOutlet weak var examMainView: UIView!
+    @IBOutlet weak var examContainerView: UIView!
+    @IBOutlet weak var examHeaderView: UIView!
+    @IBOutlet weak var examCloseButton: UIImageView!
+    @IBOutlet weak var examContentView: UIScrollView!
+    
+    
     let viewModel = GroupSheduleViewModel()
     let disposeBag = DisposeBag()
-    
     
     
     override func viewDidLoad() {
@@ -52,6 +65,7 @@ class GroupSheduleViewController: UIViewController{
         setSettingsNumbersOfWeeks()
         setSettingsSheduleTable()
         setSettingsWeekType()
+        setSettingsExamViews()
     }
     
     
@@ -261,10 +275,84 @@ class GroupSheduleViewController: UIViewController{
     }
     
     
+    // MARK: Установка настроек для представления экзаменов
+    func setSettingsExamViews(){
+        self.examMainView.isHidden = true
+        examMainView.backgroundColor = .examBackgroundColor
+        self.examContainerView.isHidden = true
+        self.examContainerView.makeRounding()
+        
+        self.additionalStatusBar.isHidden = true
+        self.view.addSubview(self.additionalStatusBar)
+        
+        self.examMenuButton.rx
+            .tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { _ in
+                self.examMainView.isHidden = false
+                self.examMainView.alpha = 0
+                self.examContainerView.isHidden = false
+                self.examContainerView.alpha = 0
+                self.additionalStatusBar.isHidden = false
+                self.additionalStatusBar.alpha = 0
+                UIView.animate(withDuration: 0.3) {
+                    self.examMainView.alpha = 1
+                    self.examContainerView.alpha = 1
+                    self.additionalStatusBar.alpha = 1
+                }
+            }).disposed(by: disposeBag)
+        
+        
+        self.examMainView.rx
+            .tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { _ in
+                self.examMainView.alpha = 1
+                self.additionalStatusBar.alpha = 1
+                self.examContainerView.alpha = 1
+                UIView.animate(withDuration: 0.3,
+                               animations: {
+                                self.examMainView.alpha = 0
+                                self.additionalStatusBar.alpha = 0
+                                self.examContainerView.alpha = 0
+                },
+                               completion: { _ in
+                                    self.examMainView.isHidden = true
+                                    self.additionalStatusBar.isHidden = true
+                                    self.examContainerView.isHidden = true
+                })
+            }).disposed(by: disposeBag)
+        
+        
+        self.examCloseButton.rx
+            .tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { _ in
+                self.examMainView.alpha = 1
+                self.additionalStatusBar.alpha = 1
+                self.examContainerView.alpha = 1
+                UIView.animate(withDuration: 0.3,
+                               animations: {
+                                self.examMainView.alpha = 0
+                                self.additionalStatusBar.alpha = 0
+                                self.examContainerView.alpha = 0
+                                
+                },
+                               completion: { _ in
+                                self.examMainView.isHidden = true
+                                self.additionalStatusBar.isHidden = true
+                                self.examContainerView.isHidden = true
+                })
+            }).disposed(by: disposeBag)
+    }
+    
+    
     // MARK: Установка настроек отображения контента в таблице
     func setSettingsSheduleTable(){
         
-        NotificationCenter.default.addObserver(self, selector: #selector(changeDay), name: Notification.Name("ChangeDay"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(changeDay),
+                                               name: Notification.Name("ChangeDay"),
+                                               object: nil)
         
         self.currentPage = createViewForSheduleTable(number: "0",
                                                      frame: CGRect(x: 0, y: 0,
@@ -420,4 +508,5 @@ class GroupSheduleViewController: UIViewController{
             self.currentDayOfWeek.text = self.viewModel.getNameOfDayByIndex(index: dayIndex)
         }
     }
+    
 }

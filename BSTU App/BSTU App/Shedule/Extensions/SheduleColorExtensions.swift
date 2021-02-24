@@ -47,4 +47,9 @@ extension UIColor{
         return UIColor(red: 207/255.0, green: 166/255.0, blue: 87/255.0, alpha: 1.0)
     }
     
+    
+    static var examBackgroundColor: UIColor{
+        return UIColor(red: 118/256.0, green: 118/256.0, blue: 118/256.0, alpha: 0.5)
+    }
+    
 }
