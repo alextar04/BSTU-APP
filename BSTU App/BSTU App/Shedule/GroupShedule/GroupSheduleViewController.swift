@@ -90,7 +90,6 @@ class GroupSheduleViewController: UIViewController{
     }
     
     
-    
     // MARK: Настройки окна типа недели
     func setSettingsWeekType(){
         
@@ -117,14 +116,12 @@ class GroupSheduleViewController: UIViewController{
             cellTable.selectionTypeWeekStatus.isHidden = !item.status
             return cellTable
         }.disposed(by: disposeBag)
-        
-        
+    
         // Каждую секунду определять день недели
         var timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true){ _ in
             self.currentServerTypeWeek = self.viewModel.getCurrentWeekType()
             dataBehaviorRelay.accept(data)
         }
-        
         
         // Открытие/Закрытие таблицы
         self.parityOfWeek.rx
@@ -285,6 +282,14 @@ class GroupSheduleViewController: UIViewController{
         self.additionalStatusBar.isHidden = true
         self.view.addSubview(self.additionalStatusBar)
         
+        let examView = createViewForSheduleTable(number: "",
+                                                 frame: CGRect(x: 0, y: 0,
+                                                                    width: self.examContentView.frame.width,
+                                                                    height: .zero),
+                                                 typeCard: .exam)
+        self.examContentView.addSubview(examView)
+        self.examContentView.autoresizesSubviews = false
+        
         self.examMenuButton.rx
             .tapGesture()
             .when(.recognized)
@@ -295,13 +300,22 @@ class GroupSheduleViewController: UIViewController{
                 self.examContainerView.alpha = 0
                 self.additionalStatusBar.isHidden = false
                 self.additionalStatusBar.alpha = 0
+                
+                let examView = self.createViewForSheduleTable(number: "",
+                                                         frame: CGRect(x: 0, y: 0,
+                                                                       width: self.examContentView.frame.width,
+                                                                       height: .zero),
+                                                         typeCard: .exam)
+                self.examContentView.subviews.forEach({ $0.removeFromSuperview() })
+                self.examContentView.addSubview(examView)
+                self.examContentView.contentOffset = CGPoint(x: 0, y: 0)
+                
                 UIView.animate(withDuration: 0.3) {
                     self.examMainView.alpha = 1
                     self.examContainerView.alpha = 1
                     self.additionalStatusBar.alpha = 1
                 }
             }).disposed(by: disposeBag)
-        
         
         self.examMainView.rx
             .tapGesture()
@@ -322,7 +336,6 @@ class GroupSheduleViewController: UIViewController{
                                     self.examContainerView.isHidden = true
                 })
             }).disposed(by: disposeBag)
-        
         
         self.examCloseButton.rx
             .tapGesture()
@@ -354,43 +367,101 @@ class GroupSheduleViewController: UIViewController{
                                                name: Notification.Name("ChangeDay"),
                                                object: nil)
         
-        self.currentPage = createViewForSheduleTable(number: "0",
+        self.currentPage = createViewForSheduleTable(number: "",
                                                      frame: CGRect(x: 0, y: 0,
                                                                    width: self.sheduleTable.frame.width,
-                                                                   height: offsetBetweenCards + (cardHeight + offsetBetweenCards) * 6))
-        self.currentSelectedIndex = 0
+                                                                   height: .zero),
+                                                     typeCard: .lesson)
+        self.currentSelectedIndex = self.dateSegmentedControl.numbersOfCalendarSegmentedControl.selectedSegmentIndex
         self.sheduleTable.addSubview(self.currentPage)
-        sheduleTable.autoresizesSubviews = false
-        sheduleTable.contentSize = CGSize(width: self.view.frame.width, height: offsetBetweenCards + (cardHeight + offsetBetweenCards) * 6)
+        self.sheduleTable.autoresizesSubviews = false
     }
     
     
     // MARK: Создание вида для таблицы расписаний
-    func createViewForSheduleTable(number: String, frame: CGRect)->UIView{
+    func createViewForSheduleTable(number: String, frame: CGRect, typeCard: TypeCard)->UIView{
         
-        let outputView = UIView(frame: frame)
+        var outputView: UIView!
         
-        // Загрузка карточек
-        for index in 0...5{
-            let subjectCard = Bundle.main.loadNibNamed("GroupSheduleCard", owner: self, options: nil)?.first as? GroupSheduleCard
-            var yStart: CGFloat = 14
-            index != 0 ? (yStart = offsetBetweenCards + (offsetBetweenCards + cardHeight) * CGFloat(index)) : (yStart = offsetBetweenCards)
-            subjectCard!.frame = CGRect(x: 10, y: yStart,
-                                            width: self.sheduleTable.frame.width - 20,
-                                            height: cardHeight)
-            
-            let typeLessons: [TypeLesson] = [.laboratory, .lection, .practice]
-            subjectCard!.setupView(typeLesson: typeLessons.randomElement()!)
-            subjectCard?.typeLesson.text! += number
-            outputView.addSubview(subjectCard!)
+        let randomNumber = Int.random(in: 0...1)
+        if randomNumber == 0{
+            var updatedFrame = frame
+            updatedFrame.size.height = offsetBetweenCards + (cardHeight + offsetBetweenCards) * 6
+            outputView = UIView(frame: updatedFrame)
+
+            // Загрузка карточек
+            for index in 0...5{
+                let subjectCard = Bundle.main.loadNibNamed("GroupSheduleCard", owner: self, options: nil)?.first as? GroupSheduleCard
+                var yStart: CGFloat = 14
+                index != 0 ? (yStart = offsetBetweenCards + (offsetBetweenCards + cardHeight) * CGFloat(index)) : (yStart = offsetBetweenCards)
+                
+                switch typeCard {
+                case .lesson:
+                    subjectCard!.frame = CGRect(x: 10, y: yStart,
+                                                    width: self.sheduleTable.frame.width - 20,
+                                                    height: cardHeight)
+                    let typeLessons: [TypeActivity] = [.laboratory, .lection, .practice]
+                    subjectCard!.setupView(typeActivity: typeLessons.randomElement()!)
+                    self.sheduleTable.isScrollEnabled = true
+                case .exam:
+                    subjectCard!.frame = CGRect(x: 10, y: yStart,
+                                                    width: self.examContentView.frame.width - 20,
+                                                    height: cardHeight)
+                    subjectCard?.nameSubject.font = UIFont.boldSystemFont(ofSize: 14.0)
+                    let typeExam: [TypeActivity] = [.consultation, .examination]
+                    subjectCard!.setupView(typeActivity: typeExam.randomElement()!)
+                    self.examContentView.isScrollEnabled = true
+                }
+
+                subjectCard?.typeActivity.text! += number
+                outputView.addSubview(subjectCard!)
+            }
         }
-            
-        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
-        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
-        leftSwipe.direction = .left
-        rightSwipe.direction = .right
-        outputView.addGestureRecognizer(leftSwipe)
-        outputView.addGestureRecognizer(rightSwipe)
+        
+        if randomNumber == 1{
+            let emptyView = Bundle.main.loadNibNamed("EmptySheduleView", owner: self, options: nil)?.first as? EmptySheduleView
+            switch typeCard {
+            case .lesson:
+                var updatedFrame = frame
+                updatedFrame.size.height = self.sheduleTable.frame.height
+                outputView = UIView(frame: updatedFrame)
+                
+                emptyView!.frame = CGRect(x: 0, y: 0,
+                                                width: self.sheduleTable.frame.width,
+                                                height: self.sheduleTable.frame.height)
+                let typeLessons: [TypeActivity] = [.laboratory, .lection, .practice]
+                emptyView!.setupView(typeActivity: typeLessons.randomElement()!)
+                self.sheduleTable.isScrollEnabled = false
+            case .exam:
+                var updatedFrame = frame
+                updatedFrame.size.height = self.examContentView.frame.height
+                outputView = UIView(frame: updatedFrame)
+                
+                emptyView!.frame = CGRect(x: 0, y: 0,
+                                                width: self.examContentView.frame.width,
+                                                height: self.examContentView.frame.height)
+                let typeExam: [TypeActivity] = [.consultation, .examination]
+                emptyView!.setupView(typeActivity: typeExam.randomElement()!)
+                self.examContentView.isScrollEnabled = false
+            }
+            outputView.addSubview(emptyView!)
+        }
+        
+        switch typeCard {
+        case .lesson:
+            self.sheduleTable.contentSize = CGSize(width: self.view.frame.width, height: outputView.frame.height)
+        case .exam:
+            self.examContentView.contentSize = CGSize(width: self.examContentView.frame.width, height: outputView.frame.height)
+        }
+        
+        if typeCard == .lesson{
+            let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+            let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+            leftSwipe.direction = .left
+            rightSwipe.direction = .right
+            outputView.addGestureRecognizer(leftSwipe)
+            outputView.addGestureRecognizer(rightSwipe)
+        }
         
         return outputView
     }
@@ -432,7 +503,8 @@ class GroupSheduleViewController: UIViewController{
         let preventPage = createViewForSheduleTable(number: String(Int.random(in: 0...10)),
                                                     frame: CGRect(x: -self.sheduleTable.frame.width, y: 0,
                                                                 width: self.sheduleTable.frame.width,
-                                                                height: offsetBetweenCards + (cardHeight + offsetBetweenCards) * 6))
+                                                                height: .zero),
+                                                    typeCard: .lesson)
         self.sheduleTable.addSubview(preventPage)
             
         let animatorSwitcherTableSheduleContent = UIViewPropertyAnimator(duration: 0.4, dampingRatio: 10.0){
@@ -464,7 +536,8 @@ class GroupSheduleViewController: UIViewController{
         let nextPage = createViewForSheduleTable(number: String(Int.random(in: 0...10)),
                                                  frame: CGRect(x: self.sheduleTable.frame.width, y: 0,
                                                                width: self.sheduleTable.frame.width,
-                                                               height: offsetBetweenCards + (cardHeight + offsetBetweenCards) * 6))
+                                                               height: .zero),
+                                                 typeCard: .lesson)
         self.sheduleTable.addSubview(nextPage)
         
         let animatorSwitcherTableSheduleContent = UIViewPropertyAnimator(duration: 0.4, dampingRatio: 10.0){

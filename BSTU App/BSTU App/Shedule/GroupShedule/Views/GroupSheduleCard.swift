@@ -14,7 +14,7 @@ class GroupSheduleCard: UIView{
     @IBOutlet weak var contentView: UIView!
     
     @IBOutlet weak var nameSubject: UILabel!
-    @IBOutlet weak var typeLesson: UILabel!
+    @IBOutlet weak var typeActivity: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var audienceLabel: UILabel!
     
@@ -22,12 +22,12 @@ class GroupSheduleCard: UIView{
     @IBOutlet weak var nameAndPatronymicTeacher: UILabel!
     @IBOutlet weak var surnameTeacher: UILabel!
     
-    func setupView(typeLesson: TypeLesson){
+    func setupView(typeActivity: TypeActivity){
         
         self.contentView.makeRounding()
-        self.makeGradient(typeLesson: typeLesson)
-        self.updateStyleTypeLesson(typeLesson: typeLesson)
-        self.updateStyleNameSubject(typeLesson: typeLesson)
+        self.makeGradient(typeActivity: typeActivity)
+        self.updateStyleTypeLesson(typeActivity: typeActivity)
+        self.updateStyleNameSubject(typeActivity: typeActivity)
         self.updateTeacherData()
         
         self.sheduleMakeShadow(width: Int(self.frame.width), heigth: Int(self.frame.height))
@@ -35,16 +35,20 @@ class GroupSheduleCard: UIView{
     
     
     // Градиент для карточки
-    func makeGradient(typeLesson: TypeLesson){
+    func makeGradient(typeActivity: TypeActivity){
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.bounds
-        switch typeLesson {
+        switch typeActivity {
         case .lection:
             gradientLayer.colors = [UIColor.lectionsBackgroundColorStart.cgColor, UIColor.lectionsBackgroundColorFinish.cgColor]
         case .laboratory:
             gradientLayer.colors = [UIColor.laboratoryBackgroundColorStart.cgColor, UIColor.laboratoryBackgroundColorFinish.cgColor]
         case .practice:
             gradientLayer.colors = [UIColor.practiceBackgroundColorStart.cgColor, UIColor.practiceBackgroundColorFinish.cgColor]
+        case .consultation:
+            gradientLayer.colors = [UIColor.consultationBackgroundColorStart.cgColor, UIColor.consultationBackgroundColorFinish.cgColor]
+        case .examination:
+            gradientLayer.colors = [UIColor.examinationBackgroundColorStart.cgColor, UIColor.examinationBackgroundColorFinish.cgColor]
         }
         gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
@@ -54,35 +58,45 @@ class GroupSheduleCard: UIView{
     
     
     // Установка стиля label типа урока
-    func updateStyleTypeLesson(typeLesson: TypeLesson){
-        self.typeLesson.makeRounding()
-        self.typeLesson.font = UIFont.boldSystemFont(ofSize: 11.0)
-        self.typeLesson.textColor = .white
+    func updateStyleTypeLesson(typeActivity: TypeActivity){
+        self.typeActivity.makeRounding()
+        self.typeActivity.font = UIFont.boldSystemFont(ofSize: 11.0)
+        self.typeActivity.textColor = .white
         
-        switch typeLesson {
+        switch typeActivity {
         case .lection:
-            self.typeLesson.backgroundColor = .lectionsSubjectColor
-            self.typeLesson.text = "Лекция"
+            self.typeActivity.backgroundColor = .lectionsSubjectColor
+            self.typeActivity.text = "Лекция"
         case .laboratory:
-            self.typeLesson.backgroundColor = .practiceSubjectColor
-            self.typeLesson.text = "Практика"
+            self.typeActivity.backgroundColor = .practiceSubjectColor
+            self.typeActivity.text = "Практика"
         case .practice:
-            self.typeLesson.backgroundColor = .laboratorySubjectColor
-            self.typeLesson.text = "Лабораторная"
+            self.typeActivity.backgroundColor = .laboratorySubjectColor
+            self.typeActivity.text = "Лабораторная"
+        case .consultation:
+            self.typeActivity.backgroundColor = .consultationSubjectColor
+            self.typeActivity.text = "Консультация"
+        case .examination:
+            self.typeActivity.backgroundColor = .examinationSubjectColor
+            self.typeActivity.text = "Экзамен"
         }
     }
     
     
     // Установка стиля label названия предмета
-    func updateStyleNameSubject(typeLesson: TypeLesson){
+    func updateStyleNameSubject(typeActivity: TypeActivity){
         
-        switch typeLesson {
+        switch typeActivity {
         case .lection:
             self.nameSubject.textColor = .lectionsSubjectColor
         case .laboratory:
             self.nameSubject.textColor = .practiceSubjectColor
         case .practice:
             self.nameSubject.textColor = .laboratorySubjectColor
+        case .consultation:
+            self.nameSubject.textColor = .consultationSubjectColor
+        case .examination:
+            self.nameSubject.textColor = .examinationSubjectColor
         }
     }
     
@@ -95,8 +109,15 @@ class GroupSheduleCard: UIView{
     
 }
 
-enum TypeLesson{
+enum TypeCard{
+    case lesson
+    case exam
+}
+
+enum TypeActivity{
     case lection
     case laboratory
     case practice
+    case consultation
+    case examination
 }

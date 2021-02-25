@@ -181,7 +181,7 @@
                                             <constraint firstItem="ugv-mg-vcq" firstAttribute="top" secondItem="Hlf-sY-Utg" secondAttribute="top" constant="14" id="szk-OU-Pv5"/>
                                         </constraints>
                                     </view>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Kj-yI-MuJ">
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Kj-yI-MuJ">
                                         <rect key="frame" x="0.0" y="50" width="339" height="492"/>
                                     </scrollView>
                                 </subviews>
@@ -234,6 +234,7 @@
                             <constraint firstItem="bY6-NG-Oc4" firstAttribute="top" secondItem="Qj2-wI-Vnp" secondAttribute="bottom" id="jKH-yo-VFc"/>
                             <constraint firstItem="Qj2-wI-Vnp" firstAttribute="top" secondItem="43s-dP-dgg" secondAttribute="bottom" constant="9" id="k7B-j6-SdL"/>
                             <constraint firstItem="Qj2-wI-Vnp" firstAttribute="top" secondItem="Ulv-H2-M99" secondAttribute="bottom" constant="8" id="lYf-JA-2Pp"/>
+                            <constraint firstItem="A6W-DC-0um" firstAttribute="top" secondItem="WwW-He-Z0B" secondAttribute="top" constant="62" id="loB-zO-GoN"/>
                             <constraint firstItem="Qj2-wI-Vnp" firstAttribute="leading" secondItem="WwW-He-Z0B" secondAttribute="leading" id="m7C-cQ-LMU"/>
                             <constraint firstItem="aYB-l8-0TX" firstAttribute="top" secondItem="WwW-He-Z0B" secondAttribute="top" constant="25" id="nBE-ZO-5LV"/>
                             <constraint firstItem="219-5L-w0t" firstAttribute="trailing" secondItem="WwW-He-Z0B" secondAttribute="trailing" id="nO0-0f-XQP"/>

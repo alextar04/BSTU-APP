@@ -48,8 +48,29 @@ extension UIColor{
     }
     
     
-    static var examBackgroundColor: UIColor{
-        return UIColor(red: 118/256.0, green: 118/256.0, blue: 118/256.0, alpha: 0.5)
+    static var consultationBackgroundColorStart: UIColor{
+        return UIColor(red: 245/255.0, green: 250/255.0, blue: 255/255.0, alpha: 1.0)
+    }
+    static var consultationBackgroundColorFinish: UIColor{
+        return UIColor(red: 230/255.0, green: 234/255.0, blue: 255.0/255.0, alpha: 1.0)
+    }
+    static var consultationSubjectColor: UIColor{
+        return UIColor(red: 105/255.0, green: 0/255.0, blue: 204/255.0, alpha: 1.0)
     }
     
+    
+    static var examinationBackgroundColorStart: UIColor{
+        return UIColor(red: 245/255.0, green: 255/255.0, blue: 247/255.0, alpha: 1.0)
+    }
+    static var examinationBackgroundColorFinish: UIColor{
+        return UIColor(red: 190/255.0, green: 255/255.0, blue: 230/255.0, alpha: 1.0)
+    }
+    static var examinationSubjectColor: UIColor{
+        return UIColor(red: 49/255.0, green: 129/255.0, blue: 124/255.0, alpha: 1.0)
+    }
+    
+    
+    static var examBackgroundColor: UIColor{
+        return UIColor(red: 118/255.0, green: 118/255.0, blue: 118/255.0, alpha: 0.5)
+    }
 }

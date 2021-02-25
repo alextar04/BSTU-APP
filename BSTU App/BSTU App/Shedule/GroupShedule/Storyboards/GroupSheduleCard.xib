@@ -20,7 +20,6 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Элективн. дис. по физ. культ. и спорт" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Hq-wO-N1N">
                             <rect key="frame" x="22" y="16" width="218" height="61"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="218" id="caY-aZ-AxA"/>
                                 <constraint firstAttribute="height" constant="61" id="cdi-Y3-BbV"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -99,12 +98,13 @@
                         <constraint firstItem="zKn-td-LWc" firstAttribute="leading" secondItem="HQ2-wR-Ame" secondAttribute="trailing" constant="23" id="N0n-wC-nRC"/>
                         <constraint firstItem="ZTz-1K-V5K" firstAttribute="leading" secondItem="8vp-Vz-4EO" secondAttribute="leading" constant="22" id="OY1-St-MRt"/>
                         <constraint firstAttribute="trailing" secondItem="yZA-Eu-Ule" secondAttribute="trailing" constant="19" id="PiD-3W-wNh"/>
-                        <constraint firstItem="ZTz-1K-V5K" firstAttribute="top" secondItem="8vp-Vz-4EO" secondAttribute="top" constant="74" id="QAQ-w7-rHt"/>
+                        <constraint firstItem="ZTz-1K-V5K" firstAttribute="top" secondItem="3Hq-wO-N1N" secondAttribute="bottom" constant="-3" id="TTA-zV-Ptb"/>
                         <constraint firstItem="3Hq-wO-N1N" firstAttribute="leading" secondItem="8vp-Vz-4EO" secondAttribute="leading" constant="22" id="bzA-6v-GNM"/>
                         <constraint firstItem="5Mb-WM-fqF" firstAttribute="leading" secondItem="HQ2-wR-Ame" secondAttribute="trailing" constant="23" id="gsF-3N-EgO"/>
                         <constraint firstItem="yZA-Eu-Ule" firstAttribute="top" secondItem="FEp-RA-ELj" secondAttribute="bottom" constant="21" id="hpS-UW-mDz"/>
                         <constraint firstItem="HQ2-wR-Ame" firstAttribute="leading" secondItem="8vp-Vz-4EO" secondAttribute="leading" constant="22" id="oJI-SF-OXJ"/>
                         <constraint firstAttribute="trailing" secondItem="FEp-RA-ELj" secondAttribute="trailing" constant="19" id="rl7-mi-WNb"/>
+                        <constraint firstItem="FEp-RA-ELj" firstAttribute="leading" secondItem="3Hq-wO-N1N" secondAttribute="trailing" constant="8" id="sg3-f6-BqS"/>
                         <constraint firstItem="5Mb-WM-fqF" firstAttribute="top" secondItem="zKn-td-LWc" secondAttribute="bottom" constant="1" id="vew-dZ-RI3"/>
                         <constraint firstItem="3Hq-wO-N1N" firstAttribute="top" secondItem="8vp-Vz-4EO" secondAttribute="top" constant="16" id="xcX-8N-G91"/>
                     </constraints>
@@ -129,7 +129,7 @@
                 <outlet property="photoTeacher" destination="HQ2-wR-Ame" id="Mi4-5Y-x8c"/>
                 <outlet property="surnameTeacher" destination="5Mb-WM-fqF" id="ON3-qJ-MKc"/>
                 <outlet property="timeLabel" destination="ZTz-1K-V5K" id="JLn-lt-16s"/>
-                <outlet property="typeLesson" destination="FEp-RA-ELj" id="UHI-vB-SRt"/>
+                <outlet property="typeActivity" destination="FEp-RA-ELj" id="bci-0f-tuX"/>
             </connections>
             <point key="canvasLocation" x="124" y="-41.829085457271368"/>
         </view>

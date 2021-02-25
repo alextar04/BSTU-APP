@@ -25,6 +25,8 @@
 		CE12A5A425E50A25008401F4 /* TypeWeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE12A5A325E50A25008401F4 /* TypeWeekCell.swift */; };
 		CE16978625C064F10040AE95 /* LabelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE16978525C064F10040AE95 /* LabelExtensions.swift */; };
 		CE16978825C151710040AE95 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE16978725C151710040AE95 /* ColorExtensions.swift */; };
+		CE35844A25E7A8DE00A77CCC /* EmptySheduleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE35844925E7A8DE00A77CCC /* EmptySheduleView.xib */; };
+		CE35844C25E7AD4700A77CCC /* EmptySheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE35844B25E7AD4700A77CCC /* EmptySheduleView.swift */; };
 		CE37A08D25CBFC540046C1F1 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37A08C25CBFC540046C1F1 /* MapViewModel.swift */; };
 		CE380A1A25BC4F910028622B /* rectangle.png in Resources */ = {isa = PBXBuildFile; fileRef = CE380A0425BC4F910028622B /* rectangle.png */; };
 		CE380A1C25BC4F910028622B /* building.png in Resources */ = {isa = PBXBuildFile; fileRef = CE380A0625BC4F910028622B /* building.png */; };
@@ -92,6 +94,8 @@
 		CE12A5A325E50A25008401F4 /* TypeWeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeWeekCell.swift; sourceTree = "<group>"; };
 		CE16978525C064F10040AE95 /* LabelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelExtensions.swift; sourceTree = "<group>"; };
 		CE16978725C151710040AE95 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
+		CE35844925E7A8DE00A77CCC /* EmptySheduleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptySheduleView.xib; sourceTree = "<group>"; };
+		CE35844B25E7AD4700A77CCC /* EmptySheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySheduleView.swift; sourceTree = "<group>"; };
 		CE37A08C25CBFC540046C1F1 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		CE380A0425BC4F910028622B /* rectangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rectangle.png; sourceTree = "<group>"; };
 		CE380A0625BC4F910028622B /* building.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = building.png; sourceTree = "<group>"; };
@@ -392,6 +396,7 @@
 				CE3DC49625E1607600E8B8D7 /* DateSegmentedControl.swift */,
 				CE12A5A325E50A25008401F4 /* TypeWeekCell.swift */,
 				CEDE465125E280C600EB7672 /* GroupSheduleCard.swift */,
+				CE35844B25E7AD4700A77CCC /* EmptySheduleView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -401,6 +406,7 @@
 			children = (
 				CEB1CBD725E14C1E00B9CF76 /* GroupSheduleViewController.storyboard */,
 				CE3DC49B25E1690300E8B8D7 /* GroupSheduleCard.xib */,
+				CE35844925E7A8DE00A77CCC /* EmptySheduleView.xib */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -465,6 +471,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE35844A25E7A8DE00A77CCC /* EmptySheduleView.xib in Resources */,
 				CE380A2D25BC6B590028622B /* UniversityCorpsView.xib in Resources */,
 				CE01CC9C25C29F75001388B9 /* SearchPremiseCellTable.xib in Resources */,
 				CE380A2725BC4F910028622B /* BottomBarView.xib in Resources */,
@@ -556,6 +563,7 @@
 				CE3DC49725E1607600E8B8D7 /* DateSegmentedControl.swift in Sources */,
 				CEE5B67825D66AAB0023D640 /* MapRoadDotDB.swift in Sources */,
 				CE12A5A425E50A25008401F4 /* TypeWeekCell.swift in Sources */,
+				CE35844C25E7AD4700A77CCC /* EmptySheduleView.swift in Sources */,
 				CEDE465425E2823300EB7672 /* SheduleColorExtensions.swift in Sources */,
 				CE380A2325BC4F910028622B /* ImageExtensions.swift in Sources */,
 				CE380A2B25BC4F910028622B /* NavigationViewController.swift in Sources */,
