@@ -19,4 +19,27 @@ extension UIView{
         self.layer.shadowOpacity = 0.2;
         self.layer.shadowOffset = CGSize(width: 0, height: 0)
     }
+    
+    
+    func groupsMakeShadow(width: Int, heigth: Int){
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowRadius = 4.0
+        self.layer.shadowPath = CGPath.init(rect: CGRect.init(x: 7, y: heigth/2,
+                                                              width: width - 14, height: heigth/2 - 3), transform: nil)
+
+        self.layer.shadowOpacity = 0.2;
+        self.layer.shadowOffset = CGSize(width: 0, height: 0)
+    }
+    
+    
+    func instituteMakeShadow(width: Int, heigth: Int){
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowRadius = 4.0
+        self.layer.shadowPath = CGPath.init(rect: CGRect.init(x: 0, y: heigth/2,
+                                                              width: width, height: heigth/2 + 4), transform: nil)
+
+        self.layer.shadowOpacity = 0.2;
+        self.layer.shadowOffset = CGSize(width: 0, height: 0)
+    }
+    
 }

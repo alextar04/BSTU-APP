@@ -22,11 +22,6 @@ class ViewController: UIViewController {
         self.addChild(navigationController)
         self.view.addSubview(navigationController.view)
         */
-        
-        
-        let viewController = UIStoryboard(name: "GroupSheduleViewController", bundle: nil).instantiateViewController(withIdentifier: "GroupSheduleViewControllerID") as! GroupSheduleViewController
-        self.addChild(viewController)
-        self.view.addSubview(viewController.view)
     }
 
 

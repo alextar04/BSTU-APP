@@ -69,8 +69,18 @@ extension UIColor{
         return UIColor(red: 49/255.0, green: 129/255.0, blue: 124/255.0, alpha: 1.0)
     }
     
+    static var institutionBackgroundColorStart: UIColor{
+        return UIColor(red: 204/255.0, green: 235/255.0, blue: 255/255.0, alpha: 1.0)
+    }
+    static var institutionBackgroundColorFinish: UIColor{
+        return UIColor(red: 102/255.0, green: 194/255.0, blue: 255/255.0, alpha: 1.0)
+    }
     
     static var examBackgroundColor: UIColor{
         return UIColor(red: 118/255.0, green: 118/255.0, blue: 118/255.0, alpha: 0.5)
+    }
+    
+    static var courseSectionColor: UIColor{
+        return UIColor(red: 242/255.0, green: 242/255.0, blue: 243/255.0, alpha: 1.0)
     }
 }

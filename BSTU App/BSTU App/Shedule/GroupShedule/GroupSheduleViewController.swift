@@ -61,6 +61,7 @@ class GroupSheduleViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         setSettingsCurrentDayOfWeek()
         setSettingsNumbersOfWeeks()
         setSettingsSheduleTable()
