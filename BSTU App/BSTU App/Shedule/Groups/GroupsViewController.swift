@@ -16,17 +16,20 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
     
     @IBOutlet weak var tableGroupsView: UITableView!
     var searchGroupBar: UISearchBar!
+    var isShowAllGroups = true
     let disposeBag = DisposeBag()
      
     
     // Вспомогательная структура для отображения данных в виде секции
     let coursesArray = ["1 курс", "2 курс", "3 курс", "4 курс", "5 курс"]
     let groupsArray = ["ПВ-11", "ПВ-12", "ПВ-21", "ПВ-22", "ПВ-31", "ПВ-41", "ВТ-41"]
-    var groupsSectionalData = [SectionOfGroups]()
+    var data = [SectionOfGroups]()
+    var groupsSectionalData: BehaviorRelay<[SectionOfGroups]>!
     struct SectionOfGroups{
         var header: String
         var items: [String]
     }
+
     
     override func viewDidLoad() {
         setupTable()
@@ -36,7 +39,7 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
      }
      
      
-     // MARK: Установка таблицы с названиями институтов
+     // MARK: Установка таблицы с названиями групп
      func setupTable(){
         
         // Установка делегата для установки кастомной шапки секции
@@ -44,8 +47,9 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
             .setDelegate(self)
             .disposed(by: disposeBag)
         
+        self.groupsSectionalData = BehaviorRelay(value: [SectionOfGroups]())
         for course in coursesArray{
-            self.groupsSectionalData.append(SectionOfGroups(header: course, items: groupsArray))
+            self.data.append(SectionOfGroups(header: course, items: groupsArray))
         }
         
         // Конфигурация содержимого для ячеек таблицы
@@ -57,7 +61,7 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
         })
         
         // Связывание данных и таблицы
-        Observable.just(groupsSectionalData)
+        self.groupsSectionalData
             .bind(to: tableGroupsView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
@@ -70,6 +74,7 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
                 let groupsSheduleController = UIStoryboard(name: "GroupSheduleViewController", bundle: nil)
                     .instantiateViewController(withIdentifier: "GroupSheduleViewControllerID") as! GroupSheduleViewController
                 self.navigationController?.pushViewController(groupsSheduleController, animated: true)
+                self.searchGroupBar.endEditing(true)
              }).disposed(by: disposeBag)
      }
     
@@ -78,7 +83,7 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
         let label = UILabel()
         label.backgroundColor = .white
         label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
-        label.text = " \(self.groupsSectionalData[section].header)"
+        (self.isShowAllGroups) ? (label.text = " \(self.data[section].header)") : (label.text = "Результаты")
         return label
     }
     
@@ -92,16 +97,39 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
         self.tableGroupsView.tableHeaderView = searchBar
         self.searchGroupBar = searchBar
         
+        // Настройка отображения контента в таблице
         self.searchGroupBar
             .rx
-            .tapGesture()
-            .when(.recognized)
-            .subscribe(onNext: { _ in
-                print("Начало редактирования")
-            }).disposed(by: disposeBag)
+            .text
+            .subscribe(onNext: { currentString in
+                if currentString == ""{
+                    self.isShowAllGroups = true
+                    self.groupsSectionalData.accept(self.data)
+                } else {
+                    self.isShowAllGroups = false
+                    var filteredData: SectionOfGroups!
+                    var filteredGroupNames = [String]()
+                    _ = self.data.map{ section in
+                        filteredGroupNames.append(contentsOf: section.items.filter { groupName in
+                            return groupName.lowercased().prefix(currentString!.count) == currentString?.lowercased().prefix(currentString!.count)
+                        })
+                    }
+                    filteredData = SectionOfGroups(header: "Результаты", items: filteredGroupNames)
+                    self.groupsSectionalData.accept([filteredData])
+                }
+        }).disposed(by: disposeBag)
+        
+        // Настройка работы с клавиатурой
+        self.tableGroupsView.keyboardDismissMode = .onDrag
     }
     
+    
+    // Настройка работы с клавиатурой
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
 }
+
 
 extension GroupsViewController.SectionOfGroups: SectionModelType{
     init(original: GroupsViewController.SectionOfGroups, items: [String]) {
