@@ -16,6 +16,9 @@ import RxDataSources
 
 class GroupSheduleViewController: UIViewController{
     
+    var groupName: String!
+    @IBOutlet weak var groupNameLabel: UILabel!
+    @IBOutlet weak var backButton: UIImageView!
     @IBOutlet weak var currentDayOfWeek: UILabel!
     
     @IBOutlet weak var parityOfWeek: UIButton!
@@ -53,7 +56,6 @@ class GroupSheduleViewController: UIViewController{
     @IBOutlet weak var examCloseButton: UIImageView!
     @IBOutlet weak var examContentView: UIScrollView!
     
-    
     let viewModel = GroupSheduleViewModel()
     let disposeBag = DisposeBag()
     
@@ -62,11 +64,25 @@ class GroupSheduleViewController: UIViewController{
         super.viewDidLoad()
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.groupNameLabel.text = groupName
+        setupBackButton()
         setSettingsCurrentDayOfWeek()
         setSettingsNumbersOfWeeks()
         setSettingsSheduleTable()
         setSettingsWeekType()
         setSettingsExamViews()
+    }
+    
+    
+    // MARK: Установка кнопки перехода к предыдущему окну
+    func setupBackButton(){
+        
+        self.backButton.rx
+            .tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { _ in
+                self.navigationController?.popViewController(animated: true)
+            }).disposed(by: disposeBag)
     }
     
     

@@ -94,6 +94,8 @@
                         <viewLayoutGuide key="safeArea" id="YOW-B5-LrH"/>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="QWQ-DW-ThF" id="7nR-Xt-diY"/>
+                        <outlet property="institutionNameLabel" destination="YAi-Hl-Mdu" id="ss6-49-D87"/>
                         <outlet property="tableGroupsView" destination="Gwb-q7-MMw" id="G9l-SO-0s1"/>
                     </connections>
                 </viewController>

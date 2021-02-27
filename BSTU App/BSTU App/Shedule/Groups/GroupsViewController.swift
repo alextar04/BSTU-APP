@@ -14,7 +14,10 @@ import UIKit
 
 class GroupsViewController: UIViewController, UITableViewDelegate{
     
+    var institutionName: String!
+    @IBOutlet weak var backButton: UIImageView!
     @IBOutlet weak var tableGroupsView: UITableView!
+    @IBOutlet weak var institutionNameLabel: UILabel!
     var searchGroupBar: UISearchBar!
     var isShowAllGroups = true
     let disposeBag = DisposeBag()
@@ -22,16 +25,22 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
     
     // Вспомогательная структура для отображения данных в виде секции
     let coursesArray = ["1 курс", "2 курс", "3 курс", "4 курс", "5 курс"]
-    let groupsArray = ["ПВ-11", "ПВ-12", "ПВ-21", "ПВ-22", "ПВ-31", "ПВ-41", "ВТ-41"]
+    let groupsArray = [["ПВ-11", "ПВ-12", "ВТ-11", "ВТ-12", "КБ-11"],
+                       ["ПВ-21", "ПВ-22", "ВТ-21", "ВТ-22", "КБ-21"],
+                       ["ПВ-31", "ПВ-32", "ВТ-31", "ВТ-32", "КБ-31"],
+                       ["ПВ-41", "ПВ-42", "ВТ-41", "ВТ-42", "КБ-41"],
+                       ["ПВ-51", "ПВ-52", "ВТ-51", "ВТ-52", "КБ-51"]]
     var data = [SectionOfGroups]()
     var groupsSectionalData: BehaviorRelay<[SectionOfGroups]>!
     struct SectionOfGroups{
         var header: String
-        var items: [String]
+        var items: [Group]
     }
 
     
     override func viewDidLoad() {
+        self.institutionNameLabel.text = institutionName
+        setupBackButton()
         setupTable()
         setupSearchBar()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -39,6 +48,18 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
      }
      
      
+    // MARK: Установка кнопки перехода к предыдущему окну
+    func setupBackButton(){
+        
+        self.backButton.rx
+            .tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { _ in
+                self.navigationController?.popViewController(animated: true)
+            }).disposed(by: disposeBag)
+    }
+    
+    
      // MARK: Установка таблицы с названиями групп
      func setupTable(){
         
@@ -48,15 +69,19 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
             .disposed(by: disposeBag)
         
         self.groupsSectionalData = BehaviorRelay(value: [SectionOfGroups]())
-        for course in coursesArray{
-            self.data.append(SectionOfGroups(header: course, items: groupsArray))
+        for (index, course) in coursesArray.enumerated(){
+            var courseList = [Group]()
+            for nameGroup in groupsArray[index]{
+                courseList.append(Group(nameGroup, index + 1))
+            }
+            self.data.append(SectionOfGroups(header: course, items: courseList))
         }
         
         // Конфигурация содержимого для ячеек таблицы
         let dataSource = RxTableViewSectionedReloadDataSource<SectionOfGroups>(configureCell: {
             dataSource, table, index, item in
             let cell = table.dequeueReusableCell(withIdentifier: "GroupsViewCellID", for: index) as! GroupsViewCell
-            cell.configureCell(name: item)
+            cell.configureCell(name: item.name, courseNumber: item.numberCourse)
             return cell
         })
         
@@ -66,13 +91,12 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
             .disposed(by: disposeBag)
         
         self.tableGroupsView.rx
-             .modelSelected(String.self)
+             .modelSelected(Group.self)
              .subscribe(onNext: { selectedItem in
-                 var result: String = ""
-                 result = selectedItem
-                 print(selectedItem)
+
                 let groupsSheduleController = UIStoryboard(name: "GroupSheduleViewController", bundle: nil)
                     .instantiateViewController(withIdentifier: "GroupSheduleViewControllerID") as! GroupSheduleViewController
+                groupsSheduleController.groupName = selectedItem.name
                 self.navigationController?.pushViewController(groupsSheduleController, animated: true)
                 self.searchGroupBar.endEditing(true)
              }).disposed(by: disposeBag)
@@ -108,13 +132,13 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
                 } else {
                     self.isShowAllGroups = false
                     var filteredData: SectionOfGroups!
-                    var filteredGroupNames = [String]()
+                    var filteredGroup = [Group]()
                     _ = self.data.map{ section in
-                        filteredGroupNames.append(contentsOf: section.items.filter { groupName in
-                            return groupName.lowercased().prefix(currentString!.count) == currentString?.lowercased().prefix(currentString!.count)
+                        filteredGroup.append(contentsOf: section.items.filter { group in
+                            return group.name.lowercased().prefix(currentString!.count) == currentString?.lowercased().prefix(currentString!.count)
                         })
                     }
-                    filteredData = SectionOfGroups(header: "Результаты", items: filteredGroupNames)
+                    filteredData = SectionOfGroups(header: "Результаты", items: filteredGroup)
                     self.groupsSectionalData.accept([filteredData])
                 }
         }).disposed(by: disposeBag)
@@ -132,8 +156,19 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
 
 
 extension GroupsViewController.SectionOfGroups: SectionModelType{
-    init(original: GroupsViewController.SectionOfGroups, items: [String]) {
+    init(original: GroupsViewController.SectionOfGroups, items: [Group]) {
         self = original
         self.items = items
+    }
+}
+
+
+class Group{
+    var name: String!
+    var numberCourse: Int!
+    
+    init(_ name: String, _ numberCourse: Int) {
+        self.name = name
+        self.numberCourse = numberCourse
     }
 }

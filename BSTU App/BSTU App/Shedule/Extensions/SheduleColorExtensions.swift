@@ -70,17 +70,48 @@ extension UIColor{
     }
     
     static var institutionBackgroundColorStart: UIColor{
-        return UIColor(red: 204/255.0, green: 235/255.0, blue: 255/255.0, alpha: 1.0)
+        return UIColor(red: 230/255.0, green: 243/255.0, blue: 255/255.0, alpha: 1.0)
     }
     static var institutionBackgroundColorFinish: UIColor{
-        return UIColor(red: 102/255.0, green: 194/255.0, blue: 255/255.0, alpha: 1.0)
+        return UIColor(red: 128/255.0, green: 193/255.0, blue: 255/255.0, alpha: 1.0)
+    }
+    
+    static var firstCourseBackgroundColorStart: UIColor{
+        return UIColor(red: 230/255.0, green: 243/255.0, blue: 255/255.0, alpha: 1.0)
+    }
+    static var firstCourseBackgroundColorFinish: UIColor{
+        return UIColor(red: 153/255.0, green: 206/255.0, blue: 255/255.0, alpha: 1.0)
+    }
+    
+    static var secondCourseBackgroundColorStart: UIColor{
+        return UIColor(red: 230/255.0, green: 243/255.0, blue: 255/255.0, alpha: 1.0)
+    }
+    static var secondCourseBackgroundColorFinish: UIColor{
+        return UIColor(red: 128/255.0, green: 193/255.0, blue: 255/255.0, alpha: 1.0)
+    }
+    
+    static var thirdCourseBackgroundColorStart: UIColor{
+        return UIColor(red: 230/255.0, green: 243/255.0, blue: 255/255.0, alpha: 1.0)
+    }
+    static var thirdCourseBackgroundColorFinish: UIColor{
+        return UIColor(red: 102/255.0, green: 181/255.0, blue: 255/255.0, alpha: 1.0)
+    }
+    
+    static var fourthCourseBackgroundColorStart: UIColor{
+        return UIColor(red: 230/255.0, green: 243/255.0, blue: 255/255.0, alpha: 1.0)
+    }
+    static var fourthCourseBackgroundColorFinish: UIColor{
+        return UIColor(red: 77/255.0, green: 169/255.0, blue: 255/255.0, alpha: 1.0)
+    }
+    
+    static var fifthCourseBackgroundColorStart: UIColor{
+        return UIColor(red: 230/255.0, green: 243/255.0, blue: 255/255.0, alpha: 1.0)
+    }
+    static var fifthCourseBackgroundColorFinish: UIColor{
+        return UIColor(red: 51/255.0, green: 156/255.0, blue: 255/255.0, alpha: 1.0)
     }
     
     static var examBackgroundColor: UIColor{
         return UIColor(red: 118/255.0, green: 118/255.0, blue: 118/255.0, alpha: 0.5)
-    }
-    
-    static var courseSectionColor: UIColor{
-        return UIColor(red: 242/255.0, green: 242/255.0, blue: 243/255.0, alpha: 1.0)
     }
 }

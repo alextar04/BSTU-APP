@@ -251,6 +251,7 @@
                         <viewLayoutGuide key="safeArea" id="WwW-He-Z0B"/>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="aYB-l8-0TX" id="Shz-D9-rpy"/>
                         <outlet property="currentDayOfWeek" destination="e7v-CH-RDX" id="AMc-HS-5oy"/>
                         <outlet property="dateStackView" destination="Qj2-wI-Vnp" id="MMZ-0A-2Zy"/>
                         <outlet property="examCloseButton" destination="jIE-hi-yKR" id="FZY-qT-cgj"/>
@@ -259,6 +260,7 @@
                         <outlet property="examHeaderView" destination="Hlf-sY-Utg" id="cYV-tr-oEY"/>
                         <outlet property="examMainView" destination="219-5L-w0t" id="ELQ-W6-Jtn"/>
                         <outlet property="examMenuButton" destination="aMr-UG-wlX" id="4yp-by-cRN"/>
+                        <outlet property="groupNameLabel" destination="43s-dP-dgg" id="EmF-qX-tzn"/>
                         <outlet property="parityDropdownButton" destination="KGF-3f-a32" id="OnS-XH-6mr"/>
                         <outlet property="parityOfWeek" destination="Ulv-H2-M99" id="IvA-yo-RTD"/>
                         <outlet property="shadowTableTypeWeek" destination="UK2-64-nfn" id="fkZ-wL-ixV"/>

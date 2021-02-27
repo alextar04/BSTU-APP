@@ -37,12 +37,10 @@ class InstitutionsViewController: UIViewController{
         self.institutionsTable.rx
             .modelSelected(String.self)
             .subscribe(onNext: { selectedItem in
-                var result: String = ""
-                result = selectedItem
-                print(selectedItem)
                 
                 let groupsController = UIStoryboard(name: "GroupsScreen", bundle: nil)
                     .instantiateViewController(withIdentifier: "GroupsScreenID") as! GroupsViewController
+                groupsController.institutionName = selectedItem
                 self.navigationController?.pushViewController(groupsController, animated: true)
             }).disposed(by: disposeBag)
     }
