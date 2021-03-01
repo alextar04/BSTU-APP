@@ -15,21 +15,18 @@ import UIKit
 class GroupsViewController: UIViewController, UITableViewDelegate{
     
     var institutionName: String!
+    var link: URL!
+    
     @IBOutlet weak var backButton: UIImageView!
     @IBOutlet weak var tableGroupsView: UITableView!
     @IBOutlet weak var institutionNameLabel: UILabel!
     var searchGroupBar: UISearchBar!
-    var isShowAllGroups = true
+    let viewModel = GroupsViewModel()
     let disposeBag = DisposeBag()
+    var isShowAllGroups = true
      
     
     // Вспомогательная структура для отображения данных в виде секции
-    let coursesArray = ["1 курс", "2 курс", "3 курс", "4 курс", "5 курс"]
-    let groupsArray = [["ПВ-11", "ПВ-12", "ВТ-11", "ВТ-12", "КБ-11"],
-                       ["ПВ-21", "ПВ-22", "ВТ-21", "ВТ-22", "КБ-21"],
-                       ["ПВ-31", "ПВ-32", "ВТ-31", "ВТ-32", "КБ-31"],
-                       ["ПВ-41", "ПВ-42", "ВТ-41", "ВТ-42", "КБ-41"],
-                       ["ПВ-51", "ПВ-52", "ВТ-51", "ВТ-52", "КБ-51"]]
     var data = [SectionOfGroups]()
     var groupsSectionalData: BehaviorRelay<[SectionOfGroups]>!
     struct SectionOfGroups{
@@ -41,8 +38,15 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
     override func viewDidLoad() {
         self.institutionNameLabel.text = institutionName
         setupBackButton()
-        setupTable()
-        setupSearchBar()
+        viewModel.getGroupsList(link: link, completion: { coursesGroups in
+            
+            let sortedCoursesGroups = coursesGroups.sorted { course1, course2 in
+                return course1.numberCourse < course2.numberCourse
+            }
+            self.setupTable(sortedCoursesGroups)
+            self.setupSearchBar()
+        })
+        
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
      }
@@ -61,20 +65,16 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
     
     
      // MARK: Установка таблицы с названиями групп
-     func setupTable(){
+    func setupTable(_ listGroup: [GroupsViewModel.CourseGroups]){
         
         // Установка делегата для установки кастомной шапки секции
         self.tableGroupsView.rx
             .setDelegate(self)
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
         
         self.groupsSectionalData = BehaviorRelay(value: [SectionOfGroups]())
-        for (index, course) in coursesArray.enumerated(){
-            var courseList = [Group]()
-            for nameGroup in groupsArray[index]{
-                courseList.append(Group(nameGroup, index + 1))
-            }
-            self.data.append(SectionOfGroups(header: course, items: courseList))
+        for course in listGroup{
+            self.data.append(SectionOfGroups(header: "\(course.numberCourse!) курс", items: course.groups))
         }
         
         // Конфигурация содержимого для ячеек таблицы
@@ -159,16 +159,5 @@ extension GroupsViewController.SectionOfGroups: SectionModelType{
     init(original: GroupsViewController.SectionOfGroups, items: [Group]) {
         self = original
         self.items = items
-    }
-}
-
-
-class Group{
-    var name: String!
-    var numberCourse: Int!
-    
-    init(_ name: String, _ numberCourse: Int) {
-        self.name = name
-        self.numberCourse = numberCourse
     }
 }

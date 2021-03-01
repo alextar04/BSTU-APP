@@ -13,9 +13,9 @@ import SwiftSoup
 class InstitutionViewModel{
     
     // MARK: Получение и обработка данных об институтах
-    func getInstitutionList(completion: @escaping (([String]) -> Void)){
+    func getInstitutionList(completion: @escaping (([Institution]) -> Void)){
         
-        var listInstitutionName = [String]()
+        var listInstitutionName = [Institution]()
         AF.request("http://info.bstu.ru/index.php/").responseString{ html in
             do {
                 let document = try SwiftSoup.parse(html.result.get())
@@ -27,7 +27,7 @@ class InstitutionViewModel{
                     let components = URLComponents(url: link, resolvingAgainstBaseURL: false)
                     let nameInstitution = components?.queryItems?.first(where: { $0.name == "name" })?.value
                     if nameInstitution != nil{
-                        listInstitutionName.append(nameInstitution!)
+                        listInstitutionName.append(Institution(name: nameInstitution, link: link))
                     }
                 }
                 completion(listInstitutionName)

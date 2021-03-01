@@ -77,6 +77,9 @@
 		CEE5B68225D674CB0023D640 /* CorpMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5B68125D674CB0023D640 /* CorpMapper.swift */; };
 		CEE5B68625D67AEC0023D640 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5B68525D67AEC0023D640 /* Database.swift */; };
 		CEE5B85625E635DF0024C7A9 /* GroupSheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5B85525E635DF0024C7A9 /* GroupSheduleViewModel.swift */; };
+		CEEDAE7225ED096000D7F75B /* InstitutionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDAE7125ED096000D7F75B /* InstitutionModel.swift */; };
+		CEEDAE7425ED0A2F00D7F75B /* GroupsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDAE7325ED0A2F00D7F75B /* GroupsViewModel.swift */; };
+		CEEDAE7625ED0A4500D7F75B /* GroupsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDAE7525ED0A4500D7F75B /* GroupsModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -153,6 +156,9 @@
 		CEE5B68125D674CB0023D640 /* CorpMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorpMapper.swift; sourceTree = "<group>"; };
 		CEE5B68525D67AEC0023D640 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		CEE5B85525E635DF0024C7A9 /* GroupSheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSheduleViewModel.swift; sourceTree = "<group>"; };
+		CEEDAE7125ED096000D7F75B /* InstitutionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstitutionModel.swift; sourceTree = "<group>"; };
+		CEEDAE7325ED0A2F00D7F75B /* GroupsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsViewModel.swift; sourceTree = "<group>"; };
+		CEEDAE7525ED0A4500D7F75B /* GroupsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsModel.swift; sourceTree = "<group>"; };
 		F96B8A8E8421A5DF88E0A7CF /* Pods_BSTU_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BSTU_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -319,6 +325,7 @@
 				CE41572725E8F186008B73D6 /* Views */,
 				CE41572025E8F0CF008B73D6 /* InstitutionsViewController.swift */,
 				CE3A609025ECD42E007DF3A7 /* InstitutionsViewModel.swift */,
+				CEEDAE7125ED096000D7F75B /* InstitutionModel.swift */,
 			);
 			path = Institutions;
 			sourceTree = "<group>";
@@ -365,6 +372,8 @@
 				CE84A8E825E92A6800CCB18B /* Storyboards */,
 				CE84A8E725E92A6100CCB18B /* Views */,
 				CE84A8E325E90F0900CCB18B /* GroupsViewController.swift */,
+				CEEDAE7325ED0A2F00D7F75B /* GroupsViewModel.swift */,
+				CEEDAE7525ED0A4500D7F75B /* GroupsModel.swift */,
 			);
 			path = Groups;
 			sourceTree = "<group>";
@@ -617,6 +626,7 @@
 				CEE5B67C25D66ACA0023D640 /* PremiseDB.swift in Sources */,
 				CE037E6A25BC425700C50C16 /* ViewController.swift in Sources */,
 				CE380A2925BC4F910028622B /* TopBarNavigation.swift in Sources */,
+				CEEDAE7225ED096000D7F75B /* InstitutionModel.swift in Sources */,
 				CE01CC9F25C2A496001388B9 /* SearchPremiseView.swift in Sources */,
 				CE009EEB25D6A20D00CA8604 /* UniversityCorpsViewModel.swift in Sources */,
 				CE42A5AC25D41CD800CDDCA5 /* CorpDB.swift in Sources */,
@@ -654,10 +664,12 @@
 				CEE5B85625E635DF0024C7A9 /* GroupSheduleViewModel.swift in Sources */,
 				CE380A2A25BC4F910028622B /* Marker.swift in Sources */,
 				CEE3AFC525D7D699007B1814 /* MapMapper.swift in Sources */,
+				CEEDAE7625ED0A4500D7F75B /* GroupsModel.swift in Sources */,
 				CEE5B67E25D66AD80023D640 /* TypePremiseDB.swift in Sources */,
 				CE91140925C439460096AB29 /* StoreySwitcherView.swift in Sources */,
 				CE16978625C064F10040AE95 /* LabelExtensions.swift in Sources */,
 				CE37A08D25CBFC540046C1F1 /* MapViewModel.swift in Sources */,
+				CEEDAE7425ED0A2F00D7F75B /* GroupsViewModel.swift in Sources */,
 				CE16978825C151710040AE95 /* ColorExtensions.swift in Sources */,
 				CEE5B68225D674CB0023D640 /* CorpMapper.swift in Sources */,
 				CE3A609125ECD42E007DF3A7 /* InstitutionsViewModel.swift in Sources */,

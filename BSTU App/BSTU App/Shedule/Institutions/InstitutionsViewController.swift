@@ -15,7 +15,7 @@ import UIKit
 class InstitutionsViewController: UIViewController{
     
     @IBOutlet weak var institutionsTable: UITableView!
-    let institutionViewModel = InstitutionViewModel()
+    let viewModel = InstitutionViewModel()
     let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -29,21 +29,22 @@ class InstitutionsViewController: UIViewController{
     // MARK: Установка таблицы с названиями институтов
     func setupTable(){
         
-        institutionViewModel.getInstitutionList(completion: { institutions in
+        viewModel.getInstitutionList(completion: { institutions in
             let data = Observable.just(institutions)
             data.bind(to: self.institutionsTable.rx.items){ (tableView, row, element) in
                 let cell = self.institutionsTable.dequeueReusableCell(withIdentifier: "InstitutionCell") as! InstitutionsTableCell
-                cell.configureCell(name: element)
+                cell.configureCell(name: element.name, url: element.link)
                 return cell
             }.disposed(by: self.disposeBag)
             
             self.institutionsTable.rx
-                .modelSelected(String.self)
+                .modelSelected(Institution.self)
                 .subscribe(onNext: { selectedItem in
                     
                     let groupsController = UIStoryboard(name: "GroupsScreen", bundle: nil)
                         .instantiateViewController(withIdentifier: "GroupsScreenID") as! GroupsViewController
-                    groupsController.institutionName = selectedItem
+                    groupsController.institutionName = selectedItem.name
+                    groupsController.link = selectedItem.link
                     self.navigationController?.pushViewController(groupsController, animated: true)
                 }).disposed(by: self.disposeBag)
         })

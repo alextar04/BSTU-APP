@@ -13,12 +13,14 @@ class InstitutionsTableCell: UITableViewCell{
     @IBOutlet weak var shadowView: UIView!
     @IBOutlet weak var roundingView: UIView!
     @IBOutlet weak var nameLabel: UILabel!
+    var link: URL!
     
-    func configureCell(name: String){
+    func configureCell(name: String, url: URL){
         self.shadowView.instituteMakeShadow(width: Int(self.roundingView.frame.width), heigth: Int(self.roundingView.frame.height))
         self.roundingView.makeRounding()
         self.makeGradient()
         self.nameLabel.text = name
+        self.link = url
     }
     
     // Градиент для фона ячейки таблицы
