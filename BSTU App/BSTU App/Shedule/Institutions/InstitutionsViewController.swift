@@ -15,9 +15,11 @@ import UIKit
 class InstitutionsViewController: UIViewController{
     
     @IBOutlet weak var institutionsTable: UITableView!
+    let institutionViewModel = InstitutionViewModel()
     let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
+        
         setupTable()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
@@ -27,21 +29,23 @@ class InstitutionsViewController: UIViewController{
     // MARK: Установка таблицы с названиями институтов
     func setupTable(){
         
-        let data = Observable.just(["АИ", "КВТ", "ИЭИТУС", "ИЗО", "ИМ", "УПК", "ХТИ"])
-        data.bind(to: self.institutionsTable.rx.items){ (tableView, row, element) in
-            let cell = self.institutionsTable.dequeueReusableCell(withIdentifier: "InstitutionCell") as! InstitutionsTableCell
-            cell.configureCell(name: element)
-            return cell
-            }.disposed(by: disposeBag)
-        
-        self.institutionsTable.rx
-            .modelSelected(String.self)
-            .subscribe(onNext: { selectedItem in
-                
-                let groupsController = UIStoryboard(name: "GroupsScreen", bundle: nil)
-                    .instantiateViewController(withIdentifier: "GroupsScreenID") as! GroupsViewController
-                groupsController.institutionName = selectedItem
-                self.navigationController?.pushViewController(groupsController, animated: true)
-            }).disposed(by: disposeBag)
+        institutionViewModel.getInstitutionList(completion: { institutions in
+            let data = Observable.just(institutions)
+            data.bind(to: self.institutionsTable.rx.items){ (tableView, row, element) in
+                let cell = self.institutionsTable.dequeueReusableCell(withIdentifier: "InstitutionCell") as! InstitutionsTableCell
+                cell.configureCell(name: element)
+                return cell
+            }.disposed(by: self.disposeBag)
+            
+            self.institutionsTable.rx
+                .modelSelected(String.self)
+                .subscribe(onNext: { selectedItem in
+                    
+                    let groupsController = UIStoryboard(name: "GroupsScreen", bundle: nil)
+                        .instantiateViewController(withIdentifier: "GroupsScreenID") as! GroupsViewController
+                    groupsController.institutionName = selectedItem
+                    self.navigationController?.pushViewController(groupsController, animated: true)
+                }).disposed(by: self.disposeBag)
+        })
     }
 }

@@ -46,6 +46,7 @@
 		CE380A2F25BC6CF30028622B /* UniversityCorpsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE380A2E25BC6CF30028622B /* UniversityCorpsView.swift */; };
 		CE380A3125BC70930028622B /* UniversityCorpCellTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE380A3025BC70930028622B /* UniversityCorpCellTable.xib */; };
 		CE380A3425BC72390028622B /* UniversityCorpCellTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE380A3325BC72390028622B /* UniversityCorpCellTable.swift */; };
+		CE3A609125ECD42E007DF3A7 /* InstitutionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3A609025ECD42E007DF3A7 /* InstitutionsViewModel.swift */; };
 		CE3DC49725E1607600E8B8D7 /* DateSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3DC49625E1607600E8B8D7 /* DateSegmentedControl.swift */; };
 		CE3DC49C25E1690300E8B8D7 /* GroupSheduleCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3DC49B25E1690300E8B8D7 /* GroupSheduleCard.xib */; };
 		CE41571B25E8EBBC008B73D6 /* InstitutionsScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE41571A25E8EBBC008B73D6 /* InstitutionsScreen.storyboard */; };
@@ -121,6 +122,7 @@
 		CE380A2E25BC6CF30028622B /* UniversityCorpsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityCorpsView.swift; sourceTree = "<group>"; };
 		CE380A3025BC70930028622B /* UniversityCorpCellTable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UniversityCorpCellTable.xib; sourceTree = "<group>"; };
 		CE380A3325BC72390028622B /* UniversityCorpCellTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityCorpCellTable.swift; sourceTree = "<group>"; };
+		CE3A609025ECD42E007DF3A7 /* InstitutionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstitutionsViewModel.swift; sourceTree = "<group>"; };
 		CE3DC49625E1607600E8B8D7 /* DateSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSegmentedControl.swift; sourceTree = "<group>"; };
 		CE3DC49B25E1690300E8B8D7 /* GroupSheduleCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupSheduleCard.xib; sourceTree = "<group>"; };
 		CE41571A25E8EBBC008B73D6 /* InstitutionsScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InstitutionsScreen.storyboard; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 				CE41572625E8F179008B73D6 /* Storyboards */,
 				CE41572725E8F186008B73D6 /* Views */,
 				CE41572025E8F0CF008B73D6 /* InstitutionsViewController.swift */,
+				CE3A609025ECD42E007DF3A7 /* InstitutionsViewModel.swift */,
 			);
 			path = Institutions;
 			sourceTree = "<group>";
@@ -657,6 +660,7 @@
 				CE37A08D25CBFC540046C1F1 /* MapViewModel.swift in Sources */,
 				CE16978825C151710040AE95 /* ColorExtensions.swift in Sources */,
 				CEE5B68225D674CB0023D640 /* CorpMapper.swift in Sources */,
+				CE3A609125ECD42E007DF3A7 /* InstitutionsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
