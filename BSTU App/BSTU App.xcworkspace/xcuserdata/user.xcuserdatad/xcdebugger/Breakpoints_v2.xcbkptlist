@@ -3440,8 +3440,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "107"
             endingLineNumber = "107"
-            landmarkName = "tableView(_:viewForHeaderInSection:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3456,8 +3456,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "142"
             endingLineNumber = "142"
-            landmarkName = "setupSearchBar()"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3472,8 +3472,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "96"
             endingLineNumber = "96"
-            landmarkName = "setupTable(_:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3504,8 +3504,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "81"
             endingLineNumber = "81"
-            landmarkName = "setupTable(_:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
             <Locations>
                <Location
                   uuid = "554BEAFE-AC71-4639-8770-5DD47E61FC98 - 19c125fb37384551"
@@ -3550,8 +3550,8 @@
             filePath = "BSTU App/Shedule/Institutions/InstitutionsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "setupTable()"
             landmarkType = "7">
          </BreakpointContent>
@@ -3568,7 +3568,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "21"
             endingLineNumber = "21"
-            landmarkName = "getInstitutionList(completion:)"
+            landmarkName = "getInstitutionList(completion:errorClosure:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3582,9 +3582,9 @@
             filePath = "BSTU App/Shedule/Institutions/InstitutionsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "getInstitutionList(completion:)"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "getInstitutionList(completion:errorClosure:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3598,9 +3598,9 @@
             filePath = "BSTU App/Shedule/Institutions/InstitutionsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "getInstitutionList(completion:)"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "getInstitutionList(completion:errorClosure:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3632,7 +3632,39 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "71"
             endingLineNumber = "71"
-            landmarkName = "setupTable(_:)"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5EEF60A1-6F20-4C3B-805D-9A0558BE1DA9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BSTU App/Shedule/Institutions/InstitutionsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "setupTable()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "44113971-1DD2-4A76-8373-AAA3937E29C1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BSTU App/Shedule/Institutions/InstitutionsViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "getInstitutionList(completion:errorClosure:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

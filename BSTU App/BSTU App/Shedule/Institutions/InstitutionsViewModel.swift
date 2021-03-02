@@ -13,26 +13,31 @@ import SwiftSoup
 class InstitutionViewModel{
     
     // MARK: Получение и обработка данных об институтах
-    func getInstitutionList(completion: @escaping (([Institution]) -> Void)){
+    func getInstitutionList(completion: @escaping (([Institution]) -> Void), errorClosure: @escaping (()->Void)){
         
         var listInstitutionName = [Institution]()
         AF.request("http://info.bstu.ru/index.php/").responseString{ html in
             do {
                 let document = try SwiftSoup.parse(html.result.get())
-                let listInstitutions = try (document.getElementById("content")?.getElementsByClass("list").select("a"))!
-                for institution in listInstitutions{
-                    let link = try! "http://info.bstu.ru\(institution.attr("href"))"
-                            .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-                            .asURL()
-                    let components = URLComponents(url: link, resolvingAgainstBaseURL: false)
-                    let nameInstitution = components?.queryItems?.first(where: { $0.name == "name" })?.value
-                    if nameInstitution != nil{
-                        listInstitutionName.append(Institution(name: nameInstitution, link: link))
+                let listInstitutions = try (document.getElementById("content")?.getElementsByClass("list").select("a"))
+                if listInstitutions != nil{
+                    for institution in listInstitutions!{
+                        let link = try "http://info.bstu.ru\(institution.attr("href"))"
+                                .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+                                .asURL()
+                        let components = URLComponents(url: link, resolvingAgainstBaseURL: false)
+                        let nameInstitution = components?.queryItems?.first(where: { $0.name == "name" })?.value
+                        if nameInstitution != nil{
+                            listInstitutionName.append(Institution(name: nameInstitution, link: link))
+                        }
                     }
+                    completion(listInstitutionName)
+                } else{
+                    errorClosure()
                 }
-                completion(listInstitutionName)
             } catch{
-            fatalError("Ошибка при парсинге страницы списка институтов!")
+                //"Ошибка при парсинге страницы списка институтов!"
+                errorClosure()
         }}
     }
 }

@@ -16,7 +16,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="65" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fgN-nJ-g1y">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="DKe-wy-bbj">
+                                <rect key="frame" x="177" y="310" width="21" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="21" id="D3Z-K5-3W4"/>
+                                    <constraint firstAttribute="height" constant="20" id="Op4-7n-VR8"/>
+                                </constraints>
+                                <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tq6-fx-pr1">
+                                <rect key="frame" x="118" y="305" width="140" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="qIC-Dz-JCN"/>
+                                </constraints>
+                                <state key="normal" title="Повторить попытку"/>
+                            </button>
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="65" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fgN-nJ-g1y">
                                 <rect key="frame" x="16" y="56" width="343" height="611"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -81,6 +96,15 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Загрузка данных" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojS-UB-GNs">
+                                <rect key="frame" x="35" y="281" width="305" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="T3Y-m8-2gG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -88,17 +112,30 @@
                             <constraint firstItem="fgN-nJ-g1y" firstAttribute="top" secondItem="Ciq-wa-Sld" secondAttribute="bottom" constant="17" id="Gdb-Hb-Eaj"/>
                             <constraint firstItem="fgN-nJ-g1y" firstAttribute="top" secondItem="Ma1-gs-3Vj" secondAttribute="bottom" constant="8" id="J83-rO-QgV"/>
                             <constraint firstItem="Ma1-gs-3Vj" firstAttribute="top" secondItem="Wde-ks-3F2" secondAttribute="top" constant="5" id="Jvg-I7-VEd"/>
+                            <constraint firstItem="Wde-ks-3F2" firstAttribute="trailing" secondItem="DKe-wy-bbj" secondAttribute="trailing" constant="177" id="Tpo-CD-wiu"/>
+                            <constraint firstItem="ojS-UB-GNs" firstAttribute="top" secondItem="Ma1-gs-3Vj" secondAttribute="bottom" constant="233" id="UQy-ra-7XD"/>
+                            <constraint firstItem="ojS-UB-GNs" firstAttribute="leading" secondItem="Wde-ks-3F2" secondAttribute="leading" constant="35" id="VUI-SB-9uF"/>
                             <constraint firstItem="fgN-nJ-g1y" firstAttribute="leading" secondItem="Wde-ks-3F2" secondAttribute="leading" constant="16" id="WKD-Sf-BeL"/>
                             <constraint firstItem="fgN-nJ-g1y" firstAttribute="trailing" secondItem="Wde-ks-3F2" secondAttribute="trailing" constant="-16" id="Yla-bE-PPC"/>
                             <constraint firstItem="fgN-nJ-g1y" firstAttribute="top" secondItem="Ma1-gs-3Vj" secondAttribute="bottom" constant="8" id="anJ-Dh-oNL"/>
+                            <constraint firstItem="Tq6-fx-pr1" firstAttribute="leading" secondItem="Wde-ks-3F2" secondAttribute="leading" constant="118" id="bId-oB-Ctx"/>
                             <constraint firstItem="Ma1-gs-3Vj" firstAttribute="leading" secondItem="Ciq-wa-Sld" secondAttribute="trailing" constant="17" id="esh-9v-0lo"/>
+                            <constraint firstItem="Tq6-fx-pr1" firstAttribute="top" secondItem="ojS-UB-GNs" secondAttribute="bottom" constant="3" id="etO-Mr-Isa"/>
+                            <constraint firstItem="Wde-ks-3F2" firstAttribute="trailing" secondItem="Tq6-fx-pr1" secondAttribute="trailing" constant="117" id="iWc-Ze-Bkd"/>
+                            <constraint firstItem="Wde-ks-3F2" firstAttribute="trailing" secondItem="ojS-UB-GNs" secondAttribute="trailing" constant="35" id="lei-dJ-3gc"/>
                             <constraint firstItem="Ciq-wa-Sld" firstAttribute="top" secondItem="Wde-ks-3F2" secondAttribute="top" constant="16" id="nGV-g2-3ky"/>
+                            <constraint firstItem="DKe-wy-bbj" firstAttribute="top" secondItem="ojS-UB-GNs" secondAttribute="bottom" constant="8" id="opc-ei-kF2"/>
+                            <constraint firstItem="DKe-wy-bbj" firstAttribute="top" secondItem="ojS-UB-GNs" secondAttribute="bottom" constant="8" id="rTG-jR-o39"/>
                             <constraint firstItem="fgN-nJ-g1y" firstAttribute="bottom" secondItem="Wde-ks-3F2" secondAttribute="bottom" id="y3a-Lw-gKA"/>
+                            <constraint firstItem="DKe-wy-bbj" firstAttribute="leading" secondItem="Wde-ks-3F2" secondAttribute="leading" constant="177" id="zaK-FN-9MB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Wde-ks-3F2"/>
                     </view>
                     <connections>
                         <outlet property="institutionsTable" destination="fgN-nJ-g1y" id="r6b-Jd-Urz"/>
+                        <outlet property="loadingWheel" destination="DKe-wy-bbj" id="NkK-q0-Qyy"/>
+                        <outlet property="reloadButton" destination="Tq6-fx-pr1" id="JvB-qO-Ek3"/>
+                        <outlet property="statusLoadingLabel" destination="ojS-UB-GNs" id="Ux6-Ff-Qv9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Roj-L7-hhh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
