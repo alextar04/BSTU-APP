@@ -63,6 +63,7 @@ class GroupSheduleViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        viewModel.getSheduleForGroup(idGroup: 10214)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.groupNameLabel.text = groupName
         setupBackButton()

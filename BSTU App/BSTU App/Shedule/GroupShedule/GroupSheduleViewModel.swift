@@ -7,10 +7,85 @@
 //
 
 import Foundation
+import Alamofire
+import SwiftSoup
 import UIKit
 
 
 class GroupSheduleViewModel{
+    
+    // MARK: Получение расписания для группы
+    // Входные параметры: id-группы
+    func getSheduleForGroup(idGroup: Int){
+        
+        let link = "http://info.bstu.ru/schedule.php?gid=\(idGroup)"
+        AF.request(link).responseString{ html in
+            
+            do{
+                let document = try SwiftSoup.parse(html.result.get())
+                let listLessons = try document.getElementsByClass("schedule_std")
+                
+                // Список занятий по дням
+                var listLessonByDaysNumerator = [[String]].init(repeating: [], count: 6)
+                var listLessonByDaysDenomentor = [[String]].init(repeating: [], count: 6)
+                for (index, lesson) in listLessons.enumerated(){
+                    
+                    var lessonParsed: Bool = false
+                    for cellType in [TypeLesson.schedule_half,
+                                     TypeLesson.schedule_hq,
+                                     TypeLesson.shedule_quater]{
+                        if !lessonParsed{
+                            switch cellType {
+                            // Обработка ячеек с занятиями числитель/знаменатель
+                            case .schedule_half:
+                                let notPermanentLesson = try lesson.getElementsByClass("schedule_half")
+                                if notPermanentLesson.count != 0{
+                                    listLessonByDaysNumerator[index % 6].append(try notPermanentLesson.first()?.text() as! String)
+                                    listLessonByDaysDenomentor[index % 6].append(try notPermanentLesson.last()?.text() as! String)
+                                    lessonParsed = true
+                                    break
+                                }
+                            // Обработка ячеек с постоянными занятиями по полупаре
+                            case .schedule_hq:
+                                listLessonByDaysNumerator[index % 6].append(try lesson.text())
+                                listLessonByDaysDenomentor[index % 6].append(try lesson.text())
+                                lessonParsed = true
+                                break
+                            // Обработка ячеек с с занятиями числитель/знаменатель по полупаре
+                            case .shedule_quater:
+                                listLessonByDaysNumerator[index % 6].append(try lesson.text())
+                                listLessonByDaysDenomentor[index % 6].append(try lesson.text())
+                                lessonParsed = true
+                                break
+                            default:
+                                break
+                            }
+                        }
+                    }
+                }
+                
+                for day in listLessonByDaysNumerator{
+                    print("Новый день")
+                    for lesson in day{
+                        print(lesson)
+                    }
+                    print()
+                }
+                
+            } catch {
+              fatalError()
+            }
+        }
+    }
+    
+    
+    enum TypeLesson{
+        case schedule_std
+        case schedule_half
+        case schedule_hq
+        case shedule_quater
+    }
+    
     
     // MARK: Получение числа и названия дня недели
     func getCurrentDayOfWeek()->(Int, String){
@@ -39,6 +114,8 @@ class GroupSheduleViewModel{
         }
     }
     
+    
+    // MARK: Получение информации о типе недели
     func getCurrentWeekType()->String{
         let date = Date()
         let calendar = Calendar.current

@@ -15,9 +15,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         /*
-        Навигация
+        // Навигация
         Database.copyDatabaseToDevice()
-        
         let navigationController = NavigationViewController()
         self.addChild(navigationController)
         self.view.addSubview(navigationController.view)

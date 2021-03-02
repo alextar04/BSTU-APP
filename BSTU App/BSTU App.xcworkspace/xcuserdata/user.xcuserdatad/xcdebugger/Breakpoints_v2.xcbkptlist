@@ -2055,22 +2055,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E942F0AB-D600-43E5-BC29-BB4ED8DAA445"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BSTU App/ViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "5C3EC4E5-51A8-48E9-9E65-E6CAA3F194F1"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -3006,8 +2990,8 @@
             filePath = "BSTU App/Shedule/GroupShedule/GroupSheduleViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "583"
-            endingLineNumber = "583"
+            startingLineNumber = "584"
+            endingLineNumber = "584"
             landmarkName = "changeDay(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3022,8 +3006,8 @@
             filePath = "BSTU App/Shedule/GroupShedule/GroupSheduleViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "setSettingsWeekType()"
             landmarkType = "7">
          </BreakpointContent>
@@ -3038,8 +3022,8 @@
             filePath = "BSTU App/Shedule/GroupShedule/GroupSheduleViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "218"
-            endingLineNumber = "218"
+            startingLineNumber = "219"
+            endingLineNumber = "219"
             landmarkName = "setSettingsWeekType()"
             landmarkType = "7">
          </BreakpointContent>
@@ -3054,8 +3038,8 @@
             filePath = "BSTU App/Shedule/GroupShedule/GroupSheduleViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "199"
-            endingLineNumber = "199"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
             landmarkName = "setSettingsWeekType()"
             landmarkType = "7">
             <Locations>
@@ -3102,8 +3086,8 @@
             filePath = "BSTU App/Shedule/GroupShedule/GroupSheduleViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
             landmarkName = "setSettingsWeekType()"
             landmarkType = "7">
          </BreakpointContent>
@@ -3118,8 +3102,8 @@
             filePath = "BSTU App/Shedule/GroupShedule/GroupSheduleViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
             landmarkName = "setSettingsWeekType()"
             landmarkType = "7">
          </BreakpointContent>
@@ -3134,8 +3118,8 @@
             filePath = "BSTU App/Shedule/GroupShedule/GroupSheduleViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "182"
-            endingLineNumber = "182"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
             landmarkName = "setSettingsWeekType()"
             landmarkType = "7">
          </BreakpointContent>
@@ -3150,8 +3134,8 @@
             filePath = "BSTU App/Shedule/GroupShedule/GroupSheduleViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
             landmarkName = "setSettingsWeekType()"
             landmarkType = "7">
          </BreakpointContent>
@@ -3166,8 +3150,8 @@
             filePath = "BSTU App/Shedule/GroupShedule/GroupSheduleViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "274"
-            endingLineNumber = "274"
+            startingLineNumber = "275"
+            endingLineNumber = "275"
             landmarkName = "setSettingsWeekType()"
             landmarkType = "7">
          </BreakpointContent>
@@ -3198,8 +3182,8 @@
             filePath = "BSTU App/Shedule/GroupShedule/GroupSheduleViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "591"
-            endingLineNumber = "591"
+            startingLineNumber = "592"
+            endingLineNumber = "592"
             landmarkName = "changeDay(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3208,22 +3192,6 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "74CCBC1D-B65A-4945-9530-5B2692ECE4A4"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BSTU App/Shedule/GroupShedule/GroupSheduleViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "597"
-            endingLineNumber = "597"
-            landmarkName = "changeDayText(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "957E9F2A-80F5-433E-82A8-055BB65B3A21"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -3239,6 +3207,22 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "957E9F2A-80F5-433E-82A8-055BB65B3A21"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BSTU App/Shedule/GroupShedule/GroupSheduleViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "599"
+            endingLineNumber = "599"
+            landmarkName = "changeDayText(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
             uuid = "627A691B-C76F-4C63-8055-CE640CA5AE5D"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -3246,8 +3230,8 @@
             filePath = "BSTU App/Shedule/GroupShedule/GroupSheduleViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
             landmarkName = "setSettingsWeekType()"
             landmarkType = "7">
          </BreakpointContent>
@@ -3262,8 +3246,8 @@
             filePath = "BSTU App/Shedule/GroupShedule/GroupSheduleViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
             landmarkName = "setSettingsWeekType()"
             landmarkType = "7">
          </BreakpointContent>
@@ -3278,8 +3262,8 @@
             filePath = "BSTU App/Shedule/GroupShedule/GroupSheduleViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
             landmarkName = "setSettingsWeekType()"
             landmarkType = "7">
          </BreakpointContent>
@@ -3294,8 +3278,8 @@
             filePath = "BSTU App/Shedule/GroupShedule/GroupSheduleViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "371"
-            endingLineNumber = "371"
+            startingLineNumber = "372"
+            endingLineNumber = "372"
             landmarkName = "setSettingsExamViews()"
             landmarkType = "7">
             <Locations>
@@ -3342,8 +3326,8 @@
             filePath = "BSTU App/Shedule/GroupShedule/GroupSheduleViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "341"
-            endingLineNumber = "341"
+            startingLineNumber = "342"
+            endingLineNumber = "342"
             landmarkName = "setSettingsExamViews()"
             landmarkType = "7">
          </BreakpointContent>
@@ -3358,8 +3342,8 @@
             filePath = "BSTU App/Shedule/GroupShedule/GroupSheduleViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "442"
-            endingLineNumber = "442"
+            startingLineNumber = "443"
+            endingLineNumber = "443"
             landmarkName = "createViewForSheduleTable(number:frame:typeCard:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3374,8 +3358,8 @@
             filePath = "BSTU App/Shedule/GroupShedule/GroupSheduleViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "525"
-            endingLineNumber = "525"
+            startingLineNumber = "526"
+            endingLineNumber = "526"
             landmarkName = "loadViewFromLeftSide()"
             landmarkType = "7">
          </BreakpointContent>
@@ -3390,8 +3374,8 @@
             filePath = "BSTU App/Shedule/GroupShedule/GroupSheduleViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "401"
-            endingLineNumber = "401"
+            startingLineNumber = "402"
+            endingLineNumber = "402"
             landmarkName = "createViewForSheduleTable(number:frame:typeCard:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3406,8 +3390,8 @@
             filePath = "BSTU App/Shedule/GroupShedule/GroupSheduleViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "392"
-            endingLineNumber = "392"
+            startingLineNumber = "393"
+            endingLineNumber = "393"
             landmarkName = "setSettingsSheduleTable()"
             landmarkType = "7">
          </BreakpointContent>
@@ -3422,8 +3406,8 @@
             filePath = "BSTU App/Shedule/GroupShedule/GroupSheduleViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "321"
-            endingLineNumber = "321"
+            startingLineNumber = "322"
+            endingLineNumber = "322"
             landmarkName = "setSettingsExamViews()"
             landmarkType = "7">
          </BreakpointContent>
@@ -3713,6 +3697,54 @@
             startingLineNumber = "130"
             endingLineNumber = "130"
             landmarkName = "setupReloadButton()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "70D55FD1-2734-4FC0-A0EC-0E1D825A610D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BSTU App/Shedule/GroupShedule/GroupSheduleViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "getSheduleForGroup(idGroup:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AB50F447-55D9-4393-9F94-652757A18ECD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BSTU App/Shedule/GroupShedule/GroupSheduleViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "getSheduleForGroup(idGroup:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CC9BD356-1A39-4EF0-8643-50B4567C9415"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BSTU App/Shedule/GroupShedule/GroupSheduleViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "getSheduleForGroup(idGroup:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

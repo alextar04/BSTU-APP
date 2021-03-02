@@ -67,6 +67,7 @@
 		CED3903625D5AFFC004409CF /* bstuDB.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = CED3903525D5AFFC004409CF /* bstuDB.sqlite3 */; };
 		CEDE465225E280C600EB7672 /* GroupSheduleCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDE465125E280C600EB7672 /* GroupSheduleCard.swift */; };
 		CEDE465425E2823300EB7672 /* SheduleColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDE465325E2823300EB7672 /* SheduleColorExtensions.swift */; };
+		CEDF80F725EE4BB800591D40 /* example.html in Resources */ = {isa = PBXBuildFile; fileRef = CEDF80F625EE4BB800591D40 /* example.html */; };
 		CEE3AFC325D7D5D8007B1814 /* MapRoadDotMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3AFC225D7D5D8007B1814 /* MapRoadDotMapper.swift */; };
 		CEE3AFC525D7D699007B1814 /* MapMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3AFC425D7D699007B1814 /* MapMapper.swift */; };
 		CEE5B67625D66A9D0023D640 /* MapDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5B67525D66A9D0023D640 /* MapDB.swift */; };
@@ -146,6 +147,7 @@
 		CED3903525D5AFFC004409CF /* bstuDB.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = bstuDB.sqlite3; sourceTree = "<group>"; };
 		CEDE465125E280C600EB7672 /* GroupSheduleCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSheduleCard.swift; sourceTree = "<group>"; };
 		CEDE465325E2823300EB7672 /* SheduleColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheduleColorExtensions.swift; sourceTree = "<group>"; };
+		CEDF80F625EE4BB800591D40 /* example.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = example.html; sourceTree = "<group>"; };
 		CEE3AFC225D7D5D8007B1814 /* MapRoadDotMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRoadDotMapper.swift; sourceTree = "<group>"; };
 		CEE3AFC425D7D699007B1814 /* MapMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMapper.swift; sourceTree = "<group>"; };
 		CEE5B67525D66A9D0023D640 /* MapDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDB.swift; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 				CEEF6FF225E2780000E412E3 /* Views */,
 				CEB1CBDA25E15D9300B9CF76 /* GroupSheduleViewController.swift */,
 				CEE5B85525E635DF0024C7A9 /* GroupSheduleViewModel.swift */,
+				CEDF80F625EE4BB800591D40 /* example.html */,
 			);
 			path = GroupShedule;
 			sourceTree = "<group>";
@@ -560,6 +563,7 @@
 				CE380A2625BC4F910028622B /* TopBarView.xib in Resources */,
 				CE41571B25E8EBBC008B73D6 /* InstitutionsScreen.storyboard in Resources */,
 				CE380A1C25BC4F910028622B /* building.png in Resources */,
+				CEDF80F725EE4BB800591D40 /* example.html in Resources */,
 				CE037E7225BC425E00C50C16 /* LaunchScreen.storyboard in Resources */,
 				CE01CC9A25C29E59001388B9 /* SearchPremiseView.xib in Resources */,
 				CE3DC49C25E1690300E8B8D7 /* GroupSheduleCard.xib in Resources */,
