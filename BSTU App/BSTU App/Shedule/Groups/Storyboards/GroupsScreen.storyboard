@@ -16,6 +16,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Загрузка данных" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5a-PW-TzA">
+                                <rect key="frame" x="35" y="281" width="305" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="arP-yz-5Oe"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oew-JN-pke">
+                                <rect key="frame" x="35" y="305" width="305" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="oD7-BU-Bxe"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <state key="normal" title="Повторить попытку"/>
+                            </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="leftArrow" translatesAutoresizingMaskIntoConstraints="NO" id="QWQ-DW-ThF">
                                 <rect key="frame" x="16" y="16" width="23" height="23"/>
                                 <constraints>
@@ -33,7 +50,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="65" sectionHeaderHeight="32" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Gwb-q7-MMw">
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="65" sectionHeaderHeight="32" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Gwb-q7-MMw">
                                 <rect key="frame" x="16" y="56" width="343" height="611"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
@@ -79,23 +96,42 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="y6B-P4-eh7">
+                                <rect key="frame" x="177" y="310" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="RdG-a0-hp8"/>
+                                </constraints>
+                                <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Gwb-q7-MMw" firstAttribute="bottom" secondItem="YOW-B5-LrH" secondAttribute="bottom" id="3NE-zt-1Wu"/>
+                            <constraint firstItem="oew-JN-pke" firstAttribute="leading" secondItem="YOW-B5-LrH" secondAttribute="leading" constant="35" id="AAr-sk-wiZ"/>
                             <constraint firstItem="YAi-Hl-Mdu" firstAttribute="leading" secondItem="QWQ-DW-ThF" secondAttribute="trailing" constant="17" id="Ani-IC-F7i"/>
+                            <constraint firstItem="oew-JN-pke" firstAttribute="top" secondItem="M5a-PW-TzA" secondAttribute="bottom" constant="3" id="DqJ-as-VJ9"/>
+                            <constraint firstItem="YOW-B5-LrH" firstAttribute="trailing" secondItem="M5a-PW-TzA" secondAttribute="trailing" constant="35" id="K4P-gO-mo3"/>
                             <constraint firstItem="YAi-Hl-Mdu" firstAttribute="top" secondItem="YOW-B5-LrH" secondAttribute="top" constant="5" id="L2T-JT-fc5"/>
                             <constraint firstItem="Gwb-q7-MMw" firstAttribute="leading" secondItem="YOW-B5-LrH" secondAttribute="leading" constant="16" id="RY8-y8-aY2"/>
+                            <constraint firstItem="YOW-B5-LrH" firstAttribute="trailing" secondItem="oew-JN-pke" secondAttribute="trailing" constant="35" id="WIo-KR-HZb"/>
                             <constraint firstItem="Gwb-q7-MMw" firstAttribute="top" secondItem="YAi-Hl-Mdu" secondAttribute="bottom" constant="8" id="ZP9-f7-3ax"/>
+                            <constraint firstItem="y6B-P4-eh7" firstAttribute="leading" secondItem="YOW-B5-LrH" secondAttribute="leading" constant="177" id="eQu-fX-FeC"/>
                             <constraint firstItem="QWQ-DW-ThF" firstAttribute="leading" secondItem="YOW-B5-LrH" secondAttribute="leading" constant="16" id="evb-J3-vba"/>
                             <constraint firstItem="QWQ-DW-ThF" firstAttribute="top" secondItem="YOW-B5-LrH" secondAttribute="top" constant="16" id="i4I-nm-2N9"/>
+                            <constraint firstItem="M5a-PW-TzA" firstAttribute="top" secondItem="YAi-Hl-Mdu" secondAttribute="bottom" constant="233" id="jUS-79-9sa"/>
+                            <constraint firstItem="M5a-PW-TzA" firstAttribute="leading" secondItem="YOW-B5-LrH" secondAttribute="leading" constant="35" id="o8L-fb-yAn"/>
                             <constraint firstItem="YOW-B5-LrH" firstAttribute="trailing" secondItem="Gwb-q7-MMw" secondAttribute="trailing" constant="16" id="p0S-f6-UiB"/>
+                            <constraint firstItem="YOW-B5-LrH" firstAttribute="trailing" secondItem="y6B-P4-eh7" secondAttribute="trailing" constant="178" id="v7T-vB-gQd"/>
+                            <constraint firstItem="y6B-P4-eh7" firstAttribute="top" secondItem="M5a-PW-TzA" secondAttribute="bottom" constant="8" id="y38-iG-gw4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YOW-B5-LrH"/>
                     </view>
                     <connections>
                         <outlet property="backButton" destination="QWQ-DW-ThF" id="7nR-Xt-diY"/>
                         <outlet property="institutionNameLabel" destination="YAi-Hl-Mdu" id="ss6-49-D87"/>
+                        <outlet property="loadingWheel" destination="y6B-P4-eh7" id="8hh-Bx-Bce"/>
+                        <outlet property="reloadButton" destination="oew-JN-pke" id="aaX-uE-x30"/>
+                        <outlet property="statusLoadingLabel" destination="M5a-PW-TzA" id="FNU-Q6-CAY"/>
                         <outlet property="tableGroupsView" destination="Gwb-q7-MMw" id="G9l-SO-0s1"/>
                     </connections>
                 </viewController>

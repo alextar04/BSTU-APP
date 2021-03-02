@@ -17,6 +17,10 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
     var institutionName: String!
     var link: URL!
     
+    @IBOutlet weak var statusLoadingLabel: UILabel!
+    @IBOutlet weak var reloadButton: UIButton!
+    @IBOutlet weak var loadingWheel: UIActivityIndicatorView!
+    
     @IBOutlet weak var backButton: UIImageView!
     @IBOutlet weak var tableGroupsView: UITableView!
     @IBOutlet weak var institutionNameLabel: UILabel!
@@ -37,14 +41,28 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
     
     override func viewDidLoad() {
         self.institutionNameLabel.text = institutionName
-        setupBackButton()
+        self.tableGroupsView.isHidden = true
+        self.reloadButton.isHidden = true
+        self.setupSearchBar()
+        self.setupReloadButton()
+        self.setupBackButton()
+        
+        
         viewModel.getGroupsList(link: link, completion: { coursesGroups in
+            
+            self.statusLoadingLabel.isHidden = true
+            self.loadingWheel.isHidden = true
+            self.tableGroupsView.isHidden = false
             
             let sortedCoursesGroups = coursesGroups.sorted { course1, course2 in
                 return course1.numberCourse < course2.numberCourse
             }
             self.setupTable(sortedCoursesGroups)
-            self.setupSearchBar()
+            self.connectTableAndSearchBar()
+        }, errorClosure: {
+            self.statusLoadingLabel.text = "Ошибка загрузки данных"
+            self.loadingWheel.isHidden = true
+            self.reloadButton.isHidden = false
         })
         
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -103,6 +121,38 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
      }
     
     
+    // MARK: Установка кнопки перезагрузки данных
+    func setupReloadButton(){
+        
+        self.reloadButton.rx
+            .tap
+            .subscribe(onNext: { _ in
+                self.statusLoadingLabel.text = "Загрузка данных"
+                self.loadingWheel.isHidden = false
+                self.reloadButton.isHidden = true
+                
+                self.viewModel.getGroupsList(link: self.link, completion: { coursesGroups in
+                    
+                    self.statusLoadingLabel.isHidden = true
+                    self.loadingWheel.isHidden = true
+                    self.tableGroupsView.isHidden = false
+                    
+                    let sortedCoursesGroups = coursesGroups.sorted { course1, course2 in
+                        return course1.numberCourse < course2.numberCourse
+                    }
+                    self.setupTable(sortedCoursesGroups)
+                    self.connectTableAndSearchBar()
+                    self.searchGroupBar.isUserInteractionEnabled = true
+                }, errorClosure: {
+                    self.statusLoadingLabel.text = "Ошибка загрузки данных"
+                    self.loadingWheel.isHidden = true
+                    self.reloadButton.isHidden = false
+                })
+                
+            }).disposed(by: disposeBag)
+    }
+    
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = UILabel()
         label.backgroundColor = .white
@@ -120,6 +170,11 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
         searchBar.placeholder = "Поиск группы"
         self.tableGroupsView.tableHeaderView = searchBar
         self.searchGroupBar = searchBar
+    }
+    
+    
+    // MARK: Соединение таблицы и окна поиска
+    func connectTableAndSearchBar(){
         
         // Настройка отображения контента в таблице
         self.searchGroupBar
