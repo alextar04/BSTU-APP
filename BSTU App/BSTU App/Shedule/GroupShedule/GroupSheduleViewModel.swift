@@ -33,7 +33,8 @@ class GroupSheduleViewModel{
                     var lessonParsed: Bool = false
                     for cellType in [TypeLesson.schedule_half,
                                      TypeLesson.schedule_hq,
-                                     TypeLesson.shedule_quater]{
+                                     TypeLesson.schedule_quarter,
+                                     TypeLesson.schedule_std]{
                         if !lessonParsed{
                             switch cellType {
                             // Обработка ячеек с занятиями числитель/знаменатель
@@ -47,29 +48,47 @@ class GroupSheduleViewModel{
                                 }
                             // Обработка ячеек с постоянными занятиями по полупаре
                             case .schedule_hq:
-                                listLessonByDaysNumerator[index % 6].append(try lesson.text())
-                                listLessonByDaysDenomentor[index % 6].append(try lesson.text())
-                                lessonParsed = true
-                                break
+                                let notPermanentLesson = try lesson.getElementsByClass("schedule_hq")
+                                if notPermanentLesson.count != 0{
+                                    for item in notPermanentLesson{
+                                        listLessonByDaysNumerator[index % 6].append(try item.text() as! String)
+                                        listLessonByDaysDenomentor[index % 6].append(try item.text() as! String)
+                                    }
+                                    lessonParsed = true
+                                    break
+                                }
                             // Обработка ячеек с с занятиями числитель/знаменатель по полупаре
-                            case .shedule_quater:
-                                listLessonByDaysNumerator[index % 6].append(try lesson.text())
-                                listLessonByDaysDenomentor[index % 6].append(try lesson.text())
+                            case .schedule_quarter:
+                                let notPermanentLesson = try lesson.getElementsByClass("schedule_quarter")
+                                if notPermanentLesson.count != 0{
+                                    
+                                    listLessonByDaysNumerator[index % 6].append(try notPermanentLesson[0].text() as! String)
+                                    listLessonByDaysNumerator[index % 6].append(try notPermanentLesson[1].text() as! String)
+                                    
+                                    listLessonByDaysDenomentor[index % 6].append(try notPermanentLesson[2].text() as! String)
+                                    listLessonByDaysDenomentor[index % 6].append(try notPermanentLesson[3].text() as! String)
+                                    
+                                    lessonParsed = true
+                                    break
+                                }
+                            // Обработка ячеек с постоянными занятиями
+                            case .schedule_std:
+                                listLessonByDaysNumerator[index % 6].append(try lesson.text() as! String)
+                                listLessonByDaysDenomentor[index % 6].append(try lesson.text() as! String)
                                 lessonParsed = true
-                                break
-                            default:
                                 break
                             }
                         }
                     }
                 }
                 
+                
                 for day in listLessonByDaysNumerator{
                     print("Новый день")
                     for lesson in day{
                         print(lesson)
                     }
-                    print()
+                    print("***")
                 }
                 
             } catch {
@@ -83,7 +102,7 @@ class GroupSheduleViewModel{
         case schedule_std
         case schedule_half
         case schedule_hq
-        case shedule_quater
+        case schedule_quarter
     }
     
     
