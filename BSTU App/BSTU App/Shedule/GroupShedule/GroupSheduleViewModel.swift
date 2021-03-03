@@ -8,101 +8,82 @@
 
 import Foundation
 import Alamofire
-import SwiftSoup
-import UIKit
+import SwiftyJSON
 
 
 class GroupSheduleViewModel{
     
     // MARK: Получение расписания для группы
     // Входные параметры: id-группы
-    func getSheduleForGroup(idGroup: Int){
+    func getSheduleForGroup(groupName: String){
         
-        let link = "http://info.bstu.ru/schedule.php?gid=\(idGroup)"
-        AF.request(link).responseString{ html in
+        let url = "http://cabinet.bstu.ru/api/1.0/timetable?role=student&groupName=\(groupName)&wholeWeek=true"
+            .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        AF.request(url!, method: .get).validate().responseJSON{ response in
             
-            do{
-                let document = try SwiftSoup.parse(html.result.get())
-                let listLessons = try document.getElementsByClass("schedule_std")
+            switch response.result{
+            case .success(let value):
+                let resultJson = JSON(value)
+                var resultDays = [[GroupSheduleModel]].init(repeating: [GroupSheduleModel](), count: 7)
                 
-                // Список занятий по дням
-                var listLessonByDaysNumerator = [[String]].init(repeating: [], count: 6)
-                var listLessonByDaysDenomentor = [[String]].init(repeating: [], count: 6)
-                for (index, lesson) in listLessons.enumerated(){
+                let currentWeek = resultJson["current_week"]
+                let isCurrentWeekNumerator = currentWeek["now_denom"].int
+                let nextWeek = resultJson["next_week"]
+                
+                // Парсинг информации о неделе
+                let arrayDays = currentWeek["days"].array
+                for day in arrayDays!{
                     
-                    var lessonParsed: Bool = false
-                    for cellType in [TypeLesson.schedule_half,
-                                     TypeLesson.schedule_hq,
-                                     TypeLesson.schedule_quarter,
-                                     TypeLesson.schedule_std]{
-                        if !lessonParsed{
-                            switch cellType {
-                            // Обработка ячеек с занятиями числитель/знаменатель
-                            case .schedule_half:
-                                let notPermanentLesson = try lesson.getElementsByClass("schedule_half")
-                                if notPermanentLesson.count != 0{
-                                    listLessonByDaysNumerator[index % 6].append(try notPermanentLesson.first()?.text() as! String)
-                                    listLessonByDaysDenomentor[index % 6].append(try notPermanentLesson.last()?.text() as! String)
-                                    lessonParsed = true
-                                    break
-                                }
-                            // Обработка ячеек с постоянными занятиями по полупаре
-                            case .schedule_hq:
-                                let notPermanentLesson = try lesson.getElementsByClass("schedule_hq")
-                                if notPermanentLesson.count != 0{
-                                    for item in notPermanentLesson{
-                                        listLessonByDaysNumerator[index % 6].append(try item.text() as! String)
-                                        listLessonByDaysDenomentor[index % 6].append(try item.text() as! String)
-                                    }
-                                    lessonParsed = true
-                                    break
-                                }
-                            // Обработка ячеек с с занятиями числитель/знаменатель по полупаре
-                            case .schedule_quarter:
-                                let notPermanentLesson = try lesson.getElementsByClass("schedule_quarter")
-                                if notPermanentLesson.count != 0{
-                                    
-                                    listLessonByDaysNumerator[index % 6].append(try notPermanentLesson[0].text() as! String)
-                                    listLessonByDaysNumerator[index % 6].append(try notPermanentLesson[1].text() as! String)
-                                    
-                                    listLessonByDaysDenomentor[index % 6].append(try notPermanentLesson[2].text() as! String)
-                                    listLessonByDaysDenomentor[index % 6].append(try notPermanentLesson[3].text() as! String)
-                                    
-                                    lessonParsed = true
-                                    break
-                                }
-                            // Обработка ячеек с постоянными занятиями
-                            case .schedule_std:
-                                listLessonByDaysNumerator[index % 6].append(try lesson.text() as! String)
-                                listLessonByDaysDenomentor[index % 6].append(try lesson.text() as! String)
-                                lessonParsed = true
-                                break
-                            }
+                    // Заполнение информации по дню
+                    let dayActivities = day["pairs"].array
+                    for activity in dayActivities!{
+                        let lesson = GroupSheduleModel()
+                        
+                        lesson.nameSubject = activity["subject_name_short"].string
+                        
+                        switch activity["event_type_name"].string {
+                        case "лек.":
+                            lesson.typeActivity = .lection
+                        case "лаб.":
+                            lesson.typeActivity = .laboratory
+                        case "практ.":
+                            lesson.typeActivity = .practice
+                        default:
+                            break
                         }
+                        
+                        lesson.timeStart = activity["pair_time_start"].string
+                        let indexTimeStart1 = lesson.timeStart.index(lesson.timeStart.startIndex, offsetBy: 11)
+                        let indexTimeStart2 = lesson.timeStart.index(indexTimeStart1, offsetBy: 4)
+                        lesson.timeStart = String(lesson.timeStart[indexTimeStart1...indexTimeStart2])
+                        
+                        lesson.timeEnd = activity["pair_time_end"].string
+                        let indexTimeEnd1 = lesson.timeEnd.index(lesson.timeEnd.startIndex, offsetBy: 11)
+                        let indexTimeEnd2 = lesson.timeEnd.index(indexTimeEnd1, offsetBy: 4)
+                        lesson.timeEnd = String(lesson.timeEnd[indexTimeEnd1...indexTimeEnd2])
+                        
+                        lesson.audiences = [String]()
+                        for item in activity["audiences"].array!{
+                            lesson.audiences.append(item["name"].string!)
+                        }
+                        
+                        lesson.teachers = [String]()
+                        for item in activity["teachers"].array!{
+                            lesson.teachers.append(item["name"].string!)
+                        }
+                        
+                        let dayOfWeek = (day["num_day"].int)! - 1
+                        resultDays[dayOfWeek].append(lesson)
                     }
                 }
                 
+                let qwerty = resultDays
+                print("Финиш")
                 
-                for day in listLessonByDaysNumerator{
-                    print("Новый день")
-                    for lesson in day{
-                        print(lesson)
-                    }
-                    print("***")
-                }
-                
-            } catch {
-              fatalError()
+            case .failure(let error):
+                print(error)
             }
         }
-    }
-    
-    
-    enum TypeLesson{
-        case schedule_std
-        case schedule_half
-        case schedule_hq
-        case schedule_quarter
     }
     
     

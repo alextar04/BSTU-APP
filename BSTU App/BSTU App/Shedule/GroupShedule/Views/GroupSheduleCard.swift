@@ -113,11 +113,3 @@ enum TypeCard{
     case lesson
     case exam
 }
-
-enum TypeActivity{
-    case lection
-    case laboratory
-    case practice
-    case consultation
-    case examination
-}
