@@ -63,7 +63,6 @@ class GroupSheduleViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel.getSheduleForGroup(groupName: "ИТ-41")
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.groupNameLabel.text = groupName
         setupBackButton()
@@ -71,7 +70,7 @@ class GroupSheduleViewController: UIViewController{
         setSettingsNumbersOfWeeks()
         setSettingsSheduleTable()
         setSettingsWeekType()
-        setSettingsExamViews()
+        //setSettingsExamViews()
     }
     
     
@@ -300,7 +299,7 @@ class GroupSheduleViewController: UIViewController{
         self.additionalStatusBar.isHidden = true
         self.view.addSubview(self.additionalStatusBar)
         
-        let examView = createViewForSheduleTable(number: "",
+        let examView = createViewForSheduleTable(data: self.viewModel.resultDaysCurrentWeek[self.currentSelectedIndex],
                                                  frame: CGRect(x: 0, y: 0,
                                                                     width: self.examContentView.frame.width,
                                                                     height: .zero),
@@ -319,7 +318,7 @@ class GroupSheduleViewController: UIViewController{
                 self.additionalStatusBar.isHidden = false
                 self.additionalStatusBar.alpha = 0
                 
-                let examView = self.createViewForSheduleTable(number: "",
+                let examView = self.createViewForSheduleTable(data: self.viewModel.resultDaysCurrentWeek[self.currentSelectedIndex],
                                                          frame: CGRect(x: 0, y: 0,
                                                                        width: self.examContentView.frame.width,
                                                                        height: .zero),
@@ -385,58 +384,59 @@ class GroupSheduleViewController: UIViewController{
                                                name: Notification.Name("ChangeDay"),
                                                object: nil)
         
-        self.currentPage = createViewForSheduleTable(number: "",
-                                                     frame: CGRect(x: 0, y: 0,
-                                                                   width: self.sheduleTable.frame.width,
-                                                                   height: .zero),
-                                                     typeCard: .lesson)
-        self.currentSelectedIndex = self.dateSegmentedControl.numbersOfCalendarSegmentedControl.selectedSegmentIndex
-        self.sheduleTable.addSubview(self.currentPage)
-        self.sheduleTable.autoresizesSubviews = false
+        self.viewModel.getSheduleForGroup(groupName: "ИТ-41", completion: {
+            self.currentSelectedIndex = self.dateSegmentedControl.numbersOfCalendarSegmentedControl.selectedSegmentIndex
+            self.currentPage = self.createViewForSheduleTable(data: self.viewModel.resultDaysCurrentWeek[self.currentSelectedIndex],
+                                                         frame: CGRect(x: 0, y: 0,
+                                                                       width: self.sheduleTable.frame.width,
+                                                                       height: .zero),
+                                                         typeCard: .lesson)
+            self.sheduleTable.addSubview(self.currentPage)
+            self.sheduleTable.autoresizesSubviews = false
+        })
     }
     
     
     // MARK: Создание вида для таблицы расписаний
-    func createViewForSheduleTable(number: String, frame: CGRect, typeCard: TypeCard)->UIView{
+    func createViewForSheduleTable(data: [GroupSheduleModel], frame: CGRect, typeCard: TypeCard)->UIView{
         
         var outputView: UIView!
         
-        let randomNumber = Int.random(in: 0...1)
-        if randomNumber == 0{
+        // Случай: есть занятия
+        if data.count != 0{
             var updatedFrame = frame
-            updatedFrame.size.height = offsetBetweenCards + (cardHeight + offsetBetweenCards) * 6
+            updatedFrame.size.height = offsetBetweenCards + (cardHeight + offsetBetweenCards) * CGFloat(data.count)
             outputView = UIView(frame: updatedFrame)
+            
+            for (index, dayShedule) in data.enumerated(){
 
-            // Загрузка карточек
-            for index in 0...5{
+                // Загрузка карточек
                 let subjectCard = Bundle.main.loadNibNamed("GroupSheduleCard", owner: self, options: nil)?.first as? GroupSheduleCard
                 var yStart: CGFloat = 14
                 index != 0 ? (yStart = offsetBetweenCards + (offsetBetweenCards + cardHeight) * CGFloat(index)) : (yStart = offsetBetweenCards)
-                
+                    
                 switch typeCard {
                 case .lesson:
                     subjectCard!.frame = CGRect(x: 10, y: yStart,
-                                                    width: self.sheduleTable.frame.width - 20,
-                                                    height: cardHeight)
-                    let typeLessons: [TypeActivity] = [.laboratory, .lection, .practice]
-                    subjectCard!.setupView(typeActivity: typeLessons.randomElement()!)
+                                                width: self.sheduleTable.frame.width - 20,
+                                                height: cardHeight)
+                    subjectCard!.setupView(activity: dayShedule)
                     self.sheduleTable.isScrollEnabled = true
                 case .exam:
                     subjectCard!.frame = CGRect(x: 10, y: yStart,
-                                                    width: self.examContentView.frame.width - 20,
-                                                    height: cardHeight)
+                                                width: self.examContentView.frame.width - 20,
+                                                height: cardHeight)
                     subjectCard?.nameSubject.font = UIFont.boldSystemFont(ofSize: 14.0)
                     let typeExam: [TypeActivity] = [.consultation, .examination]
-                    subjectCard!.setupView(typeActivity: typeExam.randomElement()!)
+                    subjectCard!.setupData(activity: dayShedule)
                     self.examContentView.isScrollEnabled = true
                 }
-
-                subjectCard?.typeActivity.text! += number
-                outputView.addSubview(subjectCard!)
+                    outputView.addSubview(subjectCard!)
             }
         }
         
-        if randomNumber == 1{
+        // Случай: нет занятий
+        if data.count == 0{
             let emptyView = Bundle.main.loadNibNamed("EmptySheduleView", owner: self, options: nil)?.first as? EmptySheduleView
             switch typeCard {
             case .lesson:
@@ -518,7 +518,7 @@ class GroupSheduleViewController: UIViewController{
         
         // Анимация: Текущее расписание перемещается вправо
         // На его месте появляется новое
-        let preventPage = createViewForSheduleTable(number: String(Int.random(in: 0...10)),
+        let preventPage = createViewForSheduleTable(data: self.viewModel.resultDaysCurrentWeek[self.currentSelectedIndex],
                                                     frame: CGRect(x: -self.sheduleTable.frame.width, y: 0,
                                                                 width: self.sheduleTable.frame.width,
                                                                 height: .zero),
@@ -551,7 +551,7 @@ class GroupSheduleViewController: UIViewController{
         
         // Анимация: Текущее расписание перемещается влево
         // На его месте появляется новое
-        let nextPage = createViewForSheduleTable(number: String(Int.random(in: 0...10)),
+        let nextPage = createViewForSheduleTable(data: self.viewModel.resultDaysCurrentWeek[self.currentSelectedIndex],
                                                  frame: CGRect(x: self.sheduleTable.frame.width, y: 0,
                                                                width: self.sheduleTable.frame.width,
                                                                height: .zero),
@@ -584,12 +584,13 @@ class GroupSheduleViewController: UIViewController{
         if let dayIndex = notification.userInfo!["dayIndex"] as? Int{
             
             if dayIndex < self.currentSelectedIndex{
+                self.currentSelectedIndex = self.dateSegmentedControl.numbersOfCalendarSegmentedControl.selectedSegmentIndex
                 loadViewFromLeftSide()
             }
             if dayIndex > self.currentSelectedIndex{
+                self.currentSelectedIndex = self.dateSegmentedControl.numbersOfCalendarSegmentedControl.selectedSegmentIndex
                 loadViewFromRightSide()
             }
-            self.currentSelectedIndex = self.dateSegmentedControl.numbersOfCalendarSegmentedControl.selectedSegmentIndex
         }
     }
     

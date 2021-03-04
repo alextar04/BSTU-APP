@@ -13,9 +13,11 @@ import SwiftyJSON
 
 class GroupSheduleViewModel{
     
-    // MARK: Получение расписания для группы
+    var resultDaysCurrentWeek: [[GroupSheduleModel]]!
+    
+    // MARK: Получение расписания для группы (для self.resultDaysCurrentWeek)
     // Входные параметры: id-группы
-    func getSheduleForGroup(groupName: String){
+    func getSheduleForGroup(groupName: String, completion: @escaping (()->Void)){
         
         let url = "http://cabinet.bstu.ru/api/1.0/timetable?role=student&groupName=\(groupName)&wholeWeek=true"
             .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
@@ -77,8 +79,8 @@ class GroupSheduleViewModel{
                     }
                 }
                 
-                let qwerty = resultDays
-                print("Финиш")
+                self.resultDaysCurrentWeek = resultDays
+                completion()
                 
             case .failure(let error):
                 print(error)

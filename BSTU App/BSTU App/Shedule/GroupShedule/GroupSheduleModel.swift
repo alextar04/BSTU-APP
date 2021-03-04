@@ -16,16 +16,6 @@ class GroupSheduleModel{
     var timeEnd: String!
     var audiences: [String]!
     var teachers: [String]!
-    
-    /*
-    init(nameSubject: String, typeActivity: TypeActivity, timeStart: String, timeEnd: String, audiences: [String], teachers: [String]) {
-        self.nameSubject = nameSubject
-        self.typeActivity = typeActivity
-        self.timeStart = timeStart
-        self.timeEnd = timeEnd
-        self.audiences = audiences
-        self.teachers = teachers
-    }*/
 }
 
 enum TypeActivity{

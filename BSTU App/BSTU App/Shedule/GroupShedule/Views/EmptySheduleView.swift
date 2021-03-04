@@ -14,7 +14,7 @@ class EmptySheduleView: UIView{
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var picture: UIImageView!
     
-    func setupView(typeActivity: TypeActivity){
+    func setupView(typeActivity: TypeActivity?){
         if typeActivity == .consultation || typeActivity == .examination{
             self.descriptionLabel.text = "Расписание экзаменов отсутствует."
             self.descriptionLabel.numberOfLines = 2

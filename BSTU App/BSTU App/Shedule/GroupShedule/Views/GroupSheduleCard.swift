@@ -22,15 +22,33 @@ class GroupSheduleCard: UIView{
     @IBOutlet weak var nameAndPatronymicTeacher: UILabel!
     @IBOutlet weak var surnameTeacher: UILabel!
     
-    func setupView(typeActivity: TypeActivity){
+    func setupView(activity: GroupSheduleModel){
         
+        self.setupData(activity: activity)
         self.contentView.makeRounding()
-        self.makeGradient(typeActivity: typeActivity)
-        self.updateStyleTypeLesson(typeActivity: typeActivity)
-        self.updateStyleNameSubject(typeActivity: typeActivity)
-        self.updateTeacherData()
+        self.makeGradient(typeActivity: activity.typeActivity)
+        self.updateStyleTypeLesson(typeActivity: activity.typeActivity)
+        self.updateStyleNameSubject(typeActivity: activity.typeActivity)
         
         self.sheduleMakeShadow(width: Int(self.frame.width), heigth: Int(self.frame.height))
+    }
+    
+    
+    // MARK: Установка информации в ячейку
+    func setupData(activity: GroupSheduleModel){
+        
+        self.nameSubject.text = activity.nameSubject
+        self.timeLabel.text = "\(activity.timeStart!) - \(activity.timeEnd!)"
+        self.audienceLabel.text = activity.audiences.joined(separator: " ")
+        
+        let teacherParts = activity.teachers.first?.split(separator: " ").map{
+            return String($0)
+        }
+        self.nameAndPatronymicTeacher.text = "\(teacherParts![1])  \(teacherParts![2])"
+        self.surnameTeacher.text = "\(teacherParts![0])"
+        
+        self.photoTeacher.image = UIImage(named: "someImage")
+        self.photoTeacher.sheduleMakeRoundingImage()
     }
     
     
@@ -98,13 +116,6 @@ class GroupSheduleCard: UIView{
         case .examination:
             self.nameSubject.textColor = .examinationSubjectColor
         }
-    }
-    
-    
-    // Установка информации о преподавателе
-    func updateTeacherData(){
-        self.photoTeacher.image = UIImage(named: "someImage")
-        self.photoTeacher.sheduleMakeRoundingImage()
     }
     
 }
