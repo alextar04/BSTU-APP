@@ -28,7 +28,6 @@
 		CE04A3E425EF9B9700BE073D /* InstitutionsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A3BB25EF9B9600BE073D /* InstitutionsTableCell.swift */; };
 		CE04A3E525EF9B9700BE073D /* InstitutionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A3BC25EF9B9600BE073D /* InstitutionsViewModel.swift */; };
 		CE04A3E625EF9B9700BE073D /* emptyExam.png in Resources */ = {isa = PBXBuildFile; fileRef = CE04A3BE25EF9B9600BE073D /* emptyExam.png */; };
-		CE04A3E725EF9B9700BE073D /* someImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE04A3BF25EF9B9600BE073D /* someImage.jpg */; };
 		CE04A3E825EF9B9700BE073D /* books.png in Resources */ = {isa = PBXBuildFile; fileRef = CE04A3C025EF9B9600BE073D /* books.png */; };
 		CE04A3E925EF9B9700BE073D /* leftArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = CE04A3C125EF9B9600BE073D /* leftArrow.png */; };
 		CE04A3EA25EF9B9700BE073D /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = CE04A3C225EF9B9600BE073D /* menu.png */; };
@@ -77,6 +76,7 @@
 		CE380A3125BC70930028622B /* UniversityCorpCellTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE380A3025BC70930028622B /* UniversityCorpCellTable.xib */; };
 		CE380A3425BC72390028622B /* UniversityCorpCellTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE380A3325BC72390028622B /* UniversityCorpCellTable.swift */; };
 		CE42A5AC25D41CD800CDDCA5 /* CorpDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42A5AB25D41CD800CDDCA5 /* CorpDB.swift */; };
+		CE81A73425F0FCA5007358F7 /* SheduleLabelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE81A73325F0FCA5007358F7 /* SheduleLabelExtensions.swift */; };
 		CE91140525C3FA020096AB29 /* NavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91140425C3FA020096AB29 /* NavigationViewModel.swift */; };
 		CE91140725C437740096AB29 /* StoreySwitcherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE91140625C437740096AB29 /* StoreySwitcherView.xib */; };
 		CE91140925C439460096AB29 /* StoreySwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91140825C439460096AB29 /* StoreySwitcherView.swift */; };
@@ -168,6 +168,7 @@
 		CE380A3025BC70930028622B /* UniversityCorpCellTable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UniversityCorpCellTable.xib; sourceTree = "<group>"; };
 		CE380A3325BC72390028622B /* UniversityCorpCellTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityCorpCellTable.swift; sourceTree = "<group>"; };
 		CE42A5AB25D41CD800CDDCA5 /* CorpDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorpDB.swift; sourceTree = "<group>"; };
+		CE81A73325F0FCA5007358F7 /* SheduleLabelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheduleLabelExtensions.swift; sourceTree = "<group>"; };
 		CE91140425C3FA020096AB29 /* NavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModel.swift; sourceTree = "<group>"; };
 		CE91140625C437740096AB29 /* StoreySwitcherView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreySwitcherView.xib; sourceTree = "<group>"; };
 		CE91140825C439460096AB29 /* StoreySwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreySwitcherView.swift; sourceTree = "<group>"; };
@@ -357,6 +358,7 @@
 				CE04A3D125EF9B9600BE073D /* SheduleColorExtensions.swift */,
 				CE04A3D225EF9B9600BE073D /* SheduleViewExtensions.swift */,
 				CE04A3D325EF9B9600BE073D /* SheduleImageExtensions.swift */,
+				CE81A73325F0FCA5007358F7 /* SheduleLabelExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -609,7 +611,6 @@
 				CE380A1D25BC4F910028622B /* showMore.png in Resources */,
 				CE04A3EA25EF9B9700BE073D /* menu.png in Resources */,
 				CE380A2625BC4F910028622B /* TopBarView.xib in Resources */,
-				CE04A3E725EF9B9700BE073D /* someImage.jpg in Resources */,
 				CE380A1C25BC4F910028622B /* building.png in Resources */,
 				CE04A3E925EF9B9700BE073D /* leftArrow.png in Resources */,
 				CE037E7225BC425E00C50C16 /* LaunchScreen.storyboard in Resources */,
@@ -693,6 +694,7 @@
 				CE04A3E325EF9B9700BE073D /* InstitutionModel.swift in Sources */,
 				CE037E6625BC425700C50C16 /* AppDelegate.swift in Sources */,
 				CE04A40025EF9B9700BE073D /* TypeWeekCell.swift in Sources */,
+				CE81A73425F0FCA5007358F7 /* SheduleLabelExtensions.swift in Sources */,
 				CEACB2D925C7F2F900F4ADD3 /* Map.swift in Sources */,
 				CE04A3FE25EF9B9700BE073D /* DateSegmentedControl.swift in Sources */,
 				CE009EF325D6F88B00CA8604 /* TypePremiseMapper.swift in Sources */,

@@ -383,8 +383,8 @@ class GroupSheduleViewController: UIViewController{
         NotificationCenter.default.addObserver(self, selector: #selector(changeDay),
                                                name: Notification.Name("ChangeDay"),
                                                object: nil)
-        
-        self.viewModel.getSheduleForGroup(groupName: "ИТ-41", completion: {
+        // "ИТ-41"
+        self.viewModel.getSheduleForGroup(groupName: "ПВ-191", completion: {
             self.currentSelectedIndex = self.dateSegmentedControl.numbersOfCalendarSegmentedControl.selectedSegmentIndex
             self.currentPage = self.createViewForSheduleTable(data: self.viewModel.resultDaysCurrentWeek[self.currentSelectedIndex],
                                                          frame: CGRect(x: 0, y: 0,

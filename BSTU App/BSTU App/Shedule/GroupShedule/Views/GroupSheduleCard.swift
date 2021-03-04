@@ -14,12 +14,20 @@ class GroupSheduleCard: UIView{
     @IBOutlet weak var contentView: UIView!
     
     @IBOutlet weak var nameSubject: UILabel!
+    @IBOutlet weak var nameSubjectTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var nameSubjectHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var nameSubjectBottomConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var typeActivity: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var audienceLabel: UILabel!
+    @IBOutlet weak var audienceTopConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var photoTeacher: UIImageView!
+    @IBOutlet weak var photoTeacherTopConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var nameAndPatronymicTeacher: UILabel!
+    @IBOutlet weak var nameAndPatronymicTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var surnameTeacher: UILabel!
     
     func setupView(activity: GroupSheduleModel){
@@ -38,17 +46,68 @@ class GroupSheduleCard: UIView{
     func setupData(activity: GroupSheduleModel){
         
         self.nameSubject.text = activity.nameSubject
-        self.timeLabel.text = "\(activity.timeStart!) - \(activity.timeEnd!)"
-        self.audienceLabel.text = activity.audiences.joined(separator: " ")
+        if self.nameSubject.isTruncated(){
+            nameSubjectTopConstraint.constant = 16
+            nameSubjectHeightConstraint.constant = 50
+            nameSubjectBottomConstraint.constant = 8
+            audienceTopConstraint.constant = 22
+            photoTeacherTopConstraint.constant = 11
+            nameAndPatronymicTopConstraint.constant = 17
+            nameSubject.numberOfLines = 2
+        } else {
+            nameSubjectTopConstraint.constant = 31
+            nameSubjectHeightConstraint.constant = 20
+            nameSubjectBottomConstraint.constant = 8
+            audienceTopConstraint.constant = 8
+            photoTeacherTopConstraint.constant = 18
+            nameAndPatronymicTopConstraint.constant = 24
+            nameSubject.numberOfLines = 1
+        }
         
-        let teacherParts = activity.teachers.first?.split(separator: " ").map{
+        self.timeLabel.text = "\(activity.timeStart!) - \(activity.timeEnd!)"
+        self.audienceLabel.text = activity.audiences.joined(separator: ", ")
+        
+        if activity.teachers.count == 1{
+            let teacherParts = activity.teachers.first?.split(separator: " ").map{
+                return String($0)
+            }
+            if teacherParts != nil{
+                if teacherParts?.count == 3{
+                    self.nameAndPatronymicTeacher.text = "\(teacherParts![1]) \(teacherParts![2])"
+                    self.surnameTeacher.text = "\(teacherParts![0])"
+                } else{
+                    self.nameAndPatronymicTeacher.text = activity.teachers.first
+                    self.surnameTeacher.text = ""
+                }
+            }
+        }
+        
+        if activity.teachers.count > 1{
+            
+            self.nameAndPatronymicTeacher.text = self.getShortTeacherRecord(teacher: activity.teachers.first!)
+            self.surnameTeacher.text = activity.teachers[1..<activity.teachers.count].map{ (teacher: String)->String in
+                return self.getShortTeacherRecord(teacher: teacher)
+            }.joined(separator: ", ")
+        }
+        
+        self.photoTeacher.image = UIImage(named: "baseTeacher")
+        //self.photoTeacher.sheduleMakeRoundingImage()
+    }
+    
+    
+    // Получение сокращенной записи для идентификации преподавателя
+    func getShortTeacherRecord(teacher: String)->String{
+        
+        // Выделение инициалов преподавателя
+        let teacherParts = teacher.split(separator: " ").map{
             return String($0)
         }
-        self.nameAndPatronymicTeacher.text = "\(teacherParts![1])  \(teacherParts![2])"
-        self.surnameTeacher.text = "\(teacherParts![0])"
+        // Сокращенные инициалы (без фамилии)
+        let notSurnamePart = teacherParts[1..<teacherParts.count].map{ names in
+            return ("\(names.first!).")
+        }.joined(separator: " ")
         
-        self.photoTeacher.image = UIImage(named: "someImage")
-        self.photoTeacher.sheduleMakeRoundingImage()
+        return "\(teacherParts.first!) \(notSurnamePart)"
     }
     
     
@@ -87,10 +146,10 @@ class GroupSheduleCard: UIView{
             self.typeActivity.text = "Лекция"
         case .laboratory:
             self.typeActivity.backgroundColor = .practiceSubjectColor
-            self.typeActivity.text = "Практика"
+            self.typeActivity.text = "Лабораторная"
         case .practice:
             self.typeActivity.backgroundColor = .laboratorySubjectColor
-            self.typeActivity.text = "Лабораторная"
+            self.typeActivity.text = "Практика"
         case .consultation:
             self.typeActivity.backgroundColor = .consultationSubjectColor
             self.typeActivity.text = "Консультация"

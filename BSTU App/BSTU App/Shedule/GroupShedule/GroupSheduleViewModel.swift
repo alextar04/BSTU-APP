@@ -42,7 +42,6 @@ class GroupSheduleViewModel{
                         let lesson = GroupSheduleModel()
                         
                         lesson.nameSubject = activity["subject_name_short"].string
-                        
                         switch activity["event_type_name"].string {
                         case "лек.":
                             lesson.typeActivity = .lection
@@ -66,12 +65,16 @@ class GroupSheduleViewModel{
                         
                         lesson.audiences = [String]()
                         for item in activity["audiences"].array!{
-                            lesson.audiences.append(item["name"].string!)
+                            if let value = item["name"].string{
+                                 lesson.audiences.append(value)
+                            }
                         }
                         
                         lesson.teachers = [String]()
                         for item in activity["teachers"].array!{
-                            lesson.teachers.append(item["name"].string!)
+                            if let value = item["name"].string{
+                                 lesson.teachers.append(value)
+                            }
                         }
                         
                         let dayOfWeek = (day["num_day"].int)! - 1
