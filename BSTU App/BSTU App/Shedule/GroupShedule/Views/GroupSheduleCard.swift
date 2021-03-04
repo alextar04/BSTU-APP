@@ -12,6 +12,7 @@ import UIKit
 class GroupSheduleCard: UIView{
     
     @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var contentViewHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var nameSubject: UILabel!
     @IBOutlet weak var nameSubjectTopConstraint: NSLayoutConstraint!

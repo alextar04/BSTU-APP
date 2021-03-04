@@ -41,6 +41,7 @@ class GroupSheduleViewController: UIViewController{
         return card!
     }()
     lazy var cardHeight = templateCard.frame.height
+    lazy var cardLiteHeight: CGFloat = 120
     lazy var offsetBetweenCards: CGFloat = 14
     
     
@@ -384,7 +385,7 @@ class GroupSheduleViewController: UIViewController{
                                                name: Notification.Name("ChangeDay"),
                                                object: nil)
         // "ИТ-41"
-        self.viewModel.getSheduleForGroup(groupName: "ПВ-191", completion: {
+        self.viewModel.getSheduleForGroup(groupName: "ИТ-191", completion: {
             self.currentSelectedIndex = self.dateSegmentedControl.numbersOfCalendarSegmentedControl.selectedSegmentIndex
             self.currentPage = self.createViewForSheduleTable(data: self.viewModel.resultDaysCurrentWeek[self.currentSelectedIndex],
                                                          frame: CGRect(x: 0, y: 0,
@@ -404,28 +405,54 @@ class GroupSheduleViewController: UIViewController{
         
         // Случай: есть занятия
         if data.count != 0{
+
+            // Определение размеров таблицы
             var updatedFrame = frame
-            updatedFrame.size.height = offsetBetweenCards + (cardHeight + offsetBetweenCards) * CGFloat(data.count)
+            let countPairWithTeachers = data.filter{ activity in
+                return activity.teachers.count != 0
+            }.count
+            updatedFrame.size.height = offsetBetweenCards
+                + (cardHeight + offsetBetweenCards) * CGFloat(countPairWithTeachers)
+                + (cardLiteHeight + offsetBetweenCards) * CGFloat(data.count - countPairWithTeachers)
             outputView = UIView(frame: updatedFrame)
             
+            var currentTableHeight: CGFloat!
             for (index, dayShedule) in data.enumerated(){
 
                 // Загрузка карточек
                 let subjectCard = Bundle.main.loadNibNamed("GroupSheduleCard", owner: self, options: nil)?.first as? GroupSheduleCard
-                var yStart: CGFloat = 14
-                index != 0 ? (yStart = offsetBetweenCards + (offsetBetweenCards + cardHeight) * CGFloat(index)) : (yStart = offsetBetweenCards)
+                index != 0 ? () : (currentTableHeight = self.offsetBetweenCards)
+                
+                let yStart: CGFloat!
+                index != 0 ? (yStart = currentTableHeight + offsetBetweenCards) : (yStart = currentTableHeight)
                     
                 switch typeCard {
                 case .lesson:
-                    subjectCard!.frame = CGRect(x: 10, y: yStart,
-                                                width: self.sheduleTable.frame.width - 20,
-                                                height: cardHeight)
+                    if dayShedule.teachers.count != 0{
+                        subjectCard!.frame = CGRect(x: 10, y: yStart,
+                                                    width: self.sheduleTable.frame.width - 20,
+                                                    height: cardHeight)
+                        index != 0 ? (currentTableHeight += self.cardHeight + offsetBetweenCards) : (currentTableHeight += self.cardHeight)
+                    } else {
+                        subjectCard!.frame = CGRect(x: 10, y: yStart,
+                                                    width: self.sheduleTable.frame.width - 20,
+                                                    height: cardLiteHeight)
+                        index != 0 ? (currentTableHeight += self.cardLiteHeight + offsetBetweenCards) : (currentTableHeight += self.cardHeight)
+                        
+                        subjectCard?.contentViewHeightConstraint.constant = cardLiteHeight
+                        subjectCard?.photoTeacher.isHidden = true
+                        subjectCard?.nameAndPatronymicTeacher.isHidden = true
+                        subjectCard?.surnameTeacher.isHidden = true
+                    }
+                    
                     subjectCard!.setupView(activity: dayShedule)
                     self.sheduleTable.isScrollEnabled = true
                 case .exam:
                     subjectCard!.frame = CGRect(x: 10, y: yStart,
                                                 width: self.examContentView.frame.width - 20,
                                                 height: cardHeight)
+                    index != 0 ? (currentTableHeight += self.cardHeight + offsetBetweenCards) : (currentTableHeight += self.cardHeight)
+                    
                     subjectCard?.nameSubject.font = UIFont.boldSystemFont(ofSize: 14.0)
                     let typeExam: [TypeActivity] = [.consultation, .examination]
                     subjectCard!.setupData(activity: dayShedule)
