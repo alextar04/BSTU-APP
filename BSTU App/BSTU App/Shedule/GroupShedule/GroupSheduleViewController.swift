@@ -29,6 +29,7 @@ class GroupSheduleViewController: UIViewController{
     @IBOutlet weak var dateStackView: UIStackView!
     var dateSegmentedControl: DateSegmentedControl!
     var currentServerTypeWeek: String!
+    var currentSheduleContainer: [[GroupSheduleModel]]!
     var numberOfCalendarDates: ([Int], [Int])!
     var currentPage: UIView!
     var currentSelectedIndex: Int!
@@ -135,11 +136,6 @@ class GroupSheduleViewController: UIViewController{
             return cellTable
         }.disposed(by: disposeBag)
     
-        // Каждую секунду определять день недели
-        var timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true){ _ in
-            self.currentServerTypeWeek = self.viewModel.getCurrentWeekType()
-            dataBehaviorRelay.accept(data)
-        }
         
         // Открытие/Закрытие таблицы
         self.parityOfWeek.rx
@@ -178,8 +174,6 @@ class GroupSheduleViewController: UIViewController{
                         initialSpringVelocity: 1.0,
                         options: .curveEaseInOut,
                         animations: {
-                            // Остановка таймера счетчика дня недели
-                            timer.invalidate()
                             var heightTable: CGFloat!
                             var heightShadow: CGFloat!
                             if isHiddenTableTypeWeek{
@@ -199,12 +193,6 @@ class GroupSheduleViewController: UIViewController{
                           completion: { _ in
                             self.tableTypeWeek.isHidden = !isHiddenTableTypeWeek
                             self.shadowTableTypeWeek.isHidden = self.tableTypeWeek.isHidden
-                            
-                            // Переинициализация таймера обновления дня недели
-                            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true){ _ in
-                                self.currentServerTypeWeek = self.viewModel.getCurrentWeekType()
-                                dataBehaviorRelay.accept(data)
-                            }
                     })
                 })
                 .disposed(by: disposeBag)
@@ -219,7 +207,9 @@ class GroupSheduleViewController: UIViewController{
                     self.parityDropdownButton.image = UIImage(named: "dropdown")
                     
                     if weekTypeTitle != self.parityOfWeek.titleLabel?.text{
-                        self.loadViewFromRightSide()
+                        (self.currentServerTypeWeek == weekTypeTitle) ?
+                            (self.currentSheduleContainer = self.viewModel.resultDaysCurrentWeek) :
+                            (self.currentSheduleContainer = self.viewModel.resultDaysNextWeek)
                     }
                     
                     UIView.performWithoutAnimation {
@@ -238,6 +228,7 @@ class GroupSheduleViewController: UIViewController{
                             self.dateSegmentedControl.changeContent()
                             let index = self.dateSegmentedControl.numbersData.firstIndex(of: self.currentDay)!
                             self.dateSegmentedControl.numbersOfCalendarSegmentedControl.selectedSegmentIndex = index
+                            self.currentSelectedIndex = index
                             self.dateSegmentedControl.changeSegmentedControlLinePosition(stackView: self.dateStackView, index: index, direction: nil)
                             self.currentDayOfWeek.text = self.viewModel.getNameOfDayByIndex(index: index)
                         default:
@@ -250,10 +241,13 @@ class GroupSheduleViewController: UIViewController{
 
                             self.dateSegmentedControl.changeContent()
                             self.dateSegmentedControl.numbersOfCalendarSegmentedControl.selectedSegmentIndex = 0
+                            self.currentSelectedIndex = 0
                             self.dateSegmentedControl.changeSegmentedControlLinePosition(stackView: self.dateStackView, index: 0, direction: nil)
                             self.currentDayOfWeek.text = self.viewModel.getNameOfDayByIndex(index: 0)
                         }
                     }
+                    
+                    self.loadViewFromRightSide()
                     self.view.layoutIfNeeded()
                     
                     
@@ -274,7 +268,6 @@ class GroupSheduleViewController: UIViewController{
                       completion: { _ in
                         self.tableTypeWeek.isHidden = true
                         self.shadowTableTypeWeek.isHidden = true
-                        selectedItem.status = false
                         
                         _ = data.map{ typeWeek in
                             typeWeek.status = false
@@ -386,8 +379,9 @@ class GroupSheduleViewController: UIViewController{
                                                object: nil)
         // "ИТ-41"
         self.viewModel.getSheduleForGroup(groupName: "ИТ-191", completion: {
+            self.currentSheduleContainer = self.viewModel.resultDaysCurrentWeek
             self.currentSelectedIndex = self.dateSegmentedControl.numbersOfCalendarSegmentedControl.selectedSegmentIndex
-            self.currentPage = self.createViewForSheduleTable(data: self.viewModel.resultDaysCurrentWeek[self.currentSelectedIndex],
+            self.currentPage = self.createViewForSheduleTable(data: self.currentSheduleContainer[self.currentSelectedIndex],
                                                          frame: CGRect(x: 0, y: 0,
                                                                        width: self.sheduleTable.frame.width,
                                                                        height: .zero),
@@ -519,7 +513,7 @@ class GroupSheduleViewController: UIViewController{
         if sender.direction == .left
         {
            let currentSelectedIndex = self.dateSegmentedControl.numbersOfCalendarSegmentedControl.selectedSegmentIndex
-           let maxIndex = self.dateSegmentedControl.numbersOfCalendarSegmentedControl.numberOfSegments-1
+           let maxIndex = self.dateSegmentedControl.numbersOfCalendarSegmentedControl.numberOfSegments - 1
            if currentSelectedIndex + 1 <= maxIndex{
                 self.dateSegmentedControl.changeSegmentedControlLinePosition(stackView: self.dateStackView, direction: .increment)
                 self.currentSelectedIndex = self.dateSegmentedControl.numbersOfCalendarSegmentedControl.selectedSegmentIndex
@@ -545,7 +539,7 @@ class GroupSheduleViewController: UIViewController{
         
         // Анимация: Текущее расписание перемещается вправо
         // На его месте появляется новое
-        let preventPage = createViewForSheduleTable(data: self.viewModel.resultDaysCurrentWeek[self.currentSelectedIndex],
+        let preventPage = createViewForSheduleTable(data: self.currentSheduleContainer[self.currentSelectedIndex],
                                                     frame: CGRect(x: -self.sheduleTable.frame.width, y: 0,
                                                                 width: self.sheduleTable.frame.width,
                                                                 height: .zero),
@@ -578,7 +572,7 @@ class GroupSheduleViewController: UIViewController{
         
         // Анимация: Текущее расписание перемещается влево
         // На его месте появляется новое
-        let nextPage = createViewForSheduleTable(data: self.viewModel.resultDaysCurrentWeek[self.currentSelectedIndex],
+        let nextPage = createViewForSheduleTable(data: self.currentSheduleContainer[self.currentSelectedIndex],
                                                  frame: CGRect(x: self.sheduleTable.frame.width, y: 0,
                                                                width: self.sheduleTable.frame.width,
                                                                height: .zero),
