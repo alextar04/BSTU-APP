@@ -379,6 +379,7 @@ class GroupSheduleViewController: UIViewController{
                                                object: nil)
         
         self.viewModel.getSheduleForGroup(groupName: "ПВ-41", completion: {
+            // Расписание успешно загружно
             self.currentSheduleContainer = self.viewModel.resultDaysCurrentWeek
             self.currentSelectedIndex = self.dateSegmentedControl.numbersOfCalendarSegmentedControl.selectedSegmentIndex
             self.currentPage = self.createViewForSheduleTable(data: self.currentSheduleContainer[self.currentSelectedIndex],
@@ -388,6 +389,25 @@ class GroupSheduleViewController: UIViewController{
                                                          typeCard: .lesson)
             self.sheduleTable.addSubview(self.currentPage)
             self.sheduleTable.autoresizesSubviews = false
+        }, errorClosure: {
+            // Ошибка загрузки расписания
+            let emptyView = Bundle.main.loadNibNamed("EmptySheduleView", owner: self, options: nil)?.first as? EmptySheduleView
+            emptyView!.frame = CGRect(x: 0, y: 0,
+                                            width: self.sheduleTable.frame.width,
+                                            height: self.sheduleTable.frame.height)
+            self.sheduleTable.addSubview(emptyView!)
+            
+            emptyView!.setupView(typeActivity: .lection)
+            emptyView?.picture.image = UIImage(named: "errorLoading")
+            emptyView?.descriptionLabel.text = "Ошибка загрузки расписания."
+            
+            self.sheduleTable.isScrollEnabled = false
+            self.examMenuButton.isEnabled = false
+            
+            self.sheduleTable.isUserInteractionEnabled = false
+            self.dateStackView.isUserInteractionEnabled = false
+            self.examMenuButton.isUserInteractionEnabled = false
+            self.parityOfWeek.isUserInteractionEnabled = false
         })
     }
     

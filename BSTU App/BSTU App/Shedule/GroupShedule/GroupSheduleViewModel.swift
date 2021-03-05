@@ -19,7 +19,7 @@ class GroupSheduleViewModel{
     
     // MARK: Получение расписания для группы (для self.resultDaysCurrentWeek)
     // Входные параметры: id-группы
-    func getSheduleForGroup(groupName: String, completion: @escaping (()->Void)){
+    func getSheduleForGroup(groupName: String, completion: @escaping (()->Void), errorClosure: @escaping ()->Void){
         
         let url = "http://cabinet.bstu.ru/api/1.0/timetable?role=student&groupName=\(groupName)&wholeWeek=true"
             .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
@@ -80,11 +80,6 @@ class GroupSheduleViewModel{
                                     let indexTimeStart2 = lesson.timeStart.index(indexTimeStart1, offsetBy: 4)
                                     lesson.timeStart = "\(dateString) \(String(lesson.timeStart[indexTimeStart1...indexTimeStart2]))"
                                     
-                                    /*
-                                    lesson.timeEnd = activity["ev_end"].string
-                                    let indexTimeEnd1 = lesson.timeEnd.index(lesson.timeEnd.startIndex, offsetBy: 11)
-                                    let indexTimeEnd2 = lesson.timeEnd.index(indexTimeEnd1, offsetBy: 4)
-                                    lesson.timeEnd = String(lesson.timeEnd[indexTimeEnd1...indexTimeEnd2]) */
                                 } else {
                                     lesson.timeStart = activity["pair_time_start"].string
                                     let indexTimeStart1 = lesson.timeStart.index(lesson.timeStart.startIndex, offsetBy: 11)
@@ -133,7 +128,7 @@ class GroupSheduleViewModel{
                 completion()
                 
             case .failure(let error):
-                print(error)
+                errorClosure()
             }
         }
     }
