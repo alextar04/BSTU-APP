@@ -378,7 +378,8 @@ class GroupSheduleViewController: UIViewController{
                                                name: Notification.Name("ChangeDay"),
                                                object: nil)
         
-        self.viewModel.getSheduleForGroup(groupName: "ПВ-41", completion: {
+        //"ПВ-31"
+        self.viewModel.getSheduleForGroup(groupName: self.groupName, completion: {
             // Расписание успешно загружно
             self.currentSheduleContainer = self.viewModel.resultDaysCurrentWeek
             self.currentSelectedIndex = self.dateSegmentedControl.numbersOfCalendarSegmentedControl.selectedSegmentIndex
@@ -451,7 +452,7 @@ class GroupSheduleViewController: UIViewController{
                         subjectCard!.frame = CGRect(x: 10, y: yStart,
                                                     width: self.sheduleTable.frame.width - 20,
                                                     height: cardLiteHeight)
-                        index != 0 ? (currentTableHeight += self.cardLiteHeight + offsetBetweenCards) : (currentTableHeight += self.cardHeight)
+                        index != 0 ? (currentTableHeight += self.cardLiteHeight + offsetBetweenCards) : (currentTableHeight += self.cardLiteHeight)
                         
                         subjectCard?.contentViewHeightConstraint.constant = cardLiteHeight
                         subjectCard?.photoTeacher.isHidden = true

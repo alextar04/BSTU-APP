@@ -46,7 +46,19 @@ class GroupSheduleViewModel{
                             for activity in dayActivities!{
                                 let lesson = GroupSheduleModel()
                                 
-                                lesson.nameSubject = activity["subject_name_short"].string
+                                // Если в дисциплине есть разделение по подгруппам
+                                // Добавить информацию о подгруппе к строке названия дисциплины
+                                var additionalNameSubject = ""
+                                if let subGroupInfo = activity["group_part"].string{
+                                    let parsedSubgroupInfo = subGroupInfo.split(separator: "/").map{
+                                            return String($0)
+                                    }
+                                    if parsedSubgroupInfo.last != "1"{
+                                        additionalNameSubject = " \(parsedSubgroupInfo.first!) гр."
+                                    }
+                                }
+                                lesson.nameSubject = "\(activity["subject_name_short"].string!)\(additionalNameSubject)"
+                                
                                 switch activity["event_type_name"].string {
                                 case "лек.":
                                     lesson.typeActivity = .lection
