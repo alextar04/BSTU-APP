@@ -15,6 +15,7 @@ class GroupSheduleViewModel{
     
     var resultDaysCurrentWeek: [[GroupSheduleModel]]!
     var resultDaysNextWeek: [[GroupSheduleModel]]!
+    var resultExams = [GroupSheduleModel]()
     
     // MARK: Получение расписания для группы (для self.resultDaysCurrentWeek)
     // Входные параметры: id-группы
@@ -36,51 +37,87 @@ class GroupSheduleViewModel{
                 for (index, week) in [currentWeek, nextWeek].enumerated(){
                     var resultDays = [[GroupSheduleModel]].init(repeating: [GroupSheduleModel](), count: 7)
                     let arrayDays = week["days"].array
-                    for day in arrayDays!{
-                        
-                        // Заполнение информации по дню
-                        let dayActivities = day["pairs"].array
-                        for activity in dayActivities!{
-                            let lesson = GroupSheduleModel()
+                    
+                    if arrayDays != nil{
+                        for day in arrayDays!{
                             
-                            lesson.nameSubject = activity["subject_name_short"].string
-                            switch activity["event_type_name"].string {
-                            case "лек.":
-                                lesson.typeActivity = .lection
-                            case "лаб.":
-                                lesson.typeActivity = .laboratory
-                            case "практ.":
-                                lesson.typeActivity = .practice
-                            default:
-                                break
-                            }
-                            
-                            lesson.timeStart = activity["pair_time_start"].string
-                            let indexTimeStart1 = lesson.timeStart.index(lesson.timeStart.startIndex, offsetBy: 11)
-                            let indexTimeStart2 = lesson.timeStart.index(indexTimeStart1, offsetBy: 4)
-                            lesson.timeStart = String(lesson.timeStart[indexTimeStart1...indexTimeStart2])
-                            
-                            lesson.timeEnd = activity["pair_time_end"].string
-                            let indexTimeEnd1 = lesson.timeEnd.index(lesson.timeEnd.startIndex, offsetBy: 11)
-                            let indexTimeEnd2 = lesson.timeEnd.index(indexTimeEnd1, offsetBy: 4)
-                            lesson.timeEnd = String(lesson.timeEnd[indexTimeEnd1...indexTimeEnd2])
-                            
-                            lesson.audiences = [String]()
-                            for item in activity["audiences"].array!{
-                                if let value = item["name"].string{
-                                     lesson.audiences.append(value)
+                            // Заполнение информации по дню
+                            let dayActivities = day["pairs"].array
+                            for activity in dayActivities!{
+                                let lesson = GroupSheduleModel()
+                                
+                                lesson.nameSubject = activity["subject_name_short"].string
+                                switch activity["event_type_name"].string {
+                                case "лек.":
+                                    lesson.typeActivity = .lection
+                                case "лаб.":
+                                    lesson.typeActivity = .laboratory
+                                case "практ.":
+                                    lesson.typeActivity = .practice
+                                case "конс.":
+                                    lesson.typeActivity = .consultation
+                                case "экз.":
+                                    lesson.typeActivity = .examination
+                                default:
+                                    break
+                                }
+                                
+                                if [TypeActivity.consultation, TypeActivity.examination].contains(lesson.typeActivity){
+                                    
+                                    lesson.timeStart = activity["ev_start"].string
+                                    var dateComponents = Array(String(lesson.timeStart.split(separator: " ").first!)
+                                        .split(separator: "-")
+                                        .reversed()
+                                        .map{
+                                        return String($0)
+                                    })
+                                    let indexYearShort1 = dateComponents[2].index(dateComponents[2].startIndex, offsetBy: 2)
+                                    let indexYearShort2 = dateComponents[2].index(indexYearShort1, offsetBy: 1)
+                                    dateComponents[2] = String(dateComponents[2][indexYearShort1...indexYearShort2])
+                                    let dateString = dateComponents.joined(separator: ".")
+                                    
+                                    let indexTimeStart1 = lesson.timeStart.index(lesson.timeStart.startIndex, offsetBy: 11)
+                                    let indexTimeStart2 = lesson.timeStart.index(indexTimeStart1, offsetBy: 4)
+                                    lesson.timeStart = "\(dateString) \(String(lesson.timeStart[indexTimeStart1...indexTimeStart2]))"
+                                    
+                                    /*
+                                    lesson.timeEnd = activity["ev_end"].string
+                                    let indexTimeEnd1 = lesson.timeEnd.index(lesson.timeEnd.startIndex, offsetBy: 11)
+                                    let indexTimeEnd2 = lesson.timeEnd.index(indexTimeEnd1, offsetBy: 4)
+                                    lesson.timeEnd = String(lesson.timeEnd[indexTimeEnd1...indexTimeEnd2]) */
+                                } else {
+                                    lesson.timeStart = activity["pair_time_start"].string
+                                    let indexTimeStart1 = lesson.timeStart.index(lesson.timeStart.startIndex, offsetBy: 11)
+                                    let indexTimeStart2 = lesson.timeStart.index(indexTimeStart1, offsetBy: 4)
+                                    lesson.timeStart = String(lesson.timeStart[indexTimeStart1...indexTimeStart2])
+                                    
+                                    lesson.timeEnd = activity["pair_time_end"].string
+                                    let indexTimeEnd1 = lesson.timeEnd.index(lesson.timeEnd.startIndex, offsetBy: 11)
+                                    let indexTimeEnd2 = lesson.timeEnd.index(indexTimeEnd1, offsetBy: 4)
+                                    lesson.timeEnd = String(lesson.timeEnd[indexTimeEnd1...indexTimeEnd2])
+                                }
+                                
+                                lesson.audiences = [String]()
+                                for item in activity["audiences"].array!{
+                                    if let value = item["name"].string{
+                                         lesson.audiences.append(value)
+                                    }
+                                }
+                                
+                                lesson.teachers = [String]()
+                                for item in activity["teachers"].array!{
+                                    if let value = item["name"].string{
+                                         lesson.teachers.append(value)
+                                    }
+                                }
+                                
+                                if [TypeActivity.consultation, TypeActivity.examination].contains(lesson.typeActivity){
+                                    self.resultExams.append(lesson)
+                                } else {
+                                    let dayOfWeek = (day["num_day"].int)! - 1
+                                    resultDays[dayOfWeek].append(lesson)
                                 }
                             }
-                            
-                            lesson.teachers = [String]()
-                            for item in activity["teachers"].array!{
-                                if let value = item["name"].string{
-                                     lesson.teachers.append(value)
-                                }
-                            }
-                            
-                            let dayOfWeek = (day["num_day"].int)! - 1
-                            resultDays[dayOfWeek].append(lesson)
                         }
                     }
     

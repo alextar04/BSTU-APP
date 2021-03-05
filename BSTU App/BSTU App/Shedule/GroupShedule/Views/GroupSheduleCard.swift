@@ -65,7 +65,15 @@ class GroupSheduleCard: UIView{
             nameSubject.numberOfLines = 1
         }
         
-        self.timeLabel.text = "\(activity.timeStart!) - \(activity.timeEnd!)"
+        if let timeStart = activity.timeStart{
+            if let timeFinish = activity.timeEnd{
+                self.timeLabel.text = "\(timeStart) - \(timeFinish)"
+            } else {
+                self.timeLabel.text = "\(timeStart)"
+            }
+        } else {
+            self.timeLabel.text = ""
+        }
         self.audienceLabel.text = activity.audiences.joined(separator: ", ")
         
         if activity.teachers.count == 1{

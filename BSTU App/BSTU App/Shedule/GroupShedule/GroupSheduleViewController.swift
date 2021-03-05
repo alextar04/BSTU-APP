@@ -72,7 +72,7 @@ class GroupSheduleViewController: UIViewController{
         setSettingsNumbersOfWeeks()
         setSettingsSheduleTable()
         setSettingsWeekType()
-        //setSettingsExamViews()
+        setSettingsExamViews()
     }
     
     
@@ -293,7 +293,7 @@ class GroupSheduleViewController: UIViewController{
         self.additionalStatusBar.isHidden = true
         self.view.addSubview(self.additionalStatusBar)
         
-        let examView = createViewForSheduleTable(data: self.viewModel.resultDaysCurrentWeek[self.currentSelectedIndex],
+        let examView = createViewForSheduleTable(data: self.viewModel.resultExams,
                                                  frame: CGRect(x: 0, y: 0,
                                                                     width: self.examContentView.frame.width,
                                                                     height: .zero),
@@ -312,7 +312,7 @@ class GroupSheduleViewController: UIViewController{
                 self.additionalStatusBar.isHidden = false
                 self.additionalStatusBar.alpha = 0
                 
-                let examView = self.createViewForSheduleTable(data: self.viewModel.resultDaysCurrentWeek[self.currentSelectedIndex],
+                let examView = self.createViewForSheduleTable(data: self.viewModel.resultExams,
                                                          frame: CGRect(x: 0, y: 0,
                                                                        width: self.examContentView.frame.width,
                                                                        height: .zero),
@@ -377,8 +377,8 @@ class GroupSheduleViewController: UIViewController{
         NotificationCenter.default.addObserver(self, selector: #selector(changeDay),
                                                name: Notification.Name("ChangeDay"),
                                                object: nil)
-        // "ИТ-41"
-        self.viewModel.getSheduleForGroup(groupName: "ИТ-191", completion: {
+        
+        self.viewModel.getSheduleForGroup(groupName: "ПВ-41", completion: {
             self.currentSheduleContainer = self.viewModel.resultDaysCurrentWeek
             self.currentSelectedIndex = self.dateSegmentedControl.numbersOfCalendarSegmentedControl.selectedSegmentIndex
             self.currentPage = self.createViewForSheduleTable(data: self.currentSheduleContainer[self.currentSelectedIndex],
@@ -448,8 +448,7 @@ class GroupSheduleViewController: UIViewController{
                     index != 0 ? (currentTableHeight += self.cardHeight + offsetBetweenCards) : (currentTableHeight += self.cardHeight)
                     
                     subjectCard?.nameSubject.font = UIFont.boldSystemFont(ofSize: 14.0)
-                    let typeExam: [TypeActivity] = [.consultation, .examination]
-                    subjectCard!.setupData(activity: dayShedule)
+                    subjectCard!.setupView(activity: dayShedule)
                     self.examContentView.isScrollEnabled = true
                 }
                     outputView.addSubview(subjectCard!)
