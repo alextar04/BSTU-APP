@@ -131,6 +131,8 @@ class GroupSheduleCard: UIView{
             gradientLayer.colors = [UIColor.laboratoryBackgroundColorStart.cgColor, UIColor.laboratoryBackgroundColorFinish.cgColor]
         case .practice:
             gradientLayer.colors = [UIColor.practiceBackgroundColorStart.cgColor, UIColor.practiceBackgroundColorFinish.cgColor]
+        case .test:
+            gradientLayer.colors = [UIColor.examinationBackgroundColorStart.cgColor, UIColor.examinationBackgroundColorFinish.cgColor]
         case .consultation:
             gradientLayer.colors = [UIColor.consultationBackgroundColorStart.cgColor, UIColor.consultationBackgroundColorFinish.cgColor]
         case .examination:
@@ -159,12 +161,21 @@ class GroupSheduleCard: UIView{
         case .practice:
             self.typeActivity.backgroundColor = .laboratorySubjectColor
             self.typeActivity.text = "Практика"
+        case .test:
+            self.typeActivity.backgroundColor = .examinationSubjectColor
+            self.typeActivity.text = "Зачет"
         case .consultation:
             self.typeActivity.backgroundColor = .consultationSubjectColor
             self.typeActivity.text = "Консультация"
+            if self.typeActivity.isTruncated(){
+                self.typeActivity.text = "К"
+            }
         case .examination:
             self.typeActivity.backgroundColor = .examinationSubjectColor
             self.typeActivity.text = "Экзамен"
+            if self.typeActivity.isTruncated(){
+                self.typeActivity.text = "Э"
+            }
         }
     }
     
@@ -179,6 +190,8 @@ class GroupSheduleCard: UIView{
             self.nameSubject.textColor = .practiceSubjectColor
         case .practice:
             self.nameSubject.textColor = .laboratorySubjectColor
+        case .test:
+            self.nameSubject.textColor = .examinationSubjectColor
         case .consultation:
             self.nameSubject.textColor = .consultationSubjectColor
         case .examination:

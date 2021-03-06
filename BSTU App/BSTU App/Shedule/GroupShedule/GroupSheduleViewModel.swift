@@ -17,9 +17,10 @@ class GroupSheduleViewModel{
     var resultDaysNextWeek: [[GroupSheduleModel]]!
     var resultExams = [GroupSheduleModel]()
     
-    // MARK: Получение расписания для группы (для self.resultDaysCurrentWeek)
+    // MARK: Получение расписания для группы
     // Входные параметры: id-группы
-    func getSheduleForGroup(groupName: String, completion: @escaping (()->Void), errorClosure: @escaping ()->Void){
+    func getSheduleForGroup(groupName: String, isCorrespondenceGroup: Bool,
+                            completion: @escaping (()->Void), errorClosure: @escaping ()->Void){
         
         let url = "http://cabinet.bstu.ru/api/1.0/timetable?role=student&groupName=\(groupName)&wholeWeek=true"
             .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
@@ -33,13 +34,16 @@ class GroupSheduleViewModel{
                 let nextWeek = resultJson["next_week"]
                 let isCurrentWeekNumerator = currentWeek["now_denom"].int
                 
-                // Парсинг информации о неделе
+                // Парсинг каждой неделе
                 for (index, week) in [currentWeek, nextWeek].enumerated(){
-                    var resultDays = [[GroupSheduleModel]].init(repeating: [GroupSheduleModel](), count: 7)
-                    let arrayDays = week["days"].array
                     
-                    if arrayDays != nil{
-                        for day in arrayDays!{
+                    var resultDays: [[GroupSheduleModel]]!
+                    (isCorrespondenceGroup) ? (resultDays = [[GroupSheduleModel]].init(repeating: [GroupSheduleModel](), count: 1)) :
+                                              (resultDays = [[GroupSheduleModel]].init(repeating: [GroupSheduleModel](), count: 7))
+                    
+                    // Парсинг каждого дня недели
+                    if let arrayDays = week["days"].array{
+                        for day in arrayDays{
                             
                             // Заполнение информации по дню
                             let dayActivities = day["pairs"].array
@@ -66,6 +70,8 @@ class GroupSheduleViewModel{
                                     lesson.typeActivity = .laboratory
                                 case "практ.":
                                     lesson.typeActivity = .practice
+                                case "зач.":
+                                    lesson.typeActivity = .test
                                 case "конс.":
                                     lesson.typeActivity = .consultation
                                 case "экз.":
@@ -74,7 +80,7 @@ class GroupSheduleViewModel{
                                     break
                                 }
                                 
-                                if [TypeActivity.consultation, TypeActivity.examination].contains(lesson.typeActivity){
+                                if [TypeActivity.consultation, TypeActivity.examination].contains(lesson.typeActivity) || isCorrespondenceGroup{
                                     
                                     lesson.timeStart = activity["ev_start"].string
                                     var dateComponents = Array(String(lesson.timeStart.split(separator: " ").first!)
@@ -118,11 +124,17 @@ class GroupSheduleViewModel{
                                     }
                                 }
                                 
-                                if [TypeActivity.consultation, TypeActivity.examination].contains(lesson.typeActivity){
-                                    self.resultExams.append(lesson)
+                                // Формирование контейнеров для очных групп
+                                if !isCorrespondenceGroup{
+                                    if [TypeActivity.consultation, TypeActivity.examination].contains(lesson.typeActivity){
+                                        self.resultExams.append(lesson)
+                                    } else {
+                                        let dayOfWeek = (day["num_day"].int)! - 1
+                                        resultDays[dayOfWeek].append(lesson)
+                                    }
                                 } else {
-                                    let dayOfWeek = (day["num_day"].int)! - 1
-                                    resultDays[dayOfWeek].append(lesson)
+                                    // Формирование контейнера для заочных групп
+                                    resultDays[0].append(lesson)
                                 }
                             }
                         }

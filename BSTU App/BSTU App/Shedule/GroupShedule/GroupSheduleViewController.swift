@@ -26,6 +26,7 @@ class GroupSheduleViewController: UIViewController{
     @IBOutlet weak var shadowTableTypeWeek: UIView!
     @IBOutlet weak var parityDropdownButton: UIImageView!
     
+    @IBOutlet weak var correspondenceSheduleLabel: UILabel!
     @IBOutlet weak var dateStackView: UIStackView!
     var dateSegmentedControl: DateSegmentedControl!
     var currentServerTypeWeek: String!
@@ -37,6 +38,7 @@ class GroupSheduleViewController: UIViewController{
     
     
     @IBOutlet weak var sheduleTable: UIScrollView!
+    var isNeedCardSwipe = true
     lazy var templateCard: GroupSheduleCard = {
         let card = Bundle.main.loadNibNamed("GroupSheduleCard", owner: self, options: nil)?.first as? GroupSheduleCard
         return card!
@@ -378,16 +380,47 @@ class GroupSheduleViewController: UIViewController{
                                                name: Notification.Name("ChangeDay"),
                                                object: nil)
         
-        //"ПВ-31"
-        self.viewModel.getSheduleForGroup(groupName: self.groupName, completion: {
+        // Форма обучения группы (очная, заочная)
+        var isCorrespondenceGroup = false
+        let groupNameWithoutNumber = String(groupName.split(separator: "-").first!)
+        if !groupNameWithoutNumber.hasSuffix("оз"){
+            if groupNameWithoutNumber.hasSuffix("з"){
+                isCorrespondenceGroup = true
+            }
+        }
+        
+        // self.groupName
+        self.viewModel.getSheduleForGroup(groupName: self.groupName,
+                                          isCorrespondenceGroup: isCorrespondenceGroup,
+                                          completion: {
             // Расписание успешно загружно
             self.currentSheduleContainer = self.viewModel.resultDaysCurrentWeek
-            self.currentSelectedIndex = self.dateSegmentedControl.numbersOfCalendarSegmentedControl.selectedSegmentIndex
-            self.currentPage = self.createViewForSheduleTable(data: self.currentSheduleContainer[self.currentSelectedIndex],
-                                                         frame: CGRect(x: 0, y: 0,
-                                                                       width: self.sheduleTable.frame.width,
-                                                                       height: .zero),
-                                                         typeCard: .lesson)
+            
+            // Обработка очных групп
+            if !isCorrespondenceGroup{
+                self.dateStackView.isHidden = false
+                self.examMenuButton.isHidden = false
+                self.parityOfWeek.isHidden = false
+                self.parityDropdownButton.isHidden = false
+                
+                self.currentSelectedIndex = self.dateSegmentedControl.numbersOfCalendarSegmentedControl.selectedSegmentIndex
+                self.currentPage = self.createViewForSheduleTable(data: self.currentSheduleContainer[self.currentSelectedIndex],
+                                                             frame: CGRect(x: 0, y: 0,
+                                                                           width: self.sheduleTable.frame.width,
+                                                                           height: .zero),
+                                                             typeCard: .lesson)
+            } else {
+                // Обработка заочных групп
+                self.correspondenceSheduleLabel.isHidden = false
+                self.isNeedCardSwipe = false
+                
+                self.currentPage = self.createViewForSheduleTable(data: self.currentSheduleContainer[0],
+                                                            frame: CGRect(x: 0, y: 0,
+                                                                          width: self.sheduleTable.frame.width,
+                                                                          height: .zero),
+                                                            typeCard: .lesson)
+            }
+                                            
             self.sheduleTable.addSubview(self.currentPage)
             self.sheduleTable.autoresizesSubviews = false
         }, errorClosure: {
@@ -513,7 +546,7 @@ class GroupSheduleViewController: UIViewController{
             self.examContentView.contentSize = CGSize(width: self.examContentView.frame.width, height: outputView.frame.height)
         }
         
-        if typeCard == .lesson{
+        if typeCard == .lesson && self.isNeedCardSwipe{
             let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
             let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
             leftSwipe.direction = .left

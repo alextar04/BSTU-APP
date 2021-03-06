@@ -22,6 +22,7 @@ enum TypeActivity{
     case lection
     case laboratory
     case practice
+    case test
     case consultation
     case examination
 }
