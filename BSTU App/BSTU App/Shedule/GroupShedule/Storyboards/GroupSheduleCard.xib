@@ -28,7 +28,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Имя Отчество" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zKn-td-LWc">
-                            <rect key="frame" x="97" y="103" width="290" height="21"/>
+                            <rect key="frame" x="22" y="103" width="365" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="1rU-lU-hp9"/>
                             </constraints>
@@ -37,7 +37,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Фамилия" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Mb-WM-fqF">
-                            <rect key="frame" x="97" y="125" width="290" height="21"/>
+                            <rect key="frame" x="22" y="125" width="365" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="dLC-0F-slu"/>
                                 <constraint firstAttribute="height" constant="21" id="dMq-mm-jMd"/>
@@ -101,11 +101,18 @@
                         <constraint firstItem="3Hq-wO-N1N" firstAttribute="leading" secondItem="8vp-Vz-4EO" secondAttribute="leading" constant="22" id="bzA-6v-GNM"/>
                         <constraint firstItem="5Mb-WM-fqF" firstAttribute="leading" secondItem="HQ2-wR-Ame" secondAttribute="trailing" constant="23" id="gsF-3N-EgO"/>
                         <constraint firstItem="FEp-RA-ELj" firstAttribute="leading" secondItem="3Hq-wO-N1N" secondAttribute="trailing" id="mix-HU-n12"/>
+                        <constraint firstItem="zKn-td-LWc" firstAttribute="leading" secondItem="8vp-Vz-4EO" secondAttribute="leading" constant="22" id="nN1-tU-BRT"/>
+                        <constraint firstItem="5Mb-WM-fqF" firstAttribute="leading" secondItem="8vp-Vz-4EO" secondAttribute="leading" constant="22" id="nXU-cB-1CD"/>
                         <constraint firstItem="HQ2-wR-Ame" firstAttribute="leading" secondItem="8vp-Vz-4EO" secondAttribute="leading" constant="22" id="oJI-SF-OXJ"/>
                         <constraint firstAttribute="trailing" secondItem="FEp-RA-ELj" secondAttribute="trailing" constant="19" id="rl7-mi-WNb"/>
                         <constraint firstItem="5Mb-WM-fqF" firstAttribute="top" secondItem="zKn-td-LWc" secondAttribute="bottom" constant="1" id="vew-dZ-RI3"/>
                         <constraint firstItem="3Hq-wO-N1N" firstAttribute="top" secondItem="8vp-Vz-4EO" secondAttribute="top" constant="31" id="xcX-8N-G91"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="subviews">
+                            <exclude reference="HQ2-wR-Ame"/>
+                        </mask>
+                    </variation>
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
