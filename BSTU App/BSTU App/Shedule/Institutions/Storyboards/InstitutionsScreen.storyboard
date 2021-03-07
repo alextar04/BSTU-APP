@@ -134,6 +134,7 @@
                     <connections>
                         <outlet property="institutionsTable" destination="fgN-nJ-g1y" id="r6b-Jd-Urz"/>
                         <outlet property="loadingWheel" destination="DKe-wy-bbj" id="NkK-q0-Qyy"/>
+                        <outlet property="menuButton" destination="Ciq-wa-Sld" id="B1G-Zh-aZ2"/>
                         <outlet property="reloadButton" destination="Tq6-fx-pr1" id="JvB-qO-Ek3"/>
                         <outlet property="statusLoadingLabel" destination="ojS-UB-GNs" id="Ux6-Ff-Qv9"/>
                     </connections>

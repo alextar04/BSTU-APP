@@ -14,6 +14,7 @@ import UIKit
 
 class InstitutionsViewController: UIViewController{
     
+    @IBOutlet weak var menuButton: UIImageView!
     @IBOutlet weak var statusLoadingLabel: UILabel!
     @IBOutlet weak var reloadButton: UIButton!
     @IBOutlet weak var loadingWheel: UIActivityIndicatorView!
@@ -26,6 +27,7 @@ class InstitutionsViewController: UIViewController{
         
         setupTable()
         setupReloadButton()
+        setupOpenMenu()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
@@ -78,6 +80,18 @@ class InstitutionsViewController: UIViewController{
                 self.loadingWheel.isHidden = false
                 self.reloadButton.isHidden = true
                 self.setupTable()
+            }).disposed(by: disposeBag)
+    }
+    
+    
+    // MARK: Установка кнопки открытия бокового меню
+    func setupOpenMenu(){
+        
+        self.menuButton.rx
+            .tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { _ in
+                NotificationCenter.default.post(name: Notification.Name("OpenLeftMenu"), object: nil)
             }).disposed(by: disposeBag)
     }
 }
