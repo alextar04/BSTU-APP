@@ -91,7 +91,7 @@ class InstitutionsViewController: UIViewController{
             .tapGesture()
             .when(.recognized)
             .subscribe(onNext: { _ in
-                NotificationCenter.default.post(name: Notification.Name("OpenLeftMenu"), object: nil)
+                NotificationCenter.default.post(name: Notification.Name("SwitchLeftMenu"), object: nil)
             }).disposed(by: disposeBag)
     }
 }

@@ -18,8 +18,7 @@
 		CE01CC9F25C2A496001388B9 /* SearchPremiseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE01CC9E25C2A496001388B9 /* SearchPremiseView.swift */; };
 		CE01CCA125C2A4BB001388B9 /* SearchPremiseCellTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE01CCA025C2A4BB001388B9 /* SearchPremiseCellTable.swift */; };
 		CE037E6625BC425700C50C16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE037E6525BC425700C50C16 /* AppDelegate.swift */; };
-		CE037E6A25BC425700C50C16 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE037E6925BC425700C50C16 /* ViewController.swift */; };
-		CE037E6D25BC425700C50C16 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE037E6B25BC425700C50C16 /* Main.storyboard */; };
+		CE037E6A25BC425700C50C16 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE037E6925BC425700C50C16 /* RootViewController.swift */; };
 		CE037E6F25BC425E00C50C16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE037E6E25BC425E00C50C16 /* Assets.xcassets */; };
 		CE037E7225BC425E00C50C16 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE037E7025BC425E00C50C16 /* LaunchScreen.storyboard */; };
 		CE04A3E125EF9B9700BE073D /* InstitutionsScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE04A3B625EF9B9600BE073D /* InstitutionsScreen.storyboard */; };
@@ -83,6 +82,7 @@
 		CE91140725C437740096AB29 /* StoreySwitcherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE91140625C437740096AB29 /* StoreySwitcherView.xib */; };
 		CE91140925C439460096AB29 /* StoreySwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91140825C439460096AB29 /* StoreySwitcherView.swift */; };
 		CEACB2D925C7F2F900F4ADD3 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEACB2D825C7F2F900F4ADD3 /* Map.swift */; };
+		CEC0C8BA25F6222D00760A0A /* MenuTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0C8B925F6222D00760A0A /* MenuTableCell.swift */; };
 		CED0489725F006D500B7DD65 /* GroupSheduleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED0489625F006D500B7DD65 /* GroupSheduleModel.swift */; };
 		CED3903625D5AFFC004409CF /* bstuDB.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = CED3903525D5AFFC004409CF /* bstuDB.sqlite3 */; };
 		CEE3AFC325D7D5D8007B1814 /* MapRoadDotMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3AFC225D7D5D8007B1814 /* MapRoadDotMapper.swift */; };
@@ -110,8 +110,7 @@
 		CE01CCA025C2A4BB001388B9 /* SearchPremiseCellTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPremiseCellTable.swift; sourceTree = "<group>"; };
 		CE037E6225BC425700C50C16 /* BSTU App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BSTU App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE037E6525BC425700C50C16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CE037E6925BC425700C50C16 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CE037E6C25BC425700C50C16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CE037E6925BC425700C50C16 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		CE037E6E25BC425E00C50C16 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE037E7125BC425E00C50C16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE037E7325BC425E00C50C16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -177,6 +176,7 @@
 		CE91140625C437740096AB29 /* StoreySwitcherView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreySwitcherView.xib; sourceTree = "<group>"; };
 		CE91140825C439460096AB29 /* StoreySwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreySwitcherView.swift; sourceTree = "<group>"; };
 		CEACB2D825C7F2F900F4ADD3 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
+		CEC0C8B925F6222D00760A0A /* MenuTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableCell.swift; sourceTree = "<group>"; };
 		CED0489625F006D500B7DD65 /* GroupSheduleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSheduleModel.swift; sourceTree = "<group>"; };
 		CED3903525D5AFFC004409CF /* bstuDB.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = bstuDB.sqlite3; sourceTree = "<group>"; };
 		CEE3AFC225D7D5D8007B1814 /* MapRoadDotMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRoadDotMapper.swift; sourceTree = "<group>"; };
@@ -250,13 +250,12 @@
 		CE037E6425BC425700C50C16 /* BSTU App */ = {
 			isa = PBXGroup;
 			children = (
+				CE3B2B8625F67DC000DF7CC1 /* RootController */,
 				CE5B3DFD25F539CD00DC66E9 /* Menu */,
 				CE9E00CD25D3FFDB00CF13C0 /* Database */,
 				CE04A3B325EF9B9600BE073D /* Shedule */,
 				CE380A0025BC4F070028622B /* Navigation */,
 				CE037E6525BC425700C50C16 /* AppDelegate.swift */,
-				CE037E6925BC425700C50C16 /* ViewController.swift */,
-				CE037E6B25BC425700C50C16 /* Main.storyboard */,
 				CE037E6E25BC425E00C50C16 /* Assets.xcassets */,
 				CE037E7025BC425E00C50C16 /* LaunchScreen.storyboard */,
 				CE037E7325BC425E00C50C16 /* Info.plist */,
@@ -475,6 +474,14 @@
 			path = UniversityCorps;
 			sourceTree = "<group>";
 		};
+		CE3B2B8625F67DC000DF7CC1 /* RootController */ = {
+			isa = PBXGroup;
+			children = (
+				CE037E6925BC425700C50C16 /* RootViewController.swift */,
+			);
+			path = RootController;
+			sourceTree = "<group>";
+		};
 		CE42A5AA25D41CB900CDDCA5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -500,6 +507,7 @@
 			children = (
 				CE5B3DF925F530F800DC66E9 /* MenuViewController.storyboard */,
 				CE5B3DFB25F539C700DC66E9 /* MenuViewController.swift */,
+				CEC0C8B925F6222D00760A0A /* MenuTableCell.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -637,7 +645,6 @@
 				CE04A3ED25EF9B9700BE073D /* okSelection.png in Resources */,
 				CE91140725C437740096AB29 /* StoreySwitcherView.xib in Resources */,
 				CE04A3FC25EF9B9700BE073D /* example.json in Resources */,
-				CE037E6D25BC425700C50C16 /* Main.storyboard in Resources */,
 				CE04A3E825EF9B9700BE073D /* books.png in Resources */,
 				CE380A3125BC70930028622B /* UniversityCorpCellTable.xib in Resources */,
 				CE04A3EC25EF9B9700BE073D /* dropup.png in Resources */,
@@ -695,7 +702,7 @@
 			files = (
 				CEE5B68625D67AEC0023D640 /* Database.swift in Sources */,
 				CEE5B67C25D66ACA0023D640 /* PremiseDB.swift in Sources */,
-				CE037E6A25BC425700C50C16 /* ViewController.swift in Sources */,
+				CE037E6A25BC425700C50C16 /* RootViewController.swift in Sources */,
 				CE380A2925BC4F910028622B /* TopBarNavigation.swift in Sources */,
 				CE01CC9F25C2A496001388B9 /* SearchPremiseView.swift in Sources */,
 				CE009EEB25D6A20D00CA8604 /* UniversityCorpsViewModel.swift in Sources */,
@@ -741,6 +748,7 @@
 				CE91140925C439460096AB29 /* StoreySwitcherView.swift in Sources */,
 				CE16978625C064F10040AE95 /* LabelExtensions.swift in Sources */,
 				CE37A08D25CBFC540046C1F1 /* MapViewModel.swift in Sources */,
+				CEC0C8BA25F6222D00760A0A /* MenuTableCell.swift in Sources */,
 				CE04A3F225EF9B9700BE073D /* GroupsViewModel.swift in Sources */,
 				CE5B3DFC25F539C700DC66E9 /* MenuViewController.swift in Sources */,
 				CE16978825C151710040AE95 /* ColorExtensions.swift in Sources */,
@@ -753,14 +761,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		CE037E6B25BC425700C50C16 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CE037E6C25BC425700C50C16 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		CE037E7025BC425E00C50C16 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

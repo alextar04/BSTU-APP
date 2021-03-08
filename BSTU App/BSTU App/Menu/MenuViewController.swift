@@ -8,11 +8,41 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxDataSources
 
 class MenuViewController: UIViewController{
     
+    @IBOutlet weak var menuTableView: UITableView!
+    let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTable()
     }
     
-}
+    
+    // MARK: Установка отображения контента таблицы
+    func setupTable(){
+        
+        let chapters: [ChapterType] = [.schedule, .navigation]
+        
+        let data = Observable.just(chapters)
+        data.bind(to: self.menuTableView.rx.items){ (tableView, row, element) in
+            let cell = self.menuTableView.dequeueReusableCell(withIdentifier: "MenuTableCellID") as! MenuTableCell
+            cell.configureCell(chapterType: element)
+            return cell
+        }.disposed(by: self.disposeBag)
+            
+        self.menuTableView.rx
+            .modelSelected(ChapterType.self)
+            .subscribe(onNext: { selectedItem in
+                
+                let userInfo: [String: ChapterType] = ["selectedItem": selectedItem]
+                NotificationCenter.default.post(name: Notification.Name("ChangeChapter"), object: nil, userInfo: userInfo)
+                
+            }).disposed(by: self.disposeBag)
+        }
+    
+    }
+    
