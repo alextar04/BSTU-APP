@@ -93,5 +93,29 @@ class InstitutionsViewController: UIViewController{
             .subscribe(onNext: { _ in
                 NotificationCenter.default.post(name: Notification.Name("SwitchLeftMenu"), object: nil)
             }).disposed(by: disposeBag)
+        
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+        leftSwipe.direction = .left
+        rightSwipe.direction = .right
+        self.view.addGestureRecognizer(leftSwipe)
+        self.view.addGestureRecognizer(rightSwipe)
     }
+    
+    
+    // MARK: Обработка свайпов экрана
+    @objc func handleSwipes(_ sender: UISwipeGestureRecognizer){
+        
+        switch sender.direction {
+        case .left:
+            print("Влево")
+            AppDelegate.appDelegate.rootViewController.currentViewMoving(recognizer: sender, listDisablers: [institutionsTable])
+        case .right:
+            print("Вправо")
+            AppDelegate.appDelegate.rootViewController.currentViewMoving(recognizer: sender, listDisablers: [institutionsTable])
+        default:
+            return
+        }
+    }
+    
 }
