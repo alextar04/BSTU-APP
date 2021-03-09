@@ -36,6 +36,9 @@ class NavigationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.view.backgroundColor = .white
         self.viewModel = NavigationViewModel(idMap: 1)
         
         NotificationCenter.default.addObserver(self, selector: #selector(openBottomBar), name: Notification.Name("OpenBottomBar"), object: nil)
@@ -211,7 +214,8 @@ class NavigationViewController: UIViewController {
         self.topBarView = Bundle.main.loadNibNamed("TopBarView", owner: self, options: nil)?.first as? TopBarNavigation
         self.topBarView.setupView(navigationControllerHeight: self.view.frame.height)
         self.topBarView?.frame = CGRect(x: 0, y: (UIApplication.shared.windows.first?.safeAreaInsets.top)!,
-                                           width: self.view.frame.width, height: (topBarView?.frame.height)!)
+                                            width: self.view.frame.width, height: (topBarView?.frame.height)!)
+        self.view.autoresizesSubviews = false
         self.view.addSubview(self.topBarView)
     }
     

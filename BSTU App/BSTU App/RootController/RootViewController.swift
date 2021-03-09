@@ -14,6 +14,7 @@ import SQLite
 class RootViewController: UIViewController {
 
     var currentView: UIView!
+    var currentNavigationController: UINavigationController?
     var isSlideInMenuPresented: Bool!
     var leftMenuController: MenuViewController!
     
@@ -33,26 +34,22 @@ class RootViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        Database.copyDatabaseToDevice()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(switchLeftMenu), name: Notification.Name("SwitchLeftMenu"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(changeChapter), name: Notification.Name("ChangeChapter"), object: nil)
         
         let institutionsController = UIStoryboard(name: "InstitutionsScreen", bundle: nil).instantiateViewController(withIdentifier: "InstitutionsScreenID") as! InstitutionsViewController
-        let institutionsNavigationController = UINavigationController(rootViewController: institutionsController)
-        self.addChild(institutionsNavigationController)
-        self.currentView = institutionsNavigationController.view
+        self.currentNavigationController = UINavigationController(rootViewController: institutionsController)
+        self.addChild(self.currentNavigationController!)
+        self.currentView = self.currentNavigationController!.view
         
         self.view.addSubview(self.leftMenuController.view)
         self.view.addSubview(self.currentView)
         self.currentView.sheduleMakeShadow(width: Int(self.currentView.frame.width),
                                           heigth: Int(self.currentView.frame.height))
-        
-        /*
-        // Навигация
-        Database.copyDatabaseToDevice()
-        let navigationController = NavigationViewController()
-        self.addChild(navigationController)
-        self.view.addSubview(navigationController.view)
-        */
+         
+        self.currentNavigationController!.didMove(toParent: self)
     }
 
     
@@ -65,7 +62,7 @@ class RootViewController: UIViewController {
                        options: .curveEaseInOut,
                        animations: {
                         self.currentView.frame.origin.x = self.isSlideInMenuPresented ? 0 : 200
-                        print(self.currentView.frame.origin.x)
+                        (self.currentView.frame.origin.x == 0) ? (print("Бар Закрыт")) : (print("Бар Открыт"))
             }, completion: {(finished) in
                 print("Animation finished: \(finished)")
                 self.isSlideInMenuPresented.toggle()
@@ -77,26 +74,34 @@ class RootViewController: UIViewController {
     @objc func changeChapter(_ notification: Notification){
         
         if let chapter = notification.userInfo!["selectedItem"] as? ChapterType{
+            
+            self.currentNavigationController!.willMove(toParent: nil)
+            self.currentView.removeFromSuperview()
+            self.currentNavigationController!.removeFromParent()
+            
             switch chapter {
-                
+        
             case .schedule:
-                //self.currentView.removeFromSuperview()
+                
                 let institutionsController = UIStoryboard(name: "InstitutionsScreen", bundle: nil).instantiateViewController(withIdentifier: "InstitutionsScreenID") as! InstitutionsViewController
-                
-                let navigationController = UINavigationController(rootViewController: institutionsController)
-                self.addChild(navigationController)
-                self.currentView = institutionsController.view
-                
-                //self.view.addSubview(self.currentView)
-                switchLeftMenu()
+                self.currentNavigationController = UINavigationController(rootViewController: institutionsController)
                 
             case .navigation:
-                //self.currentView.removeFromSuperview()
-                let navigationController = NavigationViewController()
-                self.currentView = navigationController.view
-                //self.view.addSubview(self.currentView)
-                switchLeftMenu()
+                
+                self.currentNavigationController = UINavigationController(rootViewController: NavigationViewController())
+                
             }
+            
+            self.addChild(self.currentNavigationController!)
+            self.currentView = self.currentNavigationController!.view
+            self.view.addSubview(self.currentView)
+            self.currentView.sheduleMakeShadow(width: Int(self.currentView.frame.width),
+                                              heigth: Int(self.currentView.frame.height))
+            self.currentNavigationController!.didMove(toParent: self)
+            self.currentView.frame.origin.x = 200
+            
+            switchLeftMenu()
+            
         }
     }
 

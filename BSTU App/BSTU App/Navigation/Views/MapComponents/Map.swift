@@ -28,6 +28,7 @@ class Map: UIScrollView, UIScrollViewDelegate{
     init(frame: CGRect, idMap: Int) {
         super.init(frame: frame)
         
+        self.backgroundColor = .white
         self.showsHorizontalScrollIndicator = false
         self.showsVerticalScrollIndicator = false
         self.decelerationRate = .fast

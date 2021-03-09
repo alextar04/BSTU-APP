@@ -487,7 +487,6 @@
 			children = (
 				CEE5B68025D6746A0023D640 /* Tables */,
 				CEE5B67F25D674520023D640 /* TableMappers */,
-				CEE5B68525D67AEC0023D640 /* Database.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -525,6 +524,7 @@
 		CE9E00CD25D3FFDB00CF13C0 /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				CEE5B68525D67AEC0023D640 /* Database.swift */,
 				CE009EF025D6C18000CA8604 /* admin_bstuDB.sqlite3 */,
 				CED3903525D5AFFC004409CF /* bstuDB.sqlite3 */,
 			);

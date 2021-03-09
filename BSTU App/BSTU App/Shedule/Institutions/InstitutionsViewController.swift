@@ -27,7 +27,7 @@ class InstitutionsViewController: UIViewController{
         
         setupTable()
         setupReloadButton()
-        setupOpenMenu()
+        setupLeftMenuButton()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
@@ -85,7 +85,7 @@ class InstitutionsViewController: UIViewController{
     
     
     // MARK: Установка кнопки открытия бокового меню
-    func setupOpenMenu(){
+    func setupLeftMenuButton(){
         
         self.menuButton.rx
             .tapGesture()

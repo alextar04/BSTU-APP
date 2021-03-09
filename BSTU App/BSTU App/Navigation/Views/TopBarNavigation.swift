@@ -33,6 +33,7 @@ class TopBarNavigation: UIView{
     var navigationControllerHeight: CGFloat!
     var keyboardHeight: CGFloat!
     
+    @IBOutlet weak var leftMenuButton: UIImageView!
     let disposeBag = DisposeBag()
     
     
@@ -83,6 +84,7 @@ class TopBarNavigation: UIView{
         
         self.navigationControllerHeight = navigationControllerHeight
         customizationSelectionFormPlaceTap()
+        setupLeftMenuButton()
     }
     
     
@@ -335,5 +337,17 @@ class TopBarNavigation: UIView{
         self.tablePremiseView = nil
         self.backButton = nil
     }
+
     
+    // MARK: Установка кнопки открытия бокового меню
+    func setupLeftMenuButton(){
+        
+        self.leftMenuButton.rx
+            .tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { _ in
+                NotificationCenter.default.post(name: Notification.Name("SwitchLeftMenu"), object: nil)
+            }).disposed(by: disposeBag)
     }
+    
+}
