@@ -105,6 +105,7 @@ class DateSegmentedControl{
                                                        multiplier: 1 / CGFloat(numbersOfCalendarSegmentedControl.numberOfSegments)),
             ])
         
+        stackView.layoutIfNeeded()
         let segmentWidth = stackView.frame.width / CGFloat(numbersOfCalendarSegmentedControl.numberOfSegments)
         let leadingDistance = segmentWidth * CGFloat(self.indexTodayNumber)
         self.constraintBottomUnderlineLeftOffset = bottomUnderlineView.leftAnchor.constraint(equalTo: numbersOfCalendarSegmentedControl.leftAnchor,

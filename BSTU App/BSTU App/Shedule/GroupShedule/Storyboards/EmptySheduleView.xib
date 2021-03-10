@@ -18,14 +18,14 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="363"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="books" translatesAutoresizingMaskIntoConstraints="NO" id="1P2-GC-Uav">
-                            <rect key="frame" x="118" y="65" width="138" height="130"/>
+                            <rect key="frame" x="118.5" y="57" width="138" height="130"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="138" id="G5L-Om-bbH"/>
                                 <constraint firstAttribute="height" constant="130" id="ysf-GI-8yP"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="В этот день не будет пар! Хорошая возможность провести время с пользой." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jv4-sn-XFz">
-                            <rect key="frame" x="70" y="195" width="235" height="77"/>
+                            <rect key="frame" x="70" y="183" width="235" height="77"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="235" id="Dut-5f-B3t"/>
                                 <constraint firstAttribute="height" constant="77" id="Ex7-Xv-Xw2"/>
@@ -37,12 +37,10 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="Jv4-sn-XFz" secondAttribute="trailing" constant="70" id="b4L-fQ-I8x"/>
-                        <constraint firstItem="1P2-GC-Uav" firstAttribute="leading" secondItem="gQz-Rp-UCE" secondAttribute="leading" constant="118" id="cVC-nt-IGF"/>
-                        <constraint firstAttribute="trailing" secondItem="1P2-GC-Uav" secondAttribute="trailing" constant="119" id="eWN-a1-8zk"/>
-                        <constraint firstItem="Jv4-sn-XFz" firstAttribute="top" secondItem="1P2-GC-Uav" secondAttribute="bottom" id="sku-Eh-jQ1"/>
-                        <constraint firstItem="1P2-GC-Uav" firstAttribute="top" secondItem="gQz-Rp-UCE" secondAttribute="top" constant="65" id="wAf-Ah-HNa"/>
-                        <constraint firstItem="Jv4-sn-XFz" firstAttribute="leading" secondItem="gQz-Rp-UCE" secondAttribute="leading" constant="70" id="zHn-Wl-oDV"/>
+                        <constraint firstItem="Jv4-sn-XFz" firstAttribute="centerX" secondItem="gQz-Rp-UCE" secondAttribute="centerX" id="CzD-Yn-vF3"/>
+                        <constraint firstItem="1P2-GC-Uav" firstAttribute="centerX" secondItem="gQz-Rp-UCE" secondAttribute="centerX" id="fQ1-F2-6DZ"/>
+                        <constraint firstItem="Jv4-sn-XFz" firstAttribute="centerY" secondItem="gQz-Rp-UCE" secondAttribute="centerY" constant="40" id="nsl-Ig-ptu"/>
+                        <constraint firstItem="1P2-GC-Uav" firstAttribute="centerY" secondItem="gQz-Rp-UCE" secondAttribute="centerY" constant="-59.5" id="zgE-AX-D6a"/>
                     </constraints>
                 </view>
             </subviews>
