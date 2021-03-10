@@ -91,7 +91,8 @@ class InstitutionsViewController: UIViewController{
             .tapGesture()
             .when(.recognized)
             .subscribe(onNext: { _ in
-                NotificationCenter.default.post(name: Notification.Name("SwitchLeftMenu"), object: nil)
+                let userInfo: [String: [UIView]] = ["listDisablers": [self.institutionsTable]]
+                NotificationCenter.default.post(name: Notification.Name("SwitchLeftMenu"), object: nil, userInfo: userInfo)
             }).disposed(by: disposeBag)
         
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
@@ -108,10 +109,8 @@ class InstitutionsViewController: UIViewController{
         
         switch sender.direction {
         case .left:
-            print("Влево")
             AppDelegate.appDelegate.rootViewController.currentViewMoving(recognizer: sender, listDisablers: [institutionsTable])
         case .right:
-            print("Вправо")
             AppDelegate.appDelegate.rootViewController.currentViewMoving(recognizer: sender, listDisablers: [institutionsTable])
         default:
             return

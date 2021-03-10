@@ -56,6 +56,7 @@ class NavigationViewController: UIViewController {
         self.addMap(idMap: 1)
         self.addStoreySwitcherView()
         self.setupSwapStoreyButtonAfterCreateWay()
+        self.setupOpenLeftMenuSettings()
     }
     
     
@@ -515,5 +516,40 @@ class NavigationViewController: UIViewController {
         }
         
         self.currentTopBarHeight = (UIApplication.shared.windows.first?.safeAreaInsets.top)!
+    }
+    
+    
+    // MARK: Настройка свайпа открытия меню
+    func setupOpenLeftMenuSettings(){
+        
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+        leftSwipe.direction = .left
+        rightSwipe.direction = .right
+        
+        self.view.addGestureRecognizer(leftSwipe)
+        self.view.addGestureRecognizer(rightSwipe)
+    }
+        
+        
+    // MARK: Обработка свайпов экрана
+    @objc func handleSwipes(_ sender: UISwipeGestureRecognizer){
+        
+        var listDisablers: [UIView] = [self.topBarView.startPlaceTextField, self.topBarView.finishPlaceTextField,
+                                       self.topBarView.chooseCorpButton,
+                                       self.map,
+                                       self.storeySwitcherView]
+        (self.bottomBarView != nil) ? listDisablers.append(self.bottomBarView!) : ()
+        
+        switch sender.direction {
+        case .left:
+            AppDelegate.appDelegate.rootViewController.currentViewMoving(recognizer: sender,
+                                                                         listDisablers: listDisablers)
+        case .right:
+            AppDelegate.appDelegate.rootViewController.currentViewMoving(recognizer: sender,
+                                                                         listDisablers: listDisablers)
+        default:
+            return
+        }
     }
 }

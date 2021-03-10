@@ -346,8 +346,18 @@ class TopBarNavigation: UIView{
             .tapGesture()
             .when(.recognized)
             .subscribe(onNext: { _ in
-                NotificationCenter.default.post(name: Notification.Name("SwitchLeftMenu"), object: nil)
+                
+                let parentVC = self.parentViewController as! NavigationViewController
+                var listDisablers: [UIView] = [parentVC.topBarView.startPlaceTextField, parentVC.topBarView.finishPlaceTextField,
+                                               parentVC.topBarView.chooseCorpButton,
+                                               parentVC.map,
+                                               parentVC.storeySwitcherView]
+                (parentVC.bottomBarView != nil) ? listDisablers.append(parentVC.bottomBarView!) : ()
+                
+                let userInfo: [String: [UIView]] = ["listDisablers": listDisablers]
+                NotificationCenter.default.post(name: Notification.Name("SwitchLeftMenu"), object: nil, userInfo: userInfo)
+                
             }).disposed(by: disposeBag)
+        
     }
-    
 }

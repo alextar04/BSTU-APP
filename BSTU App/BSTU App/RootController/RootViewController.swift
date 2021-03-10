@@ -60,17 +60,24 @@ class RootViewController: UIViewController {
 
     
     // MARK: Открыть/закрыть левое меню
-    @objc func switchLeftMenu(){
-        UIView.animate(withDuration: 0.25,
-                       delay: 0,
-                       usingSpringWithDamping: 0.75,
-                       initialSpringVelocity: 0.9,
-                       options: .curveEaseInOut,
-                       animations: {
-                        self.currentView.frame.origin.x = self.isSlideInMenuPresented ? 0 : 200
-            }, completion: {(finished) in
-                self.isSlideInMenuPresented.toggle()
-            })
+    @objc func switchLeftMenu(_ notification: Notification){
+        
+        if let listDisablers = notification.userInfo!["listDisablers"] as? [UIView]{
+            UIView.animate(withDuration: 0.25,
+                           delay: 0,
+                           usingSpringWithDamping: 0.75,
+                           initialSpringVelocity: 0.9,
+                           options: .curveEaseInOut,
+                           animations: {
+                            self.currentView.frame.origin.x = self.isSlideInMenuPresented ? 0 : 200
+                }, completion: {(finished) in
+                    
+                    self.isSlideInMenuPresented.toggle()
+                        for view in listDisablers{
+                            (self.isSlideInMenuPresented) ? (view.isUserInteractionEnabled = false) : (view.isUserInteractionEnabled = true)
+                        }
+                    })
+        }
     }
     
     
