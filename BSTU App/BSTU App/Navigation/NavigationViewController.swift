@@ -158,6 +158,7 @@ class NavigationViewController: UIViewController {
         
         // Опустить нижнюю панель
         if self.bottomBarIsOpen{
+            self.view.isUserInteractionEnabled = false
             let heightBottomBar = (bottomBarView?.frame.height)! + (self.currentStartTopBarHeight - self.normalStartTopBarHeight)
             let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
                 self.bottomBarView?.frame = self.bottomBarView?.frame
@@ -173,6 +174,9 @@ class NavigationViewController: UIViewController {
             let animatorSwitcherStorey = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
                 self.storeySwitcherView?.frame = self.storeySwitcherView?.frame
                     .offsetBy(dx: 0, dy: heightBottomBar) as! CGRect
+            }
+            animatorSwitcherStorey.addCompletion{ _ in
+                self.view.isUserInteractionEnabled = true
             }
             animatorSwitcherStorey.startAnimation(afterDelay: TimeInterval(0.3))
         }

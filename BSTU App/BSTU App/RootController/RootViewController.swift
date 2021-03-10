@@ -103,14 +103,17 @@ class RootViewController: UIViewController {
                 
             case .navigation:
                 if self.cachedNavigationController != nil{
-                    self.cachedNavigationController.topBarView.startPlaceTextField.isUserInteractionEnabled = true
-                    self.cachedNavigationController.topBarView.finishPlaceTextField.isUserInteractionEnabled = true
-                    self.cachedNavigationController.topBarView.chooseCorpButton.isUserInteractionEnabled = true
-                    self.cachedNavigationController.map.isUserInteractionEnabled = true
-                    self.cachedNavigationController.storeySwitcherView.isUserInteractionEnabled = true
+                    _ = [self.cachedNavigationController.topBarView.startPlaceTextField,
+                        self.cachedNavigationController.topBarView.finishPlaceTextField,
+                        self.cachedNavigationController.topBarView.chooseCorpButton,
+                        self.cachedNavigationController.map,
+                        self.cachedNavigationController.storeySwitcherView
+                    ].map({ view in
+                            view?.isUserInteractionEnabled = true
+                    })
+
                     (self.cachedNavigationController.bottomBarView != nil) ? (self.cachedNavigationController.bottomBarView!.isUserInteractionEnabled = true) : ()
-                }
-                if self.cachedNavigationController == nil{
+                } else{
                     self.cachedNavigationController = NavigationViewController()
                 }
                 self.currentController = self.cachedNavigationController
