@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
@@ -13,11 +13,11 @@
             <objects>
                 <viewController storyboardIdentifier="InstitutionsScreenID" id="oJd-NC-csY" customClass="InstitutionsViewController" customModule="BSTU_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kho-CN-o6A">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="DKe-wy-bbj">
-                                <rect key="frame" x="177.5" y="282" width="20" height="20"/>
+                                <rect key="frame" x="197" y="396.66666666666669" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Pce-1t-dcC"/>
                                     <constraint firstAttribute="width" constant="20" id="q47-a2-G7x"/>
@@ -25,7 +25,7 @@
                                 <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tq6-fx-pr1">
-                                <rect key="frame" x="55" y="277" width="265" height="30"/>
+                                <rect key="frame" x="74.666666666666686" y="391.66666666666669" width="265" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="K9o-yv-1Ef"/>
                                     <constraint firstAttribute="width" constant="265" id="MOt-T0-ItH"/>
@@ -34,22 +34,22 @@
                                 <state key="normal" title="Повторить попытку"/>
                             </button>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="65" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fgN-nJ-g1y">
-                                <rect key="frame" x="16" y="56" width="343" height="611"/>
+                                <rect key="frame" x="16" y="100" width="382" height="762"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="InstitutionsCellID" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="InstitutionCell" rowHeight="65" id="96S-IL-6g3" customClass="InstitutionsTableCell" customModule="BSTU_App" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="343" height="65"/>
+                                        <rect key="frame" x="0.0" y="28" width="382" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="96S-IL-6g3" id="tiX-AT-3rV">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="65"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="382" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U4B-64-ICL">
-                                                    <rect key="frame" x="0.0" y="0.0" width="343" height="55"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="382" height="55"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название института" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dv9-vT-6V2">
-                                                            <rect key="frame" x="31" y="0.0" width="281" height="55"/>
+                                                            <rect key="frame" x="31" y="0.0" width="320" height="55"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -82,14 +82,14 @@
                                 </prototypes>
                             </tableView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu" translatesAutoresizingMaskIntoConstraints="NO" id="Ciq-wa-Sld">
-                                <rect key="frame" x="16" y="16" width="23" height="23"/>
+                                <rect key="frame" x="16" y="60" width="23" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="23" id="aDN-SS-kSe"/>
                                     <constraint firstAttribute="height" constant="23" id="cww-SJ-Ubp"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Институты" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ma1-gs-3Vj">
-                                <rect key="frame" x="56" y="5" width="180" height="43"/>
+                                <rect key="frame" x="56" y="49" width="180" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="FWp-3k-jDI"/>
                                     <constraint firstAttribute="height" constant="43" id="kaX-rA-yn2"/>
@@ -99,7 +99,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Загрузка данных" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojS-UB-GNs">
-                                <rect key="frame" x="118" y="253" width="139.5" height="21"/>
+                                <rect key="frame" x="137.33333333333331" y="367.66666666666669" width="139.33333333333331" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="AgD-XO-F2e"/>
                                     <constraint firstAttribute="width" constant="139.5" id="v5n-S9-N2D"/>

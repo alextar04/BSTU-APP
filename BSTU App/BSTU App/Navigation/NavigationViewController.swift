@@ -10,6 +10,7 @@ import UIKit
  
 class NavigationViewController: UIViewController {
     
+    var newPhone: Bool!
     var viewModel: NavigationViewModel!
     var bottomBarView: BottomBarNavigation? = nil
     var topBarView: TopBarNavigation!
@@ -77,7 +78,7 @@ class NavigationViewController: UIViewController {
         bottomBarView = Bundle.main.loadNibNamed("BottomBarView", owner: self, options: nil)?.first as? BottomBarNavigation
         let heightBottomBar = (bottomBarView?.frame.height)! + (self.currentStartTopBarHeight - self.normalStartTopBarHeight)
         bottomBarView?.makeShadow(width: Int(self.view.frame.width),
-                                  heigth: Int(heightBottomBar))
+                                  heigth: Int(heightBottomBar)/2)
         bottomBarView?.setupView(idPremise: notification.userInfo!["idPremise"] as! Int,
                                  heightBar: heightBottomBar,
                                  viewController: self)
@@ -98,9 +99,11 @@ class NavigationViewController: UIViewController {
             animator.startAnimation()
             
             // Изменить положение переключателя этажей
+            var offsetSwitcherStorey = -heightBottomBar
+            (self.newPhone) ? (offsetSwitcherStorey -= 28) : ()
             let animatorSwitcherStorey = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
                 self.storeySwitcherView?.frame = self.storeySwitcherView?.frame
-                    .offsetBy(dx: 0, dy:  -heightBottomBar) as! CGRect
+                    .offsetBy(dx: 0, dy:  offsetSwitcherStorey) as! CGRect
             }
             animatorSwitcherStorey.startAnimation(afterDelay: TimeInterval(0.3))
             
@@ -127,9 +130,13 @@ class NavigationViewController: UIViewController {
                     
                     // Изменить положение переключателя этажей
                     let heightBottomBar = (bottomBarView?.frame.height)! + (self.currentStartTopBarHeight - self.normalStartTopBarHeight)
+                    
+                    var offsetSwitcherStorey = heightBottomBar
+                    (self.newPhone) ? (offsetSwitcherStorey += 28) : ()
+                    
                     let animatorSwitcherStorey = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
                         self.storeySwitcherView?.frame = self.storeySwitcherView?.frame
-                            .offsetBy(dx: 0, dy: heightBottomBar) as! CGRect
+                            .offsetBy(dx: 0, dy: offsetSwitcherStorey) as! CGRect
                     }
                     animatorSwitcherStorey.startAnimation(afterDelay: TimeInterval(0.3))
                      
@@ -171,9 +178,12 @@ class NavigationViewController: UIViewController {
             }
             
             // Изменить положение переключателя этажей
+            var offsetSwitcherStorey = heightBottomBar
+            (self.newPhone) ? (offsetSwitcherStorey += 28) : ()
+            
             let animatorSwitcherStorey = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
                 self.storeySwitcherView?.frame = self.storeySwitcherView?.frame
-                    .offsetBy(dx: 0, dy: heightBottomBar) as! CGRect
+                    .offsetBy(dx: 0, dy: offsetSwitcherStorey) as! CGRect
             }
             animatorSwitcherStorey.addCompletion{ _ in
                 self.view.isUserInteractionEnabled = true
@@ -357,9 +367,12 @@ class NavigationViewController: UIViewController {
         }
         
         // Изменить положение переключателя этажей
+        var offsetSwitcherStorey = heightBottomBar
+        (self.newPhone) ? (offsetSwitcherStorey += 28) : ()
+        
         let animatorSwitcherStorey = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
             self.storeySwitcherView?.frame = self.storeySwitcherView?.frame
-                .offsetBy(dx: 0, dy: heightBottomBar) as! CGRect
+                .offsetBy(dx: 0, dy: offsetSwitcherStorey) as! CGRect
         }
         animatorSwitcherStorey.startAnimation(afterDelay: TimeInterval(0.3))
     }
@@ -450,70 +463,107 @@ class NavigationViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        self.view.autoresizesSubviews = false
-        var yStartTopBar: CGFloat = 0.0
-        var yStartMap: CGFloat = 0.0
-        var yStartSwitcher: CGFloat = 0.0
-        var yStartAnotherStorey: CGFloat = 0.0
+        self.newPhone = false
+        if UIDevice().userInterfaceIdiom == .phone {
+        switch UIScreen.main.nativeBounds.height {
+            case 1136:
+                // print("iPhone 5 or 5S or 5C")
+            newPhone = false
+            case 1334:
+                // print("iPhone 6/6S/7/8")
+            newPhone = false
+            case 1920, 2208:
+                // print("iPhone 6+/6S+/7+/8+")
+            newPhone = false
+            case 2436:
+                // print("iPhone X/XS/11 Pro")
+            newPhone = true
+            case 2688:
+                // print("iPhone XS Max/11 Pro Max")
+            newPhone = true
+            case 1792:
+                // print("iPhone XR/ 11 ")
+            newPhone = true
+            default:
+                // print("Unknown")
+            newPhone = true
+            }
+        }
         
-        var yStartTable: CGFloat = 0.0
-        var tableHeight: CGFloat = 0.0
         
-        var yStartBackButton: CGFloat = 0.0
+        if self.newPhone{
+            self.normalStartTopBarHeight = (UIApplication.shared.windows.first?.safeAreaInsets.top)!
+            self.currentStartTopBarHeight = (UIApplication.shared.windows.first?.safeAreaInsets.top)!
+            self.isEnabledTopBarInInit = false
+        }
         
-        let firstDrawOnThisCall = self.firstDraw
         
-        // При первой прорисовке запомнить, был ли запущен бар
-        if self.firstDraw{
+        if !self.newPhone{
+            self.view.autoresizesSubviews = false
+            var yStartTopBar: CGFloat = 0.0
+            var yStartMap: CGFloat = 0.0
+            var yStartSwitcher: CGFloat = 0.0
+            var yStartAnotherStorey: CGFloat = 0.0
             
-            self.normalStartTopBarHeight = self.view.frame.height - (UIApplication.shared.windows.first?.safeAreaLayoutGuide.layoutFrame.height)!
-            self.currentStartTopBarHeight = UIApplication.shared.windows.first?.safeAreaInsets.top
+            var yStartTable: CGFloat = 0.0
+            var tableHeight: CGFloat = 0.0
             
-            self.isEnabledTopBarInInit = currentStartTopBarHeight != normalStartTopBarHeight
-            self.firstDraw = false
-        }
-        
-        if self.isEnabledTopBarInInit{
-            yStartTopBar = 0
-            yStartSwitcher = (UIApplication.shared.windows.first?.safeAreaLayoutGuide.layoutFrame.height)! - 98
-            yStartMap = topBarView.frame.height
-            yStartAnotherStorey = (UIApplication.shared.windows.first?.safeAreaLayoutGuide.layoutFrame.height)! - 60
-            if self.topBarView.keyboardHeight != nil{
-                tableHeight = (UIApplication.shared.windows.first?.safeAreaLayoutGuide.layoutFrame.height)! - self.topBarView.keyboardHeight - self.topBarView.frame.height
-                yStartTable = self.topBarView.frame.height
-                yStartBackButton = (UIApplication.shared.windows.first?.safeAreaLayoutGuide.layoutFrame.height)! - self.topBarView.keyboardHeight - 50
+            var yStartBackButton: CGFloat = 0.0
+            
+            let firstDrawOnThisCall = self.firstDraw
+            
+            // При первой прорисовке запомнить, был ли запущен бар
+            if self.firstDraw{
+                
+                self.normalStartTopBarHeight = self.view.frame.height - (UIApplication.shared.windows.first?.safeAreaLayoutGuide.layoutFrame.height)!
+                self.currentStartTopBarHeight = UIApplication.shared.windows.first?.safeAreaInsets.top
+                
+                self.isEnabledTopBarInInit = currentStartTopBarHeight != normalStartTopBarHeight
+                self.firstDraw = false
             }
-        } else {
-            yStartTopBar = 0
-            yStartSwitcher = self.view.frame.height - 98
-            yStartAnotherStorey = self.view.frame.height - 60
-            yStartMap = (UIApplication.shared.windows.first?.safeAreaInsets.top)! + topBarView.frame.height
-            if self.topBarView.keyboardHeight != nil{
-                tableHeight = self.view.frame.height - self.topBarView.keyboardHeight - (self.topBarView.frame.height + ((UIApplication.shared.windows.first?.safeAreaInsets.top)!))
-                yStartTable = self.topBarView.frame.height + (self.topBarView.window?.safeAreaInsets.top)!
-                yStartBackButton = self.view.frame.height - self.topBarView.keyboardHeight - 50
+            
+            if self.isEnabledTopBarInInit{
+                yStartTopBar = 0
+                yStartSwitcher = (UIApplication.shared.windows.first?.safeAreaLayoutGuide.layoutFrame.height)! - 98
+                yStartMap = topBarView.frame.height
+                yStartAnotherStorey = (UIApplication.shared.windows.first?.safeAreaLayoutGuide.layoutFrame.height)! - 60
+                if self.topBarView.keyboardHeight != nil{
+                    tableHeight = (UIApplication.shared.windows.first?.safeAreaLayoutGuide.layoutFrame.height)! - self.topBarView.keyboardHeight - self.topBarView.frame.height
+                    yStartTable = self.topBarView.frame.height
+                    yStartBackButton = (UIApplication.shared.windows.first?.safeAreaLayoutGuide.layoutFrame.height)! - self.topBarView.keyboardHeight - 50
+                }
+            } else {
+                yStartTopBar = (UIApplication.shared.windows.first?.safeAreaInsets.top)!
+                yStartSwitcher = self.view.frame.height - 98
+                yStartAnotherStorey = self.view.frame.height - 60
+                yStartMap = (UIApplication.shared.windows.first?.safeAreaInsets.top)! + topBarView.frame.height
+                if self.topBarView.keyboardHeight != nil{
+                    tableHeight = self.view.frame.height - self.topBarView.keyboardHeight - (self.topBarView.frame.height + ((UIApplication.shared.windows.first?.safeAreaInsets.top)!))
+                    yStartTable = self.topBarView.frame.height + (self.topBarView.window?.safeAreaInsets.top)!
+                    yStartBackButton = self.view.frame.height - self.topBarView.keyboardHeight - 50
+                }
             }
-        }
-        
-        // Если был изменен размер Safe area -> перерисовать объекты
-        if ((UIApplication.shared.windows.first?.safeAreaInsets.top)! - self.currentTopBarHeight != 0) || firstDrawOnThisCall{
-            self.topBarView?.frame = CGRect(x: 0, y: yStartTopBar,
-                                            width: self.view.frame.width, height: (topBarView?.frame.height)!)
-            self.storeySwitcherView?.frame = CGRect(x: 10, y: yStartSwitcher,
-                                                    width: 42, height: 88)
-            self.anotherStageButton.frame = CGRect(x: self.view.frame.width - 120, y: yStartAnotherStorey,
-                                                     width: 110, height: 50)
-            self.map.frame = CGRect(x: 0, y: yStartMap,
-                                    width: self.view.frame.width, height: self.view.frame.height - yStartMap)
-            if self.topBarView.backButton != nil{
-                self.topBarView.backButton?.frame = CGRect(x: self.topBarView.center.x - 60, y: yStartBackButton,
-                                                           width: 120, height: 40)
-                self.topBarView.tablePremiseView?.frame = CGRect(x: 0, y: yStartTable,
-                                                                 width: self.topBarView.frame.width, height: tableHeight)
-                self.topBarView.tablePremiseView?.premiseTableViewHeightConstraint.constant = tableHeight
+            
+            // Если был изменен размер Safe area -> перерисовать объекты
+            if ((UIApplication.shared.windows.first?.safeAreaInsets.top)! - self.currentTopBarHeight != 0) || firstDrawOnThisCall{
+                self.topBarView?.frame = CGRect(x: 0, y: yStartTopBar,
+                                                width: self.view.frame.width, height: (topBarView?.frame.height)!)
+                self.storeySwitcherView?.frame = CGRect(x: 10, y: yStartSwitcher,
+                                                        width: 42, height: 88)
+                self.anotherStageButton.frame = CGRect(x: self.view.frame.width - 120, y: yStartAnotherStorey,
+                                                         width: 110, height: 50)
+                self.map.frame = CGRect(x: 0, y: yStartMap,
+                                        width: self.view.frame.width, height: self.view.frame.height - yStartMap)
+                if self.topBarView.backButton != nil{
+                    self.topBarView.backButton?.frame = CGRect(x: self.topBarView.center.x - 60, y: yStartBackButton,
+                                                               width: 120, height: 40)
+                    self.topBarView.tablePremiseView?.frame = CGRect(x: 0, y: yStartTable,
+                                                                     width: self.topBarView.frame.width, height: tableHeight)
+                    self.topBarView.tablePremiseView?.premiseTableViewHeightConstraint.constant = tableHeight
+                }
             }
+            
+            self.currentTopBarHeight = (UIApplication.shared.windows.first?.safeAreaInsets.top)!
         }
-        
-        self.currentTopBarHeight = (UIApplication.shared.windows.first?.safeAreaInsets.top)!
     }
 }
