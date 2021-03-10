@@ -14,14 +14,15 @@ import RxGesture
 
 class RootViewController: UIViewController {
 
-    var currentView: UIView!
+    var currentView: UIView?
+    var currentController: UIViewController?
     var currentNavigationController: UINavigationController?
     var isSlideInMenuPresented: Bool!
     var leftMenuController: MenuViewController!
     
-    var animator: UIViewPropertyAnimator!
-    let disposeBag = DisposeBag()
+    var cachedNavigationController: NavigationViewController!
     
+    let disposeBag = DisposeBag()
     
     init() {
         self.leftMenuController = UIStoryboard(name: "MenuViewController", bundle: nil).instantiateViewController(withIdentifier: "MenuViewControllerID") as? MenuViewController
@@ -45,15 +46,15 @@ class RootViewController: UIViewController {
             Notification.Name("ChangeChapter"), object: nil)
         
         // Установка стартового экрана: Список институтов
-        let institutionsController = UIStoryboard(name: "InstitutionsScreen", bundle: nil).instantiateViewController(withIdentifier: "InstitutionsScreenID") as! InstitutionsViewController
-        self.currentNavigationController = UINavigationController(rootViewController: institutionsController)
+        self.currentController = UIStoryboard(name: "InstitutionsScreen", bundle: nil).instantiateViewController(withIdentifier: "InstitutionsScreenID") as! InstitutionsViewController
+        self.currentNavigationController = UINavigationController(rootViewController: self.currentController!)
         self.addChild(self.currentNavigationController!)
         self.currentView = self.currentNavigationController!.view
         
         self.view.addSubview(self.leftMenuController.view)
-        self.view.addSubview(self.currentView)
-        self.currentView.sheduleMakeShadow(width: Int(self.currentView.frame.width),
-                                          heigth: Int(self.currentView.frame.height))
+        self.view.addSubview(self.currentView!)
+        self.currentView!.sheduleMakeShadow(width: Int(self.currentView!.frame.width),
+                                            heigth: Int(self.currentView!.frame.height))
          
         self.currentNavigationController!.didMove(toParent: self)
     }
@@ -63,20 +64,20 @@ class RootViewController: UIViewController {
     @objc func switchLeftMenu(_ notification: Notification){
         
         if let listDisablers = notification.userInfo!["listDisablers"] as? [UIView]{
-            UIView.animate(withDuration: 0.25,
+            UIView.animate(withDuration: 0.4,
                            delay: 0,
                            usingSpringWithDamping: 0.75,
                            initialSpringVelocity: 0.9,
                            options: .curveEaseInOut,
                            animations: {
-                            self.currentView.frame.origin.x = self.isSlideInMenuPresented ? 0 : 200
+                            self.currentView!.frame.origin.x = self.isSlideInMenuPresented ? 0 : 200
                 }, completion: {(finished) in
                     
                     self.isSlideInMenuPresented.toggle()
                         for view in listDisablers{
                             (self.isSlideInMenuPresented) ? (view.isUserInteractionEnabled = false) : (view.isUserInteractionEnabled = true)
                         }
-                    })
+            })
         }
     }
     
@@ -87,26 +88,54 @@ class RootViewController: UIViewController {
         if let chapter = notification.userInfo!["selectedItem"] as? ChapterType{
             
             self.currentNavigationController!.willMove(toParent: nil)
-            self.currentView.removeFromSuperview()
+            self.currentView!.removeFromSuperview()
             self.currentNavigationController!.removeFromParent()
+            
+            self.currentView = nil
+            self.currentController = nil
+            self.currentNavigationController = nil
             
             switch chapter {
         
             case .schedule:
-                let institutionsController = UIStoryboard(name: "InstitutionsScreen", bundle: nil).instantiateViewController(withIdentifier: "InstitutionsScreenID") as! InstitutionsViewController
-                self.currentNavigationController = UINavigationController(rootViewController: institutionsController)
+                self.currentController = UIStoryboard(name: "InstitutionsScreen", bundle: nil).instantiateViewController(withIdentifier: "InstitutionsScreenID") as! InstitutionsViewController
+                self.currentNavigationController = UINavigationController(rootViewController: self.currentController!)
                 
             case .navigation:
-                self.currentNavigationController = UINavigationController(rootViewController: NavigationViewController())
+                if self.cachedNavigationController != nil{
+                    self.cachedNavigationController.topBarView.startPlaceTextField.isUserInteractionEnabled = true
+                    self.cachedNavigationController.topBarView.finishPlaceTextField.isUserInteractionEnabled = true
+                    self.cachedNavigationController.topBarView.chooseCorpButton.isUserInteractionEnabled = true
+                    self.cachedNavigationController.map.isUserInteractionEnabled = true
+                    self.cachedNavigationController.storeySwitcherView.isUserInteractionEnabled = true
+                    (self.cachedNavigationController.bottomBarView != nil) ? (self.cachedNavigationController.bottomBarView!.isUserInteractionEnabled = true) : ()
+                }
+                if self.cachedNavigationController == nil{
+                    self.cachedNavigationController = NavigationViewController()
+                }
+                self.currentController = self.cachedNavigationController
+                self.currentNavigationController = UINavigationController(rootViewController: self.currentController!)
+                self.currentNavigationController!.setNavigationBarHidden(true, animated: false)
+                
+            case .teachers:
+                print("Учитель")
+                return
+            case .news:
+                print("Новости")
+                return
+            case .cabinet:
+                print("Кабинет")
+                return
             }
             
             self.addChild(self.currentNavigationController!)
             self.currentView = self.currentNavigationController!.view
-            self.view.addSubview(self.currentView)
-            self.currentView.sheduleMakeShadow(width: Int(self.currentView.frame.width),
-                                              heigth: Int(self.currentView.frame.height))
+            self.view.addSubview(self.currentView!)
             self.currentNavigationController!.didMove(toParent: self)
-            self.currentView.frame.origin.x = 200
+            
+            self.currentView!.sheduleMakeShadow(width: Int(self.currentView!.frame.width),
+                                              heigth: Int(self.currentView!.frame.height))
+            self.currentView!.frame.origin.x = 200
             
             let swipeObject = UISwipeGestureRecognizer()
             swipeObject.direction = .left
@@ -118,7 +147,7 @@ class RootViewController: UIViewController {
     // MARK: Движение экрана над меню
     @objc func currentViewMoving(recognizer: UISwipeGestureRecognizer, listDisablers: [UIView]?) {
         
-        var currentFrame = self.currentView.frame
+        var currentFrame = self.currentView!.frame
         switch recognizer.direction {
         case .left:
             if isSlideInMenuPresented{
@@ -128,11 +157,11 @@ class RootViewController: UIViewController {
                         view.isUserInteractionEnabled = true
                     }
                 }
-                UIView.animate(withDuration: 0.25, delay: 0,
+                UIView.animate(withDuration: 0.4, delay: 0,
                                usingSpringWithDamping: 0.75,
                                initialSpringVelocity: 0.9,
                                animations: {
-                    self.currentView.frame = currentFrame
+                                self.currentView!.frame = currentFrame
                 }, completion: { _ in
                     self.isSlideInMenuPresented.toggle()
                 })
@@ -145,11 +174,11 @@ class RootViewController: UIViewController {
                         view.isUserInteractionEnabled = false
                     }
                 }
-                UIView.animate(withDuration: 0.25, delay: 0,
+                UIView.animate(withDuration: 0.4, delay: 0,
                 usingSpringWithDamping: 0.75,
                 initialSpringVelocity: 0.9,
                 animations: {
-                    self.currentView.frame = currentFrame
+                    self.currentView!.frame = currentFrame
                 }, completion: { _ in
                     self.isSlideInMenuPresented.toggle()
                 })

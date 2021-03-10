@@ -25,7 +25,11 @@ class MenuViewController: UIViewController{
     // MARK: Установка отображения контента таблицы
     func setupTable(){
         
-        let chapters: [ChapterType] = [.schedule, .navigation]
+        let chapters: [ChapterType] = [.schedule,
+                                       .navigation,
+                                       .teachers,
+                                       .news,
+                                       .cabinet]
         
         let data = Observable.just(chapters)
         data.bind(to: self.menuTableView.rx.items){ (tableView, row, element) in

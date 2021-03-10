@@ -14,6 +14,7 @@ import RxGesture
 
 class TopBarNavigation: UIView{
     
+    var parentVC: NavigationViewController!
     @IBOutlet weak var nameCorpLabel: UILabel!
     @IBOutlet weak var chooseCorpButton: UIImageView!
     var chooseCorpButtonIsActive: Bool = false
@@ -37,8 +38,9 @@ class TopBarNavigation: UIView{
     let disposeBag = DisposeBag()
     
     
-    func setupView(navigationControllerHeight: CGFloat){
+    func setupView(navigationControllerHeight: CGFloat, parentVC: NavigationViewController){
         
+        self.parentVC = parentVC
         self.startPlaceTextField.setPlaceholderBoldFont(placeholderText: "Откуда")
         self.finishPlaceTextField.setPlaceholderBoldFont(placeholderText: "Куда")
         NotificationCenter.default.addObserver(self, selector: #selector(changePremiseLabel), name: Notification.Name("ChangePremiseLabel"), object: nil)
@@ -66,13 +68,13 @@ class TopBarNavigation: UIView{
                 let cellHeight = self.universityCorpView.cellHeigth
                 let headerHeight = self.universityCorpView.headerHeigth
                 let countCells = self.universityCorpView.corpsCount
-                let parentVC = self.parentViewController
-                self.universityCorpView?.frame = CGRect(x: (Double((parentVC?.view.frame.size.width)!) / 2) - 150,
-                                                       y: Double((parentVC?.view.frame.size.height)!),
+
+                self.universityCorpView?.frame = CGRect(x: (Double((parentVC.view.frame.size.width)) / 2) - 150,
+                                                        y: Double((parentVC.view.frame.size.height)),
                                                        width: 300,
                                                        height: Double(cellHeight * countCells) + Double(headerHeight))
                 
-                parentVC!.view.addSubview(self.universityCorpView!)
+                parentVC.view.addSubview(self.universityCorpView!)
                     
                 let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
                     self.universityCorpView?.frame = self.universityCorpView?.frame
@@ -90,7 +92,7 @@ class TopBarNavigation: UIView{
     
     // MARK: Экран под окном выбора корпуса
     func setGrayScreenUnderCorpChoosenView(delay: Double){
-        let parentVC = self.parentViewController
+        
         self.chooseCorpBackground = UIView()
         chooseCorpBackground.frame = CGRect(x: 0, y: 0,
                                             width: Double((parentVC?.view.frame.width)!),
@@ -147,6 +149,7 @@ class TopBarNavigation: UIView{
                 .when(.recognized)
                 .subscribe(onNext: { _ in
 
+                    self.leftMenuButton.isHidden = true
                     if self.startPlaceTextField.text == "Откуда"{
                         self.startPlaceTextField.text = ""
                     }
@@ -166,22 +169,22 @@ class TopBarNavigation: UIView{
                         
                         var tableHeight: CGFloat = 0.0
                         var yStartTable: CGFloat = 0.0
-                        if !(self.parentViewController as! NavigationViewController).isEnabledTopBarInInit{
-                            tableHeight = (self.parentViewController?.view.frame.height)! - self.keyboardHeight - (self.frame.height + ((UIApplication.shared.windows.first?.safeAreaInsets.top)!))
+                        if !self.parentVC.isEnabledTopBarInInit{
+                            tableHeight = (self.parentVC?.view.frame.height)! - self.keyboardHeight - (self.frame.height + ((UIApplication.shared.windows.first?.safeAreaInsets.top)!))
                             yStartTable = self.frame.height + (self.window?.safeAreaInsets.top)!
                         } else {
                             tableHeight = (UIApplication.shared.windows.first?.safeAreaLayoutGuide.layoutFrame.height)! - self.keyboardHeight - self.frame.height
                             yStartTable = self.frame.height
                         }
                         
-                        self.tablePremiseView?.setupView(height: tableHeight, parentController: self.parentViewController as! NavigationViewController)
+                        self.tablePremiseView?.setupView(height: tableHeight, parentController: self.parentVC)
                         self.tablePremiseView?.frame = CGRect(x: 0, y: yStartTable,
                                                           width: self.frame.width,
                                                           height: tableHeight)
-                        self.parentViewController?.view.addSubview(self.tablePremiseView!)
+                        self.parentVC?.view.addSubview(self.tablePremiseView!)
                         
                         // Базовая инициализация данными таблицы
-                        let data = (self.parentViewController as! NavigationViewController)
+                        let data = self.parentVC
                             .viewModel
                             .loadArrayPremise(prefix: (label?.text)!)
                         self.tablePremiseView?.sections.accept([SearchPremiseView.SectionOfPremise(header: "Кабинеты",
@@ -194,14 +197,14 @@ class TopBarNavigation: UIView{
                         self.backButton!.makeCancelPremiseInputtingView()
                         
                         var yStartBackButton: CGFloat = 0.0
-                        if !(self.parentViewController as! NavigationViewController).isEnabledTopBarInInit{
-                            yStartBackButton = (self.parentViewController?.view.frame.height)! - self.keyboardHeight - 50
+                        if !(self.parentVC).isEnabledTopBarInInit{
+                            yStartBackButton = (self.parentVC.view.frame.height) - self.keyboardHeight - 50
                         } else {
                             yStartBackButton = (UIApplication.shared.windows.first?.safeAreaLayoutGuide.layoutFrame.height)! - self.keyboardHeight - 50
                         }
                         self.backButton!.frame = CGRect(x: self.center.x - 60, y: yStartBackButton,
                                                   width: 120, height: 40)
-                        self.parentViewController?.view.addSubview(self.backButton!)
+                        self.parentVC?.view.addSubview(self.backButton!)
                     }
                     
                     if timeForBindings{
@@ -214,13 +217,13 @@ class TopBarNavigation: UIView{
                             }
                             if self.startPlaceTextField.text == "" || self.finishPlaceTextField.text == ""{
                                 // Удаление старого нарисованного пути
-                                let parentVC = self.parentViewController as! NavigationViewController
-                                if parentVC.map.pathLayer != nil{
-                                    parentVC.map.pathLayer.removeFromSuperlayer()
-                                    parentVC.map.pathLayer.removeAllAnimations()
+                     
+                                if self.parentVC.map.pathLayer != nil{
+                                    self.parentVC.map.pathLayer.removeFromSuperlayer()
+                                    self.parentVC.map.pathLayer.removeAllAnimations()
                                 }
-                                parentVC.anotherStageButton.isHidden = true
-                                parentVC.storeySwitcherView.isHidden = false
+                                self.parentVC.anotherStageButton.isHidden = true
+                                self.parentVC.storeySwitcherView.isHidden = false
                             }
                             self.endEditingData()
                         }.disposed(by: self.disposeBag)
@@ -232,7 +235,7 @@ class TopBarNavigation: UIView{
                         .controlEvent([.editingChanged])
                         .asObservable()
                         .subscribe(onNext: { _ in
-                            let data = (self.parentViewController as! NavigationViewController)
+                            let data = self.parentVC
                                 .viewModel
                                 .loadArrayPremise(prefix: (label?.text)!)
                             
@@ -250,7 +253,6 @@ class TopBarNavigation: UIView{
     // MARK: Изменение точки отправления/назначения
     @objc func changePremiseLabel(_ notification: NSNotification){
         
-        let parentVC = self.parentViewController as! NavigationViewController
         let idPremise = notification.userInfo!["idPremise"] as! Int
         self.startPlaceTextField.isEditing ?
             (self.startPlacePremiseId = idPremise) :
@@ -266,16 +268,16 @@ class TopBarNavigation: UIView{
             let needsOpenNewMap = parentVC.map.viewModel.idMap != parentVC.viewModel.getPremiseById(withId: idPremise).idMap
             
             let closureToPremise = {
-                let marker = parentVC.map.viewModel.getMarkerByIdPremise(id: idPremise)
+                let marker = self.parentVC.map.viewModel.getMarkerByIdPremise(id: idPremise)
                 marker.statusSelected = true
-                parentVC.map.zoomScale = 0.5
+                self.parentVC.map.zoomScale = 0.5
                 marker.paintingPriority = 1
                 let userInfo: [String: Any] = ["tapRecognizer": notification,
                                                "idPremise": marker.idPremise]
                 NotificationCenter.default.post(name: Notification.Name("OpenBottomBar"), object: nil, userInfo: userInfo)
                 UIView.animate(withDuration: 0.6, animations: {
-                        parentVC.map.setContentOffset(CGPoint(x: marker.xPosition * parentVC.map.zoomScale - parentVC.map.frame.width/2,
-                                                              y: marker.yPosition * parentVC.map.zoomScale - parentVC.map.frame.height/2), animated: false)
+                    self.parentVC.map.setContentOffset(CGPoint(x: marker.xPosition * self.parentVC.map.zoomScale - self.parentVC.map.frame.width/2,
+                                                               y: marker.yPosition * self.parentVC.map.zoomScale - self.parentVC.map.frame.height/2), animated: false)
                 })
             }
             // Если помещение принадлежит текущей карте, то: перейти к маркеру помещению
@@ -300,7 +302,6 @@ class TopBarNavigation: UIView{
     // MARK: Перемещение камеры
     func cameraMovement(startPremiseId: Int, finishPremiseId: Int, changeStorey: Bool){
         
-        let parentVC = self.parentViewController as! NavigationViewController
         let marker1 = parentVC.map.viewModel.getMarkerByIdPremise(id: startPremiseId)
         let marker2 = parentVC.map.viewModel.getMarkerByIdPremise(id: finishPremiseId)
         
@@ -312,16 +313,16 @@ class TopBarNavigation: UIView{
         if xChanging * parentVC.map.zoomScale > parentVC.view.frame.width || yChanging * parentVC.map.zoomScale > parentVC.map.frame.height{
             
             UIView.animate(withDuration: 0.6, animations: {
-                    parentVC.map.setContentOffset(CGPoint(x: marker1.xPosition * parentVC.map.zoomScale - parentVC.map.frame.width/2,
-                                                          y: marker1.yPosition * parentVC.map.zoomScale - parentVC.map.frame.height/2), animated: false)
+                self.parentVC.map.setContentOffset(CGPoint(x: marker1.xPosition * self.parentVC.map.zoomScale - self.parentVC.map.frame.width/2,
+                                                           y: marker1.yPosition * self.parentVC.map.zoomScale - self.parentVC.map.frame.height/2), animated: false)
             })
         } else {
             // Иначе, перейти в позицию между ними
             let xMiddleBetweenMarkers = marker1.xPosition + (marker2.xPosition - marker1.xPosition)/2
             let yMiddleBetweenMarkers = marker1.yPosition + (marker2.yPosition - marker1.yPosition)/2
             UIView.animate(withDuration: 0.6, animations: {
-                parentVC.map.setContentOffset(CGPoint(x: xMiddleBetweenMarkers * parentVC.map.zoomScale - parentVC.map.frame.width/2,
-                                                      y: yMiddleBetweenMarkers * parentVC.map.zoomScale - parentVC.map.frame.height/2), animated: false)
+                self.parentVC.map.setContentOffset(CGPoint(x: xMiddleBetweenMarkers * self.parentVC.map.zoomScale - self.parentVC.map.frame.width/2,
+                                                           y: yMiddleBetweenMarkers * self.parentVC.map.zoomScale - self.parentVC.map.frame.height/2), animated: false)
             }
         )}
     }
@@ -331,6 +332,7 @@ class TopBarNavigation: UIView{
     func endEditingData(){
         self.startPlaceTextField.endEditing(true)
         self.finishPlaceTextField.endEditing(true)
+        self.leftMenuButton.isHidden = false
         
         self.tablePremiseView!.removeFromSuperview()
         self.backButton!.removeFromSuperview()
@@ -347,17 +349,20 @@ class TopBarNavigation: UIView{
             .when(.recognized)
             .subscribe(onNext: { _ in
                 
-                let parentVC = self.parentViewController as! NavigationViewController
-                var listDisablers: [UIView] = [parentVC.topBarView.startPlaceTextField, parentVC.topBarView.finishPlaceTextField,
-                                               parentVC.topBarView.chooseCorpButton,
-                                               parentVC.map,
-                                               parentVC.storeySwitcherView]
-                (parentVC.bottomBarView != nil) ? listDisablers.append(parentVC.bottomBarView!) : ()
+                var listDisablers: [UIView] = [self.parentVC.topBarView.startPlaceTextField,
+                                               self.parentVC.topBarView.finishPlaceTextField,
+                                               self.parentVC.topBarView.chooseCorpButton,
+                                               self.parentVC.map,
+                                               self.parentVC.storeySwitcherView]
+                (self.parentVC.bottomBarView != nil) ? listDisablers.append(self.parentVC.bottomBarView!) : ()
                 
                 let userInfo: [String: [UIView]] = ["listDisablers": listDisablers]
                 NotificationCenter.default.post(name: Notification.Name("SwitchLeftMenu"), object: nil, userInfo: userInfo)
                 
             }).disposed(by: disposeBag)
-        
+    }
+    
+    deinit {
+        print("Вызвался деструктор!")
     }
 }

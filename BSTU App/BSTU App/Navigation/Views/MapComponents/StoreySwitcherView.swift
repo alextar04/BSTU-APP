@@ -21,7 +21,7 @@ class StoreySwitcherView: UIView{
     
     let disposeBag = DisposeBag()
     
-    func setupView(rangeStorey: ClosedRange<Int>){
+    func setupView(rangeStorey: ClosedRange<Int>, parentVC: NavigationViewController){
     
         self.storeyNumberLabel.text = "1"
         
@@ -40,7 +40,7 @@ class StoreySwitcherView: UIView{
                     let data: [String: Any] = ["storey": currentValue!, "needsOpenNewMap": true]
                     NotificationCenter.default.post(name: Notification.Name("ChangeStorey"), object: nil, userInfo: data)
                     // Удалить нарисованный путь
-                    let parentVC = self.parentViewController as! NavigationViewController
+                    //let parentVC = self.parentViewController as! NavigationViewController
                     if parentVC.topBarView.startPlaceTextField.text != "" && parentVC.topBarView.finishPlaceTextField.text != ""{
                         parentVC.topBarView.startPlaceTextField.text = ""
                         parentVC.topBarView.finishPlaceTextField.text = ""
@@ -73,7 +73,7 @@ class StoreySwitcherView: UIView{
                 let data: [String: Any] = ["storey": currentValue!, "needsOpenNewMap": true]
                 NotificationCenter.default.post(name: Notification.Name("ChangeStorey"), object: nil, userInfo: data)
                 // Удалить нарисованный путь
-                let parentVC = self.parentViewController as! NavigationViewController
+                //let parentVC = self.parentViewController as! NavigationViewController
                 if parentVC.topBarView.startPlaceTextField.text != "" && parentVC.topBarView.finishPlaceTextField.text != ""{
                     parentVC.topBarView.startPlaceTextField.text = ""
                     parentVC.topBarView.finishPlaceTextField.text = ""

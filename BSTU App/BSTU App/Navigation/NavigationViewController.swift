@@ -7,11 +7,7 @@
 //
 
 import UIKit
-
-import RxGesture
-import RxSwift
-import RxCocoa
-
+ 
 class NavigationViewController: UIViewController {
     
     var viewModel: NavigationViewModel!
@@ -56,7 +52,6 @@ class NavigationViewController: UIViewController {
         self.addMap(idMap: 1)
         self.addStoreySwitcherView()
         self.setupSwapStoreyButtonAfterCreateWay()
-        self.setupOpenLeftMenuSettings()
     }
     
     
@@ -213,7 +208,7 @@ class NavigationViewController: UIViewController {
     // MARK: Добавление верхнего бара
     func addTopBarView(){
         self.topBarView = Bundle.main.loadNibNamed("TopBarView", owner: self, options: nil)?.first as? TopBarNavigation
-        self.topBarView.setupView(navigationControllerHeight: self.view.frame.height)
+        self.topBarView.setupView(navigationControllerHeight: self.view.frame.height, parentVC: self)
         self.topBarView?.frame = CGRect(x: 0, y: (UIApplication.shared.windows.first?.safeAreaInsets.top)!,
                                             width: self.view.frame.width, height: (topBarView?.frame.height)!)
         self.view.autoresizesSubviews = false
@@ -437,7 +432,7 @@ class NavigationViewController: UIViewController {
     // MARK: Функция добавления переключателя этажей
     func addStoreySwitcherView(){
         self.storeySwitcherView = Bundle.main.loadNibNamed("StoreySwitcherView", owner: self, options: nil)?.first as? StoreySwitcherView
-        self.storeySwitcherView.setupView(rangeStorey: 0...7)
+        self.storeySwitcherView.setupView(rangeStorey: 0...7, parentVC: self)
         
         let yStart = self.view.frame.height - 98
         self.storeySwitcherView?.frame = CGRect(x: 10, y: yStart,
@@ -516,40 +511,5 @@ class NavigationViewController: UIViewController {
         }
         
         self.currentTopBarHeight = (UIApplication.shared.windows.first?.safeAreaInsets.top)!
-    }
-    
-    
-    // MARK: Настройка свайпа открытия меню
-    func setupOpenLeftMenuSettings(){
-        
-        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
-        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
-        leftSwipe.direction = .left
-        rightSwipe.direction = .right
-        
-        self.view.addGestureRecognizer(leftSwipe)
-        self.view.addGestureRecognizer(rightSwipe)
-    }
-        
-        
-    // MARK: Обработка свайпов экрана
-    @objc func handleSwipes(_ sender: UISwipeGestureRecognizer){
-        
-        var listDisablers: [UIView] = [self.topBarView.startPlaceTextField, self.topBarView.finishPlaceTextField,
-                                       self.topBarView.chooseCorpButton,
-                                       self.map,
-                                       self.storeySwitcherView]
-        (self.bottomBarView != nil) ? listDisablers.append(self.bottomBarView!) : ()
-        
-        switch sender.direction {
-        case .left:
-            AppDelegate.appDelegate.rootViewController.currentViewMoving(recognizer: sender,
-                                                                         listDisablers: listDisablers)
-        case .right:
-            AppDelegate.appDelegate.rootViewController.currentViewMoving(recognizer: sender,
-                                                                         listDisablers: listDisablers)
-        default:
-            return
-        }
     }
 }

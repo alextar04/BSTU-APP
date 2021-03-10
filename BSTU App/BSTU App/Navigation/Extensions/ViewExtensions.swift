@@ -36,6 +36,7 @@ extension UIView{
         self.layer.masksToBounds = true
     }
     
+    /*
     var parentViewController: UIViewController? {
         var parentResponder: UIResponder? = self
         while parentResponder != nil {
@@ -45,5 +46,5 @@ extension UIView{
             }
         }
         return nil
-    }
+    }*/
 }

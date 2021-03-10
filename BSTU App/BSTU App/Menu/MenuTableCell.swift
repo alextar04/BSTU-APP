@@ -23,6 +23,21 @@ class MenuTableCell: UITableViewCell{
         case .navigation:
             self.chapterName.text = "Навигация"
             self.chapterIcon.image = UIImage(named: "navigationIcon")
+        case .teachers:
+            self.chapterName.text = "Преподаватели"
+            self.chapterName.textColor = .lightGray
+            self.chapterIcon.image = UIImage(named: "teachersIcon")
+            self.isUserInteractionEnabled = false
+        case .news:
+            self.chapterName.text = "Новости"
+            self.chapterName.textColor = .lightGray
+            self.chapterIcon.image = UIImage(named: "newsIcon")
+            self.isUserInteractionEnabled = false
+        case .cabinet:
+            self.chapterName.text = "Личный кабинет"
+            self.chapterName.textColor = .lightGray
+            self.chapterIcon.image = UIImage(named: "cabinetIcon")
+            self.isUserInteractionEnabled = false
         }
     }
 }
@@ -31,4 +46,7 @@ class MenuTableCell: UITableViewCell{
 enum ChapterType: String{
     case schedule = "Расписание"
     case navigation = "Навигация"
+    case teachers = "Преподаватели"
+    case news = "Новости"
+    case cabinet = "Личный кабинет"
 }
