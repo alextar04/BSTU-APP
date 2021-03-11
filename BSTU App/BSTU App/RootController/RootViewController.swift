@@ -123,9 +123,6 @@ class RootViewController: UIViewController {
             case .teachers:
                 print("Учитель")
                 return
-            case .news:
-                print("Новости")
-                return
             case .cabinet:
                 print("Кабинет")
                 return

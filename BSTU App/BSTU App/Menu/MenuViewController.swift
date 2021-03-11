@@ -28,7 +28,6 @@ class MenuViewController: UIViewController{
         let chapters: [ChapterType] = [.schedule,
                                        .navigation,
                                        .teachers,
-                                       .news,
                                        .cabinet]
         
         let data = Observable.just(chapters)

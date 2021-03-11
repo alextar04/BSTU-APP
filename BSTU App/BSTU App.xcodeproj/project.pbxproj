@@ -47,7 +47,6 @@
 		CE04A3F925EF9B9700BE073D /* GroupSheduleCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE04A3D725EF9B9700BE073D /* GroupSheduleCard.xib */; };
 		CE04A3FA25EF9B9700BE073D /* EmptySheduleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE04A3D825EF9B9700BE073D /* EmptySheduleView.xib */; };
 		CE04A3FB25EF9B9700BE073D /* GroupSheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A3D925EF9B9700BE073D /* GroupSheduleViewController.swift */; };
-		CE04A3FC25EF9B9700BE073D /* example.json in Resources */ = {isa = PBXBuildFile; fileRef = CE04A3DA25EF9B9700BE073D /* example.json */; };
 		CE04A3FD25EF9B9700BE073D /* GroupSheduleCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A3DC25EF9B9700BE073D /* GroupSheduleCard.swift */; };
 		CE04A3FE25EF9B9700BE073D /* DateSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A3DD25EF9B9700BE073D /* DateSegmentedControl.swift */; };
 		CE04A3FF25EF9B9700BE073D /* EmptySheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A3DE25EF9B9700BE073D /* EmptySheduleView.swift */; };
@@ -141,7 +140,6 @@
 		CE04A3D725EF9B9700BE073D /* GroupSheduleCard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupSheduleCard.xib; sourceTree = "<group>"; };
 		CE04A3D825EF9B9700BE073D /* EmptySheduleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptySheduleView.xib; sourceTree = "<group>"; };
 		CE04A3D925EF9B9700BE073D /* GroupSheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupSheduleViewController.swift; sourceTree = "<group>"; };
-		CE04A3DA25EF9B9700BE073D /* example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example.json; sourceTree = "<group>"; };
 		CE04A3DC25EF9B9700BE073D /* GroupSheduleCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupSheduleCard.swift; sourceTree = "<group>"; };
 		CE04A3DD25EF9B9700BE073D /* DateSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateSegmentedControl.swift; sourceTree = "<group>"; };
 		CE04A3DE25EF9B9700BE073D /* EmptySheduleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptySheduleView.swift; sourceTree = "<group>"; };
@@ -375,7 +373,6 @@
 				CE04A3D925EF9B9700BE073D /* GroupSheduleViewController.swift */,
 				CE04A3E025EF9B9700BE073D /* GroupSheduleViewModel.swift */,
 				CED0489625F006D500B7DD65 /* GroupSheduleModel.swift */,
-				CE04A3DA25EF9B9700BE073D /* example.json */,
 			);
 			path = GroupShedule;
 			sourceTree = "<group>";
@@ -644,7 +641,6 @@
 				CE04A3E625EF9B9700BE073D /* emptyExam.png in Resources */,
 				CE04A3ED25EF9B9700BE073D /* okSelection.png in Resources */,
 				CE91140725C437740096AB29 /* StoreySwitcherView.xib in Resources */,
-				CE04A3FC25EF9B9700BE073D /* example.json in Resources */,
 				CE04A3E825EF9B9700BE073D /* books.png in Resources */,
 				CE380A3125BC70930028622B /* UniversityCorpCellTable.xib in Resources */,
 				CE04A3EC25EF9B9700BE073D /* dropup.png in Resources */,

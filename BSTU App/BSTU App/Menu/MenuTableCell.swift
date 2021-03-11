@@ -28,11 +28,6 @@ class MenuTableCell: UITableViewCell{
             self.chapterName.textColor = .lightGray
             self.chapterIcon.image = UIImage(named: "teachersIcon")
             self.isUserInteractionEnabled = false
-        case .news:
-            self.chapterName.text = "Новости"
-            self.chapterName.textColor = .lightGray
-            self.chapterIcon.image = UIImage(named: "newsIcon")
-            self.isUserInteractionEnabled = false
         case .cabinet:
             self.chapterName.text = "Личный кабинет"
             self.chapterName.textColor = .lightGray
@@ -47,6 +42,5 @@ enum ChapterType: String{
     case schedule = "Расписание"
     case navigation = "Навигация"
     case teachers = "Преподаватели"
-    case news = "Новости"
     case cabinet = "Личный кабинет"
 }
