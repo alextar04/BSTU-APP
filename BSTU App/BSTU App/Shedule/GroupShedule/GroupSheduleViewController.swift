@@ -262,6 +262,7 @@ class GroupSheduleViewController: UIViewController{
                       animations: {
                         self.tableTypeWeek.frame = CGRect(x: self.tableTypeWeek.frame.minX, y: self.tableTypeWeek.frame.minY,
                                                           width: self.tableTypeWeek.frame.width, height: 0)
+                        
                         self.shadowTableTypeWeek.frame = CGRect(x: self.shadowTableTypeWeek.frame.minX, y: self.shadowTableTypeWeek.frame.minY,
                                                           width: self.shadowTableTypeWeek.frame.width, height: 0)
                         self.tableTypeWeek.layoutIfNeeded()
@@ -389,7 +390,6 @@ class GroupSheduleViewController: UIViewController{
             }
         }
         
-        // self.groupName
         self.viewModel.getSheduleForGroup(groupName: self.groupName,
                                           isCorrespondenceGroup: isCorrespondenceGroup,
                                           completion: {

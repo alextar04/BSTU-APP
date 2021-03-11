@@ -158,6 +158,9 @@ class GroupSheduleCard: UIView{
         case .laboratory:
             self.typeActivity.backgroundColor = .practiceSubjectColor
             self.typeActivity.text = "Лабораторная"
+            if self.typeActivity.isTruncated(){
+                self.typeActivity.text = "Лаб"
+            }
         case .practice:
             self.typeActivity.backgroundColor = .laboratorySubjectColor
             self.typeActivity.text = "Практика"
