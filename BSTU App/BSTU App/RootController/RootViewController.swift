@@ -122,6 +122,8 @@ class RootViewController: UIViewController {
                 
             case .teachers:
                 print("Учитель")
+                //self.currentController = UIStoryboard(name: "ListTeachers", bundle: nil).instantiateViewController(withIdentifier: "ListTeachersID") as! ListTeachersViewController
+                //self.currentNavigationController = UINavigationController(rootViewController: self.currentController!)
                 return
             case .cabinet:
                 print("Кабинет")

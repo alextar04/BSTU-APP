@@ -76,6 +76,12 @@
 		CE42A5AC25D41CD800CDDCA5 /* CorpDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42A5AB25D41CD800CDDCA5 /* CorpDB.swift */; };
 		CE5B3DFA25F530F800DC66E9 /* MenuViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE5B3DF925F530F800DC66E9 /* MenuViewController.storyboard */; };
 		CE5B3DFC25F539C700DC66E9 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B3DFB25F539C700DC66E9 /* MenuViewController.swift */; };
+		CE7F81B925FA079000A70CCB /* ListTeachers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE7F81B825FA079000A70CCB /* ListTeachers.storyboard */; };
+		CE7F81BB25FA07CD00A70CCB /* ListTeachersTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7F81BA25FA07CD00A70CCB /* ListTeachersTableCell.xib */; };
+		CE7F81BF25FA0C8800A70CCB /* ListTeachersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7F81BE25FA0C8800A70CCB /* ListTeachersViewController.swift */; };
+		CE7F81C225FA0CC000A70CCB /* ListTeachersTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7F81C125FA0CC000A70CCB /* ListTeachersTableCell.swift */; };
+		CE7F81C425FA0F5400A70CCB /* ListTeachersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7F81C325FA0F5400A70CCB /* ListTeachersViewModel.swift */; };
+		CE7F81C625FA0F8D00A70CCB /* ListTeachersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7F81C525FA0F8D00A70CCB /* ListTeachersModel.swift */; };
 		CE81A73425F0FCA5007358F7 /* SheduleLabelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE81A73325F0FCA5007358F7 /* SheduleLabelExtensions.swift */; };
 		CE91140525C3FA020096AB29 /* NavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91140425C3FA020096AB29 /* NavigationViewModel.swift */; };
 		CE91140725C437740096AB29 /* StoreySwitcherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE91140625C437740096AB29 /* StoreySwitcherView.xib */; };
@@ -169,6 +175,12 @@
 		CE42A5AB25D41CD800CDDCA5 /* CorpDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorpDB.swift; sourceTree = "<group>"; };
 		CE5B3DF925F530F800DC66E9 /* MenuViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MenuViewController.storyboard; sourceTree = "<group>"; };
 		CE5B3DFB25F539C700DC66E9 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		CE7F81B825FA079000A70CCB /* ListTeachers.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListTeachers.storyboard; sourceTree = "<group>"; };
+		CE7F81BA25FA07CD00A70CCB /* ListTeachersTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListTeachersTableCell.xib; sourceTree = "<group>"; };
+		CE7F81BE25FA0C8800A70CCB /* ListTeachersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTeachersViewController.swift; sourceTree = "<group>"; };
+		CE7F81C125FA0CC000A70CCB /* ListTeachersTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTeachersTableCell.swift; sourceTree = "<group>"; };
+		CE7F81C325FA0F5400A70CCB /* ListTeachersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTeachersViewModel.swift; sourceTree = "<group>"; };
+		CE7F81C525FA0F8D00A70CCB /* ListTeachersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTeachersModel.swift; sourceTree = "<group>"; };
 		CE81A73325F0FCA5007358F7 /* SheduleLabelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheduleLabelExtensions.swift; sourceTree = "<group>"; };
 		CE91140425C3FA020096AB29 /* NavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModel.swift; sourceTree = "<group>"; };
 		CE91140625C437740096AB29 /* StoreySwitcherView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreySwitcherView.xib; sourceTree = "<group>"; };
@@ -252,6 +264,7 @@
 				CE5B3DFD25F539CD00DC66E9 /* Menu */,
 				CE9E00CD25D3FFDB00CF13C0 /* Database */,
 				CE04A3B325EF9B9600BE073D /* Shedule */,
+				CE7F81B525FA071A00A70CCB /* Teachers */,
 				CE380A0025BC4F070028622B /* Navigation */,
 				CE037E6525BC425700C50C16 /* AppDelegate.swift */,
 				CE037E6E25BC425E00C50C16 /* Assets.xcassets */,
@@ -508,6 +521,51 @@
 			path = Menu;
 			sourceTree = "<group>";
 		};
+		CE7F81B525FA071A00A70CCB /* Teachers */ = {
+			isa = PBXGroup;
+			children = (
+				CE7F81B625FA076700A70CCB /* ListTeachers */,
+				CE7F81B725FA077200A70CCB /* ScheduleTeacher */,
+			);
+			path = Teachers;
+			sourceTree = "<group>";
+		};
+		CE7F81B625FA076700A70CCB /* ListTeachers */ = {
+			isa = PBXGroup;
+			children = (
+				CE7F81C025FA0CA600A70CCB /* Views */,
+				CE7F81BC25FA080400A70CCB /* Storyboards */,
+				CE7F81BE25FA0C8800A70CCB /* ListTeachersViewController.swift */,
+				CE7F81C325FA0F5400A70CCB /* ListTeachersViewModel.swift */,
+				CE7F81C525FA0F8D00A70CCB /* ListTeachersModel.swift */,
+			);
+			path = ListTeachers;
+			sourceTree = "<group>";
+		};
+		CE7F81B725FA077200A70CCB /* ScheduleTeacher */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ScheduleTeacher;
+			sourceTree = "<group>";
+		};
+		CE7F81BC25FA080400A70CCB /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				CE7F81B825FA079000A70CCB /* ListTeachers.storyboard */,
+				CE7F81BA25FA07CD00A70CCB /* ListTeachersTableCell.xib */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		CE7F81C025FA0CA600A70CCB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CE7F81C125FA0CC000A70CCB /* ListTeachersTableCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		CE91140A25C439760096AB29 /* MapComponents */ = {
 			isa = PBXGroup;
 			children = (
@@ -623,6 +681,7 @@
 				CE04A3F925EF9B9700BE073D /* GroupSheduleCard.xib in Resources */,
 				CE380A1A25BC4F910028622B /* rectangle.png in Resources */,
 				CE5B3DFA25F530F800DC66E9 /* MenuViewController.storyboard in Resources */,
+				CE7F81BB25FA07CD00A70CCB /* ListTeachersTableCell.xib in Resources */,
 				CE04A3EB25EF9B9700BE073D /* dropdown.png in Resources */,
 				CE009EF125D6C18100CA8604 /* admin_bstuDB.sqlite3 in Resources */,
 				CE04A3EE25EF9B9700BE073D /* delete.png in Resources */,
@@ -632,6 +691,7 @@
 				CE04A3EA25EF9B9700BE073D /* menu.png in Resources */,
 				CE380A2625BC4F910028622B /* TopBarView.xib in Resources */,
 				CE380A1C25BC4F910028622B /* building.png in Resources */,
+				CE7F81B925FA079000A70CCB /* ListTeachers.storyboard in Resources */,
 				CE04A3E925EF9B9700BE073D /* leftArrow.png in Resources */,
 				CE037E7225BC425E00C50C16 /* LaunchScreen.storyboard in Resources */,
 				CE04A3FA25EF9B9700BE073D /* EmptySheduleView.xib in Resources */,
@@ -714,6 +774,7 @@
 				CE04A40025EF9B9700BE073D /* TypeWeekCell.swift in Sources */,
 				CE81A73425F0FCA5007358F7 /* SheduleLabelExtensions.swift in Sources */,
 				CEACB2D925C7F2F900F4ADD3 /* Map.swift in Sources */,
+				CE7F81BF25FA0C8800A70CCB /* ListTeachersViewController.swift in Sources */,
 				CE04A3FE25EF9B9700BE073D /* DateSegmentedControl.swift in Sources */,
 				CE009EF325D6F88B00CA8604 /* TypePremiseMapper.swift in Sources */,
 				CE009EED25D6AC8B00CA8604 /* MarkerMapper.swift in Sources */,
@@ -722,6 +783,7 @@
 				CE380A2B25BC4F910028622B /* NavigationViewController.swift in Sources */,
 				CE01CCA125C2A4BB001388B9 /* SearchPremiseCellTable.swift in Sources */,
 				CE380A2425BC4F910028622B /* ButtonExtensions.swift in Sources */,
+				CE7F81C425FA0F5400A70CCB /* ListTeachersViewModel.swift in Sources */,
 				CE380A2F25BC6CF30028622B /* UniversityCorpsView.swift in Sources */,
 				CEE5B67A25D66AB70023D640 /* MarkerDB.swift in Sources */,
 				CE04A3FF25EF9B9700BE073D /* EmptySheduleView.swift in Sources */,
@@ -731,11 +793,13 @@
 				CE04A3F125EF9B9700BE073D /* GroupsModel.swift in Sources */,
 				CE04A3F425EF9B9700BE073D /* GroupsViewCell.swift in Sources */,
 				CEE3AFC325D7D5D8007B1814 /* MapRoadDotMapper.swift in Sources */,
+				CE7F81C625FA0F8D00A70CCB /* ListTeachersModel.swift in Sources */,
 				CED0489725F006D500B7DD65 /* GroupSheduleModel.swift in Sources */,
 				CE009EEF25D6B35D00CA8604 /* PremiseMapper.swift in Sources */,
 				CEE5B67625D66A9D0023D640 /* MapDB.swift in Sources */,
 				CE380A2A25BC4F910028622B /* Marker.swift in Sources */,
 				CE04A3F725EF9B9700BE073D /* SheduleImageExtensions.swift in Sources */,
+				CE7F81C225FA0CC000A70CCB /* ListTeachersTableCell.swift in Sources */,
 				CEE3AFC525D7D699007B1814 /* MapMapper.swift in Sources */,
 				CE04A3E225EF9B9700BE073D /* InstitutionsViewController.swift in Sources */,
 				CE04A3E425EF9B9700BE073D /* InstitutionsTableCell.swift in Sources */,
