@@ -78,25 +78,20 @@ class NavigationViewController: UIViewController {
         bottomBarView = Bundle.main.loadNibNamed("BottomBarView", owner: self, options: nil)?.first as? BottomBarNavigation
         let heightBottomBar = (bottomBarView?.frame.height)! + (self.currentStartTopBarHeight - self.normalStartTopBarHeight)
         
-        (self.newPhone) ?
-            (bottomBarView?.makeShadowNewDevices(width: Int(self.view.frame.width), heigth: Int(heightBottomBar), iosBottomBarHeight: Int(self.view.safeAreaInsets.bottom)))
-            : (bottomBarView?.makeShadow(width: Int(self.view.frame.width), heigth: Int(heightBottomBar)))
-        
+        bottomBarView?.makeShadow(width: Int(self.view.frame.width), heigth: Int(heightBottomBar))
+        self.view.addSubview(bottomBarView!)
         bottomBarView?.setupView(idPremise: notification.userInfo!["idPremise"] as! Int,
                                  heightBar: heightBottomBar,
                                  viewController: self)
-        
         // Положение бара на странице
         self.bottomBarView?.frame = CGRect(x: 0, y: self.view.frame.height,
                                            width: self.view.frame.width, height: (bottomBarView?.frame.height)!)
-        self.view.addSubview(bottomBarView!)
         
         // "Смена маркера" или "Бар открыт": нет анимации открытия
         // "Не смена маркера" или "Бар закрыт": есть анимация открытия
         if !self.changeMarkerStatus || !self.bottomBarIsOpen{
             
-            var offsetBottomBar = -heightBottomBar
-            (self.newPhone) ? (offsetBottomBar += self.view.safeAreaInsets.bottom) : ()
+            let offsetBottomBar = -heightBottomBar
             let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
                 self.bottomBarView?.frame = self.bottomBarView?.frame
                     .offsetBy(dx: 0, dy: offsetBottomBar) as! CGRect
@@ -112,8 +107,7 @@ class NavigationViewController: UIViewController {
             animatorSwitcherStorey.startAnimation(afterDelay: TimeInterval(0.3))
             
         } else {
-            var offsetBottomBar = -heightBottomBar
-            (self.newPhone) ? (offsetBottomBar += self.view.safeAreaInsets.bottom) : ()
+            let offsetBottomBar = -heightBottomBar
             self.bottomBarView?.frame = self.bottomBarView?.frame
                 .offsetBy(dx: 0, dy: offsetBottomBar) as! CGRect
             self.changeMarkerStatus = false
@@ -490,13 +484,11 @@ class NavigationViewController: UIViewController {
             }
         }
         
-        
         if self.newPhone{
             self.normalStartTopBarHeight = (UIApplication.shared.windows.first?.safeAreaInsets.top)!
             self.currentStartTopBarHeight = (UIApplication.shared.windows.first?.safeAreaInsets.top)!
             self.isEnabledTopBarInInit = false
         }
-        
         
         if !self.newPhone{
             self.view.autoresizesSubviews = false

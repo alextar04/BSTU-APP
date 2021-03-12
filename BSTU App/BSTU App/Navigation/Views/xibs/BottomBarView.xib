@@ -93,8 +93,10 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="hZd-sO-Ueb" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="BFa-UR-EQv"/>
-                <constraint firstItem="hZd-sO-Ueb" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="Bhj-KG-cO3"/>
                 <constraint firstItem="hZd-sO-Ueb" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="KxG-gV-zVb"/>
+                <constraint firstItem="hZd-sO-Ueb" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="SG9-ss-cjX"/>
+                <constraint firstItem="hZd-sO-Ueb" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="U9p-hl-g8p"/>
+                <constraint firstItem="hZd-sO-Ueb" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="dzb-aE-pho"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
@@ -107,7 +109,7 @@
                 <outlet property="namePremiseLabel" destination="g6r-oa-kwP" id="rYm-D4-1ai"/>
                 <outlet property="typePremiseLabel" destination="Qq4-6t-S1J" id="Rao-Z2-zbk"/>
             </connections>
-            <point key="canvasLocation" x="132" y="126.83658170914543"/>
+            <point key="canvasLocation" x="132" y="35.082458770614693"/>
         </view>
     </objects>
     <resources>
