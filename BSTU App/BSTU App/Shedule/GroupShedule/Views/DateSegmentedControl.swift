@@ -33,8 +33,19 @@ class DateSegmentedControl{
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .bold)],
                                     for: [.normal])
         
-        segmentedControl.backgroundColor = .clear
-        segmentedControl.tintColor = .clear
+        if #available(iOS 13, *) {
+            // Скрыть все подслои каждый ячейки
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                for i in 0...(segmentedControl.numberOfSegments-1)  {
+                    let backgroundSegmentView = segmentedControl.subviews[i]
+                    backgroundSegmentView.isHidden = true
+                }
+            }
+            segmentedControl.selectedSegmentTintColor = .clear
+        } else {
+            segmentedControl.backgroundColor = .clear
+            segmentedControl.tintColor = .clear
+        }
         for (index, day) in ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"].enumerated(){
             segmentedControl.insertSegment(withTitle: day, at: index, animated: true)
         }
@@ -48,8 +59,20 @@ class DateSegmentedControl{
     public lazy var numbersOfCalendarSegmentedControl: UISegmentedControl = {
         
         let segmentedControl = UISegmentedControl()
-        segmentedControl.backgroundColor = .clear
-        segmentedControl.tintColor = .clear
+        
+        if #available(iOS 13, *) {
+            // Скрыть все посдлои каждый ячейки
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                for i in 0...(segmentedControl.numberOfSegments-1)  {
+                    let backgroundSegmentView = segmentedControl.subviews[i]
+                    backgroundSegmentView.isHidden = true
+                }
+            }
+            segmentedControl.selectedSegmentTintColor = .clear
+        } else {
+            segmentedControl.backgroundColor = .clear
+            segmentedControl.tintColor = .clear
+        }
         
         // Стандартное состояние
         segmentedControl.setTitleTextAttributes([

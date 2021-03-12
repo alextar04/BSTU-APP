@@ -23,7 +23,9 @@ class GroupSheduleViewController: UIViewController{
     
     @IBOutlet weak var parityOfWeek: UIButton!
     @IBOutlet weak var tableTypeWeek: UITableView!
+    @IBOutlet weak var tableTypeWeekConstraint: NSLayoutConstraint!
     @IBOutlet weak var shadowTableTypeWeek: UIView!
+    @IBOutlet weak var shadowTableTypeWeekConstraint: NSLayoutConstraint!
     @IBOutlet weak var parityDropdownButton: UIImageView!
     
     @IBOutlet weak var correspondenceSheduleLabel: UILabel!
@@ -140,6 +142,9 @@ class GroupSheduleViewController: UIViewController{
     
         
         // Открытие/Закрытие таблицы
+        self.tableTypeWeekConstraint.constant = 0
+        self.shadowTableTypeWeekConstraint.constant = 0
+        self.view.layoutIfNeeded()
         self.parityOfWeek.rx
             .tapGesture()
             .when(.recognized)
@@ -151,18 +156,16 @@ class GroupSheduleViewController: UIViewController{
                 // Таблица скрыта - бар закрыт
                 if self.tableTypeWeek.isHidden{
                     self.parityDropdownButton.image = UIImage(named: "dropup")
-                    self.tableTypeWeek.frame = CGRect(x: 0, y: self.tableTypeWeek.frame.minY,
-                                                      width: self.tableTypeWeek.frame.width, height: 0)
-                    self.shadowTableTypeWeek.frame = CGRect(x: 0, y: self.shadowTableTypeWeek.frame.minY,
-                                                      width: self.shadowTableTypeWeek.frame.width, height: 0)
+                    self.tableTypeWeekConstraint.constant = 0
+                    self.shadowTableTypeWeekConstraint.constant = 0
+                    self.view.layoutIfNeeded()
                     
                 // Таблица открыта - бар открыт
                 } else {
                     self.parityDropdownButton.image = UIImage(named: "dropdown")
-                    self.tableTypeWeek.frame = CGRect(x: 0, y: self.tableTypeWeek.frame.minY,
-                                                      width: self.tableTypeWeek.frame.width, height: 88)
-                    self.shadowTableTypeWeek.frame = CGRect(x: 0, y: self.shadowTableTypeWeek.frame.minY,
-                                                      width: self.shadowTableTypeWeek.frame.width, height: 89)
+                    self.tableTypeWeekConstraint.constant = 88
+                    self.shadowTableTypeWeekConstraint.constant = 89
+                    self.view.layoutIfNeeded()
                 }
                 let isHiddenTableTypeWeek = self.tableTypeWeek.isHidden
                 self.tableTypeWeek.isHidden = false
@@ -174,7 +177,7 @@ class GroupSheduleViewController: UIViewController{
                         delay: 0,
                         usingSpringWithDamping: 1.0,
                         initialSpringVelocity: 1.0,
-                        options: .curveEaseInOut,
+                        options: .curveEaseIn,
                         animations: {
                             var heightTable: CGFloat!
                             var heightShadow: CGFloat!
@@ -185,12 +188,9 @@ class GroupSheduleViewController: UIViewController{
                                 heightTable = 0
                                 heightShadow = 0
                             }
-                            self.tableTypeWeek.frame = CGRect(x: self.tableTypeWeek.frame.minX, y: self.tableTypeWeek.frame.minY,
-                                                                       width: self.tableTypeWeek.frame.width, height: heightTable)
-                            self.shadowTableTypeWeek.frame = CGRect(x: self.shadowTableTypeWeek.frame.minX, y: self.shadowTableTypeWeek.frame.minY,
-                                                              width: self.shadowTableTypeWeek.frame.width, height: heightShadow)
-                            self.tableTypeWeek.layoutIfNeeded()
-                            self.shadowTableTypeWeek.layoutIfNeeded()
+                            self.tableTypeWeekConstraint.constant = heightTable
+                            self.shadowTableTypeWeekConstraint.constant = heightShadow
+                            self.view.layoutIfNeeded()
                           },
                           completion: { _ in
                             self.tableTypeWeek.isHidden = !isHiddenTableTypeWeek
@@ -258,15 +258,11 @@ class GroupSheduleViewController: UIViewController{
                       delay: 0,
                       usingSpringWithDamping: 1,
                       initialSpringVelocity: 1,
-                      options: .curveEaseInOut,
+                      options: .curveEaseIn,
                       animations: {
-                        self.tableTypeWeek.frame = CGRect(x: self.tableTypeWeek.frame.minX, y: self.tableTypeWeek.frame.minY,
-                                                          width: self.tableTypeWeek.frame.width, height: 0)
-                        
-                        self.shadowTableTypeWeek.frame = CGRect(x: self.shadowTableTypeWeek.frame.minX, y: self.shadowTableTypeWeek.frame.minY,
-                                                          width: self.shadowTableTypeWeek.frame.width, height: 0)
-                        self.tableTypeWeek.layoutIfNeeded()
-                        self.shadowTableTypeWeek.layoutIfNeeded()
+                        self.tableTypeWeekConstraint.constant = 0
+                        self.shadowTableTypeWeekConstraint.constant = 0
+                        self.view.layoutIfNeeded()
                       },
                       completion: { _ in
                         self.tableTypeWeek.isHidden = true

@@ -275,8 +275,10 @@
                         <outlet property="parityDropdownButton" destination="KGF-3f-a32" id="OnS-XH-6mr"/>
                         <outlet property="parityOfWeek" destination="Ulv-H2-M99" id="IvA-yo-RTD"/>
                         <outlet property="shadowTableTypeWeek" destination="UK2-64-nfn" id="fkZ-wL-ixV"/>
+                        <outlet property="shadowTableTypeWeekConstraint" destination="cNe-F1-b5T" id="BLA-rW-AD0"/>
                         <outlet property="sheduleTable" destination="OCP-us-MVp" id="qcj-j7-3Fh"/>
                         <outlet property="tableTypeWeek" destination="jRs-eB-G7o" id="43P-44-KRS"/>
+                        <outlet property="tableTypeWeekConstraint" destination="HAP-bF-iAN" id="Rdv-hy-tdn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Gg-Op-FEc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -99,10 +99,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Загрузка данных" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojS-UB-GNs">
-                                <rect key="frame" x="137.33333333333331" y="367.66666666666669" width="139.33333333333331" height="21"/>
+                                <rect key="frame" x="87" y="367.66666666666669" width="240" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="AgD-XO-F2e"/>
-                                    <constraint firstAttribute="width" constant="139.5" id="v5n-S9-N2D"/>
+                                    <constraint firstAttribute="width" constant="240" id="v5n-S9-N2D"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <nil key="textColor"/>
