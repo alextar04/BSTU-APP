@@ -77,8 +77,11 @@ class NavigationViewController: UIViewController {
         // Загрузка информации на бар
         bottomBarView = Bundle.main.loadNibNamed("BottomBarView", owner: self, options: nil)?.first as? BottomBarNavigation
         let heightBottomBar = (bottomBarView?.frame.height)! + (self.currentStartTopBarHeight - self.normalStartTopBarHeight)
-        bottomBarView?.makeShadow(width: Int(self.view.frame.width),
-                                  heigth: Int(heightBottomBar)/2)
+        
+        (self.newPhone) ?
+            (bottomBarView?.makeShadowNewDevices(width: Int(self.view.frame.width), heigth: Int(heightBottomBar), iosBottomBarHeight: Int(self.view.safeAreaInsets.bottom)))
+            : (bottomBarView?.makeShadow(width: Int(self.view.frame.width), heigth: Int(heightBottomBar)))
+        
         bottomBarView?.setupView(idPremise: notification.userInfo!["idPremise"] as! Int,
                                  heightBar: heightBottomBar,
                                  viewController: self)
@@ -92,24 +95,27 @@ class NavigationViewController: UIViewController {
         // "Не смена маркера" или "Бар закрыт": есть анимация открытия
         if !self.changeMarkerStatus || !self.bottomBarIsOpen{
             
+            var offsetBottomBar = -heightBottomBar
+            (self.newPhone) ? (offsetBottomBar += self.view.safeAreaInsets.bottom) : ()
             let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
                 self.bottomBarView?.frame = self.bottomBarView?.frame
-                    .offsetBy(dx: 0, dy: -heightBottomBar) as! CGRect
+                    .offsetBy(dx: 0, dy: offsetBottomBar) as! CGRect
             }
             animator.startAnimation()
             
             // Изменить положение переключателя этажей
-            var offsetSwitcherStorey = -heightBottomBar
-            (self.newPhone) ? (offsetSwitcherStorey -= 28) : ()
+            let offsetSwitcherStorey = -heightBottomBar
             let animatorSwitcherStorey = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
                 self.storeySwitcherView?.frame = self.storeySwitcherView?.frame
-                    .offsetBy(dx: 0, dy:  offsetSwitcherStorey) as! CGRect
+                    .offsetBy(dx: 0, dy: offsetSwitcherStorey) as! CGRect
             }
             animatorSwitcherStorey.startAnimation(afterDelay: TimeInterval(0.3))
             
         } else {
+            var offsetBottomBar = -heightBottomBar
+            (self.newPhone) ? (offsetBottomBar += self.view.safeAreaInsets.bottom) : ()
             self.bottomBarView?.frame = self.bottomBarView?.frame
-                .offsetBy(dx: 0, dy:  -heightBottomBar) as! CGRect
+                .offsetBy(dx: 0, dy: offsetBottomBar) as! CGRect
             self.changeMarkerStatus = false
         }
         self.bottomBarIsOpen = true
@@ -131,9 +137,7 @@ class NavigationViewController: UIViewController {
                     // Изменить положение переключателя этажей
                     let heightBottomBar = (bottomBarView?.frame.height)! + (self.currentStartTopBarHeight - self.normalStartTopBarHeight)
                     
-                    var offsetSwitcherStorey = heightBottomBar
-                    (self.newPhone) ? (offsetSwitcherStorey += 28) : ()
-                    
+                    let offsetSwitcherStorey = heightBottomBar
                     let animatorSwitcherStorey = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
                         self.storeySwitcherView?.frame = self.storeySwitcherView?.frame
                             .offsetBy(dx: 0, dy: offsetSwitcherStorey) as! CGRect
@@ -178,9 +182,7 @@ class NavigationViewController: UIViewController {
             }
             
             // Изменить положение переключателя этажей
-            var offsetSwitcherStorey = heightBottomBar
-            (self.newPhone) ? (offsetSwitcherStorey += 28) : ()
-            
+            let offsetSwitcherStorey = heightBottomBar
             let animatorSwitcherStorey = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
                 self.storeySwitcherView?.frame = self.storeySwitcherView?.frame
                     .offsetBy(dx: 0, dy: offsetSwitcherStorey) as! CGRect
@@ -367,9 +369,7 @@ class NavigationViewController: UIViewController {
         }
         
         // Изменить положение переключателя этажей
-        var offsetSwitcherStorey = heightBottomBar
-        (self.newPhone) ? (offsetSwitcherStorey += 28) : ()
-        
+        let offsetSwitcherStorey = heightBottomBar
         let animatorSwitcherStorey = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
             self.storeySwitcherView?.frame = self.storeySwitcherView?.frame
                 .offsetBy(dx: 0, dy: offsetSwitcherStorey) as! CGRect

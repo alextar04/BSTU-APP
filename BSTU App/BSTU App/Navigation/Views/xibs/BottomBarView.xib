@@ -44,7 +44,7 @@
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ZE-pB-kpK">
-                            <rect key="frame" x="198.5" y="102" width="154.5" height="39"/>
+                            <rect key="frame" x="198.5" y="95" width="154.5" height="39"/>
                             <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="39" id="aTI-kg-jar"/>
@@ -56,7 +56,7 @@
                             </state>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jrX-Vg-L4b">
-                            <rect key="frame" x="22" y="102" width="154.5" height="39"/>
+                            <rect key="frame" x="22" y="95" width="154.5" height="39"/>
                             <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="39" id="1dU-an-D2f"/>
@@ -68,15 +68,15 @@
                             </state>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="1" green="1" blue="0.97961258561643838" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="1" green="1" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="6ZE-pB-kpK" secondAttribute="bottom" constant="9" id="07z-6h-h21"/>
+                        <constraint firstAttribute="bottom" secondItem="6ZE-pB-kpK" secondAttribute="bottom" constant="16" id="07z-6h-h21"/>
                         <constraint firstItem="dWo-ZG-nqc" firstAttribute="centerX" secondItem="hZd-sO-Ueb" secondAttribute="centerX" id="2lb-km-xbU"/>
                         <constraint firstItem="g6r-oa-kwP" firstAttribute="top" secondItem="Qq4-6t-S1J" secondAttribute="bottom" constant="8" id="7fa-A8-1mY"/>
                         <constraint firstItem="Qq4-6t-S1J" firstAttribute="leading" secondItem="SX2-XV-IyS" secondAttribute="trailing" constant="28" id="8Ca-MC-HUc"/>
                         <constraint firstAttribute="height" constant="150" id="BrR-i6-oDN"/>
                         <constraint firstAttribute="trailing" secondItem="g6r-oa-kwP" secondAttribute="trailing" constant="22" id="Jx4-GH-UOc"/>
-                        <constraint firstAttribute="bottom" secondItem="jrX-Vg-L4b" secondAttribute="bottom" constant="9" id="Kqk-dD-RRY"/>
+                        <constraint firstAttribute="bottom" secondItem="jrX-Vg-L4b" secondAttribute="bottom" constant="16" id="Kqk-dD-RRY"/>
                         <constraint firstItem="jrX-Vg-L4b" firstAttribute="leading" secondItem="hZd-sO-Ueb" secondAttribute="leading" constant="22" id="MOx-6z-RVb"/>
                         <constraint firstItem="Qq4-6t-S1J" firstAttribute="top" secondItem="dWo-ZG-nqc" secondAttribute="bottom" constant="8" id="Mne-nN-mX0"/>
                         <constraint firstAttribute="trailing" secondItem="6ZE-pB-kpK" secondAttribute="trailing" constant="22" id="PWc-Kc-Q1v"/>

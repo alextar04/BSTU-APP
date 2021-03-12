@@ -53,6 +53,8 @@ class RootViewController: UIViewController {
         
         self.view.addSubview(self.leftMenuController.view)
         self.view.addSubview(self.currentView!)
+        self.currentView!.layer.cornerRadius  = 0.0
+        self.currentView!.layer.masksToBounds = false
         self.currentView!.sheduleMakeShadow(width: Int(self.currentView!.frame.width),
                                             heigth: Int(self.currentView!.frame.height))
          
@@ -135,6 +137,8 @@ class RootViewController: UIViewController {
             self.view.addSubview(self.currentView!)
             self.currentNavigationController!.didMove(toParent: self)
             
+            self.currentView!.layer.cornerRadius  = 0.0
+            self.currentView!.layer.masksToBounds = false
             self.currentView!.sheduleMakeShadow(width: Int(self.currentView!.frame.width),
                                               heigth: Int(self.currentView!.frame.height))
             self.currentView!.frame.origin.x = 200
