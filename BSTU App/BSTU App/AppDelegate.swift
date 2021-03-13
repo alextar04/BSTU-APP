@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    /* Обеспечим доступ к RootViewController */
+    /* Обеспечение доступа к RootViewController */
     /* 1. Доступ к экземпляру делегата
        2. Непосредственный доступ   */
     static var appDelegate : AppDelegate{

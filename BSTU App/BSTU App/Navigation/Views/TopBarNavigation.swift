@@ -349,16 +349,14 @@ class TopBarNavigation: UIView{
             .when(.recognized)
             .subscribe(onNext: { _ in
                 
-                var listDisablers: [UIView] = [self.parentVC.topBarView.startPlaceTextField,
-                                               self.parentVC.topBarView.finishPlaceTextField,
-                                               self.parentVC.topBarView.chooseCorpButton,
+                var listDisablers: [UIView] = [self.parentVC.topBarView,
                                                self.parentVC.map,
                                                self.parentVC.storeySwitcherView]
                 (self.parentVC.bottomBarView != nil) ? listDisablers.append(self.parentVC.bottomBarView!) : ()
                 
                 let userInfo: [String: [UIView]] = ["listDisablers": listDisablers]
                 NotificationCenter.default.post(name: Notification.Name("SwitchLeftMenu"), object: nil, userInfo: userInfo)
-                
+                self.parentVC.isMenuOpen.toggle()
             }).disposed(by: disposeBag)
     }
     

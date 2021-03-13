@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
  
 class NavigationViewController: UIViewController {
     
@@ -30,6 +32,8 @@ class NavigationViewController: UIViewController {
     var currentStartTopBarHeight: CGFloat!
     var currentTopBarHeight = (UIApplication.shared.windows.first?.safeAreaInsets.top)!
     
+    var isMenuOpen = false
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +57,7 @@ class NavigationViewController: UIViewController {
         self.addMap(idMap: 1)
         self.addStoreySwitcherView()
         self.setupSwapStoreyButtonAfterCreateWay()
+        self.addReturnToNavigationFromMenuByTap()
     }
     
     
@@ -450,6 +455,29 @@ class NavigationViewController: UIViewController {
                                            width: 42, height: 88)
         self.storeySwitcherView.makeRounding()
         self.view.addSubview(self.storeySwitcherView)
+    }
+    
+    
+    // MARK: Вернуться к экрану навигации по нажатию из меню
+    func addReturnToNavigationFromMenuByTap(){
+        self.view.rx
+            .tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                
+                if self!.isMenuOpen{
+                    var listDisablers: [UIView] = [
+                        self!.topBarView,
+                        self!.map,
+                        self!.storeySwitcherView
+                    ]
+                    (self!.bottomBarView != nil) ? listDisablers.append(self!.bottomBarView!) : ()
+                    
+                    let userInfo: [String: [UIView]] = ["listDisablers": listDisablers]
+                    NotificationCenter.default.post(name: Notification.Name("SwitchLeftMenu"), object: nil, userInfo: userInfo)
+                    self?.isMenuOpen.toggle()
+                }
+            }).disposed(by: disposeBag)
     }
     
     

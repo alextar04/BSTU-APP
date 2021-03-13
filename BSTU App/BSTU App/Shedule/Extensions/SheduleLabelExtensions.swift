@@ -12,7 +12,6 @@ import UIKit
 extension UILabel{
     
     func countLabelLines() -> Int {
-        // Call self.layoutIfNeeded() if your view is uses auto layout
         self.layoutIfNeeded()
         let myText = self.text! as NSString
         let attributes = [NSAttributedString.Key.font : self.font]

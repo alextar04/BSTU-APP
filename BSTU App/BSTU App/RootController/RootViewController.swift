@@ -105,9 +105,7 @@ class RootViewController: UIViewController {
                 
             case .navigation:
                 if self.cachedNavigationController != nil{
-                    _ = [self.cachedNavigationController.topBarView.startPlaceTextField,
-                        self.cachedNavigationController.topBarView.finishPlaceTextField,
-                        self.cachedNavigationController.topBarView.chooseCorpButton,
+                    _ = [self.cachedNavigationController.topBarView,
                         self.cachedNavigationController.map,
                         self.cachedNavigationController.storeySwitcherView
                     ].map({ view in
@@ -115,6 +113,7 @@ class RootViewController: UIViewController {
                     })
 
                     (self.cachedNavigationController.bottomBarView != nil) ? (self.cachedNavigationController.bottomBarView!.isUserInteractionEnabled = true) : ()
+                    self.cachedNavigationController.isMenuOpen = false
                 } else{
                     self.cachedNavigationController = NavigationViewController()
                 }
@@ -123,13 +122,12 @@ class RootViewController: UIViewController {
                 self.currentNavigationController!.setNavigationBarHidden(true, animated: false)
                 
             case .teachers:
-                print("Учитель")
-                //self.currentController = UIStoryboard(name: "ListTeachers", bundle: nil).instantiateViewController(withIdentifier: "ListTeachersID") as! ListTeachersViewController
-                //self.currentNavigationController = UINavigationController(rootViewController: self.currentController!)
-                return
+                self.currentController = UIStoryboard(name: "ListTeachers", bundle: nil).instantiateViewController(withIdentifier: "ListTeachersID") as! ListTeachersViewController
+                self.currentNavigationController = UINavigationController(rootViewController: self.currentController!)
+                
             case .cabinet:
-                print("Кабинет")
-                return
+                self.currentController = UIStoryboard(name: "SigninViewController", bundle: nil).instantiateViewController(withIdentifier: "SigninViewControllerID") as! SigninViewController
+                self.currentNavigationController = UINavigationController(rootViewController: self.currentController!)
             }
             
             self.addChild(self.currentNavigationController!)

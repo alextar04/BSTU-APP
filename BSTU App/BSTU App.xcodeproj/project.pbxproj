@@ -88,6 +88,10 @@
 		CE91140925C439460096AB29 /* StoreySwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91140825C439460096AB29 /* StoreySwitcherView.swift */; };
 		CEACB2D925C7F2F900F4ADD3 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEACB2D825C7F2F900F4ADD3 /* Map.swift */; };
 		CEC0C8BA25F6222D00760A0A /* MenuTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0C8B925F6222D00760A0A /* MenuTableCell.swift */; };
+		CECE8BA125FCB785008D7840 /* SigninViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECE8BA025FCB785008D7840 /* SigninViewController.storyboard */; };
+		CECE8BA325FCC12D008D7840 /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE8BA225FCC12D008D7840 /* SigninViewController.swift */; };
+		CECE8BA625FCD594008D7840 /* PersonalCabinetButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE8BA525FCD594008D7840 /* PersonalCabinetButtonExtensions.swift */; };
+		CECEB15125FCDCA10015446C /* PersonalCabinetViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECEB15025FCDCA10015446C /* PersonalCabinetViewExtensions.swift */; };
 		CED0489725F006D500B7DD65 /* GroupSheduleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED0489625F006D500B7DD65 /* GroupSheduleModel.swift */; };
 		CED3903625D5AFFC004409CF /* bstuDB.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = CED3903525D5AFFC004409CF /* bstuDB.sqlite3 */; };
 		CEE3AFC325D7D5D8007B1814 /* MapRoadDotMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3AFC225D7D5D8007B1814 /* MapRoadDotMapper.swift */; };
@@ -187,6 +191,10 @@
 		CE91140825C439460096AB29 /* StoreySwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreySwitcherView.swift; sourceTree = "<group>"; };
 		CEACB2D825C7F2F900F4ADD3 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		CEC0C8B925F6222D00760A0A /* MenuTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableCell.swift; sourceTree = "<group>"; };
+		CECE8BA025FCB785008D7840 /* SigninViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SigninViewController.storyboard; sourceTree = "<group>"; };
+		CECE8BA225FCC12D008D7840 /* SigninViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
+		CECE8BA525FCD594008D7840 /* PersonalCabinetButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCabinetButtonExtensions.swift; sourceTree = "<group>"; };
+		CECEB15025FCDCA10015446C /* PersonalCabinetViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCabinetViewExtensions.swift; sourceTree = "<group>"; };
 		CED0489625F006D500B7DD65 /* GroupSheduleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSheduleModel.swift; sourceTree = "<group>"; };
 		CED3903525D5AFFC004409CF /* bstuDB.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = bstuDB.sqlite3; sourceTree = "<group>"; };
 		CEE3AFC225D7D5D8007B1814 /* MapRoadDotMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRoadDotMapper.swift; sourceTree = "<group>"; };
@@ -266,6 +274,7 @@
 				CE04A3B325EF9B9600BE073D /* Shedule */,
 				CE7F81B525FA071A00A70CCB /* Teachers */,
 				CE380A0025BC4F070028622B /* Navigation */,
+				CECE8B9E25FCB6E1008D7840 /* PersonalCabinet */,
 				CE037E6525BC425700C50C16 /* AppDelegate.swift */,
 				CE037E6E25BC425E00C50C16 /* Assets.xcassets */,
 				CE037E7025BC425E00C50C16 /* LaunchScreen.storyboard */,
@@ -586,6 +595,33 @@
 			path = Database;
 			sourceTree = "<group>";
 		};
+		CECE8B9E25FCB6E1008D7840 /* PersonalCabinet */ = {
+			isa = PBXGroup;
+			children = (
+				CECE8BA425FCD583008D7840 /* Extensions */,
+				CECE8B9F25FCB71D008D7840 /* Storyboards */,
+				CECE8BA225FCC12D008D7840 /* SigninViewController.swift */,
+			);
+			path = PersonalCabinet;
+			sourceTree = "<group>";
+		};
+		CECE8B9F25FCB71D008D7840 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				CECE8BA025FCB785008D7840 /* SigninViewController.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		CECE8BA425FCD583008D7840 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CECE8BA525FCD594008D7840 /* PersonalCabinetButtonExtensions.swift */,
+				CECEB15025FCDCA10015446C /* PersonalCabinetViewExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		CEE5B67F25D674520023D640 /* TableMappers */ = {
 			isa = PBXGroup;
 			children = (
@@ -700,6 +736,7 @@
 				CED3903625D5AFFC004409CF /* bstuDB.sqlite3 in Resources */,
 				CE04A3E625EF9B9700BE073D /* emptyExam.png in Resources */,
 				CE04A3ED25EF9B9700BE073D /* okSelection.png in Resources */,
+				CECE8BA125FCB785008D7840 /* SigninViewController.storyboard in Resources */,
 				CE91140725C437740096AB29 /* StoreySwitcherView.xib in Resources */,
 				CE04A3E825EF9B9700BE073D /* books.png in Resources */,
 				CE380A3125BC70930028622B /* UniversityCorpCellTable.xib in Resources */,
@@ -758,12 +795,14 @@
 			files = (
 				CEE5B68625D67AEC0023D640 /* Database.swift in Sources */,
 				CEE5B67C25D66ACA0023D640 /* PremiseDB.swift in Sources */,
+				CECE8BA625FCD594008D7840 /* PersonalCabinetButtonExtensions.swift in Sources */,
 				CE037E6A25BC425700C50C16 /* RootViewController.swift in Sources */,
 				CE380A2925BC4F910028622B /* TopBarNavigation.swift in Sources */,
 				CE01CC9F25C2A496001388B9 /* SearchPremiseView.swift in Sources */,
 				CE009EEB25D6A20D00CA8604 /* UniversityCorpsViewModel.swift in Sources */,
 				CE42A5AC25D41CD800CDDCA5 /* CorpDB.swift in Sources */,
 				CE380A2525BC4F910028622B /* TextFieldExtensions.swift in Sources */,
+				CECE8BA325FCC12D008D7840 /* SigninViewController.swift in Sources */,
 				CE04A3FD25EF9B9700BE073D /* GroupSheduleCard.swift in Sources */,
 				CE380A2125BC4F910028622B /* ViewExtensions.swift in Sources */,
 				CE380A2825BC4F910028622B /* BottomBarNavigation.swift in Sources */,
@@ -773,6 +812,7 @@
 				CE037E6625BC425700C50C16 /* AppDelegate.swift in Sources */,
 				CE04A40025EF9B9700BE073D /* TypeWeekCell.swift in Sources */,
 				CE81A73425F0FCA5007358F7 /* SheduleLabelExtensions.swift in Sources */,
+				CECEB15125FCDCA10015446C /* PersonalCabinetViewExtensions.swift in Sources */,
 				CEACB2D925C7F2F900F4ADD3 /* Map.swift in Sources */,
 				CE7F81BF25FA0C8800A70CCB /* ListTeachersViewController.swift in Sources */,
 				CE04A3FE25EF9B9700BE073D /* DateSegmentedControl.swift in Sources */,

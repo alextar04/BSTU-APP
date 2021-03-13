@@ -30,9 +30,9 @@ class MenuTableCell: UITableViewCell{
             self.isUserInteractionEnabled = false
         case .cabinet:
             self.chapterName.text = "Личный кабинет"
-            self.chapterName.textColor = .lightGray
+            //self.chapterName.textColor = .lightGray
             self.chapterIcon.image = UIImage(named: "cabinetIcon")
-            self.isUserInteractionEnabled = false
+            //self.isUserInteractionEnabled = false
         }
     }
 }
