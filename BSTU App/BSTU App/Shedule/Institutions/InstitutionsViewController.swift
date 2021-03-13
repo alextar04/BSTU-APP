@@ -94,9 +94,13 @@ class InstitutionsViewController: UIViewController, UIGestureRecognizerDelegate{
     // MARK: Установка кнопки открытия бокового меню
     func setupLeftMenuButton(){
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
-        self.view.addGestureRecognizer(tap)
-        tap.delegate = self
+       let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+       self.view.addGestureRecognizer(tap)
+       tap.delegate = self
+        
+       let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(self.screenEdgeSwiped))
+       edgePan.edges = .left
+       self.view.addGestureRecognizer(edgePan)
         
         self.menuButton.rx
             .tapGesture()
@@ -141,12 +145,25 @@ class InstitutionsViewController: UIViewController, UIGestureRecognizerDelegate{
         }
     }
     
+
     // MARK: Отмена нажатия на экран при нажатии на таблицу
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if touch.view?.isDescendant(of: self.institutionsTable) == true {
             return false
         }
         return true
+    }
+    
+    
+    // MARK: Действия по открытию меню из-за пределов экрана
+    @objc func screenEdgeSwiped(_ recognizer: UIScreenEdgePanGestureRecognizer) {
+        if recognizer.state == .recognized {
+            if !self.isMenuOpen{
+                let userInfo: [String: [UIView]] = ["listDisablers": self.listDisablers]
+                NotificationCenter.default.post(name: Notification.Name("SwitchLeftMenu"), object: nil, userInfo: userInfo)
+                self.isMenuOpen.toggle()
+            }
+        }
     }
     
     deinit {
