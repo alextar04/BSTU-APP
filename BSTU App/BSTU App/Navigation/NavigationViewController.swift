@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
  
-class NavigationViewController: UIViewController {
+class NavigationViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var newPhone: Bool!
     var viewModel: NavigationViewModel!
@@ -457,27 +457,39 @@ class NavigationViewController: UIViewController {
         self.view.addSubview(self.storeySwitcherView)
     }
     
-    
+
     // MARK: Вернуться к экрану навигации по нажатию из меню
     func addReturnToNavigationFromMenuByTap(){
-        self.view.rx
-            .tapGesture()
-            .when(.recognized)
-            .subscribe(onNext: { [weak self] _ in
-                
-                if self!.isMenuOpen{
-                    var listDisablers: [UIView] = [
-                        self!.topBarView,
-                        self!.map,
-                        self!.storeySwitcherView
-                    ]
-                    (self!.bottomBarView != nil) ? listDisablers.append(self!.bottomBarView!) : ()
-                    
-                    let userInfo: [String: [UIView]] = ["listDisablers": listDisablers]
-                    NotificationCenter.default.post(name: Notification.Name("SwitchLeftMenu"), object: nil, userInfo: userInfo)
-                    self?.isMenuOpen.toggle()
-                }
-            }).disposed(by: disposeBag)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        self.view.addGestureRecognizer(tap)
+        tap.delegate = self
+    }
+    
+    
+    // MARK: Действия по открытию меню
+    @objc func handleTap(_ sender: UITapGestureRecognizer){
+        if self.isMenuOpen{
+            
+            var listDisablers: [UIView] = [
+                self.topBarView,
+                self.map,
+                self.storeySwitcherView
+            ]
+            (self.bottomBarView != nil) ? listDisablers.append(self.bottomBarView!) : ()
+            
+            let userInfo: [String: [UIView]] = ["listDisablers": listDisablers]
+            NotificationCenter.default.post(name: Notification.Name("SwitchLeftMenu"), object: nil, userInfo: userInfo)
+            self.isMenuOpen.toggle()
+        }
+    }
+    
+
+    // MARK: Отмена нажатия на экран невключенном меню
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if self.isMenuOpen{
+            return true
+        }
+        return false
     }
     
     

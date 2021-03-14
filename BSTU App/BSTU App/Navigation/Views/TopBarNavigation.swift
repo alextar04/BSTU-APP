@@ -242,6 +242,14 @@ class TopBarNavigation: UIView{
                             self.tablePremiseView?.sections.accept([SearchPremiseView.SectionOfPremise(header: "Кабинеты",
                                                                                                        items: data!)])
                         }).disposed(by: disposeBag)
+                    
+            
+                    label?.rx
+                        .controlEvent(.editingDidBegin)
+                        .asObservable()
+                        .subscribe(onNext: { _ in
+                            UIView.setAnimationsEnabled(false)
+                        }).disposed(by: disposeBag)
             
                     label?.autocorrectionType = .no
                     label?.clearButtonMode = .always
@@ -330,6 +338,7 @@ class TopBarNavigation: UIView{
     
     // MARK: Завершение редактирования данных
     func endEditingData(){
+        UIView.setAnimationsEnabled(true)
         self.startPlaceTextField.endEditing(true)
         self.finishPlaceTextField.endEditing(true)
         self.leftMenuButton.isHidden = false

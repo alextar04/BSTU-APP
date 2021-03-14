@@ -37,7 +37,6 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
         var header: String
         var items: [Group]
     }
-
     
     override func viewDidLoad() {
         self.institutionNameLabel.text = institutionName
@@ -59,6 +58,10 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
             }
             self.setupTable(sortedCoursesGroups)
             self.connectTableAndSearchBar()
+            
+            let recognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.didSwipe(_:)))
+            self.tableGroupsView.addGestureRecognizer(recognizer)
+            
         }, errorClosure: {
             self.statusLoadingLabel.text = "Ошибка загрузки данных"
             self.loadingWheel.isHidden = true
@@ -76,8 +79,8 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
         self.backButton.rx
             .tapGesture()
             .when(.recognized)
-            .subscribe(onNext: { _ in
-                self.navigationController?.popViewController(animated: true)
+            .subscribe(onNext: { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
             }).disposed(by: disposeBag)
     }
     
@@ -97,7 +100,7 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
         
         // Конфигурация содержимого для ячеек таблицы
         let dataSource = RxTableViewSectionedReloadDataSource<SectionOfGroups>(configureCell: {
-            dataSource, table, index, item in
+            [weak self] dataSource, table, index, item in
             let cell = table.dequeueReusableCell(withIdentifier: "GroupsViewCellID", for: index) as! GroupsViewCell
             cell.configureCell(name: item.name, courseNumber: item.numberCourse)
             return cell
@@ -110,13 +113,13 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
         
         self.tableGroupsView.rx
              .modelSelected(Group.self)
-             .subscribe(onNext: { selectedItem in
+             .subscribe(onNext: { [weak self] selectedItem in
 
                 let groupsSheduleController = UIStoryboard(name: "GroupSheduleViewController", bundle: nil)
                     .instantiateViewController(withIdentifier: "GroupSheduleViewControllerID") as! GroupSheduleViewController
                 groupsSheduleController.groupName = selectedItem.name
-                self.navigationController?.pushViewController(groupsSheduleController, animated: true)
-                self.searchGroupBar.endEditing(true)
+                self?.navigationController?.pushViewController(groupsSheduleController, animated: true)
+                self!.searchGroupBar.endEditing(true)
              }).disposed(by: disposeBag)
      }
     
@@ -126,27 +129,27 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
         
         self.reloadButton.rx
             .tap
-            .subscribe(onNext: { _ in
-                self.statusLoadingLabel.text = "Загрузка данных"
-                self.loadingWheel.isHidden = false
-                self.reloadButton.isHidden = true
+            .subscribe(onNext: { [weak self] _ in
+                self!.statusLoadingLabel.text = "Загрузка данных"
+                self!.loadingWheel.isHidden = false
+                self!.reloadButton.isHidden = true
                 
-                self.viewModel.getGroupsList(link: self.link, completion: { coursesGroups in
+                self!.viewModel.getGroupsList(link: self!.link, completion: {coursesGroups in
                     
-                    self.statusLoadingLabel.isHidden = true
-                    self.loadingWheel.isHidden = true
-                    self.tableGroupsView.isHidden = false
+                    self!.statusLoadingLabel.isHidden = true
+                    self!.loadingWheel.isHidden = true
+                    self!.tableGroupsView.isHidden = false
                     
                     let sortedCoursesGroups = coursesGroups.sorted { course1, course2 in
                         return course1.numberCourse < course2.numberCourse
                     }
-                    self.setupTable(sortedCoursesGroups)
-                    self.connectTableAndSearchBar()
-                    self.searchGroupBar.isUserInteractionEnabled = true
+                    self!.setupTable(sortedCoursesGroups)
+                    self!.connectTableAndSearchBar()
+                    self!.searchGroupBar.isUserInteractionEnabled = true
                 }, errorClosure: {
-                    self.statusLoadingLabel.text = "Ошибка загрузки данных"
-                    self.loadingWheel.isHidden = true
-                    self.reloadButton.isHidden = false
+                    self!.statusLoadingLabel.text = "Ошибка загрузки данных"
+                    self!.loadingWheel.isHidden = true
+                    self!.reloadButton.isHidden = false
                 })
                 
             }).disposed(by: disposeBag)
@@ -180,21 +183,21 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
         self.searchGroupBar
             .rx
             .text
-            .subscribe(onNext: { currentString in
+            .subscribe(onNext: { [weak self] currentString in
                 if currentString == ""{
-                    self.isShowAllGroups = true
-                    self.groupsSectionalData.accept(self.data)
+                    self!.isShowAllGroups = true
+                    self!.groupsSectionalData.accept(self!.data)
                 } else {
-                    self.isShowAllGroups = false
+                    self!.isShowAllGroups = false
                     var filteredData: SectionOfGroups!
                     var filteredGroup = [Group]()
-                    _ = self.data.map{ section in
+                    _ = self!.data.map{ section in
                         filteredGroup.append(contentsOf: section.items.filter { group in
                             return group.name.lowercased().prefix(currentString!.count) == currentString?.lowercased().prefix(currentString!.count)
                         })
                     }
                     filteredData = SectionOfGroups(header: "Результаты", items: filteredGroup)
-                    self.groupsSectionalData.accept([filteredData])
+                    self!.groupsSectionalData.accept([filteredData])
                 }
         }).disposed(by: disposeBag)
         
@@ -206,6 +209,15 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
     // Настройка работы с клавиатурой
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
+    }
+    
+    // MARK: Метод, перехватыватывающий свайп по таблице, расценивающийся как нажатие
+    @objc func didSwipe(_ recognizer: UISwipeGestureRecognizer) {
+        return
+    }
+    
+    deinit {
+        print("Вызов деструктора страницы групп!")
     }
 }
 

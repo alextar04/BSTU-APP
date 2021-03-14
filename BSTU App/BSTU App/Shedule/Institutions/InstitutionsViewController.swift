@@ -146,12 +146,12 @@ class InstitutionsViewController: UIViewController, UIGestureRecognizerDelegate{
     }
     
 
-    // MARK: Отмена нажатия на экран при нажатии на таблицу
+    // MARK: Отмена нажатия на экран при закрытом меню
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        if touch.view?.isDescendant(of: self.institutionsTable) == true {
-            return false
+        if self.isMenuOpen {
+            return true
         }
-        return true
+        return false
     }
     
     
