@@ -41,7 +41,7 @@ class InstitutionsViewController: UIViewController, UIGestureRecognizerDelegate{
     
     // MARK: Установка таблицы с названиями институтов
     func setupTable(){
-
+        
         self.institutionsTable.isHidden = true
         self.reloadButton.isHidden = true
         

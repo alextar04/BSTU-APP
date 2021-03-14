@@ -68,7 +68,6 @@ class GroupSheduleViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.groupNameLabel.text = groupName
         setupBackButton()
@@ -86,8 +85,8 @@ class GroupSheduleViewController: UIViewController{
         self.backButton.rx
             .tapGesture()
             .when(.recognized)
-            .subscribe(onNext: { _ in
-                self.navigationController?.popViewController(animated: true)
+            .subscribe(onNext: { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
             }).disposed(by: disposeBag)
     }
     
@@ -130,11 +129,11 @@ class GroupSheduleViewController: UIViewController{
         
         let dataBehaviorRelay = BehaviorRelay<[TypeWeek]>(value: data)
         dataBehaviorRelay.bind(to: self.tableTypeWeek.rx.items){
-            table, row, item in
+            [weak self] table, row, item in
             let cellTable = table.dequeueReusableCell(withIdentifier: "typeWeekCell", for: IndexPath.init(row: row, section: 0)) as! TypeWeekCell
             
             var additionalText = ""
-            (self.currentServerTypeWeek == item.name) ? (additionalText += ": Текущая неделя") : (additionalText = "")
+            (self!.currentServerTypeWeek == item.name) ? (additionalText += ": Текущая неделя") : (additionalText = "")
             cellTable.nameTypeWeek.text = item.name + additionalText
             cellTable.selectionTypeWeekStatus.isHidden = !item.status
             return cellTable
@@ -148,28 +147,28 @@ class GroupSheduleViewController: UIViewController{
         self.parityOfWeek.rx
             .tapGesture()
             .when(.recognized)
-            .subscribe(onNext: { _ in
-                self.parityOfWeek.setTitleColor(.darkGray, for: .normal)
-                self.currentServerTypeWeek = self.viewModel.getCurrentWeekType()
+            .subscribe(onNext: { [weak self] _ in
+                self!.parityOfWeek.setTitleColor(.darkGray, for: .normal)
+                self!.currentServerTypeWeek = self!.viewModel.getCurrentWeekType()
                 dataBehaviorRelay.accept(data)
                 
                 // Таблица скрыта - бар закрыт
-                if self.tableTypeWeek.isHidden{
-                    self.parityDropdownButton.image = UIImage(named: "dropup")
-                    self.tableTypeWeekConstraint.constant = 0
-                    self.shadowTableTypeWeekConstraint.constant = 0
-                    self.view.layoutIfNeeded()
+                if self!.tableTypeWeek.isHidden{
+                    self!.parityDropdownButton.image = UIImage(named: "dropup")
+                    self!.tableTypeWeekConstraint.constant = 0
+                    self!.shadowTableTypeWeekConstraint.constant = 0
+                    self!.view.layoutIfNeeded()
                     
                 // Таблица открыта - бар открыт
                 } else {
-                    self.parityDropdownButton.image = UIImage(named: "dropdown")
-                    self.tableTypeWeekConstraint.constant = 88
-                    self.shadowTableTypeWeekConstraint.constant = 89
-                    self.view.layoutIfNeeded()
+                    self!.parityDropdownButton.image = UIImage(named: "dropdown")
+                    self!.tableTypeWeekConstraint.constant = 88
+                    self!.shadowTableTypeWeekConstraint.constant = 89
+                    self!.view.layoutIfNeeded()
                 }
-                let isHiddenTableTypeWeek = self.tableTypeWeek.isHidden
-                self.tableTypeWeek.isHidden = false
-                self.shadowTableTypeWeek.isHidden = false
+                let isHiddenTableTypeWeek = self!.tableTypeWeek.isHidden
+                self!.tableTypeWeek.isHidden = false
+                self!.shadowTableTypeWeek.isHidden = false
         
                 // Анимация движения таблицы
                 UIView.animate(
@@ -188,13 +187,13 @@ class GroupSheduleViewController: UIViewController{
                                 heightTable = 0
                                 heightShadow = 0
                             }
-                            self.tableTypeWeekConstraint.constant = heightTable
-                            self.shadowTableTypeWeekConstraint.constant = heightShadow
-                            self.view.layoutIfNeeded()
+                            self!.tableTypeWeekConstraint.constant = heightTable
+                            self!.shadowTableTypeWeekConstraint.constant = heightShadow
+                            self!.view.layoutIfNeeded()
                           },
                           completion: { _ in
-                            self.tableTypeWeek.isHidden = !isHiddenTableTypeWeek
-                            self.shadowTableTypeWeek.isHidden = self.tableTypeWeek.isHidden
+                            self!.tableTypeWeek.isHidden = !isHiddenTableTypeWeek
+                            self!.shadowTableTypeWeek.isHidden = self!.tableTypeWeek.isHidden
                     })
                 })
                 .disposed(by: disposeBag)
@@ -204,53 +203,53 @@ class GroupSheduleViewController: UIViewController{
         self.tableTypeWeek.rx
             .modelSelected(TypeWeek.self)
             .subscribe(
-                onNext: {selectedItem in
+                onNext: {[weak self] selectedItem in
                     let weekTypeTitle = String((selectedItem.name.split(separator: ":").first)!)
-                    self.parityDropdownButton.image = UIImage(named: "dropdown")
+                    self!.parityDropdownButton.image = UIImage(named: "dropdown")
                     
-                    if weekTypeTitle != self.parityOfWeek.titleLabel?.text{
-                        (self.currentServerTypeWeek == weekTypeTitle) ?
-                            (self.currentSheduleContainer = self.viewModel.resultDaysCurrentWeek) :
-                            (self.currentSheduleContainer = self.viewModel.resultDaysNextWeek)
+                    if weekTypeTitle != self!.parityOfWeek.titleLabel?.text{
+                        (self!.currentServerTypeWeek == weekTypeTitle) ?
+                            (self!.currentSheduleContainer = self!.viewModel.resultDaysCurrentWeek) :
+                            (self!.currentSheduleContainer = self!.viewModel.resultDaysNextWeek)
                     }
                     
                     UIView.performWithoutAnimation {
-                        self.parityOfWeek.setTitle(weekTypeTitle, for: [.normal])
-                        self.parityOfWeek.layoutIfNeeded()
+                        self!.parityOfWeek.setTitle(weekTypeTitle, for: [.normal])
+                        self!.parityOfWeek.layoutIfNeeded()
                         
                         switch weekTypeTitle{
-                        case self.currentServerTypeWeek:
-                            self.numberOfCalendarDates = self.viewModel.getNumbersOfCalendarDates()
-                            self.dateSegmentedControl.numbersData = self.numberOfCalendarDates.0
-                            self.dateSegmentedControl.todayNumber = self.numberOfCalendarDates.0.first
-                            let result = self.viewModel.getCurrentDayOfWeek()
-                            self.currentDayOfWeek.text = result.1
-                            self.currentDay = result.0
+                        case self!.currentServerTypeWeek:
+                            self!.numberOfCalendarDates = self!.viewModel.getNumbersOfCalendarDates()
+                            self!.dateSegmentedControl.numbersData = self!.numberOfCalendarDates.0
+                            self!.dateSegmentedControl.todayNumber = self!.numberOfCalendarDates.0.first
+                            let result = self!.viewModel.getCurrentDayOfWeek()
+                            self!.currentDayOfWeek.text = result.1
+                            self!.currentDay = result.0
 
-                            self.dateSegmentedControl.changeContent()
-                            let index = self.dateSegmentedControl.numbersData.firstIndex(of: self.currentDay)!
-                            self.dateSegmentedControl.numbersOfCalendarSegmentedControl.selectedSegmentIndex = index
-                            self.currentSelectedIndex = index
-                            self.dateSegmentedControl.changeSegmentedControlLinePosition(stackView: self.dateStackView, index: index, direction: nil)
-                            self.currentDayOfWeek.text = self.viewModel.getNameOfDayByIndex(index: index)
+                            self!.dateSegmentedControl.changeContent()
+                            let index = self!.dateSegmentedControl.numbersData.firstIndex(of: self!.currentDay)!
+                            self!.dateSegmentedControl.numbersOfCalendarSegmentedControl.selectedSegmentIndex = index
+                            self!.currentSelectedIndex = index
+                            self!.dateSegmentedControl.changeSegmentedControlLinePosition(stackView: self!.dateStackView, index: index, direction: nil)
+                            self!.currentDayOfWeek.text = self!.viewModel.getNameOfDayByIndex(index: index)
                         default:
-                            self.numberOfCalendarDates = self.viewModel.getNumbersOfCalendarDates()
-                            self.dateSegmentedControl.numbersData = self.numberOfCalendarDates.1
-                            self.dateSegmentedControl.todayNumber = self.numberOfCalendarDates.1.first
-                            let result = self.viewModel.getCurrentDayOfWeek()
-                            self.currentDayOfWeek.text = result.1
-                            self.currentDay = result.0
+                            self!.numberOfCalendarDates = self!.viewModel.getNumbersOfCalendarDates()
+                            self!.dateSegmentedControl.numbersData = self!.numberOfCalendarDates.1
+                            self!.dateSegmentedControl.todayNumber = self!.numberOfCalendarDates.1.first
+                            let result = self!.viewModel.getCurrentDayOfWeek()
+                            self!.currentDayOfWeek.text = result.1
+                            self!.currentDay = result.0
 
-                            self.dateSegmentedControl.changeContent()
-                            self.dateSegmentedControl.numbersOfCalendarSegmentedControl.selectedSegmentIndex = 0
-                            self.currentSelectedIndex = 0
-                            self.dateSegmentedControl.changeSegmentedControlLinePosition(stackView: self.dateStackView, index: 0, direction: nil)
-                            self.currentDayOfWeek.text = self.viewModel.getNameOfDayByIndex(index: 0)
+                            self!.dateSegmentedControl.changeContent()
+                            self!.dateSegmentedControl.numbersOfCalendarSegmentedControl.selectedSegmentIndex = 0
+                            self!.currentSelectedIndex = 0
+                            self!.dateSegmentedControl.changeSegmentedControlLinePosition(stackView: self!.dateStackView, index: 0, direction: nil)
+                            self!.currentDayOfWeek.text = self!.viewModel.getNameOfDayByIndex(index: 0)
                         }
                     }
                     
-                    self.loadViewFromRightSide()
-                    self.view.layoutIfNeeded()
+                    self!.loadViewFromRightSide()
+                    self!.view.layoutIfNeeded()
                     
                     
                     UIView.animate(
@@ -260,13 +259,13 @@ class GroupSheduleViewController: UIViewController{
                       initialSpringVelocity: 1,
                       options: .curveEaseIn,
                       animations: {
-                        self.tableTypeWeekConstraint.constant = 0
-                        self.shadowTableTypeWeekConstraint.constant = 0
-                        self.view.layoutIfNeeded()
+                        self!.tableTypeWeekConstraint.constant = 0
+                        self!.shadowTableTypeWeekConstraint.constant = 0
+                        self!.view.layoutIfNeeded()
                       },
                       completion: { _ in
-                        self.tableTypeWeek.isHidden = true
-                        self.shadowTableTypeWeek.isHidden = true
+                        self!.tableTypeWeek.isHidden = true
+                        self!.shadowTableTypeWeek.isHidden = true
                         
                         _ = data.map{ typeWeek in
                             typeWeek.status = false
@@ -303,68 +302,68 @@ class GroupSheduleViewController: UIViewController{
         self.examMenuButton.rx
             .tapGesture()
             .when(.recognized)
-            .subscribe(onNext: { _ in
-                self.examMainView.isHidden = false
-                self.examMainView.alpha = 0
-                self.examContainerView.isHidden = false
-                self.examContainerView.alpha = 0
-                self.additionalStatusBar.isHidden = false
-                self.additionalStatusBar.alpha = 0
+            .subscribe(onNext: { [weak self] _ in
+                self!.examMainView.isHidden = false
+                self!.examMainView.alpha = 0
+                self!.examContainerView.isHidden = false
+                self!.examContainerView.alpha = 0
+                self!.additionalStatusBar.isHidden = false
+                self!.additionalStatusBar.alpha = 0
                 
-                let examView = self.createViewForSheduleTable(data: self.viewModel.resultExams,
+                let examView = self!.createViewForSheduleTable(data: self!.viewModel.resultExams,
                                                          frame: CGRect(x: 0, y: 0,
-                                                                       width: self.examContentView.frame.width,
+                                                                       width: self!.examContentView.frame.width,
                                                                        height: .zero),
                                                          typeCard: .exam)
-                self.examContentView.subviews.forEach({ $0.removeFromSuperview() })
-                self.examContentView.addSubview(examView)
-                self.examContentView.contentOffset = CGPoint(x: 0, y: 0)
+                self!.examContentView.subviews.forEach({ $0.removeFromSuperview() })
+                self!.examContentView.addSubview(examView)
+                self!.examContentView.contentOffset = CGPoint(x: 0, y: 0)
                 
                 UIView.animate(withDuration: 0.3) {
-                    self.examMainView.alpha = 1
-                    self.examContainerView.alpha = 1
-                    self.additionalStatusBar.alpha = 1
+                    self!.examMainView.alpha = 1
+                    self!.examContainerView.alpha = 1
+                    self!.additionalStatusBar.alpha = 1
                 }
             }).disposed(by: disposeBag)
         
         self.examMainView.rx
             .tapGesture()
             .when(.recognized)
-            .subscribe(onNext: { _ in
-                self.examMainView.alpha = 1
-                self.additionalStatusBar.alpha = 1
-                self.examContainerView.alpha = 1
+            .subscribe(onNext: { [weak self] _ in
+                self!.examMainView.alpha = 1
+                self!.additionalStatusBar.alpha = 1
+                self!.examContainerView.alpha = 1
                 UIView.animate(withDuration: 0.3,
                                animations: {
-                                self.examMainView.alpha = 0
-                                self.additionalStatusBar.alpha = 0
-                                self.examContainerView.alpha = 0
+                                self!.examMainView.alpha = 0
+                                self!.additionalStatusBar.alpha = 0
+                                self!.examContainerView.alpha = 0
                 },
                                completion: { _ in
-                                    self.examMainView.isHidden = true
-                                    self.additionalStatusBar.isHidden = true
-                                    self.examContainerView.isHidden = true
+                                    self!.examMainView.isHidden = true
+                                    self!.additionalStatusBar.isHidden = true
+                                    self!.examContainerView.isHidden = true
                 })
             }).disposed(by: disposeBag)
         
         self.examCloseButton.rx
             .tapGesture()
             .when(.recognized)
-            .subscribe(onNext: { _ in
-                self.examMainView.alpha = 1
-                self.additionalStatusBar.alpha = 1
-                self.examContainerView.alpha = 1
+            .subscribe(onNext: { [weak self] _ in
+                self!.examMainView.alpha = 1
+                self!.additionalStatusBar.alpha = 1
+                self!.examContainerView.alpha = 1
                 UIView.animate(withDuration: 0.3,
                                animations: {
-                                self.examMainView.alpha = 0
-                                self.additionalStatusBar.alpha = 0
-                                self.examContainerView.alpha = 0
+                                self!.examMainView.alpha = 0
+                                self!.additionalStatusBar.alpha = 0
+                                self!.examContainerView.alpha = 0
                                 
                 },
                                completion: { _ in
-                                self.examMainView.isHidden = true
-                                self.additionalStatusBar.isHidden = true
-                                self.examContainerView.isHidden = true
+                                self!.examMainView.isHidden = true
+                                self!.additionalStatusBar.isHidden = true
+                                self!.examContainerView.isHidden = true
                 })
             }).disposed(by: disposeBag)
     }
@@ -669,6 +668,10 @@ class GroupSheduleViewController: UIViewController{
         if let dayIndex = notification.userInfo!["dayIndex"] as? Int{
             self.currentDayOfWeek.text = self.viewModel.getNameOfDayByIndex(index: dayIndex)
         }
+    }
+    
+    deinit {
+        print("Вызов деструктора страницы расписания для группы!")
     }
     
 }

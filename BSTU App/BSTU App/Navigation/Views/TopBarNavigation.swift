@@ -249,6 +249,7 @@ class TopBarNavigation: UIView{
                         .asObservable()
                         .subscribe(onNext: { _ in
                             UIView.setAnimationsEnabled(false)
+                            self.startPlaceTextField.isEditing ? (self.finishPlaceTextField.isUserInteractionEnabled = false) : (self.startPlaceTextField.isUserInteractionEnabled = false)
                         }).disposed(by: disposeBag)
             
                     label?.autocorrectionType = .no
@@ -339,6 +340,8 @@ class TopBarNavigation: UIView{
     // MARK: Завершение редактирования данных
     func endEditingData(){
         UIView.setAnimationsEnabled(true)
+        self.startPlaceTextField.isUserInteractionEnabled = true
+        self.finishPlaceTextField.isUserInteractionEnabled = true
         self.startPlaceTextField.endEditing(true)
         self.finishPlaceTextField.endEditing(true)
         self.leftMenuButton.isHidden = false

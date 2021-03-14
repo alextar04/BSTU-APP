@@ -18,7 +18,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="l4D-vG-dx8">
                                 <rect key="frame" x="0.0" y="120" width="200" height="547"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="mX5-1H-pKh"/>
                                 </constraints>
@@ -57,6 +57,7 @@
                                                 <constraint firstItem="bBJ-hb-4w8" firstAttribute="top" secondItem="5kG-3r-wlX" secondAttribute="top" constant="7" id="yBN-Fh-tAi"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="chapterIcon" destination="bBJ-hb-4w8" id="bGG-pJ-GvU"/>
                                             <outlet property="chapterName" destination="Ppe-vW-cmY" id="8Uz-xd-ZzK"/>
@@ -67,7 +68,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HgP-Sr-ELz">
                                 <rect key="frame" x="0.0" y="0.0" width="200" height="119"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="YN9-eu-LXB">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoMenuWithoutBackground" translatesAutoresizingMaskIntoConstraints="NO" id="YN9-eu-LXB">
                                         <rect key="frame" x="8" y="8" width="184" height="101"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="184" id="Abf-B5-5cj"/>
@@ -75,7 +76,7 @@
                                         </constraints>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="YN9-eu-LXB" firstAttribute="top" secondItem="HgP-Sr-ELz" secondAttribute="top" constant="8" id="1Oi-OH-P1v"/>
                                     <constraint firstAttribute="bottom" secondItem="YN9-eu-LXB" secondAttribute="bottom" constant="10" id="BDu-1P-Jjw"/>
@@ -85,14 +86,14 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wad-4b-ZSA">
                                 <rect key="frame" x="0.0" y="119" width="200" height="1"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="OFW-8R-wf2"/>
                                     <constraint firstAttribute="height" constant="1" id="dKd-Fu-vPw"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="HgP-Sr-ELz" firstAttribute="leading" secondItem="r7J-nj-ndJ" secondAttribute="leading" id="8I5-or-PHq"/>
                             <constraint firstItem="l4D-vG-dx8" firstAttribute="top" secondItem="wad-4b-ZSA" secondAttribute="bottom" id="ATt-Bt-q2Z"/>
@@ -116,6 +117,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="logo" width="496" height="148"/>
+        <image name="logoMenuWithoutBackground" width="915" height="273"/>
     </resources>
 </document>

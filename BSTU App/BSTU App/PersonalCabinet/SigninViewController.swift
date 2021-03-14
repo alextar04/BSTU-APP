@@ -23,7 +23,6 @@ class SigninViewController: UIViewController{
     @IBOutlet weak var forgetPasswordButton: UIButton!
     @IBOutlet weak var loadingWheel: UIActivityIndicatorView!
     
-    
     @IBOutlet weak var shadowFeedbackView: UIView!
     @IBOutlet weak var roundedFeedbackView: UIView!
     @IBOutlet weak var feedbackButton: UIButton!
@@ -48,7 +47,6 @@ class SigninViewController: UIViewController{
         setupRegistrationButton()
         setupForgetPasswordButton()
         setupFeedbackButton()
-        
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
