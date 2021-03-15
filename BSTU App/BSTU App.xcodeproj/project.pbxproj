@@ -103,6 +103,7 @@
 		CEE5B67E25D66AD80023D640 /* TypePremiseDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5B67D25D66AD80023D640 /* TypePremiseDB.swift */; };
 		CEE5B68225D674CB0023D640 /* CorpMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5B68125D674CB0023D640 /* CorpMapper.swift */; };
 		CEE5B68625D67AEC0023D640 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5B68525D67AEC0023D640 /* Database.swift */; };
+		CEE9D49725FFA74700D20C1A /* PersonalCabinetMainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9D49625FFA74600D20C1A /* PersonalCabinetMainPageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -206,6 +207,7 @@
 		CEE5B67D25D66AD80023D640 /* TypePremiseDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypePremiseDB.swift; sourceTree = "<group>"; };
 		CEE5B68125D674CB0023D640 /* CorpMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorpMapper.swift; sourceTree = "<group>"; };
 		CEE5B68525D67AEC0023D640 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		CEE9D49625FFA74600D20C1A /* PersonalCabinetMainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCabinetMainPageViewController.swift; sourceTree = "<group>"; };
 		F96B8A8E8421A5DF88E0A7CF /* Pods_BSTU_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BSTU_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -601,6 +603,7 @@
 				CECE8BA425FCD583008D7840 /* Extensions */,
 				CECE8B9F25FCB71D008D7840 /* Storyboards */,
 				CECE8BA225FCC12D008D7840 /* SigninViewController.swift */,
+				CEE9D49625FFA74600D20C1A /* PersonalCabinetMainPageViewController.swift */,
 			);
 			path = PersonalCabinet;
 			sourceTree = "<group>";
@@ -850,6 +853,7 @@
 				CE37A08D25CBFC540046C1F1 /* MapViewModel.swift in Sources */,
 				CEC0C8BA25F6222D00760A0A /* MenuTableCell.swift in Sources */,
 				CE04A3F225EF9B9700BE073D /* GroupsViewModel.swift in Sources */,
+				CEE9D49725FFA74700D20C1A /* PersonalCabinetMainPageViewController.swift in Sources */,
 				CE5B3DFC25F539C700DC66E9 /* MenuViewController.swift in Sources */,
 				CE16978825C151710040AE95 /* ColorExtensions.swift in Sources */,
 				CEE5B68225D674CB0023D640 /* CorpMapper.swift in Sources */,

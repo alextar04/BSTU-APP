@@ -76,9 +76,25 @@ class SigninViewController: UIViewController{
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
                 print("Вход в систему!")
+                
+                /*
+                 http://cabinet.bstu.ru/auth/login
+                 POST: email, password
+                 */
+                
                 self!.view.endEditing(true)
                 self?.loadingWheel.isHidden = false
                 self?.signinButton.isHidden = true
+                
+                let dialogMessage = UIAlertController(title: "Вход в систему",
+                                                      message: "Неверный логин или пароль. Попробуйте ещё раз.",
+                                                      preferredStyle: .alert)
+                let okButton = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+                    print("Ok button tapped")
+                })
+                dialogMessage.addAction(okButton)
+                self!.present(dialogMessage, animated: true, completion: nil)
+                
             }).disposed(by: disposeBag)
     }
     
