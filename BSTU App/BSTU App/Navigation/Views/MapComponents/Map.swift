@@ -205,6 +205,11 @@ class Map: UIScrollView, UIScrollViewDelegate{
                 if marker1.paintingPriority > marker2.paintingPriority{
                     return true
                 }
+                
+                if marker1.paintingPriority < marker2.paintingPriority{
+                    return false
+                }
+                
                 return marker1.frame.width > marker2.frame.width
             })
             
@@ -215,6 +220,11 @@ class Map: UIScrollView, UIScrollViewDelegate{
                     if marker1.paintingPriority > marker2.paintingPriority{
                         return true
                     }
+                    
+                    if marker1.paintingPriority < marker2.paintingPriority{
+                        return false
+                    }
+                    
                     return marker1.frame.width > marker2.frame.width
                 }){
 

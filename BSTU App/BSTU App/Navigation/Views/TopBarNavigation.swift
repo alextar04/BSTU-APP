@@ -279,7 +279,7 @@ class TopBarNavigation: UIView{
             let closureToPremise = {
                 let marker = self.parentVC.map.viewModel.getMarkerByIdPremise(id: idPremise)
                 marker.statusSelected = true
-                self.parentVC.map.zoomScale = 0.5
+                self.parentVC.map.zoomScale = 0.8
                 marker.paintingPriority = 1
                 let userInfo: [String: Any] = ["tapRecognizer": notification,
                                                "idPremise": marker.idPremise]
