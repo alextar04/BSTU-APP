@@ -71,12 +71,10 @@ class SigninViewController: UIViewController, UIGestureRecognizerDelegate{
                 self?.loadingWheel.isHidden = false
                 self?.signinButton.isHidden = true
                 
-                self!.viewModel.autorizate(login: "taranlesha@mail.ru",//self!.loginField.text!,
-                                           password: "PaganiZonda1999",//self!.passwordField.text!,
-                                           completion: { [weak self] in
-                                            self!.loadingWheel.isHidden = true
-                                            self!.signinButton.isHidden = false
-                                            AppDelegate.appDelegate.rootViewController.successAutorizationChangeChapter()
+                self!.viewModel.autorizate(login: self!.loginField.text!,
+                                           password: self!.passwordField.text!,
+                    completion: {
+                        AppDelegate.appDelegate.rootViewController.successAccountChangeChapter(newPageType: .mainPage)
                                             
                 }, errorCallback: { [weak self] typeError in
                     self!.loadingWheel.isHidden = true
@@ -85,9 +83,9 @@ class SigninViewController: UIViewController, UIGestureRecognizerDelegate{
                     var message: String!
                     switch typeError{
                     case .networkError:
-                        message = "Ошибка подключения к интернету."
+                        message = "Ошибка подключения к Интернету"
                     case .wrongDataError:
-                        message = "Неверный логин или пароль. Попробуйте ещё раз."
+                        message = "Неверный логин или пароль. Попробуйте ещё раз"
                         self!.passwordField.text = ""
                     }
                     

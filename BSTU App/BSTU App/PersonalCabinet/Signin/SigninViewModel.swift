@@ -12,15 +12,10 @@ import SwiftSoup
 
 class SigninViewModel{
     
-    // MARK: Функция авторизации на сервере
+    // MARK: Метод авторизации на сервере
     func autorizate(login: String, password: String,
                     completion: @escaping ()->Void,
                     errorCallback: @escaping (TypeError)->Void){
-        
-        /*
-         http://cabinet.bstu.ru/auth/login
-         POST: email, password
-         */
         
         let queryParameters: [String: String] = [
             "email" : login,
@@ -31,7 +26,7 @@ class SigninViewModel{
                    method: .post,
                    parameters: queryParameters,
                    encoding: URLEncoding.httpBody)
-            .responseString{ html in
+            .responseString{ [weak self] html in
                 do {
                     let document = try SwiftSoup.parse(html.result.get())
                     let title = try (document.title())
@@ -42,15 +37,32 @@ class SigninViewModel{
                     }
                     
                     completion()
+                    self!.setUserDataToStorage(login: login,
+                                         password: password)
                 } catch{
                     errorCallback(.networkError)
                 }
             }
     }
+    
+    
+    // MARK: Функция записи в хранилище данных о пользователе
+    func setUserDataToStorage(login: String, password: String){
+        let defaults = UserDefaults.standard
+        defaults.set(login, forKey: "login")
+        defaults.set(password, forKey: "password")
+    }
+    
 }
 
 
 enum TypeError{
     case networkError
     case wrongDataError
+}
+
+
+enum TypePersonalCabinetStartPage{
+    case login
+    case mainPage
 }

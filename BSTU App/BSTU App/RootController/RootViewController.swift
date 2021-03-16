@@ -126,7 +126,18 @@ class RootViewController: UIViewController {
                 self.currentNavigationController = UINavigationController(rootViewController: self.currentController!)
                 
             case .cabinet:
-                self.currentController = UIStoryboard(name: "SigninViewController", bundle: nil).instantiateViewController(withIdentifier: "SigninViewControllerID") as! SigninViewController
+                
+                // Загрузка личного кабинета
+                let defaults = UserDefaults.standard
+                if let _ = defaults.string(forKey: "login") {
+                    if let _ = defaults.string(forKey: "password"){
+                        self.currentController = UIStoryboard(name: "PersonalCabinetMainPageViewController", bundle: nil).instantiateViewController(withIdentifier: "PersonalCabinetMainPageViewControllerID") as! PersonalCabinetMainPageViewController
+                        (self.currentController as! PersonalCabinetMainPageViewController).makeAutorization()
+                    }
+                } else {
+                    // Загрузка страницы входа в систему
+                    self.currentController = UIStoryboard(name: "SigninViewController", bundle: nil).instantiateViewController(withIdentifier: "SigninViewControllerID") as! SigninViewController
+                }
                 self.currentNavigationController = UINavigationController(rootViewController: self.currentController!)
             }
             
@@ -193,18 +204,26 @@ class RootViewController: UIViewController {
     }
     
     
-    // MARK: Смена контроллера при успешной авторизации
-    func successAutorizationChangeChapter(){
+    // MARK: Смена контроллера при:
+    // 1) Успешной авторизации
+    // 2) Успешном выходе из системы
+    func successAccountChangeChapter(newPageType: TypePersonalCabinetStartPage){
         
         DispatchQueue.main.async {
             
-            var preventNavigationControlelr = self.currentNavigationController
+            var preventNavigationController = self.currentNavigationController
             var preventView = self.currentView
             self.currentController = nil
             self.currentNavigationController = nil
             
-            let mainPage = UIStoryboard(name: "PersonalCabinetMainPageViewController", bundle: nil).instantiateViewController(withIdentifier: "PersonalCabinetMainPageViewControllerID") as! PersonalCabinetMainPageViewController
-            self.currentNavigationController = UINavigationController(rootViewController: mainPage)
+            let page: UIViewController!
+            switch newPageType{
+            case .login:
+                page = UIStoryboard(name: "SigninViewController", bundle: nil).instantiateViewController(withIdentifier: "SigninViewControllerID") as! SigninViewController
+            case .mainPage:
+                page = UIStoryboard(name: "PersonalCabinetMainPageViewController", bundle: nil).instantiateViewController(withIdentifier: "PersonalCabinetMainPageViewControllerID") as! PersonalCabinetMainPageViewController
+            }
+            self.currentNavigationController = UINavigationController(rootViewController: page)
             
             self.addChild(self.currentNavigationController!)
             self.currentView = self.currentNavigationController!.view
@@ -212,16 +231,16 @@ class RootViewController: UIViewController {
             
             UIView.transition(from: preventView!,
                               to: (self.currentNavigationController?.view)!,
-                              duration: 0.25,
+                              duration: 0.5,
                               options: [.transitionFlipFromRight, .showHideTransitionViews],
-                              completion: { [weak self] _ in
+                              completion: { _ in
                                 
-                                preventNavigationControlelr?.willMove(toParent: nil)
+                                preventNavigationController?.willMove(toParent: nil)
                                 preventView?.removeFromSuperview()
-                                preventNavigationControlelr?.removeFromParent()
+                                preventNavigationController?.removeFromParent()
                                 
                                 preventView = nil
-                                preventNavigationControlelr = nil
+                                preventNavigationController = nil
             })
             self.currentNavigationController!.didMove(toParent: self)
             

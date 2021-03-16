@@ -78,6 +78,7 @@
 		CE47D67F26009499009D1CCA /* SigninViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE47D67E26009499009D1CCA /* SigninViewModel.swift */; };
 		CE5B3DFA25F530F800DC66E9 /* MenuViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE5B3DF925F530F800DC66E9 /* MenuViewController.storyboard */; };
 		CE5B3DFC25F539C700DC66E9 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B3DFB25F539C700DC66E9 /* MenuViewController.swift */; };
+		CE68297B2600D5CB008556FA /* PersonalCabinetMainPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68297A2600D5CB008556FA /* PersonalCabinetMainPageViewModel.swift */; };
 		CE7F81B925FA079000A70CCB /* ListTeachers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE7F81B825FA079000A70CCB /* ListTeachers.storyboard */; };
 		CE7F81BB25FA07CD00A70CCB /* ListTeachersTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7F81BA25FA07CD00A70CCB /* ListTeachersTableCell.xib */; };
 		CE7F81BF25FA0C8800A70CCB /* ListTeachersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7F81BE25FA0C8800A70CCB /* ListTeachersViewController.swift */; };
@@ -184,6 +185,7 @@
 		CE47D67E26009499009D1CCA /* SigninViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewModel.swift; sourceTree = "<group>"; };
 		CE5B3DF925F530F800DC66E9 /* MenuViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MenuViewController.storyboard; sourceTree = "<group>"; };
 		CE5B3DFB25F539C700DC66E9 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		CE68297A2600D5CB008556FA /* PersonalCabinetMainPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCabinetMainPageViewModel.swift; sourceTree = "<group>"; };
 		CE7F81B825FA079000A70CCB /* ListTeachers.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListTeachers.storyboard; sourceTree = "<group>"; };
 		CE7F81BA25FA07CD00A70CCB /* ListTeachersTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListTeachersTableCell.xib; sourceTree = "<group>"; };
 		CE7F81BE25FA0C8800A70CCB /* ListTeachersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTeachersViewController.swift; sourceTree = "<group>"; };
@@ -539,6 +541,7 @@
 			children = (
 				CE47D681260094BF009D1CCA /* Storyboards */,
 				CEE9D49625FFA74600D20C1A /* PersonalCabinetMainPageViewController.swift */,
+				CE68297A2600D5CB008556FA /* PersonalCabinetMainPageViewModel.swift */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -862,6 +865,7 @@
 				CEE5B67A25D66AB70023D640 /* MarkerDB.swift in Sources */,
 				CE04A3FF25EF9B9700BE073D /* EmptySheduleView.swift in Sources */,
 				CE04A3F325EF9B9700BE073D /* GroupsViewController.swift in Sources */,
+				CE68297B2600D5CB008556FA /* PersonalCabinetMainPageViewModel.swift in Sources */,
 				CE04A3F525EF9B9700BE073D /* SheduleColorExtensions.swift in Sources */,
 				CE47D67F26009499009D1CCA /* SigninViewModel.swift in Sources */,
 				CE04A40125EF9B9700BE073D /* GroupSheduleViewModel.swift in Sources */,
