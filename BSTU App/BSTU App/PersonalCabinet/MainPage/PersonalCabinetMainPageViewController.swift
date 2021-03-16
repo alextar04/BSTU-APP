@@ -54,7 +54,9 @@ class PersonalCabinetMainPageViewController: UIViewController{
                                                                     message: message,
                                                                     preferredStyle: .alert)
                                 let okButton = UIAlertAction(title: "OK", style: .default, handler: { _ in
-                                    AppDelegate.appDelegate.rootViewController.successAccountChangeChapter(newPageType: .login)
+                                    if typeError == .wrongDataError{
+                                        AppDelegate.appDelegate.rootViewController.successAccountChangeChapter(newPageType: .login)
+                                    }
                                 })
                                 dialogMessage.addAction(okButton)
                                 self!.present(dialogMessage, animated: true, completion: nil)
@@ -102,18 +104,19 @@ class PersonalCabinetMainPageViewController: UIViewController{
                     AppDelegate.appDelegate
                         .rootViewController
                         .successAccountChangeChapter(newPageType: .login)
-                        
                 },
                     errorCallback: { [weak self] _ in
-                        dialogExit.dismiss(animated: true, completion: nil)
-                        let message = "Ошибка выхода из системы. Повторите попытку."
-                        let dialogMessage = UIAlertController(title: "Выход из системы",
-                                                              message: message,
-                                                              preferredStyle: .alert)
-                        let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
-                        dialogMessage.addAction(okButton)
-                        self!.present(dialogMessage, animated: true, completion: nil)
-                })
+                            let message = "Ошибка выхода из системы. Повторите попытку."
+                            let dialogMessage = UIAlertController(title: "Выход из системы",
+                                                                  message: message,
+                                                                  preferredStyle: .alert)
+                            let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
+                            dialogMessage.addAction(okButton)
+                            dialogExit.dismiss(animated: true, completion: {
+                                self!.present(dialogMessage, animated: true, completion: nil)
+                            })
+                    }
+                )
         }).disposed(by: disposeBag)
     }
     
