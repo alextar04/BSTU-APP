@@ -191,6 +191,46 @@ class RootViewController: UIViewController {
             break
         }
     }
-
+    
+    
+    // MARK: Смена контроллера при успешной авторизации
+    func successAutorizationChangeChapter(){
+        
+        DispatchQueue.main.async {
+            
+            var preventNavigationControlelr = self.currentNavigationController
+            var preventView = self.currentView
+            self.currentController = nil
+            self.currentNavigationController = nil
+            
+            let mainPage = UIStoryboard(name: "PersonalCabinetMainPageViewController", bundle: nil).instantiateViewController(withIdentifier: "PersonalCabinetMainPageViewControllerID") as! PersonalCabinetMainPageViewController
+            self.currentNavigationController = UINavigationController(rootViewController: mainPage)
+            
+            self.addChild(self.currentNavigationController!)
+            self.currentView = self.currentNavigationController!.view
+            self.view.addSubview(self.currentView!)
+            
+            UIView.transition(from: preventView!,
+                              to: (self.currentNavigationController?.view)!,
+                              duration: 0.25,
+                              options: [.transitionFlipFromRight, .showHideTransitionViews],
+                              completion: { [weak self] _ in
+                                
+                                preventNavigationControlelr?.willMove(toParent: nil)
+                                preventView?.removeFromSuperview()
+                                preventNavigationControlelr?.removeFromParent()
+                                
+                                preventView = nil
+                                preventNavigationControlelr = nil
+            })
+            self.currentNavigationController!.didMove(toParent: self)
+            
+            self.currentView!.layer.cornerRadius  = 0.0
+            self.currentView!.layer.masksToBounds = false
+            self.currentView!.sheduleMakeShadow(width: Int(self.currentView!.frame.width),
+                                              heigth: Int(self.currentView!.frame.height))
+            self.currentView!.frame.origin.x = 0
+        }
+    }
 }
 

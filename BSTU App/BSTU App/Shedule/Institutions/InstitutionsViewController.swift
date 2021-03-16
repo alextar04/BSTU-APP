@@ -102,14 +102,14 @@ class InstitutionsViewController: UIViewController, UIGestureRecognizerDelegate{
        edgePan.edges = .left
        self.view.addGestureRecognizer(edgePan)
         
-        self.menuButton.rx
+       self.menuButton.rx
             .tapGesture()
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
                 let userInfo: [String: [UIView]] = ["listDisablers": self!.listDisablers]
                 NotificationCenter.default.post(name: Notification.Name("SwitchLeftMenu"), object: nil, userInfo: userInfo)
                 self!.isMenuOpen.toggle()
-            }).disposed(by: disposeBag)
+        }).disposed(by: disposeBag)
         
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))

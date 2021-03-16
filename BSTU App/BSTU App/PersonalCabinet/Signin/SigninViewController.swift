@@ -76,17 +76,23 @@ class SigninViewController: UIViewController, UIGestureRecognizerDelegate{
                                            completion: { [weak self] in
                                             self!.loadingWheel.isHidden = true
                                             self!.signinButton.isHidden = false
+                                            AppDelegate.appDelegate.rootViewController.successAutorizationChangeChapter()
                                             
-                                            let mainPage = UIStoryboard(name: "PersonalCabinetMainPageViewController", bundle: nil).instantiateViewController(withIdentifier: "PersonalCabinetMainPageViewControllerID") as! PersonalCabinetMainPageViewController
-                                            AppDelegate.appDelegate.rootViewController.currentNavigationController = UINavigationController(rootViewController: mainPage)
-                                            UIView.transition(with: (AppDelegate.appDelegate.rootViewController.currentNavigationController?.view)!, duration: 0.5, options: [.transitionFlipFromRight, .allowAnimatedContent], animations: {self!.view.addSubview(AppDelegate.appDelegate.rootViewController.currentNavigationController!.view)})
-                                            
-                }, errorCallback: { [weak self] in
+                }, errorCallback: { [weak self] typeError in
                     self!.loadingWheel.isHidden = true
                     self!.signinButton.isHidden = false
-                    self!.passwordField.text = ""
+                    
+                    var message: String!
+                    switch typeError{
+                    case .networkError:
+                        message = "Ошибка подключения к интернету."
+                    case .wrongDataError:
+                        message = "Неверный логин или пароль. Попробуйте ещё раз."
+                        self!.passwordField.text = ""
+                    }
+                    
                     let dialogMessage = UIAlertController(title: "Вход в систему",
-                                                          message: "Неверный логин или пароль. Попробуйте ещё раз.",
+                                                          message: message,
                                                           preferredStyle: .alert)
                     let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
                     dialogMessage.addAction(okButton)

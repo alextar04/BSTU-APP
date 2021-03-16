@@ -31,7 +31,7 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="o0a-bG-Old" firstAttribute="trailing" secondItem="Vno-T9-hFX" secondAttribute="trailing" constant="16" id="6si-1p-fWh"/>
                             <constraint firstItem="Vno-T9-hFX" firstAttribute="top" secondItem="o0a-bG-Old" secondAttribute="top" constant="16" id="BRa-lw-hWW"/>

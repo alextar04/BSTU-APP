@@ -17,6 +17,7 @@ class PersonalCabinetMainPageViewController: UIViewController{
     @IBOutlet weak var menuButton: UIImageView!
     @IBOutlet weak var exitButton: UIImageView!
     
+    var isMenuOpen = false
     let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -28,7 +29,14 @@ class PersonalCabinetMainPageViewController: UIViewController{
     
     
     func setupMenuButton(){
-        
+        self.menuButton.rx
+            .tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                let userInfo: [String: [UIView]] = ["listDisablers": []]
+                NotificationCenter.default.post(name: Notification.Name("SwitchLeftMenu"), object: nil, userInfo: userInfo)
+                self!.isMenuOpen.toggle()
+            }).disposed(by: disposeBag)
     }
     
     

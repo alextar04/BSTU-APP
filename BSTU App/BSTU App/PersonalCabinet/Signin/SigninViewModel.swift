@@ -15,7 +15,7 @@ class SigninViewModel{
     // MARK: Функция авторизации на сервере
     func autorizate(login: String, password: String,
                     completion: @escaping ()->Void,
-                    errorCallback: @escaping ()->Void){
+                    errorCallback: @escaping (TypeError)->Void){
         
         /*
          http://cabinet.bstu.ru/auth/login
@@ -27,21 +27,30 @@ class SigninViewModel{
             "password" : password,
         ]
         
-        AF.request("http://cabinet.bstu.ru/auth/login", method: .post, parameters: queryParameters, encoding: URLEncoding.httpBody) .responseString{ html in
-            do {
-                let document = try SwiftSoup.parse(html.result.get())
-                let title = try (document.title())
-                
-                if title == "Вход в систему"{
-                    errorCallback()
-                    return
+        AF.request("http://cabinet.bstu.ru/auth/login",
+                   method: .post,
+                   parameters: queryParameters,
+                   encoding: URLEncoding.httpBody)
+            .responseString{ html in
+                do {
+                    let document = try SwiftSoup.parse(html.result.get())
+                    let title = try (document.title())
+                    
+                    if title == "Вход в систему"{
+                        errorCallback(.wrongDataError)
+                        return
+                    }
+                    
+                    completion()
+                } catch{
+                    errorCallback(.networkError)
                 }
-                
-                completion()
-            } catch{
-                errorCallback()
             }
-        }
-        
     }
+}
+
+
+enum TypeError{
+    case networkError
+    case wrongDataError
 }
