@@ -26,7 +26,6 @@ class MenuViewController: UIViewController{
     func setupTable(){
         
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
-        //menuTableView.backgroundView = UIImageView(image: UIImage(named: "background"))
         let chapters: [ChapterType] = [.schedule,
                                        .navigation,
                                        .teachers,

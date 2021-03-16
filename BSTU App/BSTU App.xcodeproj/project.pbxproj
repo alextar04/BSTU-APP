@@ -74,6 +74,8 @@
 		CE380A3125BC70930028622B /* UniversityCorpCellTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE380A3025BC70930028622B /* UniversityCorpCellTable.xib */; };
 		CE380A3425BC72390028622B /* UniversityCorpCellTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE380A3325BC72390028622B /* UniversityCorpCellTable.swift */; };
 		CE42A5AC25D41CD800CDDCA5 /* CorpDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42A5AB25D41CD800CDDCA5 /* CorpDB.swift */; };
+		CE47D67B26009196009D1CCA /* PersonalCabinetMainPageViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE47D67A26009196009D1CCA /* PersonalCabinetMainPageViewController.storyboard */; };
+		CE47D67F26009499009D1CCA /* SigninViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE47D67E26009499009D1CCA /* SigninViewModel.swift */; };
 		CE5B3DFA25F530F800DC66E9 /* MenuViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE5B3DF925F530F800DC66E9 /* MenuViewController.storyboard */; };
 		CE5B3DFC25F539C700DC66E9 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B3DFB25F539C700DC66E9 /* MenuViewController.swift */; };
 		CE7F81B925FA079000A70CCB /* ListTeachers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE7F81B825FA079000A70CCB /* ListTeachers.storyboard */; };
@@ -178,6 +180,8 @@
 		CE380A3025BC70930028622B /* UniversityCorpCellTable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UniversityCorpCellTable.xib; sourceTree = "<group>"; };
 		CE380A3325BC72390028622B /* UniversityCorpCellTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityCorpCellTable.swift; sourceTree = "<group>"; };
 		CE42A5AB25D41CD800CDDCA5 /* CorpDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorpDB.swift; sourceTree = "<group>"; };
+		CE47D67A26009196009D1CCA /* PersonalCabinetMainPageViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PersonalCabinetMainPageViewController.storyboard; sourceTree = "<group>"; };
+		CE47D67E26009499009D1CCA /* SigninViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewModel.swift; sourceTree = "<group>"; };
 		CE5B3DF925F530F800DC66E9 /* MenuViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MenuViewController.storyboard; sourceTree = "<group>"; };
 		CE5B3DFB25F539C700DC66E9 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		CE7F81B825FA079000A70CCB /* ListTeachers.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListTeachers.storyboard; sourceTree = "<group>"; };
@@ -512,6 +516,41 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		CE47D67C26009448009D1CCA /* Signin */ = {
+			isa = PBXGroup;
+			children = (
+				CE47D67D2600947A009D1CCA /* Storyboards */,
+				CECE8BA225FCC12D008D7840 /* SigninViewController.swift */,
+				CE47D67E26009499009D1CCA /* SigninViewModel.swift */,
+			);
+			path = Signin;
+			sourceTree = "<group>";
+		};
+		CE47D67D2600947A009D1CCA /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				CECE8BA025FCB785008D7840 /* SigninViewController.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		CE47D680260094B4009D1CCA /* MainPage */ = {
+			isa = PBXGroup;
+			children = (
+				CE47D681260094BF009D1CCA /* Storyboards */,
+				CEE9D49625FFA74600D20C1A /* PersonalCabinetMainPageViewController.swift */,
+			);
+			path = MainPage;
+			sourceTree = "<group>";
+		};
+		CE47D681260094BF009D1CCA /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				CE47D67A26009196009D1CCA /* PersonalCabinetMainPageViewController.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		CE5A9D6025CD3B2E000AE913 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -601,19 +640,10 @@
 			isa = PBXGroup;
 			children = (
 				CECE8BA425FCD583008D7840 /* Extensions */,
-				CECE8B9F25FCB71D008D7840 /* Storyboards */,
-				CECE8BA225FCC12D008D7840 /* SigninViewController.swift */,
-				CEE9D49625FFA74600D20C1A /* PersonalCabinetMainPageViewController.swift */,
+				CE47D680260094B4009D1CCA /* MainPage */,
+				CE47D67C26009448009D1CCA /* Signin */,
 			);
 			path = PersonalCabinet;
-			sourceTree = "<group>";
-		};
-		CECE8B9F25FCB71D008D7840 /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				CECE8BA025FCB785008D7840 /* SigninViewController.storyboard */,
-			);
-			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		CECE8BA425FCD583008D7840 /* Extensions */ = {
@@ -732,6 +762,7 @@
 				CE380A1C25BC4F910028622B /* building.png in Resources */,
 				CE7F81B925FA079000A70CCB /* ListTeachers.storyboard in Resources */,
 				CE04A3E925EF9B9700BE073D /* leftArrow.png in Resources */,
+				CE47D67B26009196009D1CCA /* PersonalCabinetMainPageViewController.storyboard in Resources */,
 				CE037E7225BC425E00C50C16 /* LaunchScreen.storyboard in Resources */,
 				CE04A3FA25EF9B9700BE073D /* EmptySheduleView.xib in Resources */,
 				CE01CC9A25C29E59001388B9 /* SearchPremiseView.xib in Resources */,
@@ -832,6 +863,7 @@
 				CE04A3FF25EF9B9700BE073D /* EmptySheduleView.swift in Sources */,
 				CE04A3F325EF9B9700BE073D /* GroupsViewController.swift in Sources */,
 				CE04A3F525EF9B9700BE073D /* SheduleColorExtensions.swift in Sources */,
+				CE47D67F26009499009D1CCA /* SigninViewModel.swift in Sources */,
 				CE04A40125EF9B9700BE073D /* GroupSheduleViewModel.swift in Sources */,
 				CE04A3F125EF9B9700BE073D /* GroupsModel.swift in Sources */,
 				CE04A3F425EF9B9700BE073D /* GroupsViewCell.swift in Sources */,

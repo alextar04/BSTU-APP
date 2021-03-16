@@ -24,3 +24,17 @@ extension UIView{
         self.layer.insertSublayer(gradientLayer, at: 0)
     }
 }
+
+
+extension UIViewController {
+    func transitionVC(vc: UIViewController, duration: CFTimeInterval, type: CATransitionSubtype) {
+        let customVcTransition = vc
+        let transition = CATransition()
+        transition.duration = duration
+        transition.type = CATransitionType.push
+        transition.subtype = type
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+        view.window!.layer.add(transition, forKey: kCATransition)
+        present(customVcTransition, animated: false, completion: nil)
+    }
+}

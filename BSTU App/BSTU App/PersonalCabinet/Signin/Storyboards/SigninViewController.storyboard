@@ -249,9 +249,9 @@
                         <outlet property="feedbackButton" destination="ipY-1z-oYO" id="Tc5-1C-cnC"/>
                         <outlet property="forgetPasswordButton" destination="6wC-QG-e8h" id="TAK-zN-DyW"/>
                         <outlet property="loadingWheel" destination="guN-SA-APo" id="vfq-nv-Xvr"/>
-                        <outlet property="loginField" destination="wI6-m6-y8r" id="nZz-cm-rA6"/>
+                        <outlet property="loginField" destination="Kf8-jV-1GX" id="TnA-pk-05l"/>
                         <outlet property="menuButton" destination="4kd-ag-BpJ" id="yPT-2u-KjV"/>
-                        <outlet property="passwordField" destination="Kf8-jV-1GX" id="37N-Ip-Nk9"/>
+                        <outlet property="passwordField" destination="wI6-m6-y8r" id="5Yh-EQ-fsB"/>
                         <outlet property="registrationButton" destination="iMh-YP-aJs" id="ubO-0m-PVu"/>
                         <outlet property="roundedFeedbackView" destination="4a0-Xq-ddg" id="yQW-nk-lnc"/>
                         <outlet property="shadowFeedbackView" destination="K11-vh-e2N" id="IJi-Fb-7QC"/>

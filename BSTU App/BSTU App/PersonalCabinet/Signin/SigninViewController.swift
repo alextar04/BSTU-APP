@@ -12,7 +12,7 @@ import RxCocoa
 import RxGesture
 import UIKit
 
-class SigninViewController: UIViewController{
+class SigninViewController: UIViewController, UIGestureRecognizerDelegate{
     
     @IBOutlet weak var menuButton: UIImageView!
     @IBOutlet weak var loginField: UITextField!
@@ -28,6 +28,7 @@ class SigninViewController: UIViewController{
     @IBOutlet weak var feedbackButton: UIButton!
     
     var isMenuOpen = false
+    let viewModel = SigninViewModel()
     let disposeBag = DisposeBag()
     
     lazy var listDisablers: [UIView] = [self.menuButton,
@@ -57,44 +58,40 @@ class SigninViewController: UIViewController{
         self.signinButton.makeSigninButtonStyle()
         self.signinButton.makeRoundingButton()
         
-        self.view.rx
-            .tapGesture()
-            .when(.recognized)
-            .subscribe(onNext: { [weak self] _ in
-                self!.view.endEditing(true)
-                
-                if self!.isMenuOpen{
-                    let userInfo: [String: [UIView]] = ["listDisablers": self!.listDisablers]
-                    NotificationCenter.default.post(name: Notification.Name("SwitchLeftMenu"), object: nil, userInfo: userInfo)
-                    self?.isMenuOpen.toggle()
-                }
-                
-            }).disposed(by: disposeBag)
+        let closeMenuTap = UITapGestureRecognizer(target: self, action: #selector(self.closeMenu(_:)))
+        self.view.addGestureRecognizer(closeMenuTap)
+        closeMenuTap.delegate = self
         
         self.signinButton.rx
             .tapGesture()
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
                 print("Вход в систему!")
-                
-                /*
-                 http://cabinet.bstu.ru/auth/login
-                 POST: email, password
-                 */
-                
                 self!.view.endEditing(true)
                 self?.loadingWheel.isHidden = false
                 self?.signinButton.isHidden = true
                 
-                let dialogMessage = UIAlertController(title: "Вход в систему",
-                                                      message: "Неверный логин или пароль. Попробуйте ещё раз.",
-                                                      preferredStyle: .alert)
-                let okButton = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
-                    print("Ok button tapped")
+                self!.viewModel.autorizate(login: "taranlesha@mail.ru",//self!.loginField.text!,
+                                           password: "PaganiZonda1999",//self!.passwordField.text!,
+                                           completion: { [weak self] in
+                                            self!.loadingWheel.isHidden = true
+                                            self!.signinButton.isHidden = false
+                                            
+                                            let mainPage = UIStoryboard(name: "PersonalCabinetMainPageViewController", bundle: nil).instantiateViewController(withIdentifier: "PersonalCabinetMainPageViewControllerID") as! PersonalCabinetMainPageViewController
+                                            AppDelegate.appDelegate.rootViewController.currentNavigationController = UINavigationController(rootViewController: mainPage)
+                                            UIView.transition(with: (AppDelegate.appDelegate.rootViewController.currentNavigationController?.view)!, duration: 0.5, options: [.transitionFlipFromRight, .allowAnimatedContent], animations: {self!.view.addSubview(AppDelegate.appDelegate.rootViewController.currentNavigationController!.view)})
+                                            
+                }, errorCallback: { [weak self] in
+                    self!.loadingWheel.isHidden = true
+                    self!.signinButton.isHidden = false
+                    self!.passwordField.text = ""
+                    let dialogMessage = UIAlertController(title: "Вход в систему",
+                                                          message: "Неверный логин или пароль. Попробуйте ещё раз.",
+                                                          preferredStyle: .alert)
+                    let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    dialogMessage.addAction(okButton)
+                    self!.present(dialogMessage, animated: true, completion: nil)
                 })
-                dialogMessage.addAction(okButton)
-                self!.present(dialogMessage, animated: true, completion: nil)
-                
             }).disposed(by: disposeBag)
     }
     
@@ -176,6 +173,31 @@ class SigninViewController: UIViewController{
             return
         }
     }
+    
+    
+    // MARK: Закрытие меню
+    @objc func closeMenu(_ sender: UITapGestureRecognizer){
+        self.view.endEditing(true)
+        
+        if self.isMenuOpen{
+            let userInfo: [String: [UIView]] = ["listDisablers": self.listDisablers]
+            NotificationCenter.default.post(name: Notification.Name("SwitchLeftMenu"), object: nil, userInfo: userInfo)
+            self.isMenuOpen.toggle()
+        }
+    }
+    
+    
+    // MARK: Отмена нажатия на экран при смене редактирования полей логина/пароля
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        
+        if self.loginField.isEditing || self.passwordField.isEditing{
+            if touch.view == self.loginField || touch.view == self.passwordField{
+                return false
+            }
+        }
+        return true
+    }
+    
     
     deinit {
         print("Вызов деструктора Окна входа в ЛК")
