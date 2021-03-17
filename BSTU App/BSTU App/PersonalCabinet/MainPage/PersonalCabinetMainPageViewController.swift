@@ -15,15 +15,47 @@ import UIKit
 class PersonalCabinetMainPageViewController: UIViewController{
     
     @IBOutlet weak var menuButton: UIImageView!
+    @IBOutlet weak var headerName: UILabel!
     @IBOutlet weak var exitButton: UIImageView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    @IBOutlet weak var educationalInformationView: UIView!
+    @IBOutlet weak var instituteName: UILabel!
+    @IBOutlet weak var groupName: UILabel!
+    @IBOutlet weak var numberRecordBookValue: UILabel!
+    @IBOutlet weak var numberRecordBookLabel: UILabel!
+    @IBOutlet weak var numberRecordBookWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var typePerson: UILabel!
+    @IBOutlet weak var educationForm: UILabel!
+    @IBOutlet weak var educationType: UILabel!
+    
+    @IBOutlet weak var containerPersonalInformationView: UIView!
+    @IBOutlet weak var containerPersonalInformationViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var personalInformationView: UIView!
+    @IBOutlet weak var personalInformationViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var togglerPersonalInformation: UIButton!
+    @IBOutlet weak var togglerImage: UIImageView!
+    @IBOutlet weak var birthday: UILabel!
+    @IBOutlet weak var gender: UILabel!
+    @IBOutlet weak var citizenship: UILabel!
+    @IBOutlet weak var telephone: UILabel!
+    @IBOutlet weak var email: UILabel!
+    @IBOutlet weak var snils: UILabel!
+    var personalInformationViewIsOpen = false
+    
+    @IBOutlet weak var chaptersTableHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var chaptersTable: UITableView!
     
     var isMenuOpen = false
     let viewModel = PersonalCabinetMainPageViewModel()
     let disposeBag = DisposeBag()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.setupEducationalInformation()
+        self.setupPersonalInformation()
+        self.setupChaptersTable()
         self.setupMenuButton()
         self.setupExitButton()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -63,6 +95,121 @@ class PersonalCabinetMainPageViewController: UIViewController{
         })
     }
     
+    
+    // MARK: Настройка раздела информации об образовательном процессе
+    func setupEducationalInformation(){
+        
+        // Запрос на бэк
+        self.educationalInformationView.frame = CGRect(x: 16, y: 0,
+                                                        width: self.view.frame.width - 32,
+                                                        height: self.educationalInformationView.frame.height)
+        self.educationalInformationView.layoutIfNeeded()
+        self.educationalInformationView.makeRounding()
+        self.educationalInformationView.addViewBlueGradientStyle()
+        
+        self.instituteName.text = "ИЭИТУС"
+        self.groupName.text = "ВТ-41"
+        self.numberRecordBookValue.text = "121221212"
+        if numberRecordBookValue.isTruncated(){
+            self.numberRecordBookLabel.text = "Номер ЗК: "
+            self.numberRecordBookWidthConstraint.constant = 96
+        } else {
+            self.numberRecordBookWidthConstraint.constant = 212
+        }
+        self.typePerson.text = "Студент"
+        self.educationForm.text = "Очная"
+        self.educationType.text = "Бюджет"
+    }
+    
+    
+    // MARK: Настройка раздела личной информации
+    func setupPersonalInformation(){
+        
+        self.containerPersonalInformationView.frame = CGRect(x: 16, y: 0,
+                                                        width: self.view.frame.width - 32,
+                                                        height: containerPersonalInformationViewHeightConstraint.constant)
+        self.containerPersonalInformationView.layoutIfNeeded()
+        
+        self.containerPersonalInformationView.makeRounding()
+        self.containerPersonalInformationView.addViewBlueGradientStyle()
+        self.personalInformationView.addViewBlueGradientStyle()
+        
+        self.headerName.text = "Сергеев С.C."
+        self.birthday.text = "03.12.22"
+        self.gender.text = "Женский"
+        self.citizenship.text = "Китай"
+        self.telephone.text = "8(999)999-99-99"
+        self.email.text = "weerty@mail.ru"
+        self.snils.text = "112-112-112-12"
+        
+        self.containerPersonalInformationViewHeightConstraint.constant = 31
+        self.personalInformationViewHeightConstraint.constant = 0
+        self.togglerPersonalInformation.rx
+            .tap
+            .subscribe(onNext: { [weak self] _ in
+                
+                var newValueContainerHeight: CGFloat!
+                var newValueHeight: CGFloat!
+                if self!.personalInformationViewIsOpen{
+                    newValueContainerHeight = 31
+                    newValueHeight = 0
+                } else{
+                    newValueContainerHeight = 214
+                    newValueHeight = 183
+                }
+                
+                UIView.animate(
+                    withDuration: 0.4,
+                    delay: 0,
+                    usingSpringWithDamping: 1,
+                    initialSpringVelocity: 1,
+                options: .curveEaseIn,
+                animations: {
+                  self!.containerPersonalInformationViewHeightConstraint.constant = newValueContainerHeight
+                  self!.personalInformationViewHeightConstraint.constant = newValueHeight
+                    
+                  (!self!.personalInformationViewIsOpen) ?
+                    (self!.togglerImage.image = UIImage(named: "dropup")) : (self!.togglerImage.image = UIImage(named: "dropdown"))
+                    
+                  self!.view.layoutIfNeeded()
+                }, completion: { [weak self] _ in
+                    self!.personalInformationViewIsOpen.toggle()
+                })
+                
+            }).disposed(by: disposeBag)
+    }
+    
+    
+    // MARK: Настройка таблицы с разделами
+    func setupChaptersTable(){
+        
+        self.chaptersTable.register(UINib(nibName: "PersonalCabinetChapterCard", bundle: nil), forCellReuseIdentifier: "PersonalCabinetChapterCardID")
+        
+        // Высота таблицы = количество разделов * высота одной ячейки
+        let chapters: [TypePersonalCabinetChapter] = [.attestation,
+                                                      .exams,
+                                                      .schedule]
+        self.chaptersTableHeightConstraint.constant = CGFloat(chapters.count * 80)
+        
+        Observable.just(chapters).bind(to: self.chaptersTable.rx.items){
+            [weak self] (tableView, row, element) in
+            let cell = self!.chaptersTable.dequeueReusableCell(withIdentifier: "PersonalCabinetChapterCardID") as! PersonalCabinetChapterCard
+            cell.frame = CGRect(x: 0, y: 0,
+                                width: self!.chaptersTable.frame.width, height: 80)
+            cell.layoutIfNeeded()
+            cell.configureCell(typePersonalCabinetChapter: element)
+            return cell
+        }.disposed(by: self.disposeBag)
+        
+        self.chaptersTable.rx
+            .modelSelected(TypePersonalCabinetChapter.self)
+            .subscribe(onNext: { selectedItem in
+                print(selectedItem.rawValue)
+            }).disposed(by: self.disposeBag)
+    }
+    
+    
+    // MARK: Настройка открытия бокового меню
     func setupMenuButton(){
         self.menuButton.rx
             .tapGesture()

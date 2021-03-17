@@ -72,7 +72,7 @@ class SigninViewController: UIViewController, UIGestureRecognizerDelegate{
                 self?.signinButton.isHidden = true
                 
                 self!.viewModel.autorizate(login: self!.loginField.text!,
-                                           password: self!.passwordField.text!,
+                    password: self!.passwordField.text!,
                     completion: {
                         AppDelegate.appDelegate.rootViewController.successAccountChangeChapter(newPageType: .mainPage)
                                             
@@ -127,7 +127,7 @@ class SigninViewController: UIViewController, UIGestureRecognizerDelegate{
     // MARK: Установка кнопки "Обратная связь"
     func setupFeedbackButton(){
         self.roundedFeedbackView.layoutIfNeeded()
-        self.roundedFeedbackView.makeSigninFeedbackViewStyle()
+        self.roundedFeedbackView.addViewGrayGradientStyle()
         self.roundedFeedbackView.makeRounding()
         
         self.feedbackButton.rx
