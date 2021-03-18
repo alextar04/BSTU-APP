@@ -5244,8 +5244,8 @@
             filePath = "BSTU App/PersonalCabinet/MainPage/PersonalCabinetMainPageViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "218"
-            endingLineNumber = "218"
+            startingLineNumber = "228"
+            endingLineNumber = "228"
             landmarkName = "setupMenuButton()"
             landmarkType = "7">
          </BreakpointContent>
@@ -5340,8 +5340,8 @@
             filePath = "BSTU App/PersonalCabinet/MainPage/PersonalCabinetMainPageViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "251"
-            endingLineNumber = "251"
+            startingLineNumber = "261"
+            endingLineNumber = "261"
             landmarkName = "setupExitButton()"
             landmarkType = "7">
          </BreakpointContent>
@@ -5388,8 +5388,8 @@
             filePath = "BSTU App/PersonalCabinet/MainPage/PersonalCabinetMainPageViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "250"
-            endingLineNumber = "250"
+            startingLineNumber = "260"
+            endingLineNumber = "260"
             landmarkName = "setupExitButton()"
             landmarkType = "7">
          </BreakpointContent>
@@ -5407,6 +5407,22 @@
             startingLineNumber = "114"
             endingLineNumber = "114"
             landmarkName = "setupEducationalInformation()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1F73D09F-23D5-4622-9993-908C20C48CBC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BSTU App/PersonalCabinet/Attestation/Views/AttestationCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "setupInOutForTable(countData:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

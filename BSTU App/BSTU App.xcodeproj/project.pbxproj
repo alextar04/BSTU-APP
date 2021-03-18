@@ -92,6 +92,13 @@
 		CE91140525C3FA020096AB29 /* NavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91140425C3FA020096AB29 /* NavigationViewModel.swift */; };
 		CE91140725C437740096AB29 /* StoreySwitcherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE91140625C437740096AB29 /* StoreySwitcherView.xib */; };
 		CE91140925C439460096AB29 /* StoreySwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91140825C439460096AB29 /* StoreySwitcherView.swift */; };
+		CEA4C9B526033A7900716C07 /* AttestationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEA4C9B426033A7900716C07 /* AttestationViewController.storyboard */; };
+		CEA4C9B72603401600716C07 /* AttestationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA4C9B62603401600716C07 /* AttestationCell.xib */; };
+		CEA4C9BA2603403500716C07 /* AttestationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4C9B92603403500716C07 /* AttestationViewController.swift */; };
+		CEA4C9BC2603435C00716C07 /* AttestationCellDropdownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA4C9BB2603435C00716C07 /* AttestationCellDropdownCell.xib */; };
+		CEA4C9BE260343F300716C07 /* AttestationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4C9BD260343F300716C07 /* AttestationCell.swift */; };
+		CEA4C9C02603442200716C07 /* AttestationCellDropdownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4C9BF2603442200716C07 /* AttestationCellDropdownCell.swift */; };
+		CEA4C9C226034BF800716C07 /* AttestationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4C9C126034BF800716C07 /* AttestationModel.swift */; };
 		CEACB2D925C7F2F900F4ADD3 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEACB2D825C7F2F900F4ADD3 /* Map.swift */; };
 		CEC0C8BA25F6222D00760A0A /* MenuTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0C8B925F6222D00760A0A /* MenuTableCell.swift */; };
 		CECE8BA125FCB785008D7840 /* SigninViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECE8BA025FCB785008D7840 /* SigninViewController.storyboard */; };
@@ -202,6 +209,13 @@
 		CE91140425C3FA020096AB29 /* NavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModel.swift; sourceTree = "<group>"; };
 		CE91140625C437740096AB29 /* StoreySwitcherView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreySwitcherView.xib; sourceTree = "<group>"; };
 		CE91140825C439460096AB29 /* StoreySwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreySwitcherView.swift; sourceTree = "<group>"; };
+		CEA4C9B426033A7900716C07 /* AttestationViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AttestationViewController.storyboard; sourceTree = "<group>"; };
+		CEA4C9B62603401600716C07 /* AttestationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttestationCell.xib; sourceTree = "<group>"; };
+		CEA4C9B92603403500716C07 /* AttestationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationViewController.swift; sourceTree = "<group>"; };
+		CEA4C9BB2603435C00716C07 /* AttestationCellDropdownCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttestationCellDropdownCell.xib; sourceTree = "<group>"; };
+		CEA4C9BD260343F300716C07 /* AttestationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationCell.swift; sourceTree = "<group>"; };
+		CEA4C9BF2603442200716C07 /* AttestationCellDropdownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationCellDropdownCell.swift; sourceTree = "<group>"; };
+		CEA4C9C126034BF800716C07 /* AttestationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationModel.swift; sourceTree = "<group>"; };
 		CEACB2D825C7F2F900F4ADD3 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		CEC0C8B925F6222D00760A0A /* MenuTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableCell.swift; sourceTree = "<group>"; };
 		CECE8BA025FCB785008D7840 /* SigninViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SigninViewController.storyboard; sourceTree = "<group>"; };
@@ -655,10 +669,49 @@
 			path = Database;
 			sourceTree = "<group>";
 		};
+		CEA4C9AF260339BF00716C07 /* Attestation */ = {
+			isa = PBXGroup;
+			children = (
+				CEA4C9B82603401C00716C07 /* Views */,
+				CEA4C9B326033A7900716C07 /* Storyboards */,
+				CEA4C9B92603403500716C07 /* AttestationViewController.swift */,
+				CEA4C9C126034BF800716C07 /* AttestationModel.swift */,
+			);
+			path = Attestation;
+			sourceTree = "<group>";
+		};
+		CEA4C9B0260339CD00716C07 /* Exams */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Exams;
+			sourceTree = "<group>";
+		};
+		CEA4C9B326033A7900716C07 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				CEA4C9B426033A7900716C07 /* AttestationViewController.storyboard */,
+				CEA4C9B62603401600716C07 /* AttestationCell.xib */,
+				CEA4C9BB2603435C00716C07 /* AttestationCellDropdownCell.xib */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		CEA4C9B82603401C00716C07 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CEA4C9BD260343F300716C07 /* AttestationCell.swift */,
+				CEA4C9BF2603442200716C07 /* AttestationCellDropdownCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		CECE8B9E25FCB6E1008D7840 /* PersonalCabinet */ = {
 			isa = PBXGroup;
 			children = (
 				CECE8BA425FCD583008D7840 /* Extensions */,
+				CEA4C9B0260339CD00716C07 /* Exams */,
+				CEA4C9AF260339BF00716C07 /* Attestation */,
 				CE47D680260094B4009D1CCA /* MainPage */,
 				CE47D67C26009448009D1CCA /* Signin */,
 			);
@@ -767,6 +820,7 @@
 				CE04A3F025EF9B9700BE073D /* GroupsScreen.storyboard in Resources */,
 				CE04A3EF25EF9B9700BE073D /* exam.png in Resources */,
 				CE380A2725BC4F910028622B /* BottomBarView.xib in Resources */,
+				CEA4C9B72603401600716C07 /* AttestationCell.xib in Resources */,
 				CE04A3F925EF9B9700BE073D /* GroupSheduleCard.xib in Resources */,
 				CE380A1A25BC4F910028622B /* rectangle.png in Resources */,
 				CE5B3DFA25F530F800DC66E9 /* MenuViewController.storyboard in Resources */,
@@ -775,6 +829,7 @@
 				CE009EF125D6C18100CA8604 /* admin_bstuDB.sqlite3 in Resources */,
 				CE04A3EE25EF9B9700BE073D /* delete.png in Resources */,
 				CE380A1E25BC4F910028622B /* marker_pointer.png in Resources */,
+				CEA4C9BC2603435C00716C07 /* AttestationCellDropdownCell.xib in Resources */,
 				CE04A3E125EF9B9700BE073D /* InstitutionsScreen.storyboard in Resources */,
 				CE380A1D25BC4F910028622B /* showMore.png in Resources */,
 				CE04A3EA25EF9B9700BE073D /* menu.png in Resources */,
@@ -792,6 +847,7 @@
 				CE04A3ED25EF9B9700BE073D /* okSelection.png in Resources */,
 				CECE8BA125FCB785008D7840 /* SigninViewController.storyboard in Resources */,
 				CE91140725C437740096AB29 /* StoreySwitcherView.xib in Resources */,
+				CEA4C9B526033A7900716C07 /* AttestationViewController.storyboard in Resources */,
 				CE04A3E825EF9B9700BE073D /* books.png in Resources */,
 				CE380A3125BC70930028622B /* UniversityCorpCellTable.xib in Resources */,
 				CE04A3EC25EF9B9700BE073D /* dropup.png in Resources */,
@@ -857,6 +913,8 @@
 				CE009EEB25D6A20D00CA8604 /* UniversityCorpsViewModel.swift in Sources */,
 				CE42A5AC25D41CD800CDDCA5 /* CorpDB.swift in Sources */,
 				CE380A2525BC4F910028622B /* TextFieldExtensions.swift in Sources */,
+				CEA4C9C226034BF800716C07 /* AttestationModel.swift in Sources */,
+				CEA4C9C02603442200716C07 /* AttestationCellDropdownCell.swift in Sources */,
 				CECE8BA325FCC12D008D7840 /* SigninViewController.swift in Sources */,
 				CE04A3FD25EF9B9700BE073D /* GroupSheduleCard.swift in Sources */,
 				CE380A2125BC4F910028622B /* ViewExtensions.swift in Sources */,
@@ -869,6 +927,7 @@
 				CE81A73425F0FCA5007358F7 /* SheduleLabelExtensions.swift in Sources */,
 				CECEB15125FCDCA10015446C /* PersonalCabinetViewExtensions.swift in Sources */,
 				CE51EE4A260223C300F6FFFB /* PersonalCabinetViewControllerExtensions.swift in Sources */,
+				CEA4C9BA2603403500716C07 /* AttestationViewController.swift in Sources */,
 				CEACB2D925C7F2F900F4ADD3 /* Map.swift in Sources */,
 				CE7F81BF25FA0C8800A70CCB /* ListTeachersViewController.swift in Sources */,
 				CE04A3FE25EF9B9700BE073D /* DateSegmentedControl.swift in Sources */,
@@ -902,6 +961,7 @@
 				CEE3AFC525D7D699007B1814 /* MapMapper.swift in Sources */,
 				CE04A3E225EF9B9700BE073D /* InstitutionsViewController.swift in Sources */,
 				CE04A3E425EF9B9700BE073D /* InstitutionsTableCell.swift in Sources */,
+				CEA4C9BE260343F300716C07 /* AttestationCell.swift in Sources */,
 				CE04A3FB25EF9B9700BE073D /* GroupSheduleViewController.swift in Sources */,
 				CEE5B67E25D66AD80023D640 /* TypePremiseDB.swift in Sources */,
 				CE91140925C439460096AB29 /* StoreySwitcherView.swift in Sources */,

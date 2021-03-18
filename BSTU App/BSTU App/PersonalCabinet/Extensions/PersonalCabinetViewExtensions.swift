@@ -30,8 +30,8 @@ extension UIView{
         
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.bounds
-        gradientLayer.colors = [UIColor.thirdCourseBackgroundColorStart.cgColor,
-                                UIColor.thirdCourseBackgroundColorFinish.cgColor]
+        gradientLayer.colors = [UIColor.secondCourseBackgroundColorStart.cgColor,
+                                UIColor.secondCourseBackgroundColorFinish.cgColor]
         gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
         
@@ -48,6 +48,13 @@ extension UIView{
 
         self.layer.shadowOpacity = 0.15;
         self.layer.shadowOffset = CGSize(width: 0, height: 0)
+    }
+    
+    
+    func makeRoundingSpecificCorners(arrayCorners: CACornerMask){
+        self.layer.maskedCorners = arrayCorners
+        self.layer.cornerRadius = 10.0
+        self.layer.masksToBounds = true
     }
 }
 

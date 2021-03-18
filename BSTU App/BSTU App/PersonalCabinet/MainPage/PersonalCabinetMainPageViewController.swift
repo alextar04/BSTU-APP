@@ -205,6 +205,16 @@ class PersonalCabinetMainPageViewController: UIViewController{
             .modelSelected(TypePersonalCabinetChapter.self)
             .subscribe(onNext: { selectedItem in
                 print(selectedItem.rawValue)
+                switch selectedItem{
+                case .attestation:
+                    let attestationController = UIStoryboard(name: "AttestationViewController", bundle: nil)
+                        .instantiateViewController(withIdentifier: "AttestationViewControllerID") as! AttestationViewController
+                    self.navigationController?.pushViewController(attestationController, animated: true)
+                case .exams:
+                    print(selectedItem.rawValue)
+                case .schedule:
+                    print(selectedItem.rawValue)
+                }
             }).disposed(by: self.disposeBag)
     }
     

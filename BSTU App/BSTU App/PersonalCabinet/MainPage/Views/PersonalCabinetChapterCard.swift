@@ -59,8 +59,8 @@ class PersonalCabinetChapterCard: UITableViewCell{
     func makeGradient(){
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.roundedView.bounds
-        gradientLayer.colors = [UIColor.thirdCourseBackgroundColorStart.cgColor,
-                                UIColor.thirdCourseBackgroundColorFinish.cgColor]
+        gradientLayer.colors = [UIColor.secondCourseBackgroundColorStart.cgColor,
+                                UIColor.secondCourseBackgroundColorFinish.cgColor]
         
         gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)

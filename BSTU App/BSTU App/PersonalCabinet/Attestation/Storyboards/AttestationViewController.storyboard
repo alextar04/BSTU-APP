@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Attestation View Controller-->
+        <scene sceneID="74X-3c-2kl">
+            <objects>
+                <viewController storyboardIdentifier="AttestationViewControllerID" id="4Wo-ZV-pAz" customClass="AttestationViewController" customModule="BSTU_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ifg-rF-oRM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="leftArrow" translatesAutoresizingMaskIntoConstraints="NO" id="D5k-Yt-kTP">
+                                <rect key="frame" x="16" y="16" width="23" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="23" id="eSx-3U-BlZ"/>
+                                    <constraint firstAttribute="width" constant="23" id="gV5-ZQ-Iqt"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Аттестация" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nub-yr-EAb">
+                                <rect key="frame" x="56" y="5" width="180" height="43"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="43" id="Ule-iz-Su0"/>
+                                    <constraint firstAttribute="width" constant="180" id="hZu-dV-HbB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jmx-Be-eaT">
+                                <rect key="frame" x="0.0" y="47" width="375" height="620"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="D5k-Yt-kTP" firstAttribute="top" secondItem="ajR-Xq-Tn7" secondAttribute="top" constant="16" id="CyH-um-MvM"/>
+                            <constraint firstItem="ajR-Xq-Tn7" firstAttribute="bottom" secondItem="Jmx-Be-eaT" secondAttribute="bottom" id="Fkh-e3-bd9"/>
+                            <constraint firstItem="nub-yr-EAb" firstAttribute="top" secondItem="ajR-Xq-Tn7" secondAttribute="top" constant="5" id="MVn-aR-iB6"/>
+                            <constraint firstItem="Jmx-Be-eaT" firstAttribute="top" secondItem="ajR-Xq-Tn7" secondAttribute="top" constant="47" id="aDe-IZ-DhN"/>
+                            <constraint firstItem="nub-yr-EAb" firstAttribute="leading" secondItem="D5k-Yt-kTP" secondAttribute="trailing" constant="17" id="ioj-fi-zIE"/>
+                            <constraint firstItem="Jmx-Be-eaT" firstAttribute="leading" secondItem="ajR-Xq-Tn7" secondAttribute="leading" id="mh6-av-vFm"/>
+                            <constraint firstItem="ajR-Xq-Tn7" firstAttribute="trailing" secondItem="Jmx-Be-eaT" secondAttribute="trailing" id="sEa-Ar-DNC"/>
+                            <constraint firstItem="D5k-Yt-kTP" firstAttribute="leading" secondItem="ajR-Xq-Tn7" secondAttribute="leading" constant="16" id="tkN-lR-ffs"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ajR-Xq-Tn7"/>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="D5k-Yt-kTP" id="lom-OW-TOi"/>
+                        <outlet property="contentView" destination="Jmx-Be-eaT" id="RJG-BZ-1sj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9aL-IZ-Xv7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="74.400000000000006" y="115.59220389805098"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="leftArrow" width="100" height="100"/>
+    </resources>
+</document>

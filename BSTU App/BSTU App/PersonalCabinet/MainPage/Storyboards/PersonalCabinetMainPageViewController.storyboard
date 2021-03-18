@@ -403,7 +403,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="23" id="ixe-Yx-mEM"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="21"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
