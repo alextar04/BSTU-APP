@@ -9,14 +9,26 @@
 import Foundation
 import UIKit
 import RxSwift
+import RxCocoa
+import RxDataSources
 
-class AttestationViewController: UIViewController{
+class AttestationViewController: UIViewController, UITableViewDelegate{
     
     @IBOutlet weak var backButton: UIImageView!
-    @IBOutlet weak var contentView: UIScrollView!
+    weak var selectedCell: AttestationCell!
+    var selectedCellIndex: IndexPath!
+    var selectedCellHeight: Int!
+    @IBOutlet weak var contentView: ContentTableView!
     
-    let offsetBetweenRecords: CGFloat = 8.0
+    var arrayRangeDates = [AttestationCell]()
     let disposeBag = DisposeBag()
+    
+    // Вспомогательная структура для отображения данных в виде секции
+    var sectionedArrayRangeDates = [SectionOfDataRanges]()
+    struct SectionOfDataRanges{
+        var header: String
+        var items: [AttestationModel]
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,50 +42,77 @@ class AttestationViewController: UIViewController{
     // MARK: Установка контента
     func setupContent(){
         
-        let attestationData: [AttestationModel] = [AttestationModel(dataRange: "21.01.10 - 22.22.22",
-                                                                    disciplines: ["Русский": 5,
-                                                                                  "Математика": 3,
-                                                                                  "Окружающий мир": 4])/*,
-                                                   AttestationModel(dataRange: "21.01.10 - 22.22.22",
-                                                                    disciplines: ["Русский": 5,
-                                                                                      "Математика": 3,
-                                                                                      "Окружающий мир": 4]),
-                                                   AttestationModel(dataRange: "21.01.10 - 22.22.22",
-                                                                    disciplines: ["Русский": 5,
-                                                                                  "Математика": 3,
-                                                                                  "Окружающий мир": 4]),
-                                                   AttestationModel(dataRange: "21.01.10 - 22.22.22",
-                                                                    disciplines: ["Русский": 5,
-                                                                                  "Математика": 3,
-                                                                                  "Окружающий мир": 4])*/]
-        var currentTableHeight = offsetBetweenRecords
-        for (index, oneAttestationData) in attestationData.enumerated(){
-            let yStart: CGFloat!
-            index != 0 ? (yStart = currentTableHeight + offsetBetweenRecords) : (yStart = currentTableHeight)
-            
-            let oneAttestationView = UINib(nibName: "AttestationCell", bundle: nil)
-                .instantiate(withOwner: self, options: nil)
-                .first as? AttestationCell
-            
-            oneAttestationView!.frame = CGRect(x: 10, y: yStart,
-                                        width: self.contentView.frame.width - 20,
-                                        height: (oneAttestationView?.frame.height)!)
-            oneAttestationView?.headerContainerView.frame = CGRect(x: 0, y: 0,
-                                                                   width: self.contentView.frame.width - 20,
-                                                                   height: (oneAttestationView?.headerContainerView.frame.height)!)
-            
-            oneAttestationView?.configureCell(data: oneAttestationData)
-            
-            oneAttestationView?.containerViewHeightConstraint.constant = 37
-            oneAttestationView?.headerViewHeightConstraint.constant = 37
-            oneAttestationView?.tableMarksHeightConstraiant.constant = 0
-            
-            index != 0 ? (currentTableHeight += (oneAttestationView?.headerViewHeightConstraint.constant)! + offsetBetweenRecords) : (currentTableHeight += (oneAttestationView?.headerViewHeightConstraint.constant)!)
-            contentView.addSubview(oneAttestationView!)
+        var attestationData = [AttestationModel]()
+        for _ in 0...10{
+            attestationData.append(AttestationModel(dataRange: "21.01.10 - 22.22.22",
+                                                    disciplines: [DisciplineModel(discipline: ("Русский", 5)),
+                                                                  DisciplineModel(discipline: ("Математика", 4)),
+                                                                  DisciplineModel(discipline: ("Информатика", 2)),
+                                                                  DisciplineModel(discipline: ("Английский", 3)),
+                                                                  DisciplineModel(discipline: ("Окружающий", 3))
+                                                                  ]))
         }
         
-        self.contentView.contentSize = CGSize(width: self.view.frame.width,
-                                               height: 1000)
+        
+        for attestation in attestationData{
+            self.sectionedArrayRangeDates.append(SectionOfDataRanges(header: attestation.dataRange!, items: [attestation]))
+        }
+        
+        self.contentView.register(UINib(nibName: "AttestationCell", bundle: nil),
+                                  forCellReuseIdentifier: "AttestationCellID")
+        self.contentView.canCancelContentTouches = true
+        
+        // Конфигурация содержимого для ячеек таблицы
+        let dataSource = RxTableViewSectionedReloadDataSource<SectionOfDataRanges>(configureCell: {
+            [weak self] dataSource, table, index, item in
+            let cell = table.dequeueReusableCell(withIdentifier: "AttestationCellID", for: index) as! AttestationCell
+            cell.layoutIfNeeded()
+            cell.parentVC = self
+            cell.myIndex = index
+            cell.configureCell(data: item)
+            return cell
+        })
+        
+        // Связывание данных и таблицы
+        Observable.just(self.sectionedArrayRangeDates)
+            .bind(to: contentView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+        
+        self.contentView.rx
+            .setDelegate(self)
+            .disposed(by: disposeBag)
+    }
+    
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if self.selectedCellIndex == indexPath {
+            return CGFloat(self.selectedCellHeight!)
+        }
+        return 37
+    }
+    
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }
+    
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 8.0
+    }
+    
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }
+    
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return (section == tableView.numberOfSections - 1) ? 8.0 : 0
     }
     
     
@@ -90,5 +129,25 @@ class AttestationViewController: UIViewController{
     
     deinit {
         print("Деструктор страницы Аттестации")
+    }
+}
+
+
+class ContentTableView: UITableView {
+
+    override func touchesShouldCancel(in view: UIView) -> Bool {
+        if view.isKind(of: UIButton.self) {
+          return true
+        }
+
+        return super.touchesShouldCancel(in: view)
+    }
+}
+
+
+extension AttestationViewController.SectionOfDataRanges: SectionModelType{
+    init(original: AttestationViewController.SectionOfDataRanges, items: [AttestationModel]) {
+        self = original
+        self.items = items
     }
 }

@@ -33,27 +33,27 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jmx-Be-eaT">
-                                <rect key="frame" x="0.0" y="47" width="375" height="620"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </scrollView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oRQ-tG-OSa" customClass="ContentTableView" customModule="BSTU_App" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="48" width="375" height="619"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="oRQ-tG-OSa" firstAttribute="top" secondItem="nub-yr-EAb" secondAttribute="bottom" id="Bb8-Hc-Ubm"/>
                             <constraint firstItem="D5k-Yt-kTP" firstAttribute="top" secondItem="ajR-Xq-Tn7" secondAttribute="top" constant="16" id="CyH-um-MvM"/>
-                            <constraint firstItem="ajR-Xq-Tn7" firstAttribute="bottom" secondItem="Jmx-Be-eaT" secondAttribute="bottom" id="Fkh-e3-bd9"/>
+                            <constraint firstItem="oRQ-tG-OSa" firstAttribute="leading" secondItem="ajR-Xq-Tn7" secondAttribute="leading" id="HS3-hb-uaa"/>
+                            <constraint firstItem="ajR-Xq-Tn7" firstAttribute="bottom" secondItem="oRQ-tG-OSa" secondAttribute="bottom" id="JEI-RP-VXa"/>
                             <constraint firstItem="nub-yr-EAb" firstAttribute="top" secondItem="ajR-Xq-Tn7" secondAttribute="top" constant="5" id="MVn-aR-iB6"/>
-                            <constraint firstItem="Jmx-Be-eaT" firstAttribute="top" secondItem="ajR-Xq-Tn7" secondAttribute="top" constant="47" id="aDe-IZ-DhN"/>
+                            <constraint firstItem="ajR-Xq-Tn7" firstAttribute="trailing" secondItem="oRQ-tG-OSa" secondAttribute="trailing" id="MjF-NC-l6E"/>
                             <constraint firstItem="nub-yr-EAb" firstAttribute="leading" secondItem="D5k-Yt-kTP" secondAttribute="trailing" constant="17" id="ioj-fi-zIE"/>
-                            <constraint firstItem="Jmx-Be-eaT" firstAttribute="leading" secondItem="ajR-Xq-Tn7" secondAttribute="leading" id="mh6-av-vFm"/>
-                            <constraint firstItem="ajR-Xq-Tn7" firstAttribute="trailing" secondItem="Jmx-Be-eaT" secondAttribute="trailing" id="sEa-Ar-DNC"/>
                             <constraint firstItem="D5k-Yt-kTP" firstAttribute="leading" secondItem="ajR-Xq-Tn7" secondAttribute="leading" constant="16" id="tkN-lR-ffs"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ajR-Xq-Tn7"/>
                     </view>
                     <connections>
                         <outlet property="backButton" destination="D5k-Yt-kTP" id="lom-OW-TOi"/>
-                        <outlet property="contentView" destination="Jmx-Be-eaT" id="RJG-BZ-1sj"/>
+                        <outlet property="contentView" destination="oRQ-tG-OSa" id="Xjt-Dc-7p5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9aL-IZ-Xv7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

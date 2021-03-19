@@ -7,13 +7,18 @@
 //
 
 import Foundation
-import RxSwift
 import UIKit
+import RxSwift
+import RxCocoa
+import RxDataSources
 
-class AttestationCell: UIView{
+
+class AttestationCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource{
     
-    @IBOutlet weak var containerView: UIView!
+    weak var parentVC: AttestationViewController!
+    
     @IBOutlet weak var containerViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var containerView: UIView!
     
     @IBOutlet weak var headerContainerView: UIView!
     @IBOutlet weak var headerViewHeightConstraint: NSLayoutConstraint!
@@ -23,105 +28,113 @@ class AttestationCell: UIView{
     @IBOutlet weak var tableMarks: UITableView!
     @IBOutlet weak var tableMarksHeightConstraiant: NSLayoutConstraint!
     var installedGradientLayer: CAGradientLayer!
+    var installedGradientLayer2: CAGradientLayer!
     
-    var personalInformationViewIsOpen = false
-    let disposeBag = DisposeBag()
+    var myIndex: IndexPath!
+    var isExpanded = false
+    var disposeBag = DisposeBag()
+    
+    var dataAttestation = [AttestationModel]()
     
     
     func configureCell(data: AttestationModel){
+        self.makeHeaderGradient()
         self.headerContainerView.makeRounding()
-        self.makeGradient()
-        self.tableMarks.makeRounding()
-        self.containerView.makeRounding()
         
         self.setupData(data: data)
         self.setupInOutForTable(countData: data.disciplines.count)
+        self.containerView.makeRounding()
+        
+        self.tableMarks.makeRoundingSpecificCorners(arrayCorners: [.layerMinXMaxYCorner, .layerMaxXMaxYCorner])
     }
     
     
     func setupData(data: AttestationModel){
         
+        self.dataAttestation = [data]
+        self.dateRange.setTitle(data.dataRange, for: .normal)
         self.tableMarks.register(UINib(nibName: "AttestationCellDropdownCell", bundle: nil), forCellReuseIdentifier: "AttestationCellDropdownCellID")
         
-        // Высота таблицы = количество промежутков дат * высота одной ячейки
-        let disciplines = data.disciplines
-        self.containerViewHeightConstraint.constant = 37
-        self.headerViewHeightConstraint.constant = 37
-        self.tableMarksHeightConstraiant.constant = 0
+        self.tableMarks.delegate = self
+        self.tableMarks.dataSource = self
         
-        Observable.just(disciplines!).bind(to: self.tableMarks.rx.items){
-            [weak self] (tableView, row, element) in
-            let cell = self!.tableMarks.dequeueReusableCell(withIdentifier: "AttestationCellDropdownCellID") as! AttestationCellDropdownCell
-            cell.frame = CGRect(x: 0, y: 0,
-                                width: self!.tableMarks.frame.width, height: 44)
-            cell.configureCell(pairDisciplineMark: element)
-            return cell
-        }.disposed(by: self.disposeBag)
     }
     
     
     // MARK: Настройка параметров выпадающего списка с оценками
     func setupInOutForTable(countData: Int){
-        self.tableMarksHeightConstraiant.constant = 0
+        self.containerViewHeightConstraint.constant = 37
         
         let clickedClosure = { [weak self] in
-            var newValueHeight: CGFloat!
-            var newValueContainerHeight: CGFloat!
-            if self!.personalInformationViewIsOpen{
-                newValueHeight = 0
-                newValueContainerHeight = 37
-            } else{
-                newValueHeight = CGFloat(44 * countData)
-                newValueContainerHeight = newValueHeight + 37
+            
+            //if (!self!.personalInformationViewIsOpen){
+            self!.dropdownButton.image = UIImage(named: "dropup")
+            //} else {
+            //    (self!.dropdownButton.image = UIImage(named: "dropdown"))
+            //}
+            //(self!.dropdownButton.image = UIImage(named: "dropup")) : (self!.dropdownButton.image = UIImage(named: "dropdown"))
+            self!.isExpanded.toggle()
+            
+            if self?.parentVC.selectedCell != nil && self?.parentVC.selectedCell != self{
+                self?.parentVC.selectedCell.dropdownButton.image = UIImage(named: "dropdown")
             }
             
-            UIView.animate(
-                withDuration: 0.4,
-                delay: 0,
-                usingSpringWithDamping: 1,
-                initialSpringVelocity: 1,
-            options: .curveEaseInOut,
-            animations: {
-                self!.headerViewHeightConstraint.constant = 37
-                self!.tableMarksHeightConstraiant.constant = newValueHeight
-                self!.containerViewHeightConstraint.constant = newValueContainerHeight
+            weak var preventSelectedCellLink = self?.parentVC.selectedCell
+            self!.parentVC.selectedCellIndex = self!.parentVC.selectedCellIndex == self!.myIndex ? nil : self!.myIndex
+            self?.parentVC.selectedCell = self
+            
+            let calculatedTotalHeight = 37 + 44 * countData
+            self?.parentVC.selectedCellHeight = calculatedTotalHeight
+            self?.tableMarksHeightConstraiant.constant = CGFloat(calculatedTotalHeight)
+            self?.containerViewHeightConstraint.constant = CGFloat(calculatedTotalHeight)
+            
+            self?.parentVC.contentView.isUserInteractionEnabled = false
+            self!.parentVC.contentView.performBatchUpdates(nil, completion: { [weak self] _ in
+                self?.parentVC.contentView.isUserInteractionEnabled = true
                 
-                if (!self!.personalInformationViewIsOpen){
-                    self!.headerContainerView.makeRoundingSpecificCorners(arrayCorners: [.layerMinXMinYCorner, .layerMaxXMinYCorner])
-                    self!.tableMarks.makeRoundingSpecificCorners(arrayCorners: [.layerMinXMaxYCorner, .layerMaxXMaxYCorner])
+                if self!.isExpanded{
+                    self?.tableMarks.isHidden = false
+                    self!.dropdownButton.image = UIImage(named: "dropup")
+                } else {
+                    self?.tableMarks.isHidden = true
+                    self!.dropdownButton.image = UIImage(named: "dropdown")
                 }
                 
-                (!self!.personalInformationViewIsOpen) ?
-                    (self!.dropdownButton.image = UIImage(named: "dropup")) : (self!.dropdownButton.image = UIImage(named: "dropdown"))
-                
-                self!.layoutIfNeeded()
-            }, completion: { [weak self] _ in
-                self!.personalInformationViewIsOpen.toggle()
-                
-                if !self!.personalInformationViewIsOpen{
-                    self!.headerContainerView.makeRoundingSpecificCorners(arrayCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner,
-                                                                                         .layerMaxXMinYCorner, .layerMaxXMaxYCorner])
+                if preventSelectedCellLink != nil && preventSelectedCellLink != self{
+                    preventSelectedCellLink!.tableMarks.isHidden = true
+                    preventSelectedCellLink?.isExpanded = false
                 }
             })
         }
         
+        self.disposeBag = DisposeBag()
+        
         self.dateRange.rx
             .tap
             .subscribe(onNext: { [weak self] _ in
-            clickedClosure()
+                self!.parentVC.contentView.performBatchUpdates(nil, completion: { [weak self] _ in
+                    self?.tableMarks.isHidden = false
+                    clickedClosure()
+                })
+        
         }).disposed(by: disposeBag)
         
         self.dropdownButton.rx
             .tapGesture()
             .when(.recognized)
         .subscribe(onNext: { [weak self] _ in
-            clickedClosure()
+            
+            self!.parentVC.contentView.performBatchUpdates(nil, completion: { [weak self] _ in
+                self?.tableMarks.isHidden = false
+                clickedClosure()
+            })
+            
         }).disposed(by: disposeBag)
     }
     
     
-    // Градиент для фона ячейки таблицы
-    func makeGradient(){
+    // Градиент для фона ячейки шапки таблицы
+    func makeHeaderGradient(){
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.headerContainerView.bounds
         gradientLayer.colors = [UIColor.secondCourseBackgroundColorStart.cgColor,
@@ -136,4 +149,53 @@ class AttestationCell: UIView{
         self.installedGradientLayer = gradientLayer
         self.headerContainerView.layer.insertSublayer(self.installedGradientLayer, at: 0)
     }
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return (dataAttestation.first?.disciplines.count)!
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AttestationCellDropdownCellID", for: indexPath) as! AttestationCellDropdownCell
+        cell.layoutIfNeeded()
+        
+        let dataForCell = self.dataAttestation.first?.disciplines[indexPath.row].discipline
+        cell.configureCell(pairDisciplineMark: dataForCell!)
+        return cell
+    }
+    
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = .red
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: self.frame.width,
+                                     height: 10)
+        gradientLayer.colors = [UIColor.secondCourseBackgroundColorStart.cgColor,
+                                UIColor.secondCourseBackgroundColorFinish.cgColor]
+        
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+        
+        if self.installedGradientLayer2 != nil{
+            self.installedGradientLayer2.removeFromSuperlayer()
+        }
+        self.installedGradientLayer2 = gradientLayer
+        headerView.layer.insertSublayer(self.installedGradientLayer2, at: 0)
+        
+        return headerView
+    }
+    
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 10.0
+    }
+    
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
 }
