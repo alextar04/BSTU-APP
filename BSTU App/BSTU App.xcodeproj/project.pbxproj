@@ -63,6 +63,8 @@
 		CE36FEAD2605F6E70021D9F0 /* ExamsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE36FEAC2605F6E70021D9F0 /* ExamsCell.xib */; };
 		CE36FEAF2605F9E10021D9F0 /* ExamsCellDropdownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE36FEAE2605F9E10021D9F0 /* ExamsCellDropdownCell.xib */; };
 		CE36FEB12605FCEF0021D9F0 /* ExamsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE36FEB02605FCEF0021D9F0 /* ExamsViewController.storyboard */; };
+		CE36FEB3260625E30021D9F0 /* PersonalCabinetMainPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE36FEB2260625E30021D9F0 /* PersonalCabinetMainPageModel.swift */; };
+		CE36FEB5260631CE0021D9F0 /* PersonalCabinetStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE36FEB4260631CE0021D9F0 /* PersonalCabinetStringExtensions.swift */; };
 		CE37A08D25CBFC540046C1F1 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37A08C25CBFC540046C1F1 /* MapViewModel.swift */; };
 		CE380A1A25BC4F910028622B /* rectangle.png in Resources */ = {isa = PBXBuildFile; fileRef = CE380A0425BC4F910028622B /* rectangle.png */; };
 		CE380A1C25BC4F910028622B /* building.png in Resources */ = {isa = PBXBuildFile; fileRef = CE380A0625BC4F910028622B /* building.png */; };
@@ -187,6 +189,8 @@
 		CE36FEAC2605F6E70021D9F0 /* ExamsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExamsCell.xib; sourceTree = "<group>"; };
 		CE36FEAE2605F9E10021D9F0 /* ExamsCellDropdownCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExamsCellDropdownCell.xib; sourceTree = "<group>"; };
 		CE36FEB02605FCEF0021D9F0 /* ExamsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ExamsViewController.storyboard; sourceTree = "<group>"; };
+		CE36FEB2260625E30021D9F0 /* PersonalCabinetMainPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCabinetMainPageModel.swift; sourceTree = "<group>"; };
+		CE36FEB4260631CE0021D9F0 /* PersonalCabinetStringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCabinetStringExtensions.swift; sourceTree = "<group>"; };
 		CE37A08C25CBFC540046C1F1 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		CE380A0425BC4F910028622B /* rectangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rectangle.png; sourceTree = "<group>"; };
 		CE380A0625BC4F910028622B /* building.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = building.png; sourceTree = "<group>"; };
@@ -615,6 +619,7 @@
 				CE47D681260094BF009D1CCA /* Storyboards */,
 				CEE9D49625FFA74600D20C1A /* PersonalCabinetMainPageViewController.swift */,
 				CE68297A2600D5CB008556FA /* PersonalCabinetMainPageViewModel.swift */,
+				CE36FEB2260625E30021D9F0 /* PersonalCabinetMainPageModel.swift */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -761,6 +766,7 @@
 				CECE8BA525FCD594008D7840 /* PersonalCabinetButtonExtensions.swift */,
 				CECEB15025FCDCA10015446C /* PersonalCabinetViewExtensions.swift */,
 				CE51EE49260223C300F6FFFB /* PersonalCabinetViewControllerExtensions.swift */,
+				CE36FEB4260631CE0021D9F0 /* PersonalCabinetStringExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -993,6 +999,7 @@
 				CE47D67F26009499009D1CCA /* SigninViewModel.swift in Sources */,
 				CE04A40125EF9B9700BE073D /* GroupSheduleViewModel.swift in Sources */,
 				CE04A3F125EF9B9700BE073D /* GroupsModel.swift in Sources */,
+				CE36FEB5260631CE0021D9F0 /* PersonalCabinetStringExtensions.swift in Sources */,
 				CE04A3F425EF9B9700BE073D /* GroupsViewCell.swift in Sources */,
 				CEE3AFC325D7D5D8007B1814 /* MapRoadDotMapper.swift in Sources */,
 				CE7F81C625FA0F8D00A70CCB /* ListTeachersModel.swift in Sources */,
@@ -1010,6 +1017,7 @@
 				CEE5B67E25D66AD80023D640 /* TypePremiseDB.swift in Sources */,
 				CE91140925C439460096AB29 /* StoreySwitcherView.swift in Sources */,
 				CE16978625C064F10040AE95 /* LabelExtensions.swift in Sources */,
+				CE36FEB3260625E30021D9F0 /* PersonalCabinetMainPageModel.swift in Sources */,
 				CE37A08D25CBFC540046C1F1 /* MapViewModel.swift in Sources */,
 				CEC0C8BA25F6222D00760A0A /* MenuTableCell.swift in Sources */,
 				CE04A3F225EF9B9700BE073D /* GroupsViewModel.swift in Sources */,

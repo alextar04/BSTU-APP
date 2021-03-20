@@ -47,6 +47,7 @@ class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecogniz
     @IBOutlet weak var chaptersTable: UITableView!
     
     var isMenuOpen = false
+    var personalCabinetData: PersonalCabinetMainPageModel? = nil
     let viewModel = PersonalCabinetMainPageViewModel()
     let disposeBag = DisposeBag()
     
@@ -59,8 +60,14 @@ class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecogniz
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupEducationalInformation()
-        self.setupPersonalInformation()
+        self.setupEducationalInformationDisplay()
+        self.setupPersonalInformationDisplay()
+        
+        if personalCabinetData != nil{
+            self.setupEducationalInformation(model: personalCabinetData!)
+            self.setupPersonalInformation(model: personalCabinetData!)
+        }
+        
         self.setupChaptersTable()
         self.setupMenuButton()
         self.setupExitButton()
@@ -76,8 +83,12 @@ class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecogniz
         let password = defaults.string(forKey: "password")
         
         viewModel.autorizate(login: login!, password: password!,
-                             completion: {
+                             completion: { [weak self] model in
+                                
                                 print("Подгрузились из кэша!")
+                                self!.personalCabinetData = model
+                                self!.setupEducationalInformation(model: self!.personalCabinetData!)
+                                self!.setupPersonalInformation(model: self!.personalCabinetData!)
         },
                              errorCallback: { [weak self] typeError in
                                 var message: String!
@@ -93,7 +104,8 @@ class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecogniz
                                                                     preferredStyle: .alert)
                                 let okButton = UIAlertAction(title: "OK", style: .default, handler: { _ in
                                     if typeError == .wrongDataError{
-                                        AppDelegate.appDelegate.rootViewController.successAccountChangeChapter(newPageType: .login)
+                                        AppDelegate.appDelegate.rootViewController.successAccountChangeChapter(newPageType: .login,
+                                                                                                               personalCabinetData: nil)
                                     }
                                 })
                                 dialogMessage.addAction(okButton)
@@ -102,34 +114,38 @@ class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecogniz
     }
     
     
-    // MARK: Настройка раздела информации об образовательном процессе
-    func setupEducationalInformation(){
+    // MARK: Настройка отображения раздела информации об образовательном процессе
+    func setupEducationalInformationDisplay(){
         
-        // Запрос на бэк
         self.educationalInformationView.frame = CGRect(x: 16, y: 0,
                                                         width: self.view.frame.width - 32,
                                                         height: self.educationalInformationView.frame.height)
         self.educationalInformationView.layoutIfNeeded()
         self.educationalInformationView.makeRounding()
         self.educationalInformationView.addViewBlueGradientStyle()
+    }
+    
+    
+    // MARK: Настройка информации раздела информации об образовательном процессе
+    func setupEducationalInformation(model: PersonalCabinetMainPageModel){
         
-        self.instituteName.text = "ИЭИТУС"
-        self.groupName.text = "ВТ-41"
-        self.numberRecordBookValue.text = "121221212"
+        self.instituteName.text = model.instituteName
+        self.groupName.text = model.groupName
+        self.numberRecordBookValue.text = model.numberRecordBookValue
         if numberRecordBookValue.isTruncated(){
             self.numberRecordBookLabel.text = "Номер ЗК: "
             self.numberRecordBookWidthConstraint.constant = 96
         } else {
             self.numberRecordBookWidthConstraint.constant = 212
         }
-        self.typePerson.text = "Студент"
-        self.educationForm.text = "Очная"
-        self.educationType.text = "Бюджет"
+        self.typePerson.text = model.typePerson
+        self.educationForm.text = model.educationForm
+        self.educationType.text = model.educationType
     }
     
     
-    // MARK: Настройка раздела личной информации
-    func setupPersonalInformation(){
+    // MARK: Настройка отображения раздела личной информации
+    func setupPersonalInformationDisplay(){
         
         self.containerPersonalInformationView.frame = CGRect(x: 16, y: 0,
                                                         width: self.view.frame.width - 32,
@@ -139,14 +155,6 @@ class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecogniz
         self.containerPersonalInformationView.makeRounding()
         self.containerPersonalInformationView.addViewBlueGradientStyle()
         self.personalInformationView.addViewBlueGradientStyle()
-        
-        self.headerName.text = "Сергеев С.C."
-        self.birthday.text = "03.12.22"
-        self.gender.text = "Женский"
-        self.citizenship.text = "Китай"
-        self.telephone.text = "8(999)999-99-99"
-        self.email.text = "weerty@mail.ru"
-        self.snils.text = "112-112-112-12"
         
         self.containerPersonalInformationViewHeightConstraint.constant = 31
         self.personalInformationViewHeightConstraint.constant = 0
@@ -183,6 +191,19 @@ class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecogniz
                 })
                 
             }).disposed(by: disposeBag)
+    }
+    
+    
+    // MARK: Настройка информации раздела личной информации
+    func setupPersonalInformation(model: PersonalCabinetMainPageModel){
+        
+        self.headerName.text = model.headerName
+        self.birthday.text = model.birthday
+        self.gender.text = model.gender
+        self.citizenship.text = model.citizenship
+        self.telephone.text = model.telephone
+        self.email.text = model.email
+        self.snils.text = model.snils
     }
     
     
@@ -227,6 +248,7 @@ class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecogniz
                 }
             }).disposed(by: self.disposeBag)
     }
+    
     
     // MARK: Установка кнопки открытия бокового меню
     func setupMenuButton(){
@@ -304,7 +326,6 @@ class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecogniz
     }
     
     
-    
     // MARK: Настройка работы кнопки выхода из системы
     func setupExitButton(){
         
@@ -333,7 +354,8 @@ class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecogniz
                         dialogExit.dismiss(animated: true, completion: nil)
                     AppDelegate.appDelegate
                         .rootViewController
-                        .successAccountChangeChapter(newPageType: .login)
+                        .successAccountChangeChapter(newPageType: .login,
+                                                     personalCabinetData: nil)
                 },
                     errorCallback: { [weak self] _ in
                             let message = "Ошибка выхода из системы. Повторите попытку."

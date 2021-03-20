@@ -41,6 +41,14 @@ class RootViewController: UIViewController {
         
         Database.copyDatabaseToDevice()
         
+        // Обнуление информации
+        let defaults = UserDefaults.standard
+        print(defaults.string(forKey: "login"))
+        print(defaults.string(forKey: "password"))
+        defaults.set(nil, forKey: "login")
+        defaults.set(nil, forKey: "password")
+        
+        
         NotificationCenter.default.addObserver(self, selector: #selector(switchLeftMenu), name: Notification.Name("SwitchLeftMenu"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(changeChapter), name:
             Notification.Name("ChangeChapter"), object: nil)
@@ -207,7 +215,8 @@ class RootViewController: UIViewController {
     // MARK: Смена контроллера при:
     // 1) Успешной авторизации
     // 2) Успешном выходе из системы
-    func successAccountChangeChapter(newPageType: TypePersonalCabinetStartPage){
+    func successAccountChangeChapter(newPageType: TypePersonalCabinetStartPage,
+                                     personalCabinetData: PersonalCabinetMainPageModel?){
         
         DispatchQueue.main.async {
             
@@ -222,6 +231,7 @@ class RootViewController: UIViewController {
                 page = UIStoryboard(name: "SigninViewController", bundle: nil).instantiateViewController(withIdentifier: "SigninViewControllerID") as! SigninViewController
             case .mainPage:
                 page = UIStoryboard(name: "PersonalCabinetMainPageViewController", bundle: nil).instantiateViewController(withIdentifier: "PersonalCabinetMainPageViewControllerID") as! PersonalCabinetMainPageViewController
+                (page as! PersonalCabinetMainPageViewController).personalCabinetData = personalCabinetData
             }
             self.currentNavigationController = UINavigationController(rootViewController: page)
             

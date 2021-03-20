@@ -72,9 +72,10 @@ class SigninViewController: UIViewController, UIGestureRecognizerDelegate{
                 self?.signinButton.isHidden = true
                 
                 self!.viewModel.autorizate(login: self!.loginField.text!,
-                    password: self!.passwordField.text!,
-                    completion: {
-                        AppDelegate.appDelegate.rootViewController.successAccountChangeChapter(newPageType: .mainPage)
+                                           password: self!.passwordField.text!,
+                    completion: { [weak self] model in
+                        AppDelegate.appDelegate.rootViewController.successAccountChangeChapter(newPageType: .mainPage,
+                                                                                               personalCabinetData: model)
                                             
                 }, errorCallback: { [weak self] typeError in
                     self!.loadingWheel.isHidden = true

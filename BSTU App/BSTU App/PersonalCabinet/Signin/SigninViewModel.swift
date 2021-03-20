@@ -14,7 +14,7 @@ class SigninViewModel{
     
     // MARK: Метод авторизации на сервере
     func autorizate(login: String, password: String,
-                    completion: @escaping ()->Void,
+                    completion: @escaping (PersonalCabinetMainPageModel)->Void,
                     errorCallback: @escaping (TypeError)->Void){
         
         let queryParameters: [String: String] = [
@@ -36,9 +36,15 @@ class SigninViewModel{
                         return
                     }
                     
-                    completion()
+                    if title == "502 Bad Gateway"{
+                        errorCallback(.networkError)
+                        return
+                    }
+                    
+                    let personalCabinetViewModel = PersonalCabinetMainPageViewModel()
+                    completion(personalCabinetViewModel.getUserInfoFromServerResponse(html: document))
                     self!.setUserDataToStorage(login: login,
-                                         password: password)
+                                               password: password)
                 } catch{
                     errorCallback(.networkError)
                 }

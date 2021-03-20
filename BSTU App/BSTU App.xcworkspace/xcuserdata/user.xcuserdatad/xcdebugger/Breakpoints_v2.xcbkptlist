@@ -3982,8 +3982,8 @@
             filePath = "BSTU App/RootController/RootViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -4030,8 +4030,8 @@
             filePath = "BSTU App/RootController/RootViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
             landmarkName = "currentViewMoving(recognizer:listDisablers:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4046,8 +4046,8 @@
             filePath = "BSTU App/RootController/RootViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
             landmarkName = "currentViewMoving(recognizer:listDisablers:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4142,8 +4142,8 @@
             filePath = "BSTU App/RootController/RootViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "168"
-            endingLineNumber = "168"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "currentViewMoving(recognizer:listDisablers:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4398,8 +4398,8 @@
             filePath = "BSTU App/RootController/RootViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
             landmarkName = "changeChapter(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -5212,9 +5212,9 @@
             filePath = "BSTU App/RootController/RootViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "242"
-            endingLineNumber = "242"
-            landmarkName = "successAccountChangeChapter(newPageType:)"
+            startingLineNumber = "252"
+            endingLineNumber = "252"
+            landmarkName = "successAccountChangeChapter(newPageType:personalCabinetData:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5228,9 +5228,9 @@
             filePath = "BSTU App/RootController/RootViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "239"
-            endingLineNumber = "239"
-            landmarkName = "successAccountChangeChapter(newPageType:)"
+            startingLineNumber = "249"
+            endingLineNumber = "249"
+            landmarkName = "successAccountChangeChapter(newPageType:personalCabinetData:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5324,8 +5324,8 @@
             filePath = "BSTU App/PersonalCabinet/MainPage/PersonalCabinetMainPageViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "334"
-            endingLineNumber = "334"
+            startingLineNumber = "355"
+            endingLineNumber = "355"
             landmarkName = "setupExitButton()"
             landmarkType = "7">
          </BreakpointContent>
@@ -5372,25 +5372,9 @@
             filePath = "BSTU App/PersonalCabinet/MainPage/PersonalCabinetMainPageViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "333"
-            endingLineNumber = "333"
+            startingLineNumber = "354"
+            endingLineNumber = "354"
             landmarkName = "setupExitButton()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D43EAEE6-1DA1-43C1-93B2-0E3B0E2C6F0E"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BSTU App/PersonalCabinet/MainPage/PersonalCabinetMainPageViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
-            landmarkName = "setupEducationalInformation()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5692,8 +5676,8 @@
             filePath = "BSTU App/PersonalCabinet/MainPage/PersonalCabinetMainPageViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "210"
-            endingLineNumber = "210"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
             landmarkName = "setupChaptersTable()"
             landmarkType = "7">
          </BreakpointContent>
@@ -5820,8 +5804,8 @@
             filePath = "BSTU App/PersonalCabinet/MainPage/PersonalCabinetMainPageViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "224"
-            endingLineNumber = "224"
+            startingLineNumber = "245"
+            endingLineNumber = "245"
             landmarkName = "setupChaptersTable()"
             landmarkType = "7">
          </BreakpointContent>
@@ -5836,8 +5820,8 @@
             filePath = "BSTU App/PersonalCabinet/MainPage/PersonalCabinetMainPageViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "223"
-            endingLineNumber = "223"
+            startingLineNumber = "244"
+            endingLineNumber = "244"
             landmarkName = "setupChaptersTable()"
             landmarkType = "7">
          </BreakpointContent>
@@ -5852,8 +5836,8 @@
             filePath = "BSTU App/PersonalCabinet/MainPage/PersonalCabinetMainPageViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "263"
-            endingLineNumber = "263"
+            startingLineNumber = "285"
+            endingLineNumber = "285"
             landmarkName = "handleSwipes(_:)"
             landmarkType = "7">
             <Locations>
@@ -5915,8 +5899,8 @@
             filePath = "BSTU App/PersonalCabinet/MainPage/PersonalCabinetMainPageViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "297"
-            endingLineNumber = "297"
+            startingLineNumber = "319"
+            endingLineNumber = "319"
             landmarkName = "screenEdgeSwiped(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -5931,8 +5915,8 @@
             filePath = "BSTU App/PersonalCabinet/MainPage/PersonalCabinetMainPageViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "278"
-            endingLineNumber = "278"
+            startingLineNumber = "300"
+            endingLineNumber = "300"
             landmarkName = "handleTap(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -5947,9 +5931,137 @@
             filePath = "BSTU App/PersonalCabinet/MainPage/PersonalCabinetMainPageViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "288"
-            endingLineNumber = "288"
+            startingLineNumber = "310"
+            endingLineNumber = "310"
             landmarkName = "gestureRecognizer(_:shouldReceive:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "77A73C96-7426-477B-8CAE-A92FBA12A9B1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BSTU App/PersonalCabinet/MainPage/PersonalCabinetMainPageViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "getUserInfoFromServerResponse(html:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1DB8BDD4-FDB0-4854-86A1-ACFD4FB64732"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BSTU App/PersonalCabinet/MainPage/PersonalCabinetMainPageViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
+            landmarkName = "getUserInfoFromServerResponse(html:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E81515C4-B568-4339-8EB0-62B4380FCB0D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BSTU App/PersonalCabinet/MainPage/PersonalCabinetMainPageViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
+            landmarkName = "getUserInfoFromServerResponse(html:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "74D5EB77-74A5-4469-B421-032B424C467A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BSTU App/PersonalCabinet/MainPage/PersonalCabinetMainPageViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
+            landmarkName = "getUserInfoFromServerResponse(html:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "771DCE5A-8847-417C-A4DF-697713983AE9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BSTU App/PersonalCabinet/MainPage/PersonalCabinetMainPageViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
+            landmarkName = "getUserInfoFromServerResponse(html:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "68EDD9B7-2176-40B0-8FB4-6F45774D0105"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BSTU App/PersonalCabinet/MainPage/PersonalCabinetMainPageViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "246"
+            endingLineNumber = "246"
+            landmarkName = "setupChaptersTable()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B8407725-4A5E-4D1D-8792-92DC95ED3CC7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BSTU App/RootController/RootViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
+            landmarkName = "successAccountChangeChapter(newPageType:personalCabinetData:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3781E372-90ED-48DC-99EB-C1478FC5462A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BSTU App/PersonalCabinet/MainPage/PersonalCabinetMainPageViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
