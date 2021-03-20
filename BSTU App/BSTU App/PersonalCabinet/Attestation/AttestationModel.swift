@@ -11,16 +11,16 @@ import Foundation
 class AttestationModel{
     
     var dataRange: String!
-    var disciplines: [DisciplineModel]!
+    var disciplines: [DisciplineAttestationModel]!
     
-    init(dataRange: String, disciplines: [DisciplineModel]) {
+    init(dataRange: String, disciplines: [DisciplineAttestationModel]) {
         self.dataRange = dataRange
         self.disciplines = disciplines
     }
 }
 
 
-class DisciplineModel{
+class DisciplineAttestationModel{
     
     var discipline: (name: String, mark: Int)!
     

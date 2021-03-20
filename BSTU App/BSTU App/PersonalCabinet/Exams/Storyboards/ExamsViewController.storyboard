@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Exams View Controller-->
+        <scene sceneID="mfa-1v-ZSq">
+            <objects>
+                <viewController storyboardIdentifier="ExamsViewControllerID" id="oqx-wU-t6G" customClass="ExamsViewController" customModule="BSTU_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dPh-WZ-gmB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="leftArrow" translatesAutoresizingMaskIntoConstraints="NO" id="RZc-PS-fTd">
+                                <rect key="frame" x="16" y="16" width="23" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="23" id="4tC-hZ-X0y"/>
+                                    <constraint firstAttribute="width" constant="23" id="Cwd-6y-ia4"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Успеваемость" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CGc-2i-nQZ">
+                                <rect key="frame" x="58" y="5" width="180" height="43"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="43" id="ZZk-zc-rFX"/>
+                                    <constraint firstAttribute="width" constant="180" id="qvV-NF-d6P"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="l2R-M2-6qJ" customClass="ContentTableView" customModule="BSTU_App" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="48" width="375" height="619"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="CGc-2i-nQZ" firstAttribute="leading" secondItem="RZc-PS-fTd" secondAttribute="trailing" constant="19" id="3DJ-cf-UFw"/>
+                            <constraint firstItem="RZc-PS-fTd" firstAttribute="top" secondItem="j0z-TR-pMV" secondAttribute="top" constant="16" id="Lh5-Ne-2ru"/>
+                            <constraint firstItem="l2R-M2-6qJ" firstAttribute="trailing" secondItem="j0z-TR-pMV" secondAttribute="trailing" id="MKd-se-kYV"/>
+                            <constraint firstItem="l2R-M2-6qJ" firstAttribute="bottom" secondItem="j0z-TR-pMV" secondAttribute="bottom" id="ZEh-cl-5PD"/>
+                            <constraint firstItem="l2R-M2-6qJ" firstAttribute="leading" secondItem="j0z-TR-pMV" secondAttribute="leading" id="b8Q-aX-Se5"/>
+                            <constraint firstItem="CGc-2i-nQZ" firstAttribute="top" secondItem="j0z-TR-pMV" secondAttribute="top" constant="5" id="bW2-Ak-ogS"/>
+                            <constraint firstItem="l2R-M2-6qJ" firstAttribute="top" secondItem="RZc-PS-fTd" secondAttribute="bottom" constant="9" id="ckC-iY-2Ox"/>
+                            <constraint firstItem="RZc-PS-fTd" firstAttribute="leading" secondItem="j0z-TR-pMV" secondAttribute="leading" constant="16" id="hkh-aU-A2S"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="j0z-TR-pMV"/>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="RZc-PS-fTd" id="d97-2o-oDY"/>
+                        <outlet property="contentTableView" destination="l2R-M2-6qJ" id="86t-ab-t5P"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VGy-J2-v2A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="181.59999999999999" y="128.18590704647679"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="leftArrow" width="100" height="100"/>
+    </resources>
+</document>

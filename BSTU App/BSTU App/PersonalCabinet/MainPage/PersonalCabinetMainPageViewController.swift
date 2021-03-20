@@ -12,7 +12,7 @@ import RxCocoa
 import UIKit
 
 
-class PersonalCabinetMainPageViewController: UIViewController{
+class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecognizerDelegate{
     
     @IBOutlet weak var menuButton: UIImageView!
     @IBOutlet weak var headerName: UILabel!
@@ -49,6 +49,12 @@ class PersonalCabinetMainPageViewController: UIViewController{
     var isMenuOpen = false
     let viewModel = PersonalCabinetMainPageViewModel()
     let disposeBag = DisposeBag()
+    
+    lazy var listDisablers: [UIView] = [
+        self.menuButton, self.headerName, self.exitButton,
+        self.educationalInformationView, self.containerPersonalInformationView,
+        self.chaptersTable
+    ]
     
     
     override func viewDidLoad() {
@@ -204,32 +210,99 @@ class PersonalCabinetMainPageViewController: UIViewController{
         self.chaptersTable.rx
             .modelSelected(TypePersonalCabinetChapter.self)
             .subscribe(onNext: { selectedItem in
-                print(selectedItem.rawValue)
                 switch selectedItem{
                 case .attestation:
                     let attestationController = UIStoryboard(name: "AttestationViewController", bundle: nil)
                         .instantiateViewController(withIdentifier: "AttestationViewControllerID") as! AttestationViewController
                     self.navigationController?.pushViewController(attestationController, animated: true)
                 case .exams:
-                    print(selectedItem.rawValue)
+                    let examController = UIStoryboard(name: "ExamsViewController", bundle: nil)
+                        .instantiateViewController(withIdentifier: "ExamsViewControllerID") as! ExamsViewController
+                    self.navigationController?.pushViewController(examController, animated: true)
                 case .schedule:
-                    print(selectedItem.rawValue)
+                    let groupsSheduleController = UIStoryboard(name: "GroupSheduleViewController", bundle: nil)
+                        .instantiateViewController(withIdentifier: "GroupSheduleViewControllerID") as! GroupSheduleViewController
+                    groupsSheduleController.groupName = self.groupName.text
+                    self.navigationController?.pushViewController(groupsSheduleController, animated: true)
                 }
             }).disposed(by: self.disposeBag)
     }
     
-    
-    // MARK: Настройка открытия бокового меню
+    // MARK: Установка кнопки открытия бокового меню
     func setupMenuButton(){
-        self.menuButton.rx
+        
+       let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+       self.view.addGestureRecognizer(tap)
+       tap.delegate = self
+        
+       let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(self.screenEdgeSwiped))
+       edgePan.edges = .left
+       self.view.addGestureRecognizer(edgePan)
+        
+       self.menuButton.rx
             .tapGesture()
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
-                let userInfo: [String: [UIView]] = ["listDisablers": []]
+                let userInfo: [String: [UIView]] = ["listDisablers": self!.listDisablers]
                 NotificationCenter.default.post(name: Notification.Name("SwitchLeftMenu"), object: nil, userInfo: userInfo)
                 self!.isMenuOpen.toggle()
-            }).disposed(by: disposeBag)
+        }).disposed(by: disposeBag)
+        
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+        leftSwipe.direction = .left
+        rightSwipe.direction = .right
+        self.view.addGestureRecognizer(leftSwipe)
+        self.view.addGestureRecognizer(rightSwipe)
     }
+    
+    
+    // MARK: Обработка свайпов экрана
+    @objc func handleSwipes(_ sender: UISwipeGestureRecognizer){
+    
+        switch sender.direction {
+        case .left:
+            AppDelegate.appDelegate.rootViewController.currentViewMoving(recognizer: sender, listDisablers: listDisablers)
+            self.isMenuOpen = false
+        case .right:
+            AppDelegate.appDelegate.rootViewController.currentViewMoving(recognizer: sender, listDisablers: listDisablers)
+            self.isMenuOpen = true
+        default:
+            return
+        }
+    }
+    
+    
+    // MARK: Действия по открытию меню
+    @objc func handleTap(_ sender: UITapGestureRecognizer){
+        if self.isMenuOpen{
+            let userInfo: [String: [UIView]] = ["listDisablers": self.listDisablers]
+            NotificationCenter.default.post(name: Notification.Name("SwitchLeftMenu"), object: nil, userInfo: userInfo)
+            self.isMenuOpen.toggle()
+        }
+    }
+    
+
+    // MARK: Отмена нажатия на экран при закрытом меню
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if self.isMenuOpen {
+            return true
+        }
+        return false
+    }
+    
+    
+    // MARK: Действия по открытию меню из-за пределов экрана
+    @objc func screenEdgeSwiped(_ recognizer: UIScreenEdgePanGestureRecognizer) {
+        if recognizer.state == .recognized {
+            if !self.isMenuOpen{
+                let userInfo: [String: [UIView]] = ["listDisablers": self.listDisablers]
+                NotificationCenter.default.post(name: Notification.Name("SwitchLeftMenu"), object: nil, userInfo: userInfo)
+                self.isMenuOpen.toggle()
+            }
+        }
+    }
+    
     
     
     // MARK: Настройка работы кнопки выхода из системы

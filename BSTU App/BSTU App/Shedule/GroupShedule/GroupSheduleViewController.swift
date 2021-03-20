@@ -69,6 +69,7 @@ class GroupSheduleViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
         self.groupNameLabel.text = groupName
         setupBackButton()
         setSettingsCurrentDayOfWeek()

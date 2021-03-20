@@ -1,5 +1,5 @@
 //
-//  AttestationCell.swift
+//  ExamCell.swift
 //  BSTU App
 //
 //  Created by Alexey Taran on 18.03.2021.
@@ -13,20 +13,22 @@ import RxCocoa
 import RxDataSources
 
 
-class AttestationCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource{
+class ExamsCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource{
     
-    weak var parentVC: AttestationViewController!
+    weak var parentVC: ExamsViewController!
     
     @IBOutlet weak var containerViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var containerView: UIView!
     
     @IBOutlet weak var headerContainerView: UIView!
     @IBOutlet weak var headerViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var dateRange: UIButton!
+    @IBOutlet weak var numberSemestr: UIButton!
     @IBOutlet weak var dropdownButton: UIImageView!
     
     @IBOutlet weak var tableMarks: UITableView!
     @IBOutlet weak var tableMarksHeightConstraiant: NSLayoutConstraint!
+    
+    
     var installedGradientLayer: CAGradientLayer!
     var installedGradientLayer2: CAGradientLayer!
     
@@ -34,10 +36,10 @@ class AttestationCell: UITableViewCell, UITableViewDelegate, UITableViewDataSour
     var isExpanded = false
     var disposeBag = DisposeBag()
     
-    var dataAttestation = [AttestationModel]()
+    var dataExam = [ExamsModel]()
     
     
-    func configureCell(data: AttestationModel){
+    func configureCell(data: ExamsModel){
         self.makeHeaderGradient()
         self.headerContainerView.makeRounding()
         
@@ -49,18 +51,17 @@ class AttestationCell: UITableViewCell, UITableViewDelegate, UITableViewDataSour
     }
     
     
-    func setupData(data: AttestationModel){
+    func setupData(data: ExamsModel){
         
-        self.dataAttestation = [data]
-        self.dateRange.setTitle(data.dataRange, for: .normal)
-        self.tableMarks.register(UINib(nibName: "AttestationCellDropdownCell", bundle: nil), forCellReuseIdentifier: "AttestationCellDropdownCellID")
+        self.dataExam = [data]
+        self.numberSemestr.setTitle(data.numberSemester, for: .normal)
+        self.tableMarks.register(UINib(nibName: "ExamsCellDropdownCell", bundle: nil), forCellReuseIdentifier: "ExamsCellDropdownCellID")
         
         self.tableMarks.layoutMargins = UIEdgeInsets.zero
         self.tableMarks.separatorInset = UIEdgeInsets.zero
         
         self.tableMarks.delegate = self
         self.tableMarks.dataSource = self
-        
     }
     
     
@@ -86,9 +87,9 @@ class AttestationCell: UITableViewCell, UITableViewDelegate, UITableViewDataSour
             self?.tableMarksHeightConstraiant.constant = CGFloat(calculatedTotalHeight)
             self?.containerViewHeightConstraint.constant = CGFloat(calculatedTotalHeight)
             
-            self?.parentVC.contentView.isUserInteractionEnabled = false
-            self!.parentVC.contentView.performBatchUpdates(nil, completion: { [weak self] _ in
-                self?.parentVC.contentView.isUserInteractionEnabled = true
+            self?.parentVC.contentTableView.isUserInteractionEnabled = false
+            self!.parentVC.contentTableView.performBatchUpdates(nil, completion: { [weak self] _ in
+                self?.parentVC.contentTableView.isUserInteractionEnabled = true
                 
                 if self!.isExpanded{
                     self?.tableMarks.isHidden = false
@@ -107,10 +108,10 @@ class AttestationCell: UITableViewCell, UITableViewDelegate, UITableViewDataSour
         
         self.disposeBag = DisposeBag()
         
-        self.dateRange.rx
+        self.numberSemestr.rx
             .tap
             .subscribe(onNext: { [weak self] _ in
-                self!.parentVC.contentView.performBatchUpdates(nil, completion: { [weak self] _ in
+                self!.parentVC.contentTableView.performBatchUpdates(nil, completion: { [weak self] _ in
                     self?.tableMarks.isHidden = false
                     clickedClosure()
                 })
@@ -122,7 +123,7 @@ class AttestationCell: UITableViewCell, UITableViewDelegate, UITableViewDataSour
             .when(.recognized)
         .subscribe(onNext: { [weak self] _ in
             
-            self!.parentVC.contentView.performBatchUpdates(nil, completion: { [weak self] _ in
+            self!.parentVC.contentTableView.performBatchUpdates(nil, completion: { [weak self] _ in
                 self?.tableMarks.isHidden = false
                 clickedClosure()
             })
@@ -150,16 +151,16 @@ class AttestationCell: UITableViewCell, UITableViewDelegate, UITableViewDataSour
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (dataAttestation.first?.disciplines.count)!
+        return (dataExam.first?.disciplines.count)!
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AttestationCellDropdownCellID", for: indexPath) as! AttestationCellDropdownCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ExamsCellDropdownCellID", for: indexPath) as! ExamsCellDropdownCell
         cell.layoutIfNeeded()
         cell.layoutMargins = UIEdgeInsets.zero
         
-        let dataForCell = self.dataAttestation.first?.disciplines[indexPath.row].discipline
+        let dataForCell = self.dataExam.first?.disciplines[indexPath.row].discipline
         cell.configureCell(pairDisciplineMark: dataForCell!)
         return cell
     }

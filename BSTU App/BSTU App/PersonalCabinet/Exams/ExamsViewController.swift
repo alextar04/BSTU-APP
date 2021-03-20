@@ -1,5 +1,5 @@
 //
-//  AttestationViewController.swift
+//  ExamsViewController.swift
 //  BSTU App
 //
 //  Created by Alexey Taran on 18.03.2021.
@@ -12,22 +12,22 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-class AttestationViewController: UIViewController, UITableViewDelegate{
+class ExamsViewController: UIViewController, UITableViewDelegate{
     
     @IBOutlet weak var backButton: UIImageView!
-    weak var selectedCell: AttestationCell!
+    weak var selectedCell: ExamsCell!
     var selectedCellIndex: IndexPath!
     var selectedCellHeight: Int!
-    @IBOutlet weak var contentView: ContentTableView!
+    @IBOutlet weak var contentTableView: ContentTableView!
     
-    var arrayRangeDates = [AttestationCell]()
+    var arrayNumberSemesters = [ExamsCell]()
     let disposeBag = DisposeBag()
     
     // Вспомогательная структура для отображения данных в виде секции
-    var sectionedArrayRangeDates = [SectionOfDataRanges]()
-    struct SectionOfDataRanges{
+    var sectionedArrayNumberSemesters = [SectionOfNumberSemesters]()
+    struct SectionOfNumberSemesters{
         var header: String
-        var items: [AttestationModel]
+        var items: [ExamsModel]
     }
     
     override func viewDidLoad() {
@@ -42,30 +42,32 @@ class AttestationViewController: UIViewController, UITableViewDelegate{
     // MARK: Установка контента
     func setupContent(){
         
-        var attestationData = [AttestationModel]()
+        var sessionData = [ExamsModel]()
         for _ in 0...10{
-            attestationData.append(AttestationModel(dataRange: "21.01.10 - 22.22.22",
-                                                    disciplines: [DisciplineAttestationModel(discipline: ("Русский", 5)),
-                                                                  DisciplineAttestationModel(discipline: ("Математика", 4)),
-                                                                  DisciplineAttestationModel(discipline: ("Информатика", 2)),
-                                                                  DisciplineAttestationModel(discipline: ("Английский", 3)),
-                                                                  DisciplineAttestationModel(discipline: ("Окружающий", 3))
-                                                                  ]))
+            sessionData.append(
+                ExamsModel(numberSemester: "1 сессия (весна 2017)", disciplines: [
+                DisciplineExamModel(discipline: ("Математика", .differentialСredit, 5)),
+                DisciplineExamModel(discipline: ("Информатика", .courseProject, 5)),
+                DisciplineExamModel(discipline: ("Английский", .courseWork, 5)),
+                DisciplineExamModel(discipline: ("Окружающий", .credit, 5)),
+                DisciplineExamModel(discipline: ("Математика", .exam, 5))])
+            )
         }
         
         
-        for attestation in attestationData{
-            self.sectionedArrayRangeDates.append(SectionOfDataRanges(header: attestation.dataRange!, items: [attestation]))
+        for session in sessionData{
+            self.sectionedArrayNumberSemesters.append(SectionOfNumberSemesters(header: session.numberSemester,
+                                                                               items: [session]))
         }
         
-        self.contentView.register(UINib(nibName: "AttestationCell", bundle: nil),
-                                  forCellReuseIdentifier: "AttestationCellID")
-        self.contentView.canCancelContentTouches = true
+        self.contentTableView.register(UINib(nibName: "ExamsCell", bundle: nil),
+                                  forCellReuseIdentifier: "ExamsCellID")
+        self.contentTableView.canCancelContentTouches = true
         
         // Конфигурация содержимого для ячеек таблицы
-        let dataSource = RxTableViewSectionedReloadDataSource<SectionOfDataRanges>(configureCell: {
+        let dataSource = RxTableViewSectionedReloadDataSource<SectionOfNumberSemesters>(configureCell: {
             [weak self] dataSource, table, index, item in
-            let cell = table.dequeueReusableCell(withIdentifier: "AttestationCellID", for: index) as! AttestationCell
+            let cell = table.dequeueReusableCell(withIdentifier: "ExamsCellID", for: index) as! ExamsCell
             cell.layoutIfNeeded()
             cell.parentVC = self
             cell.myIndex = index
@@ -74,11 +76,11 @@ class AttestationViewController: UIViewController, UITableViewDelegate{
         })
         
         // Связывание данных и таблицы
-        Observable.just(self.sectionedArrayRangeDates)
-            .bind(to: contentView.rx.items(dataSource: dataSource))
+        Observable.just(self.sectionedArrayNumberSemesters)
+            .bind(to: contentTableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
-        self.contentView.rx
+        self.contentTableView.rx
             .setDelegate(self)
             .disposed(by: disposeBag)
     }
@@ -93,9 +95,9 @@ class AttestationViewController: UIViewController, UITableViewDelegate{
     
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView()
-        view.backgroundColor = .clear
-        return view
+        let headerView = UIView()
+        headerView.backgroundColor = .clear
+        return headerView
     }
     
     
@@ -105,9 +107,9 @@ class AttestationViewController: UIViewController, UITableViewDelegate{
     
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = UIView()
-        view.backgroundColor = .clear
-        return view
+        let footerView = UIView()
+        footerView.backgroundColor = .clear
+        return footerView
     }
     
     
@@ -128,25 +130,13 @@ class AttestationViewController: UIViewController, UITableViewDelegate{
     }
     
     deinit {
-        print("Деструктор страницы Аттестации")
+        print("Деструктор страницы Экзаменов")
     }
 }
 
 
-class ContentTableView: UITableView {
-
-    override func touchesShouldCancel(in view: UIView) -> Bool {
-        if view.isKind(of: UIButton.self) {
-          return true
-        }
-
-        return super.touchesShouldCancel(in: view)
-    }
-}
-
-
-extension AttestationViewController.SectionOfDataRanges: SectionModelType{
-    init(original: AttestationViewController.SectionOfDataRanges, items: [AttestationModel]) {
+extension ExamsViewController.SectionOfNumberSemesters: SectionModelType{
+    init(original: ExamsViewController.SectionOfNumberSemesters, items: [ExamsModel]) {
         self = original
         self.items = items
     }
