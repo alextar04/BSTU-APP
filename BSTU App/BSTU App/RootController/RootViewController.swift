@@ -42,11 +42,13 @@ class RootViewController: UIViewController {
         Database.copyDatabaseToDevice()
         
         // Обнуление информации
+        /*
         let defaults = UserDefaults.standard
         print(defaults.string(forKey: "login"))
         print(defaults.string(forKey: "password"))
-        defaults.set(nil, forKey: "login")
-        defaults.set(nil, forKey: "password")
+        //defaults.set(nil, forKey: "login")
+        //defaults.set(nil, forKey: "password")
+         */
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(switchLeftMenu), name: Notification.Name("SwitchLeftMenu"), object: nil)

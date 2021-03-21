@@ -36,8 +36,8 @@ class SigninViewModel{
                         return
                     }
                     
-                    if title == "502 Bad Gateway"{
-                        errorCallback(.networkError)
+                    if title != ""{
+                        errorCallback(.serverError)
                         return
                     }
                     
@@ -64,6 +64,7 @@ class SigninViewModel{
 
 enum TypeError{
     case networkError
+    case serverError
     case wrongDataError
 }
 

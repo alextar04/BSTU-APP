@@ -95,6 +95,8 @@ class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecogniz
                                 switch typeError{
                                 case .networkError:
                                     message = "Ошибка подключения к Интернету"
+                                case .serverError:
+                                    message = "Ошибка сервера"
                                 case .wrongDataError:
                                     message = "Неверный логин или пароль. Попробуйте ещё раз"
                                 }
@@ -158,38 +160,49 @@ class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecogniz
         
         self.containerPersonalInformationViewHeightConstraint.constant = 31
         self.personalInformationViewHeightConstraint.constant = 0
+        
+        let dropInDropOutClosure = { [weak self] in
+            
+            var newValueContainerHeight: CGFloat!
+            var newValueHeight: CGFloat!
+            if self!.personalInformationViewIsOpen{
+                newValueContainerHeight = 31
+                newValueHeight = 0
+            } else{
+                newValueContainerHeight = 214
+                newValueHeight = 183
+            }
+            
+            UIView.animate(
+                withDuration: 0.4,
+                delay: 0,
+                usingSpringWithDamping: 1,
+                initialSpringVelocity: 1,
+            options: .curveEaseIn,
+            animations: {
+              self!.containerPersonalInformationViewHeightConstraint.constant = newValueContainerHeight
+              self!.personalInformationViewHeightConstraint.constant = newValueHeight
+                
+              (!self!.personalInformationViewIsOpen) ?
+                (self!.togglerImage.image = UIImage(named: "dropup")) : (self!.togglerImage.image = UIImage(named: "dropdown"))
+                
+              self!.view.layoutIfNeeded()
+            }, completion: { [weak self] _ in
+                self!.personalInformationViewIsOpen.toggle()
+            })
+        }
+        
         self.togglerPersonalInformation.rx
             .tap
             .subscribe(onNext: { [weak self] _ in
-                
-                var newValueContainerHeight: CGFloat!
-                var newValueHeight: CGFloat!
-                if self!.personalInformationViewIsOpen{
-                    newValueContainerHeight = 31
-                    newValueHeight = 0
-                } else{
-                    newValueContainerHeight = 214
-                    newValueHeight = 183
-                }
-                
-                UIView.animate(
-                    withDuration: 0.4,
-                    delay: 0,
-                    usingSpringWithDamping: 1,
-                    initialSpringVelocity: 1,
-                options: .curveEaseIn,
-                animations: {
-                  self!.containerPersonalInformationViewHeightConstraint.constant = newValueContainerHeight
-                  self!.personalInformationViewHeightConstraint.constant = newValueHeight
-                    
-                  (!self!.personalInformationViewIsOpen) ?
-                    (self!.togglerImage.image = UIImage(named: "dropup")) : (self!.togglerImage.image = UIImage(named: "dropdown"))
-                    
-                  self!.view.layoutIfNeeded()
-                }, completion: { [weak self] _ in
-                    self!.personalInformationViewIsOpen.toggle()
-                })
-                
+                dropInDropOutClosure()
+            }).disposed(by: disposeBag)
+        
+        togglerImage.rx
+            .tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                dropInDropOutClosure()
             }).disposed(by: disposeBag)
     }
     

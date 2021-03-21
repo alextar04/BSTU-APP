@@ -37,6 +37,11 @@ class PersonalCabinetMainPageViewModel{
                         return
                     }
                     
+                    if title != ""{
+                        errorCallback(.serverError)
+                        return
+                    }
+                    
                     completion(self!.getUserInfoFromServerResponse(html: document))
                 } catch{
                     errorCallback(.networkError)

@@ -85,6 +85,8 @@ class SigninViewController: UIViewController, UIGestureRecognizerDelegate{
                     switch typeError{
                     case .networkError:
                         message = "Ошибка подключения к Интернету"
+                    case .serverError:
+                        message = "Ошибка сервера"
                     case .wrongDataError:
                         message = "Неверный логин или пароль. Попробуйте ещё раз"
                         self!.passwordField.text = ""
