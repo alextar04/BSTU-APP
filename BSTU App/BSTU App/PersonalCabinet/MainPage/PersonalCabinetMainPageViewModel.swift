@@ -59,6 +59,11 @@ class PersonalCabinetMainPageViewModel{
             .responseString{ [weak self] html in
                 do {
                     let document = try SwiftSoup.parse(html.result.get())
+                    
+                    if try document.title() != ""{
+                        errorCallback(.serverError)
+                    }
+                    
                     let headScripts = try (document.head()?.select("script"))
                     
                     var neededScriptDefine: String!
@@ -70,7 +75,7 @@ class PersonalCabinetMainPageViewModel{
                         }
                     }
                     if neededScriptDefine == nil{
-                        errorCallback(.networkError)
+                        errorCallback(.serverError)
                     }
                     
                     // Регулярное выражение для получения JSON c данными о вышедшем пользователе

@@ -14,10 +14,14 @@ import UIKit
 
 class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecognizerDelegate{
     
+    var needAutorization = false
     @IBOutlet weak var menuButton: UIImageView!
     @IBOutlet weak var headerName: UILabel!
     @IBOutlet weak var exitButton: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
+    
+    @IBOutlet weak var errorLoadingLabel: UILabel!
+    @IBOutlet weak var repeatLoadingButton: UIButton!
     
     @IBOutlet weak var educationalInformationView: UIView!
     @IBOutlet weak var instituteName: UILabel!
@@ -50,11 +54,15 @@ class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecogniz
     var personalCabinetData: PersonalCabinetMainPageModel? = nil
     let viewModel = PersonalCabinetMainPageViewModel()
     let disposeBag = DisposeBag()
+    var disposeBagReloadingButton = DisposeBag()
     
     lazy var listDisablers: [UIView] = [
         self.menuButton, self.headerName, self.exitButton,
+        self.scrollView,
         self.educationalInformationView, self.containerPersonalInformationView,
-        self.chaptersTable
+        self.chaptersTable,
+        self.errorLoadingLabel,
+        self.repeatLoadingButton
     ]
     
     
@@ -64,6 +72,12 @@ class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecogniz
         self.setupPersonalInformationDisplay()
         
         if personalCabinetData != nil{
+            for item in [self.headerName, self.exitButton,
+                         self.scrollView,
+                         self.educationalInformationView, self.containerPersonalInformationView,
+                         self.chaptersTable]{
+                item?.isHidden = false
+            }
             self.setupEducationalInformation(model: personalCabinetData!)
             self.setupPersonalInformation(model: personalCabinetData!)
         }
@@ -74,6 +88,13 @@ class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecogniz
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if self.needAutorization{
+            makeAutorization()
+            self.needAutorization = false
+        }
+    }
     
     // MARK: Авторизация уже имеющегося в базе пользователя
     func makeAutorization(){
@@ -82,13 +103,48 @@ class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecogniz
         let login = defaults.string(forKey: "login")
         let password = defaults.string(forKey: "password")
         
+        for item in [ self.headerName, self.exitButton,
+                      self.scrollView,
+                      self.educationalInformationView, self.containerPersonalInformationView,
+                      self.chaptersTable,
+                      self.errorLoadingLabel,
+                      self.repeatLoadingButton]{
+                item?.isHidden = true
+        }
+        
+        let dialogLoading = UIAlertController(title: "Вход в систему",
+                                              message: nil,
+                                              preferredStyle: .alert)
+        let activityIndicator = UIActivityIndicatorView(style: .gray)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.isUserInteractionEnabled = false
+        activityIndicator.startAnimating()
+
+        dialogLoading.view.addSubview(activityIndicator)
+        dialogLoading.view.heightAnchor.constraint(equalToConstant: 95).isActive = true
+
+        activityIndicator.centerXAnchor.constraint(equalTo: dialogLoading.view.centerXAnchor, constant: 0).isActive = true
+        activityIndicator.bottomAnchor.constraint(equalTo: dialogLoading.view.bottomAnchor, constant: -20).isActive = true
+        self.present(dialogLoading, animated: true)
+        
         viewModel.autorizate(login: login!, password: password!,
                              completion: { [weak self] model in
                                 
                                 print("Подгрузились из кэша!")
+                                for item in [self!.headerName, self!.exitButton,
+                                             self!.scrollView,
+                                             self!.educationalInformationView, self!.containerPersonalInformationView,
+                                             self!.chaptersTable]{
+                                    item?.isHidden = false
+                                }
+                                for item in [self!.errorLoadingLabel,
+                                             self!.repeatLoadingButton]{
+                                    item?.isHidden = true
+                                }
                                 self!.personalCabinetData = model
                                 self!.setupEducationalInformation(model: self!.personalCabinetData!)
                                 self!.setupPersonalInformation(model: self!.personalCabinetData!)
+                                dialogLoading.dismiss(animated: true, completion: nil)
         },
                              errorCallback: { [weak self] typeError in
                                 var message: String!
@@ -98,20 +154,39 @@ class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecogniz
                                 case .serverError:
                                     message = "Ошибка сервера"
                                 case .wrongDataError:
-                                    message = "Неверный логин или пароль. Попробуйте ещё раз"
+                                    message = "Неверный логин или пароль"
                                 }
-                                                   
-                                let dialogMessage = UIAlertController(title: "Вход в систему",
-                                                                    message: message,
-                                                                    preferredStyle: .alert)
-                                let okButton = UIAlertAction(title: "OK", style: .default, handler: { _ in
-                                    if typeError == .wrongDataError{
-                                        AppDelegate.appDelegate.rootViewController.successAccountChangeChapter(newPageType: .login,
-                                                                                                               personalCabinetData: nil)
-                                    }
-                                })
-                                dialogMessage.addAction(okButton)
-                                self!.present(dialogMessage, animated: true, completion: nil)
+                                
+                                dialogLoading.dismiss(animated: true, completion: nil)
+                                self?.errorLoadingLabel.text = message
+                                
+                                for item in [self!.headerName, self!.exitButton,
+                                             self!.scrollView,
+                                             self!.educationalInformationView, self!.containerPersonalInformationView,
+                                             self!.chaptersTable]{
+                                    item?.isHidden = true
+                                }
+                                for item in [self!.errorLoadingLabel,
+                                             self!.repeatLoadingButton]{
+                                    item?.isHidden = false
+                                }
+                                
+                                self?.disposeBagReloadingButton = DisposeBag()
+                                if typeError == .wrongDataError{
+                                    self!.repeatLoadingButton.rx
+                                        .tap
+                                        .subscribe(onNext: { _ in
+                                            self!.viewModel.removeUserDataFromStorage()
+                                            AppDelegate.appDelegate.rootViewController.successAccountChangeChapter(newPageType: .login,
+                                                                                                                   personalCabinetData: nil)
+                                        }).disposed(by: self!.disposeBagReloadingButton)
+                                } else {
+                                    self!.repeatLoadingButton.rx
+                                    .tap
+                                    .subscribe(onNext: { _ in
+                                        self!.makeAutorization()
+                                    }).disposed(by: self!.disposeBagReloadingButton)
+                                }
         })
     }
     
@@ -371,7 +446,7 @@ class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecogniz
                                                      personalCabinetData: nil)
                 },
                     errorCallback: { [weak self] _ in
-                            let message = "Ошибка выхода из системы. Повторите попытку."
+                            let message = "Ошибка выхода из системы. Повторите попытку"
                             let dialogMessage = UIAlertController(title: "Выход из системы",
                                                                   message: message,
                                                                   preferredStyle: .alert)

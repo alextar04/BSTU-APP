@@ -16,7 +16,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Th3-lZ-0DG">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ошибка" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="od3-VL-v8K">
+                                <rect key="frame" x="10" y="273.5" width="300" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="I1a-fb-Ufz"/>
+                                    <constraint firstAttribute="width" constant="300" id="uMm-j1-9dx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ej-1C-aGf">
+                                <rect key="frame" x="88" y="294" width="144" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="144" id="OW6-3C-dj1"/>
+                                    <constraint firstAttribute="height" constant="30" id="zgC-7F-xb7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <state key="normal" title="Повторите попытку"/>
+                            </button>
+                            <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Th3-lZ-0DG">
                                 <rect key="frame" x="0.0" y="52" width="320" height="516"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kis-fk-mVU">
@@ -127,18 +146,18 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Тип обучения:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Duk-aD-0gV">
-                                                <rect key="frame" x="29" y="182" width="124" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Форма оплаты:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Duk-aD-0gV">
+                                                <rect key="frame" x="29" y="182" width="135" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="XdK-Ov-U2g"/>
-                                                    <constraint firstAttribute="width" constant="124" id="s0u-UX-NGE"/>
+                                                    <constraint firstAttribute="width" constant="135" id="s0u-UX-NGE"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Бюджет" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iee-iJ-QIg">
-                                                <rect key="frame" x="153" y="182" width="63.5" height="21"/>
+                                                <rect key="frame" x="164" y="182" width="63.5" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="SD3-kE-ZLL"/>
                                                 </constraints>
@@ -391,14 +410,14 @@
                                     <constraint firstAttribute="width" constant="23" id="wHw-Tl-aVZ"/>
                                 </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="exit" translatesAutoresizingMaskIntoConstraints="NO" id="Vno-T9-hFX">
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="exit" translatesAutoresizingMaskIntoConstraints="NO" id="Vno-T9-hFX">
                                 <rect key="frame" x="281" y="16" width="23" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="23" id="9o5-k0-nG9"/>
                                     <constraint firstAttribute="height" constant="23" id="OTs-ZQ-0H4"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Фамилия И. О" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jOW-lK-sjB">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Фамилия И. О" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jOW-lK-sjB">
                                 <rect key="frame" x="55" y="16" width="210" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="23" id="ixe-Yx-mEM"/>
@@ -416,6 +435,7 @@
                             <constraint firstItem="Vno-T9-hFX" firstAttribute="top" secondItem="o0a-bG-Old" secondAttribute="top" constant="16" id="BRa-lw-hWW"/>
                             <constraint firstItem="o0a-bG-Old" firstAttribute="trailing" secondItem="4aG-8r-pcP" secondAttribute="trailing" constant="18" id="H8q-g4-cqB"/>
                             <constraint firstItem="rbX-ZK-Vgv" firstAttribute="top" secondItem="o0a-bG-Old" secondAttribute="top" constant="16" id="OWi-k8-JF5"/>
+                            <constraint firstItem="od3-VL-v8K" firstAttribute="centerY" secondItem="0Ef-Zp-zE4" secondAttribute="centerY" id="PZ6-0a-EBN"/>
                             <constraint firstItem="Th3-lZ-0DG" firstAttribute="trailing" secondItem="o0a-bG-Old" secondAttribute="trailing" id="UCH-X8-NjU"/>
                             <constraint firstItem="uwr-vT-DPA" firstAttribute="leading" secondItem="o0a-bG-Old" secondAttribute="leading" constant="16" id="WRv-Yg-yG8"/>
                             <constraint firstItem="Th3-lZ-0DG" firstAttribute="top" secondItem="rbX-ZK-Vgv" secondAttribute="bottom" constant="13" id="YzJ-pg-eIl"/>
@@ -425,7 +445,10 @@
                             <constraint firstItem="rbX-ZK-Vgv" firstAttribute="leading" secondItem="o0a-bG-Old" secondAttribute="leading" constant="16" id="dOV-OA-4dA"/>
                             <constraint firstItem="Kis-fk-mVU" firstAttribute="leading" secondItem="o0a-bG-Old" secondAttribute="leading" constant="16" id="dsh-Nw-mQw"/>
                             <constraint firstItem="Th3-lZ-0DG" firstAttribute="bottom" secondItem="o0a-bG-Old" secondAttribute="bottom" id="e2e-ko-Uxz"/>
+                            <constraint firstItem="6ej-1C-aGf" firstAttribute="centerX" secondItem="0Ef-Zp-zE4" secondAttribute="centerX" id="eBR-vM-rJB"/>
+                            <constraint firstItem="6ej-1C-aGf" firstAttribute="centerY" secondItem="0Ef-Zp-zE4" secondAttribute="centerY" constant="25" id="ebp-aK-boi"/>
                             <constraint firstItem="Vno-T9-hFX" firstAttribute="leading" secondItem="jOW-lK-sjB" secondAttribute="trailing" constant="16" id="rfo-7E-kKA"/>
+                            <constraint firstItem="od3-VL-v8K" firstAttribute="centerX" secondItem="0Ef-Zp-zE4" secondAttribute="centerX" id="uUE-DY-bkM"/>
                             <constraint firstItem="o0a-bG-Old" firstAttribute="trailing" secondItem="Kis-fk-mVU" secondAttribute="trailing" constant="18" id="v3l-jc-Ds4"/>
                             <constraint firstItem="jOW-lK-sjB" firstAttribute="leading" secondItem="rbX-ZK-Vgv" secondAttribute="trailing" constant="16" id="v90-UB-7jO"/>
                             <constraint firstItem="Th3-lZ-0DG" firstAttribute="leading" secondItem="o0a-bG-Old" secondAttribute="leading" id="wbD-ek-gtv"/>
@@ -443,6 +466,7 @@
                         <outlet property="educationType" destination="iee-iJ-QIg" id="9WY-GS-wV5"/>
                         <outlet property="educationalInformationView" destination="Kis-fk-mVU" id="rba-rZ-M2L"/>
                         <outlet property="email" destination="RaP-7c-iGq" id="qKg-VN-3nm"/>
+                        <outlet property="errorLoadingLabel" destination="od3-VL-v8K" id="31a-J2-wvt"/>
                         <outlet property="exitButton" destination="Vno-T9-hFX" id="c7K-SV-z2W"/>
                         <outlet property="gender" destination="B5P-9g-WQ0" id="p9B-WR-3Qr"/>
                         <outlet property="groupName" destination="Zli-hu-oE5" id="3tm-Xn-4fQ"/>
@@ -454,6 +478,7 @@
                         <outlet property="numberRecordBookWidthConstraint" destination="ddJ-An-JkN" id="lxn-eT-F2C"/>
                         <outlet property="personalInformationView" destination="uwr-vT-DPA" id="Fv2-2W-jZt"/>
                         <outlet property="personalInformationViewHeightConstraint" destination="Go9-Yb-l5l" id="cc0-d9-LZO"/>
+                        <outlet property="repeatLoadingButton" destination="6ej-1C-aGf" id="stn-Tx-GkA"/>
                         <outlet property="scrollView" destination="Th3-lZ-0DG" id="zNO-bC-eyk"/>
                         <outlet property="snils" destination="vTm-d1-MeV" id="OTX-YW-0PW"/>
                         <outlet property="telephone" destination="B58-zF-ga2" id="IiX-na-6GF"/>

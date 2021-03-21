@@ -41,16 +41,6 @@ class RootViewController: UIViewController {
         
         Database.copyDatabaseToDevice()
         
-        // Обнуление информации
-        /*
-        let defaults = UserDefaults.standard
-        print(defaults.string(forKey: "login"))
-        print(defaults.string(forKey: "password"))
-        //defaults.set(nil, forKey: "login")
-        //defaults.set(nil, forKey: "password")
-         */
-        
-        
         NotificationCenter.default.addObserver(self, selector: #selector(switchLeftMenu), name: Notification.Name("SwitchLeftMenu"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(changeChapter), name:
             Notification.Name("ChangeChapter"), object: nil)
@@ -142,7 +132,8 @@ class RootViewController: UIViewController {
                 if let _ = defaults.string(forKey: "login") {
                     if let _ = defaults.string(forKey: "password"){
                         self.currentController = UIStoryboard(name: "PersonalCabinetMainPageViewController", bundle: nil).instantiateViewController(withIdentifier: "PersonalCabinetMainPageViewControllerID") as! PersonalCabinetMainPageViewController
-                        (self.currentController as! PersonalCabinetMainPageViewController).makeAutorization()
+                        
+                        (self.currentController as! PersonalCabinetMainPageViewController).needAutorization = true
                     }
                 } else {
                     // Загрузка страницы входа в систему
