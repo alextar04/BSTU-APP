@@ -13,6 +13,9 @@ class ExamsModel{
     var numberSemester: String!
     var disciplines: [DisciplineExamModel]!
     
+    var myCellHeight: Int!
+    var isExpanded = false
+    
     init(numberSemester: String, disciplines: [DisciplineExamModel]) {
         self.numberSemester = numberSemester
         self.disciplines = disciplines
@@ -22,10 +25,23 @@ class ExamsModel{
 
 class DisciplineExamModel{
     
-    var discipline: (numberSemester: String, typeExam: TypeExam, mark: Int)!
+    var discipline: (name: String, typeExam: TypeExam, mark: String)!
     
-    init(discipline: (numberSemester: String, typeExam: TypeExam, mark: Int)) {
+    init(discipline: (name: String, typeExam: TypeExam, mark: String)) {
         self.discipline = discipline
+    }
+}
+
+
+class SelectedCellParametrs{
+    var headerName: String!
+    var selectedCellIndex: Int!
+    var selectedCellHeight: Int!
+    
+    init(headerName: String, selectedCellIndex: Int, selecredCellHeight: Int) {
+        self.headerName = headerName
+        self.selectedCellIndex = selectedCellIndex
+        self.selectedCellHeight = selecredCellHeight
     }
 }
 
@@ -34,6 +50,6 @@ enum TypeExam: String{
     case differentialСredit = "Диф. зач."
     case credit = "Зач."
     case courseWork = "Курс. раб."
-    case courseProject = "Курс. проект"
+    case courseProject = "Курс. пр."
     case exam = "Экз."
 }

@@ -15,6 +15,7 @@ import UIKit
 class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecognizerDelegate{
     
     var needAutorization = false
+    var idUser: Int!
     @IBOutlet weak var menuButton: UIImageView!
     @IBOutlet weak var headerName: UILabel!
     @IBOutlet weak var exitButton: UIImageView!
@@ -78,6 +79,7 @@ class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecogniz
                          self.chaptersTable]{
                 item?.isHidden = false
             }
+            self.idUser = personalCabinetData?.idUser
             self.setupEducationalInformation(model: personalCabinetData!)
             self.setupPersonalInformation(model: personalCabinetData!)
         }
@@ -130,7 +132,7 @@ class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecogniz
         viewModel.autorizate(login: login!, password: password!,
                              completion: { [weak self] model in
                                 
-                                print("Подгрузились из кэша!")
+                                print("Подгрузились из кэша данных о пользователе!")
                                 for item in [self!.headerName, self!.exitButton,
                                              self!.scrollView,
                                              self!.educationalInformationView, self!.containerPersonalInformationView,
@@ -142,6 +144,7 @@ class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecogniz
                                     item?.isHidden = true
                                 }
                                 self!.personalCabinetData = model
+                                self?.idUser = self?.personalCabinetData?.idUser
                                 self!.setupEducationalInformation(model: self!.personalCabinetData!)
                                 self!.setupPersonalInformation(model: self!.personalCabinetData!)
                                 dialogLoading.dismiss(animated: true, completion: nil)
@@ -318,21 +321,23 @@ class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecogniz
         
         self.chaptersTable.rx
             .modelSelected(TypePersonalCabinetChapter.self)
-            .subscribe(onNext: { selectedItem in
+            .subscribe(onNext: { [weak self] selectedItem in
                 switch selectedItem{
                 case .attestation:
                     let attestationController = UIStoryboard(name: "AttestationViewController", bundle: nil)
                         .instantiateViewController(withIdentifier: "AttestationViewControllerID") as! AttestationViewController
-                    self.navigationController?.pushViewController(attestationController, animated: true)
+                    attestationController.idUser = self!.idUser
+                    self?.navigationController?.pushViewController(attestationController, animated: true)
                 case .exams:
                     let examController = UIStoryboard(name: "ExamsViewController", bundle: nil)
                         .instantiateViewController(withIdentifier: "ExamsViewControllerID") as! ExamsViewController
-                    self.navigationController?.pushViewController(examController, animated: true)
+                    examController.idUser = self!.idUser
+                    self?.navigationController?.pushViewController(examController, animated: true)
                 case .schedule:
                     let groupsSheduleController = UIStoryboard(name: "GroupSheduleViewController", bundle: nil)
                         .instantiateViewController(withIdentifier: "GroupSheduleViewControllerID") as! GroupSheduleViewController
-                    groupsSheduleController.groupName = self.groupName.text
-                    self.navigationController?.pushViewController(groupsSheduleController, animated: true)
+                    groupsSheduleController.groupName = self!.groupName.text
+                    self?.navigationController?.pushViewController(groupsSheduleController, animated: true)
                 }
             }).disposed(by: self.disposeBag)
     }
@@ -464,12 +469,4 @@ class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecogniz
     deinit{
         print("Вызван деструктор главной страницы кабинета")
     }
-    
-    /*
-     Функционал:
-     Успеваемость: http://cabinet.bstu.ru/api/1.0/progress?dataId=102973 (id - студента)
-     Аттестация: http://cabinet.bstu.ru/api/1.0/certification?dataId=102973 (id-студента)
-     Расписание: Адреса есть в расписании
-     Выход: http://cabinet.bstu.ru/auth/logout
-     */
 }

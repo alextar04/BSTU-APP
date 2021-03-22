@@ -28,12 +28,10 @@ class ExamsCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource{
     @IBOutlet weak var tableMarks: UITableView!
     @IBOutlet weak var tableMarksHeightConstraiant: NSLayoutConstraint!
     
-    
     var installedGradientLayer: CAGradientLayer!
     var installedGradientLayer2: CAGradientLayer!
     
     var myIndex: IndexPath!
-    var isExpanded = false
     var disposeBag = DisposeBag()
     
     var dataExam = [ExamsModel]()
@@ -44,7 +42,7 @@ class ExamsCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource{
         self.headerContainerView.makeRounding()
         
         self.setupData(data: data)
-        self.setupInOutForTable(countData: data.disciplines.count)
+        self.setupInOutForTable(countData: data.disciplines.count, data: data)
         self.containerView.makeRounding()
         
         self.tableMarks.makeRoundingSpecificCorners(arrayCorners: [.layerMinXMaxYCorner, .layerMaxXMaxYCorner])
@@ -56,6 +54,7 @@ class ExamsCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource{
         self.dataExam = [data]
         self.numberSemestr.setTitle(data.numberSemester, for: .normal)
         self.tableMarks.register(UINib(nibName: "ExamsCellDropdownCell", bundle: nil), forCellReuseIdentifier: "ExamsCellDropdownCellID")
+        self.dropdownButton.image = UIImage(named: "dropdown")
         
         self.tableMarks.layoutMargins = UIEdgeInsets.zero
         self.tableMarks.separatorInset = UIEdgeInsets.zero
@@ -66,32 +65,48 @@ class ExamsCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource{
     
     
     // MARK: Настройка параметров выпадающего списка с оценками
-    func setupInOutForTable(countData: Int){
-        self.containerViewHeightConstraint.constant = 37
+    func setupInOutForTable(countData: Int, data: ExamsModel){
+        
+        if data.isExpanded{
+            self.tableMarks.isHidden = false
+            self.dropdownButton.image = UIImage(named: "dropup")
+            
+            let calculatedTotalHeight = 37 + 76 * countData
+            data.myCellHeight = calculatedTotalHeight
+            self.tableMarksHeightConstraiant.constant = CGFloat(calculatedTotalHeight)
+            self.containerViewHeightConstraint.constant = CGFloat(calculatedTotalHeight)
+            self.tableMarks.reloadData()
+            
+        } else {
+            self.containerViewHeightConstraint.constant = 37
+        }
         
         let clickedClosure = { [weak self] in
             
             self!.dropdownButton.image = UIImage(named: "dropup")
-            self!.isExpanded.toggle()
+            data.isExpanded.toggle()
             
-            if self?.parentVC.selectedCell != nil && self?.parentVC.selectedCell != self{
-                self?.parentVC.selectedCell.dropdownButton.image = UIImage(named: "dropdown")
-            }
-            
-            weak var preventSelectedCellLink = self?.parentVC.selectedCell
-            self!.parentVC.selectedCellIndex = self!.parentVC.selectedCellIndex == self!.myIndex ? nil : self!.myIndex
-            self?.parentVC.selectedCell = self
-            
-            let calculatedTotalHeight = 37 + 44 * countData
-            self?.parentVC.selectedCellHeight = calculatedTotalHeight
+            let calculatedTotalHeight = 37 + 76 * countData
+            data.myCellHeight = calculatedTotalHeight
             self?.tableMarksHeightConstraiant.constant = CGFloat(calculatedTotalHeight)
             self?.containerViewHeightConstraint.constant = CGFloat(calculatedTotalHeight)
             
+            if data.isExpanded{
+                self?.parentVC.selectedCellsParametrs.append(SelectedCellParametrs(headerName: data.numberSemester,
+                                                                                   selectedCellIndex: (self?.myIndex.section)!,
+                                                                                   selecredCellHeight: calculatedTotalHeight))
+            } else {
+                self?.parentVC.selectedCellsParametrs = (self?.parentVC.selectedCellsParametrs.filter{ [weak self] selectedCellParametr in
+                    return selectedCellParametr.headerName != self!.numberSemestr.titleLabel?.text!
+                })!
+            }
+            
             self?.parentVC.contentTableView.isUserInteractionEnabled = false
+            self?.tableMarks.reloadData()
             self!.parentVC.contentTableView.performBatchUpdates(nil, completion: { [weak self] _ in
                 self?.parentVC.contentTableView.isUserInteractionEnabled = true
                 
-                if self!.isExpanded{
+                if data.isExpanded{
                     self?.tableMarks.isHidden = false
                     self!.dropdownButton.image = UIImage(named: "dropup")
                 } else {
@@ -99,15 +114,10 @@ class ExamsCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource{
                     self!.dropdownButton.image = UIImage(named: "dropdown")
                 }
                 
-                if preventSelectedCellLink != nil && preventSelectedCellLink != self{
-                    preventSelectedCellLink!.tableMarks.isHidden = true
-                    preventSelectedCellLink?.isExpanded = false
-                }
             })
         }
         
         self.disposeBag = DisposeBag()
-        
         self.numberSemestr.rx
             .tap
             .subscribe(onNext: { [weak self] _ in
@@ -160,8 +170,10 @@ class ExamsCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource{
         cell.layoutIfNeeded()
         cell.layoutMargins = UIEdgeInsets.zero
         
-        let dataForCell = self.dataExam.first?.disciplines[indexPath.row].discipline
-        cell.configureCell(pairDisciplineMark: dataForCell!)
+        if indexPath.row <= (self.dataExam.first?.disciplines.count)! - 1{
+            let dataForCell = self.dataExam.first?.disciplines[indexPath.row].discipline
+            cell.configureCell(pairDisciplineMark: dataForCell!)
+        }
         return cell
     }
     
@@ -198,4 +210,22 @@ class ExamsCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource{
         return 1
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        //print("Готовлю к переиспользованию: \(self.myIndex.section)")
+        self.containerViewHeightConstraint.constant = 37
+        self.myIndex = nil
+        self.numberSemestr.setTitle("", for: .normal)
+        self.disposeBag = DisposeBag()
+        
+        /*
+        print("На пареиспользовании: ")
+        for q in self.parentVC.selectedCellsParametrs{
+            print(q.selectedCellIndex)
+        }
+        print("@@")
+        */
+    }
 }
+

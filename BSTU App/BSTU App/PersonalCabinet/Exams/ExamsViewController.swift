@@ -14,13 +14,12 @@ import RxDataSources
 
 class ExamsViewController: UIViewController, UITableViewDelegate{
     
+    var idUser: Int!
     @IBOutlet weak var backButton: UIImageView!
-    weak var selectedCell: ExamsCell!
-    var selectedCellIndex: IndexPath!
-    var selectedCellHeight: Int!
     @IBOutlet weak var contentTableView: ContentTableView!
     
     var arrayNumberSemesters = [ExamsCell]()
+    let viewModel = ExamsViewModel()
     let disposeBag = DisposeBag()
     
     // Вспомогательная структура для отображения данных в виде секции
@@ -30,8 +29,18 @@ class ExamsViewController: UIViewController, UITableViewDelegate{
         var items: [ExamsModel]
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    @IBOutlet weak var errorImage: UIImageView!
+    @IBOutlet weak var errorText: UILabel!
+    
+    /*
+    weak var selectedCell: ExamsCell!
+    var selectedCellIndex: IndexPath!
+    var selectedCellHeight: Int!
+    */
+    var selectedCellsParametrs = [SelectedCellParametrs]()
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         setupBackButton()
         setupContent()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -42,53 +51,70 @@ class ExamsViewController: UIViewController, UITableViewDelegate{
     // MARK: Установка контента
     func setupContent(){
         
-        var sessionData = [ExamsModel]()
-        for _ in 0...10{
-            sessionData.append(
-                ExamsModel(numberSemester: "1 сессия (весна 2017)", disciplines: [
-                DisciplineExamModel(discipline: ("Математика", .differentialСredit, 5)),
-                DisciplineExamModel(discipline: ("Информатика", .courseProject, 5)),
-                DisciplineExamModel(discipline: ("Английский", .courseWork, 5)),
-                DisciplineExamModel(discipline: ("Окружающий", .credit, 5)),
-                DisciplineExamModel(discipline: ("Математика", .exam, 5))])
-            )
-        }
-        
-        
-        for session in sessionData{
-            self.sectionedArrayNumberSemesters.append(SectionOfNumberSemesters(header: session.numberSemester,
-                                                                               items: [session]))
-        }
-        
-        self.contentTableView.register(UINib(nibName: "ExamsCell", bundle: nil),
-                                  forCellReuseIdentifier: "ExamsCellID")
-        self.contentTableView.canCancelContentTouches = true
-        
-        // Конфигурация содержимого для ячеек таблицы
-        let dataSource = RxTableViewSectionedReloadDataSource<SectionOfNumberSemesters>(configureCell: {
-            [weak self] dataSource, table, index, item in
-            let cell = table.dequeueReusableCell(withIdentifier: "ExamsCellID", for: index) as! ExamsCell
-            cell.layoutIfNeeded()
-            cell.parentVC = self
-            cell.myIndex = index
-            cell.configureCell(data: item)
-            return cell
-        })
-        
-        // Связывание данных и таблицы
-        Observable.just(self.sectionedArrayNumberSemesters)
-            .bind(to: contentTableView.rx.items(dataSource: dataSource))
-            .disposed(by: disposeBag)
-        
         self.contentTableView.rx
             .setDelegate(self)
             .disposed(by: disposeBag)
+        
+        let dialogLoading = UIAlertController(title: "Загрузка",
+                                              message: nil,
+                                              preferredStyle: .alert)
+        let activityIndicator = UIActivityIndicatorView(style: .gray)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.isUserInteractionEnabled = false
+        activityIndicator.startAnimating()
+
+        dialogLoading.view.addSubview(activityIndicator)
+        dialogLoading.view.heightAnchor.constraint(equalToConstant: 95).isActive = true
+
+        activityIndicator.centerXAnchor.constraint(equalTo: dialogLoading.view.centerXAnchor, constant: 0).isActive = true
+        activityIndicator.bottomAnchor.constraint(equalTo: dialogLoading.view.bottomAnchor, constant: -20).isActive = true
+        self.present(dialogLoading, animated: true)
+        
+        viewModel.getUserExamsInfo(idUser: self.idUser,
+                                   completion: { [weak self] sessionData in
+                                    
+                                    self!.contentTableView.register(UINib(nibName: "ExamsCell", bundle: nil),
+                                                              forCellReuseIdentifier: "ExamsCellID")
+                                    self!.contentTableView.canCancelContentTouches = true
+                                    
+                                    for session in sessionData{
+                                        self!.sectionedArrayNumberSemesters.append(SectionOfNumberSemesters(header: session.numberSemester,
+                                                                                                           items: [session]))
+                                    }
+                                    
+                                    // Конфигурация содержимого для ячеек таблицы
+                                    let dataSource = RxTableViewSectionedReloadDataSource<SectionOfNumberSemesters>(configureCell: {
+                                        [weak self] dataSource, table, index, item in
+                                        let cell = table.dequeueReusableCell(withIdentifier: "ExamsCellID", for: index) as! ExamsCell
+                                        cell.layoutIfNeeded()
+                                        cell.parentVC = self
+                                        cell.myIndex = index
+                                        cell.configureCell(data: item)
+                                        return cell
+                                    })
+                                    
+                                    // Связывание данных и таблицы
+                                    Observable.just(self!.sectionedArrayNumberSemesters)
+                                        .bind(to: self!.contentTableView.rx.items(dataSource: dataSource))
+                                        .disposed(by: self!.disposeBag)
+                                    
+                                    dialogLoading.dismiss(animated: true, completion: nil)
+                                    
+            }, errorCallback: { [weak self] typeError in
+                self!.errorImage.isHidden = false
+                self!.errorText.isHidden = false
+                self!.contentTableView.isHidden = true
+                dialogLoading.dismiss(animated: true, completion: nil)
+        })
     }
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if self.selectedCellIndex == indexPath {
-            return CGFloat(self.selectedCellHeight!)
+        
+        for selectedCell in self.selectedCellsParametrs{
+            if selectedCell.selectedCellIndex == indexPath.section{
+                return CGFloat(selectedCell.selectedCellHeight)
+            }
         }
         return 37
     }

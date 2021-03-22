@@ -52,6 +52,7 @@
 		CE04A3FF25EF9B9700BE073D /* EmptySheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A3DE25EF9B9700BE073D /* EmptySheduleView.swift */; };
 		CE04A40025EF9B9700BE073D /* TypeWeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A3DF25EF9B9700BE073D /* TypeWeekCell.swift */; };
 		CE04A40125EF9B9700BE073D /* GroupSheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A3E025EF9B9700BE073D /* GroupSheduleViewModel.swift */; };
+		CE0E7C1C26080AC400705059 /* AttestationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0E7C1B26080AC400705059 /* AttestationViewModel.swift */; };
 		CE16978625C064F10040AE95 /* LabelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE16978525C064F10040AE95 /* LabelExtensions.swift */; };
 		CE16978825C151710040AE95 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE16978725C151710040AE95 /* ColorExtensions.swift */; };
 		CE2B982A2601F3380008A2E1 /* PersonalCabinetChapterCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2B98292601F3380008A2E1 /* PersonalCabinetChapterCard.xib */; };
@@ -91,6 +92,7 @@
 		CE5B3DFA25F530F800DC66E9 /* MenuViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE5B3DF925F530F800DC66E9 /* MenuViewController.storyboard */; };
 		CE5B3DFC25F539C700DC66E9 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B3DFB25F539C700DC66E9 /* MenuViewController.swift */; };
 		CE68297B2600D5CB008556FA /* PersonalCabinetMainPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68297A2600D5CB008556FA /* PersonalCabinetMainPageViewModel.swift */; };
+		CE6E65D02608966F002EBA3D /* ExamsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6E65CF2608966F002EBA3D /* ExamsViewModel.swift */; };
 		CE7F81B925FA079000A70CCB /* ListTeachers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE7F81B825FA079000A70CCB /* ListTeachers.storyboard */; };
 		CE7F81BB25FA07CD00A70CCB /* ListTeachersTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7F81BA25FA07CD00A70CCB /* ListTeachersTableCell.xib */; };
 		CE7F81BF25FA0C8800A70CCB /* ListTeachersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7F81BE25FA0C8800A70CCB /* ListTeachersViewController.swift */; };
@@ -178,6 +180,7 @@
 		CE04A3DE25EF9B9700BE073D /* EmptySheduleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptySheduleView.swift; sourceTree = "<group>"; };
 		CE04A3DF25EF9B9700BE073D /* TypeWeekCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeWeekCell.swift; sourceTree = "<group>"; };
 		CE04A3E025EF9B9700BE073D /* GroupSheduleViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupSheduleViewModel.swift; sourceTree = "<group>"; };
+		CE0E7C1B26080AC400705059 /* AttestationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationViewModel.swift; sourceTree = "<group>"; };
 		CE16978525C064F10040AE95 /* LabelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelExtensions.swift; sourceTree = "<group>"; };
 		CE16978725C151710040AE95 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		CE2B98292601F3380008A2E1 /* PersonalCabinetChapterCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonalCabinetChapterCard.xib; sourceTree = "<group>"; };
@@ -217,6 +220,7 @@
 		CE5B3DF925F530F800DC66E9 /* MenuViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MenuViewController.storyboard; sourceTree = "<group>"; };
 		CE5B3DFB25F539C700DC66E9 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		CE68297A2600D5CB008556FA /* PersonalCabinetMainPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCabinetMainPageViewModel.swift; sourceTree = "<group>"; };
+		CE6E65CF2608966F002EBA3D /* ExamsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamsViewModel.swift; sourceTree = "<group>"; };
 		CE7F81B825FA079000A70CCB /* ListTeachers.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListTeachers.storyboard; sourceTree = "<group>"; };
 		CE7F81BA25FA07CD00A70CCB /* ListTeachersTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListTeachersTableCell.xib; sourceTree = "<group>"; };
 		CE7F81BE25FA0C8800A70CCB /* ListTeachersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTeachersViewController.swift; sourceTree = "<group>"; };
@@ -480,6 +484,7 @@
 				CE36FE9C2605D71A0021D9F0 /* Storyboards */,
 				CE36FEA12605D71A0021D9F0 /* Views */,
 				CE36FEA42605D71A0021D9F0 /* ExamsViewController.swift */,
+				CE6E65CF2608966F002EBA3D /* ExamsViewModel.swift */,
 				CE36FEA02605D71A0021D9F0 /* ExamsModel.swift */,
 			);
 			path = Exams;
@@ -724,6 +729,7 @@
 				CEA4C9B82603401C00716C07 /* Views */,
 				CEA4C9B326033A7900716C07 /* Storyboards */,
 				CEA4C9B92603403500716C07 /* AttestationViewController.swift */,
+				CE0E7C1B26080AC400705059 /* AttestationViewModel.swift */,
 				CEA4C9C126034BF800716C07 /* AttestationModel.swift */,
 			);
 			path = Attestation;
@@ -961,6 +967,7 @@
 				CE42A5AC25D41CD800CDDCA5 /* CorpDB.swift in Sources */,
 				CE380A2525BC4F910028622B /* TextFieldExtensions.swift in Sources */,
 				CEA4C9C226034BF800716C07 /* AttestationModel.swift in Sources */,
+				CE0E7C1C26080AC400705059 /* AttestationViewModel.swift in Sources */,
 				CE36FEA82605D71A0021D9F0 /* ExamsModel.swift in Sources */,
 				CEA4C9C02603442200716C07 /* AttestationCellDropdownCell.swift in Sources */,
 				CECE8BA325FCC12D008D7840 /* SigninViewController.swift in Sources */,
@@ -1004,6 +1011,7 @@
 				CEE3AFC325D7D5D8007B1814 /* MapRoadDotMapper.swift in Sources */,
 				CE7F81C625FA0F8D00A70CCB /* ListTeachersModel.swift in Sources */,
 				CED0489725F006D500B7DD65 /* GroupSheduleModel.swift in Sources */,
+				CE6E65D02608966F002EBA3D /* ExamsViewModel.swift in Sources */,
 				CE009EEF25D6B35D00CA8604 /* PremiseMapper.swift in Sources */,
 				CEE5B67625D66A9D0023D640 /* MapDB.swift in Sources */,
 				CE380A2A25BC4F910028622B /* Marker.swift in Sources */,

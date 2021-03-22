@@ -10,6 +10,7 @@ import Foundation
 
 class PersonalCabinetMainPageModel{
     
+    var idUser: Int!
     var headerName = "(Нет)"
     
     var instituteName = "(Нет)"

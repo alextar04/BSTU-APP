@@ -144,6 +144,8 @@ class PersonalCabinetMainPageViewModel{
                 stringifyJSON = stringifyJSON.replacingOccurrences(of: "undefined", with: "-1")
                 let json = try! JSON(data: Data(stringifyJSON.utf8))
                 
+                userInfo.idUser = json["currentUser"]["defaultAccount"]["data"]["id"].int ?? 0
+                
                 // Получение инициалов пользователя, вошедшего в кабинет
                 if let fullNameUser = json["currentUser"]["fullName"].string{
                     

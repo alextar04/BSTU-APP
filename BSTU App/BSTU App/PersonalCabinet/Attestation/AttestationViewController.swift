@@ -14,14 +14,12 @@ import RxDataSources
 
 class AttestationViewController: UIViewController, UITableViewDelegate{
     
+    var idUser: Int!
     @IBOutlet weak var backButton: UIImageView!
+    @IBOutlet weak var contentView: ContentTableView!
     weak var selectedCell: AttestationCell!
     var selectedCellIndex: IndexPath!
     var selectedCellHeight: Int!
-    @IBOutlet weak var contentView: ContentTableView!
-    
-    var arrayRangeDates = [AttestationCell]()
-    let disposeBag = DisposeBag()
     
     // Вспомогательная структура для отображения данных в виде секции
     var sectionedArrayRangeDates = [SectionOfDataRanges]()
@@ -30,8 +28,15 @@ class AttestationViewController: UIViewController, UITableViewDelegate{
         var items: [AttestationModel]
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    var arrayRangeDates = [AttestationCell]()
+    let viewModel = AttestationViewModel()
+    let disposeBag = DisposeBag()
+    
+    @IBOutlet weak var errorImage: UIImageView!
+    @IBOutlet weak var errorText: UILabel!
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         setupBackButton()
         setupContent()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -42,45 +47,60 @@ class AttestationViewController: UIViewController, UITableViewDelegate{
     // MARK: Установка контента
     func setupContent(){
         
-        var attestationData = [AttestationModel]()
-        for _ in 0...10{
-            attestationData.append(AttestationModel(dataRange: "21.01.10 - 22.22.22",
-                                                    disciplines: [DisciplineAttestationModel(discipline: ("Русский", 5)),
-                                                                  DisciplineAttestationModel(discipline: ("Математика", 4)),
-                                                                  DisciplineAttestationModel(discipline: ("Информатика", 2)),
-                                                                  DisciplineAttestationModel(discipline: ("Английский", 3)),
-                                                                  DisciplineAttestationModel(discipline: ("Окружающий", 3))
-                                                                  ]))
-        }
+        let dialogLoading = UIAlertController(title: "Загрузка",
+                                              message: nil,
+                                              preferredStyle: .alert)
+        let activityIndicator = UIActivityIndicatorView(style: .gray)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.isUserInteractionEnabled = false
+        activityIndicator.startAnimating()
+
+        dialogLoading.view.addSubview(activityIndicator)
+        dialogLoading.view.heightAnchor.constraint(equalToConstant: 95).isActive = true
+
+        activityIndicator.centerXAnchor.constraint(equalTo: dialogLoading.view.centerXAnchor, constant: 0).isActive = true
+        activityIndicator.bottomAnchor.constraint(equalTo: dialogLoading.view.bottomAnchor, constant: -20).isActive = true
+        self.present(dialogLoading, animated: true)
         
-        
-        for attestation in attestationData{
-            self.sectionedArrayRangeDates.append(SectionOfDataRanges(header: attestation.dataRange!, items: [attestation]))
-        }
-        
-        self.contentView.register(UINib(nibName: "AttestationCell", bundle: nil),
-                                  forCellReuseIdentifier: "AttestationCellID")
-        self.contentView.canCancelContentTouches = true
-        
-        // Конфигурация содержимого для ячеек таблицы
-        let dataSource = RxTableViewSectionedReloadDataSource<SectionOfDataRanges>(configureCell: {
-            [weak self] dataSource, table, index, item in
-            let cell = table.dequeueReusableCell(withIdentifier: "AttestationCellID", for: index) as! AttestationCell
-            cell.layoutIfNeeded()
-            cell.parentVC = self
-            cell.myIndex = index
-            cell.configureCell(data: item)
-            return cell
-        })
-        
-        // Связывание данных и таблицы
-        Observable.just(self.sectionedArrayRangeDates)
-            .bind(to: contentView.rx.items(dataSource: dataSource))
-            .disposed(by: disposeBag)
+        viewModel.getUserAttestationInfo(idUser: self.idUser,
+                                         completion: { [weak self] attestationData in
+            
+                                            for attestation in attestationData{
+                                                self!.sectionedArrayRangeDates.append(SectionOfDataRanges(header: attestation.dataRange!, items: [attestation]))
+                                            }
+                                            
+                                            self!.contentView.register(UINib(nibName: "AttestationCell", bundle: nil),
+                                                                      forCellReuseIdentifier: "AttestationCellID")
+                                            self!.contentView.canCancelContentTouches = true
+                                            
+                                            // Конфигурация содержимого для ячеек таблицы
+                                            let dataSource = RxTableViewSectionedReloadDataSource<SectionOfDataRanges>(configureCell: {
+                                                [weak self] dataSource, table, index, item in
+                                                let cell = table.dequeueReusableCell(withIdentifier: "AttestationCellID", for: index) as! AttestationCell
+                                                cell.layoutIfNeeded()
+                                                cell.parentVC = self
+                                                cell.myIndex = index
+                                                cell.configureCell(data: item)
+                                                return cell
+                                            })
+                                            
+                                            // Связывание данных и таблицы
+                                            Observable.just(self!.sectionedArrayRangeDates)
+                                                .bind(to: self!.contentView.rx.items(dataSource: dataSource))
+                                                .disposed(by: self!.disposeBag)
+                                            
+                                            dialogLoading.dismiss(animated: true, completion: nil)
+        },
+                                         errorCallback: { [weak self] typeError in
+                                            self!.errorImage.isHidden = false
+                                            self!.errorText.isHidden = false
+                                            self!.contentView.isHidden = true
+                                            dialogLoading.dismiss(animated: true, completion: nil)
+            })
         
         self.contentView.rx
             .setDelegate(self)
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
     }
     
     

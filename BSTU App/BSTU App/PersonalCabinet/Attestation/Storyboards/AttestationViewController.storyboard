@@ -23,6 +23,16 @@
                                     <constraint firstAttribute="width" constant="23" id="gV5-ZQ-Iqt"/>
                                 </constraints>
                             </imageView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ошибка загрузки" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4lm-J3-fpO">
+                                <rect key="frame" x="99.5" y="353" width="176" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="33" id="gUY-7a-L7w"/>
+                                    <constraint firstAttribute="width" constant="176" id="rOD-EZ-XAp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Аттестация" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nub-yr-EAb">
                                 <rect key="frame" x="56" y="5" width="180" height="43"/>
                                 <constraints>
@@ -37,16 +47,27 @@
                                 <rect key="frame" x="0.0" y="48" width="375" height="619"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="errorLoading" translatesAutoresizingMaskIntoConstraints="NO" id="fyj-DE-job">
+                                <rect key="frame" x="109.5" y="217" width="156" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="156" id="DdE-iD-gbd"/>
+                                    <constraint firstAttribute="height" constant="128" id="aar-Sf-vhx"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="oRQ-tG-OSa" firstAttribute="top" secondItem="nub-yr-EAb" secondAttribute="bottom" id="Bb8-Hc-Ubm"/>
+                            <constraint firstItem="4lm-J3-fpO" firstAttribute="centerY" secondItem="ifg-rF-oRM" secondAttribute="centerY" constant="36" id="Bsu-YI-xg1"/>
                             <constraint firstItem="D5k-Yt-kTP" firstAttribute="top" secondItem="ajR-Xq-Tn7" secondAttribute="top" constant="16" id="CyH-um-MvM"/>
                             <constraint firstItem="oRQ-tG-OSa" firstAttribute="leading" secondItem="ajR-Xq-Tn7" secondAttribute="leading" id="HS3-hb-uaa"/>
                             <constraint firstItem="ajR-Xq-Tn7" firstAttribute="bottom" secondItem="oRQ-tG-OSa" secondAttribute="bottom" id="JEI-RP-VXa"/>
                             <constraint firstItem="nub-yr-EAb" firstAttribute="top" secondItem="ajR-Xq-Tn7" secondAttribute="top" constant="5" id="MVn-aR-iB6"/>
                             <constraint firstItem="ajR-Xq-Tn7" firstAttribute="trailing" secondItem="oRQ-tG-OSa" secondAttribute="trailing" id="MjF-NC-l6E"/>
+                            <constraint firstItem="fyj-DE-job" firstAttribute="centerY" secondItem="ifg-rF-oRM" secondAttribute="centerY" constant="-52.5" id="TTx-VU-PXT"/>
+                            <constraint firstItem="4lm-J3-fpO" firstAttribute="centerX" secondItem="ifg-rF-oRM" secondAttribute="centerX" id="bmB-my-x0O"/>
                             <constraint firstItem="nub-yr-EAb" firstAttribute="leading" secondItem="D5k-Yt-kTP" secondAttribute="trailing" constant="17" id="ioj-fi-zIE"/>
+                            <constraint firstItem="fyj-DE-job" firstAttribute="centerX" secondItem="ifg-rF-oRM" secondAttribute="centerX" id="phA-kx-Ghl"/>
                             <constraint firstItem="D5k-Yt-kTP" firstAttribute="leading" secondItem="ajR-Xq-Tn7" secondAttribute="leading" constant="16" id="tkN-lR-ffs"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ajR-Xq-Tn7"/>
@@ -54,6 +75,8 @@
                     <connections>
                         <outlet property="backButton" destination="D5k-Yt-kTP" id="lom-OW-TOi"/>
                         <outlet property="contentView" destination="oRQ-tG-OSa" id="Xjt-Dc-7p5"/>
+                        <outlet property="errorImage" destination="fyj-DE-job" id="JEF-vL-ui7"/>
+                        <outlet property="errorText" destination="4lm-J3-fpO" id="1EF-in-dAg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9aL-IZ-Xv7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -62,6 +85,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="errorLoading" width="768" height="768"/>
         <image name="leftArrow" width="100" height="100"/>
     </resources>
 </document>

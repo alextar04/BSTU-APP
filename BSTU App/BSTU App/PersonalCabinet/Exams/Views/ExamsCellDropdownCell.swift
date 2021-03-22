@@ -18,11 +18,11 @@ class ExamsCellDropdownCell: UITableViewCell{
     var installedGradientLayer: CAGradientLayer!
     
     
-    func configureCell(pairDisciplineMark: (String, TypeExam, Int)){
+    func configureCell(pairDisciplineMark: (String, TypeExam, String)){
         
         self.disciplineName.text = pairDisciplineMark.0
         self.disciplineType.text = pairDisciplineMark.1.rawValue
-        self.disciplineMark.text = String(pairDisciplineMark.2)
+        self.disciplineMark.text = pairDisciplineMark.2
         self.makeGradient()
     }
     

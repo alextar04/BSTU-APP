@@ -87,6 +87,7 @@ class AttestationCell: UITableViewCell, UITableViewDelegate, UITableViewDataSour
             self?.containerViewHeightConstraint.constant = CGFloat(calculatedTotalHeight)
             
             self?.parentVC.contentView.isUserInteractionEnabled = false
+            self?.tableMarks.reloadData()
             self!.parentVC.contentView.performBatchUpdates(nil, completion: { [weak self] _ in
                 self?.parentVC.contentView.isUserInteractionEnabled = true
                 
@@ -158,9 +159,11 @@ class AttestationCell: UITableViewCell, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: "AttestationCellDropdownCellID", for: indexPath) as! AttestationCellDropdownCell
         cell.layoutIfNeeded()
         cell.layoutMargins = UIEdgeInsets.zero
-        
-        let dataForCell = self.dataAttestation.first?.disciplines[indexPath.row].discipline
-        cell.configureCell(pairDisciplineMark: dataForCell!)
+    
+        if indexPath.row <= (self.dataAttestation.first?.disciplines.count)! - 1{
+            let dataForCell = self.dataAttestation.first?.disciplines[indexPath.row].discipline
+            cell.configureCell(pairDisciplineMark: dataForCell!)
+        }
         return cell
     }
     
