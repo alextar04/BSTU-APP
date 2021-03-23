@@ -64,6 +64,10 @@ class AttestationViewController: UIViewController, UITableViewDelegate{
         activityIndicator.bottomAnchor.constraint(equalTo: dialogLoading.view.bottomAnchor, constant: -20).isActive = true
         self.present(dialogLoading, animated: true)
         
+        self.contentView.rx
+            .setDelegate(self)
+            .disposed(by: self.disposeBag)
+        
         viewModel.getUserAttestationInfo(idUser: self.idUser,
                                          completion: { [weak self] attestationData in
             
@@ -99,10 +103,6 @@ class AttestationViewController: UIViewController, UITableViewDelegate{
                                             self!.contentView.isHidden = true
                                             dialogLoading.dismiss(animated: true, completion: nil)
             })
-        
-        self.contentView.rx
-            .setDelegate(self)
-            .disposed(by: self.disposeBag)
     }
     
     

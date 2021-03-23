@@ -17,6 +17,8 @@ import RxDataSources
 class GroupSheduleViewController: UIViewController{
     
     var groupName: String!
+    var dialogLoading: UIAlertController!
+    var dialogLoadingIsNeeded = true
     @IBOutlet weak var groupNameLabel: UILabel!
     @IBOutlet weak var backButton: UIImageView!
     @IBOutlet weak var currentDayOfWeek: UILabel!
@@ -70,13 +72,35 @@ class GroupSheduleViewController: UIViewController{
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        
         self.groupNameLabel.text = groupName
         setupBackButton()
         setSettingsCurrentDayOfWeek()
         setSettingsNumbersOfWeeks()
         setSettingsSheduleTable()
-        setSettingsWeekType()
         setSettingsExamViews()
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        if self.dialogLoadingIsNeeded{
+            self.dialogLoading = UIAlertController(title: "Загрузка",
+                                                  message: nil,
+                                                  preferredStyle: .alert)
+            let activityIndicator = UIActivityIndicatorView(style: .gray)
+            activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+            activityIndicator.isUserInteractionEnabled = false
+            activityIndicator.startAnimating()
+
+            self.dialogLoading.view.addSubview(activityIndicator)
+            self.dialogLoading.view.heightAnchor.constraint(equalToConstant: 95).isActive = true
+
+            activityIndicator.centerXAnchor.constraint(equalTo: self.dialogLoading.view.centerXAnchor, constant: 0).isActive = true
+            activityIndicator.bottomAnchor.constraint(equalTo: self.dialogLoading.view.bottomAnchor, constant: -20).isActive = true
+            self.present(self.dialogLoading, animated: true)
+        }
     }
     
     
@@ -386,10 +410,12 @@ class GroupSheduleViewController: UIViewController{
             }
         }
         
+        
         self.viewModel.getSheduleForGroup(groupName: self.groupName,
                                           isCorrespondenceGroup: isCorrespondenceGroup,
                                           completion: {
             // Расписание успешно загружно
+            self.setSettingsWeekType()
             self.currentSheduleContainer = self.viewModel.resultDaysCurrentWeek
             
             // Обработка очных групп
@@ -405,6 +431,10 @@ class GroupSheduleViewController: UIViewController{
                                                                            width: self.sheduleTable.frame.width,
                                                                            height: .zero),
                                                              typeCard: .lesson)
+                self.dialogLoadingIsNeeded = false
+                if self.dialogLoading != nil{
+                    self.dialogLoading.dismiss(animated: true, completion: nil)
+                }
             } else {
                 // Обработка заочных групп
                 self.correspondenceSheduleLabel.isHidden = false
@@ -419,6 +449,11 @@ class GroupSheduleViewController: UIViewController{
                                             
             self.sheduleTable.addSubview(self.currentPage)
             self.sheduleTable.autoresizesSubviews = false
+                                            
+            self.dialogLoadingIsNeeded = false
+            if self.dialogLoading != nil{
+                self.dialogLoading.dismiss(animated: true, completion: nil)
+            }
         }, errorClosure: {
             // Ошибка загрузки расписания
             let emptyView = Bundle.main.loadNibNamed("EmptySheduleView", owner: self, options: nil)?.first as? EmptySheduleView
@@ -438,6 +473,11 @@ class GroupSheduleViewController: UIViewController{
             self.dateStackView.isUserInteractionEnabled = false
             self.examMenuButton.isUserInteractionEnabled = false
             self.parityOfWeek.isUserInteractionEnabled = false
+            
+            self.dialogLoadingIsNeeded = false
+            if self.dialogLoading != nil{
+                self.dialogLoading.dismiss(animated: true, completion: nil)
+            }
         })
     }
     

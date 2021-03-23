@@ -34,10 +34,9 @@ class AttestationCellDropdownCell: UITableViewCell{
         gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
         
-        if self.installedGradientLayer != nil{
-            self.installedGradientLayer.removeFromSuperlayer()
+        if self.installedGradientLayer == nil{
+            self.installedGradientLayer = gradientLayer
+            self.disciplineView.layer.insertSublayer(self.installedGradientLayer, at: 0)
         }
-        self.installedGradientLayer = gradientLayer
-        self.disciplineView.layer.insertSublayer(self.installedGradientLayer, at: 0)
     }
 }

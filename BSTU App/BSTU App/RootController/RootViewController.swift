@@ -21,8 +21,8 @@ class RootViewController: UIViewController {
     var leftMenuController: MenuViewController!
     
     var cachedNavigationController: NavigationViewController!
-    
     let disposeBag = DisposeBag()
+    
     
     init() {
         self.leftMenuController = UIStoryboard(name: "MenuViewController", bundle: nil).instantiateViewController(withIdentifier: "MenuViewControllerID") as? MenuViewController

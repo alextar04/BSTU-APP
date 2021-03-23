@@ -16,6 +16,7 @@ class GroupSheduleViewModel{
     var resultDaysCurrentWeek: [[GroupSheduleModel]]!
     var resultDaysNextWeek: [[GroupSheduleModel]]!
     var resultExams = [GroupSheduleModel]()
+    var isCurrentWeekNumerator: Bool!
     
     // MARK: Получение расписания для группы
     // Входные параметры: id-группы
@@ -32,7 +33,7 @@ class GroupSheduleViewModel{
                 
                 let currentWeek = resultJson["current_week"]
                 let nextWeek = resultJson["next_week"]
-                let isCurrentWeekNumerator = currentWeek["now_denom"].int
+                (currentWeek["now_denom"].int == 1) ? (self.isCurrentWeekNumerator = false) : (self.isCurrentWeekNumerator = true)
                 
                 // Парсинг каждой неделе
                 for (index, week) in [currentWeek, nextWeek].enumerated(){
@@ -188,11 +189,8 @@ class GroupSheduleViewModel{
     
     // MARK: Получение информации о типе недели
     func getCurrentWeekType()->String{
-        let date = Date()
-        let calendar = Calendar.current
-        let weekNumber = calendar.component(.weekOfMonth, from: date)
         
-        if weekNumber == 1{
+        if self.isCurrentWeekNumerator{
             return "Числитель"
         }
         

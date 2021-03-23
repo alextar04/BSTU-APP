@@ -10,21 +10,21 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ExamsCellDropdownCellID" rowHeight="76" id="ODS-IE-zB9" customClass="ExamsCellDropdownCell" customModule="BSTU_App" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="76"/>
+            <rect key="frame" x="0.0" y="0.0" width="429" height="76"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ODS-IE-zB9" id="bmw-9W-egq">
-                <rect key="frame" x="0.0" y="0.0" width="414" height="76"/>
+                <rect key="frame" x="0.0" y="0.0" width="429" height="76"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название дисциплины" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4lT-Ca-EG0">
-                        <rect key="frame" x="20" y="12" width="228" height="53"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Информатика" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.25" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4lT-Ca-EG0">
+                        <rect key="frame" x="20" y="12" width="243" height="53"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Незач." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BTV-jY-I3b">
-                        <rect key="frame" x="333" y="12" width="61" height="53"/>
+                        <rect key="frame" x="348" y="12" width="61" height="53"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="61" id="nQb-sH-xyN"/>
@@ -34,7 +34,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Диф. зач." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ubJ-nQ-cIc">
-                        <rect key="frame" x="248" y="12" width="85" height="53"/>
+                        <rect key="frame" x="263" y="12" width="85" height="53"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="85" id="GVd-fz-itS"/>
                         </constraints>
@@ -64,7 +64,7 @@
                 <outlet property="disciplineType" destination="ubJ-nQ-cIc" id="jXP-aC-fNz"/>
                 <outlet property="disciplineView" destination="bmw-9W-egq" id="QHR-GX-mhv"/>
             </connections>
-            <point key="canvasLocation" x="189.85507246376812" y="141.29464285714286"/>
+            <point key="canvasLocation" x="199.27536231884059" y="141.29464285714286"/>
         </tableViewCell>
     </objects>
 </document>

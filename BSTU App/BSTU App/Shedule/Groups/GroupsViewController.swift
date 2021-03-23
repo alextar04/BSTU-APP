@@ -46,7 +46,6 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
         self.setupReloadButton()
         self.setupBackButton()
         
-        
         viewModel.getGroupsList(link: link, completion: { coursesGroups in
             
             self.statusLoadingLabel.isHidden = true

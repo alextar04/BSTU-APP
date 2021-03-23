@@ -100,12 +100,15 @@ class GroupSheduleCard: UIView{
         }
         
         self.photoTeacher.image = UIImage(named: "baseTeacher")
-        //self.photoTeacher.sheduleMakeRoundingImage()
     }
     
     
     // Получение сокращенной записи для идентификации преподавателя
     func getShortTeacherRecord(teacher: String)->String{
+        
+        if teacher == ""{
+            return teacher
+        }
         
         // Выделение инициалов преподавателя
         let teacherParts = teacher.split(separator: " ").map{

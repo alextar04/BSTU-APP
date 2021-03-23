@@ -173,6 +173,11 @@ class ExamsCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource{
         if indexPath.row <= (self.dataExam.first?.disciplines.count)! - 1{
             let dataForCell = self.dataExam.first?.disciplines[indexPath.row].discipline
             cell.configureCell(pairDisciplineMark: dataForCell!)
+
+            // Для IPhone SE установить меньший размер шрифта для названия предмета
+            if tableView.frame.width == 300{
+                cell.disciplineName.font = UIFont.systemFont(ofSize: 10.0)
+            }
         }
         return cell
     }
@@ -213,7 +218,6 @@ class ExamsCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource{
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        //print("Готовлю к переиспользованию: \(self.myIndex.section)")
         self.containerViewHeightConstraint.constant = 37
         self.myIndex = nil
         self.numberSemestr.setTitle("", for: .normal)
