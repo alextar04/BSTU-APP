@@ -13,6 +13,9 @@ class AttestationModel{
     var dataRange: String!
     var disciplines: [DisciplineAttestationModel]!
     
+    var myCellHeight: Int!
+    var isExpanded = false
+    
     init(dataRange: String, disciplines: [DisciplineAttestationModel]) {
         self.dataRange = dataRange
         self.disciplines = disciplines

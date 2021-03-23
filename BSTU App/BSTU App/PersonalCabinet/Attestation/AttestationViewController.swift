@@ -35,6 +35,8 @@ class AttestationViewController: UIViewController, UITableViewDelegate{
     @IBOutlet weak var errorImage: UIImageView!
     @IBOutlet weak var errorText: UILabel!
     
+    var selectedCellsParametrs = [SelectedCellParametrs]()
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupBackButton()
@@ -105,8 +107,10 @@ class AttestationViewController: UIViewController, UITableViewDelegate{
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if self.selectedCellIndex == indexPath {
-            return CGFloat(self.selectedCellHeight!)
+        for selectedCell in self.selectedCellsParametrs{
+            if selectedCell.selectedCellIndex == indexPath.section{
+                return CGFloat(selectedCell.selectedCellHeight)
+            }
         }
         return 37
     }

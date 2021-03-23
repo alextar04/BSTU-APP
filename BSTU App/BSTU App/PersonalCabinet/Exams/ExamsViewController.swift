@@ -32,11 +32,6 @@ class ExamsViewController: UIViewController, UITableViewDelegate{
     @IBOutlet weak var errorImage: UIImageView!
     @IBOutlet weak var errorText: UILabel!
     
-    /*
-    weak var selectedCell: ExamsCell!
-    var selectedCellIndex: IndexPath!
-    var selectedCellHeight: Int!
-    */
     var selectedCellsParametrs = [SelectedCellParametrs]()
     
     override func viewDidAppear(_ animated: Bool) {

@@ -42,7 +42,7 @@ class AttestationCell: UITableViewCell, UITableViewDelegate, UITableViewDataSour
         self.headerContainerView.makeRounding()
         
         self.setupData(data: data)
-        self.setupInOutForTable(countData: data.disciplines.count)
+        self.setupInOutForTable(countData: data.disciplines.count, data: data)
         self.containerView.makeRounding()
         
         self.tableMarks.makeRoundingSpecificCorners(arrayCorners: [.layerMinXMaxYCorner, .layerMaxXMaxYCorner])
@@ -54,6 +54,7 @@ class AttestationCell: UITableViewCell, UITableViewDelegate, UITableViewDataSour
         self.dataAttestation = [data]
         self.dateRange.setTitle(data.dataRange, for: .normal)
         self.tableMarks.register(UINib(nibName: "AttestationCellDropdownCell", bundle: nil), forCellReuseIdentifier: "AttestationCellDropdownCellID")
+        self.dropdownButton.image = UIImage(named: "dropdown")
         
         self.tableMarks.layoutMargins = UIEdgeInsets.zero
         self.tableMarks.separatorInset = UIEdgeInsets.zero
@@ -65,33 +66,48 @@ class AttestationCell: UITableViewCell, UITableViewDelegate, UITableViewDataSour
     
     
     // MARK: Настройка параметров выпадающего списка с оценками
-    func setupInOutForTable(countData: Int){
-        self.containerViewHeightConstraint.constant = 37
+    func setupInOutForTable(countData: Int, data: AttestationModel){
+        
+        if data.isExpanded{
+            self.tableMarks.isHidden = false
+            self.dropdownButton.image = UIImage(named: "dropup")
+            
+            let calculatedTotalHeight = 37 + 44 * countData
+            data.myCellHeight = calculatedTotalHeight
+            self.tableMarksHeightConstraiant.constant = CGFloat(calculatedTotalHeight)
+            self.containerViewHeightConstraint.constant = CGFloat(calculatedTotalHeight)
+            self.tableMarks.reloadData()
+            
+        } else {
+            self.containerViewHeightConstraint.constant = 37
+        }
         
         let clickedClosure = { [weak self] in
             
             self!.dropdownButton.image = UIImage(named: "dropup")
-            self!.isExpanded.toggle()
-            
-            if self?.parentVC.selectedCell != nil && self?.parentVC.selectedCell != self{
-                self?.parentVC.selectedCell.dropdownButton.image = UIImage(named: "dropdown")
-            }
-            
-            weak var preventSelectedCellLink = self?.parentVC.selectedCell
-            self!.parentVC.selectedCellIndex = self!.parentVC.selectedCellIndex == self!.myIndex ? nil : self!.myIndex
-            self?.parentVC.selectedCell = self
+            data.isExpanded.toggle()
             
             let calculatedTotalHeight = 37 + 44 * countData
-            self?.parentVC.selectedCellHeight = calculatedTotalHeight
+            data.myCellHeight = calculatedTotalHeight
             self?.tableMarksHeightConstraiant.constant = CGFloat(calculatedTotalHeight)
             self?.containerViewHeightConstraint.constant = CGFloat(calculatedTotalHeight)
+            
+            if data.isExpanded{
+                self?.parentVC.selectedCellsParametrs.append(SelectedCellParametrs(headerName: data.dataRange,
+                                                                                   selectedCellIndex: (self?.myIndex.section)!,
+                                                                                   selecredCellHeight: calculatedTotalHeight))
+            } else {
+                self?.parentVC.selectedCellsParametrs = (self?.parentVC.selectedCellsParametrs.filter{ [weak self] selectedCellParametr in
+                    return selectedCellParametr.headerName != self!.dateRange.titleLabel?.text!
+                })!
+            }
             
             self?.parentVC.contentView.isUserInteractionEnabled = false
             self?.tableMarks.reloadData()
             self!.parentVC.contentView.performBatchUpdates(nil, completion: { [weak self] _ in
                 self?.parentVC.contentView.isUserInteractionEnabled = true
                 
-                if self!.isExpanded{
+                if data.isExpanded{
                     self?.tableMarks.isHidden = false
                     self!.dropdownButton.image = UIImage(named: "dropup")
                 } else {
@@ -99,15 +115,10 @@ class AttestationCell: UITableViewCell, UITableViewDelegate, UITableViewDataSour
                     self!.dropdownButton.image = UIImage(named: "dropdown")
                 }
                 
-                if preventSelectedCellLink != nil && preventSelectedCellLink != self{
-                    preventSelectedCellLink!.tableMarks.isHidden = true
-                    preventSelectedCellLink?.isExpanded = false
-                }
             })
         }
         
         self.disposeBag = DisposeBag()
-        
         self.dateRange.rx
             .tap
             .subscribe(onNext: { [weak self] _ in
@@ -198,6 +209,15 @@ class AttestationCell: UITableViewCell, UITableViewDelegate, UITableViewDataSour
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.containerViewHeightConstraint.constant = 37
+        self.myIndex = nil
+        self.dateRange.setTitle("", for: .normal)
+        self.disposeBag = DisposeBag()
     }
     
 }

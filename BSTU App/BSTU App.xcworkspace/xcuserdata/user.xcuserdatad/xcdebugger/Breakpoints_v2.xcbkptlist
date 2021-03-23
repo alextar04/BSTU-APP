@@ -5381,86 +5381,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "AB7E6BF1-9486-4C76-BF1C-1398FC1A3F03"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BSTU App/PersonalCabinet/Attestation/Views/AttestationCell.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "setupInOutForTable(countData:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7A51500B-87F7-4A5A-B5C0-6D3F0AB3C22A"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BSTU App/PersonalCabinet/Attestation/Views/AttestationCell.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "setupInOutForTable(countData:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C22C4F15-1D77-414C-9510-9A4BB0674A94"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BSTU App/PersonalCabinet/Attestation/Views/AttestationCell.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
-            landmarkName = "setupInOutForTable(countData:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "BCED167D-0617-400F-B210-41162F0AAD50"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BSTU App/PersonalCabinet/Attestation/Views/AttestationCell.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
-            landmarkName = "setupInOutForTable(countData:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B31C2462-D5FE-423F-A5CE-FFE927612D2E"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BSTU App/PersonalCabinet/Attestation/Views/AttestationCell.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
-            landmarkName = "setupInOutForTable(countData:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "B70A1930-A398-4C5F-93A5-0731B690F22C"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -5468,25 +5388,9 @@
             filePath = "BSTU App/PersonalCabinet/Attestation/Views/AttestationCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
             landmarkName = "tableView(_:viewForHeaderInSection:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0B5690F7-A7FC-4833-90DC-5E0306E3E834"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BSTU App/PersonalCabinet/Attestation/Views/AttestationCell.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
-            landmarkName = "setupInOutForTable(countData:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5644,8 +5548,8 @@
             filePath = "BSTU App/PersonalCabinet/Exams/ExamsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
             landmarkName = "tableView(_:heightForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -5660,8 +5564,8 @@
             filePath = "BSTU App/PersonalCabinet/Exams/ExamsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
             landmarkName = "tableView(_:viewForHeaderInSection:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -5676,8 +5580,8 @@
             filePath = "BSTU App/PersonalCabinet/Exams/ExamsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "tableView(_:heightForHeaderInSection:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -6059,8 +5963,8 @@
             filePath = "BSTU App/PersonalCabinet/Attestation/AttestationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
             landmarkName = "tableView(_:heightForHeaderInSection:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -6075,8 +5979,8 @@
             filePath = "BSTU App/PersonalCabinet/Attestation/AttestationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
             landmarkName = "setupContent()"
             landmarkType = "7">
          </BreakpointContent>
@@ -6091,58 +5995,10 @@
             filePath = "BSTU App/PersonalCabinet/Attestation/AttestationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "setupContent()"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "5AB5502C-2E1D-40F0-A9FC-66957E2731FC"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BSTU App/PersonalCabinet/Attestation/Views/AttestationCell.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
-            landmarkName = "setupInOutForTable(countData:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "5AB5502C-2E1D-40F0-A9FC-66957E2731FC - 91e52e1a0a455f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (()) -&gt; () in BSTU_App.AttestationCell.setupInOutForTable(countData: Swift.Int) -&gt; ()"
-                  moduleName = "BSTU App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/user/Documents/GitHub/BSTU-APP/BSTU%20App/BSTU%20App/PersonalCabinet/Attestation/Views/AttestationCell.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "113"
-                  endingLineNumber = "113"
-                  offsetFromSymbolStart = "139">
-               </Location>
-               <Location
-                  uuid = "5AB5502C-2E1D-40F0-A9FC-66957E2731FC - f948c64a726b58f7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Bool) -&gt; () in closure #2 (()) -&gt; () in BSTU_App.AttestationCell.setupInOutForTable(countData: Swift.Int) -&gt; ()"
-                  moduleName = "BSTU App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/user/Documents/GitHub/BSTU-APP/BSTU%20App/BSTU%20App/PersonalCabinet/Attestation/Views/AttestationCell.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "113"
-                  endingLineNumber = "113"
-                  offsetFromSymbolStart = "85">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6155,58 +6011,10 @@
             filePath = "BSTU App/PersonalCabinet/Attestation/Views/AttestationCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F320F30C-D905-410A-A61D-F0D7FC919740"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BSTU App/PersonalCabinet/Attestation/Views/AttestationCell.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
-            landmarkName = "setupInOutForTable(countData:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "F320F30C-D905-410A-A61D-F0D7FC919740 - cffe25431987d63"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in BSTU_App.AttestationCell.setupInOutForTable(countData: Swift.Int) -&gt; ()"
-                  moduleName = "BSTU App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/user/Documents/GitHub/BSTU-APP/BSTU%20App/BSTU%20App/PersonalCabinet/Attestation/Views/AttestationCell.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "90"
-                  endingLineNumber = "90"
-                  offsetFromSymbolStart = "9152">
-               </Location>
-               <Location
-                  uuid = "F320F30C-D905-410A-A61D-F0D7FC919740 - 115b73d739eaf0dd"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Bool) -&gt; () in closure #1 () -&gt; () in BSTU_App.AttestationCell.setupInOutForTable(countData: Swift.Int) -&gt; ()"
-                  moduleName = "BSTU App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/user/Documents/GitHub/BSTU-APP/BSTU%20App/BSTU%20App/PersonalCabinet/Attestation/Views/AttestationCell.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "90"
-                  endingLineNumber = "90"
-                  offsetFromSymbolStart = "105">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6267,8 +6075,8 @@
             filePath = "BSTU App/PersonalCabinet/Exams/ExamsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "setupContent()"
             landmarkType = "7">
          </BreakpointContent>
@@ -6283,8 +6091,8 @@
             filePath = "BSTU App/PersonalCabinet/Exams/ExamsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
             landmarkName = "tableView(_:heightForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -6299,8 +6107,8 @@
             filePath = "BSTU App/PersonalCabinet/Exams/ExamsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
             landmarkName = "tableView(_:heightForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -6315,8 +6123,8 @@
             filePath = "BSTU App/PersonalCabinet/Exams/ExamsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
             landmarkName = "setupContent()"
             landmarkType = "7">
          </BreakpointContent>
@@ -6331,8 +6139,8 @@
             filePath = "BSTU App/PersonalCabinet/Exams/ExamsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "setupContent()"
             landmarkType = "7">
             <Locations>
@@ -6379,8 +6187,8 @@
             filePath = "BSTU App/PersonalCabinet/Exams/ExamsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
             landmarkName = "setupContent()"
             landmarkType = "7">
          </BreakpointContent>
@@ -6491,8 +6299,8 @@
             filePath = "BSTU App/PersonalCabinet/Exams/ExamsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "setupContent()"
             landmarkType = "7">
          </BreakpointContent>
@@ -6507,8 +6315,8 @@
             filePath = "BSTU App/PersonalCabinet/Exams/ExamsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
             landmarkName = "tableView(_:heightForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -6523,8 +6331,8 @@
             filePath = "BSTU App/PersonalCabinet/Exams/ExamsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
             landmarkName = "setupContent()"
             landmarkType = "7">
          </BreakpointContent>
@@ -6558,6 +6366,38 @@
             startingLineNumber = "216"
             endingLineNumber = "216"
             landmarkName = "prepareForReuse()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "959831D0-BD54-4302-B6E9-EE2372FDFB30"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BSTU App/PersonalCabinet/Attestation/Views/AttestationCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
+            landmarkName = "prepareForReuse()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E6AF56AE-D99E-4DDF-9B58-909EFD707FD2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BSTU App/PersonalCabinet/Attestation/Views/AttestationCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "setupInOutForTable(countData:data:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

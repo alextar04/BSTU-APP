@@ -218,14 +218,6 @@ class ExamsCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource{
         self.myIndex = nil
         self.numberSemestr.setTitle("", for: .normal)
         self.disposeBag = DisposeBag()
-        
-        /*
-        print("На пареиспользовании: ")
-        for q in self.parentVC.selectedCellsParametrs{
-            print(q.selectedCellIndex)
-        }
-        print("@@")
-        */
     }
 }
 
