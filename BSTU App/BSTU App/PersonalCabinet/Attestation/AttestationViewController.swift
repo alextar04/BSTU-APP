@@ -32,17 +32,23 @@ class AttestationViewController: UIViewController, UITableViewDelegate{
     let viewModel = AttestationViewModel()
     let disposeBag = DisposeBag()
     
+    var viewControllerWasPainted = false
     @IBOutlet weak var errorImage: UIImageView!
     @IBOutlet weak var errorText: UILabel!
     
     var selectedCellsParametrs = [SelectedCellParametrs]()
     
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        setupBackButton()
-        setupContent()
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        
+        if !viewControllerWasPainted{
+            setupBackButton()
+            setupContent()
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+            self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+            viewControllerWasPainted = true
+        }
     }
     
     

@@ -13,8 +13,9 @@ import RxDataSources
 import UIKit
 
 
-class ListTeachersViewController: UIViewController, UITableViewDelegate{
+class ListTeachersViewController: UIViewController, UITableViewDelegate, UIGestureRecognizerDelegate{
     
+    var isMenuOpen = false
     @IBOutlet weak var statusLoadingLabel: UILabel!
     @IBOutlet weak var reloadButton: UIButton!
     @IBOutlet weak var loadingWheel: UIActivityIndicatorView!
@@ -35,6 +36,10 @@ class ListTeachersViewController: UIViewController, UITableViewDelegate{
         var items: [Teacher]
     }
 
+    lazy var listDisablers: [UIView] = [self.menuButton,
+                                        self.tableTeachersView
+    ]
+    
         
     override func viewDidLoad() {
         self.tableTeachersView.isHidden = true
@@ -51,11 +56,7 @@ class ListTeachersViewController: UIViewController, UITableViewDelegate{
             self!.loadingWheel.isHidden = true
             self!.tableTeachersView.isHidden = false
                 
-                /*
-                let sortedCoursesGroups = coursesGroups.sorted { course1, course2 in
-                    return course1.numberCourse < course2.numberCourse
-                }*/
-            self!.setupTable(teachers)//sortedCoursesGroups)
+            self!.setupTable(teachers)
             self!.connectTableAndSearchBar()
             }, errorClosure: { [weak self] in
                 self!.statusLoadingLabel.text = "Ошибка загрузки данных"
@@ -77,8 +78,11 @@ class ListTeachersViewController: UIViewController, UITableViewDelegate{
                 .disposed(by: self.disposeBag)
             
             self.groupsSectionalData = BehaviorRelay(value: [SectionOfTeachers]())
-            for teacher in listTeachers{
-                self.data.append(SectionOfTeachers(header: "\(teacher.link)", items: [teacher]))
+            let groupTeachersByNameFirstLetter = Dictionary(grouping: listTeachers){ teacher in
+                return teacher.name.first
+            }
+            for group in groupTeachersByNameFirstLetter{
+                self.data.append(SectionOfTeachers(header: "\(group.key!)", items: group.value))
             }
             
             // Конфигурация содержимого для ячеек таблицы
@@ -125,10 +129,6 @@ class ListTeachersViewController: UIViewController, UITableViewDelegate{
                         self!.loadingWheel.isHidden = true
                         self!.tableTeachersView.isHidden = false
                         
-                        /*
-                        let sortedCoursesGroups = coursesGroups.sorted { course1, course2 in
-                            return course1.numberCourse < course2.numberCourse
-                        }*/
                         self!.setupTable(teachers)
                         self!.connectTableAndSearchBar()
                         self!.searchGroupBar.isUserInteractionEnabled = true
@@ -197,16 +197,21 @@ class ListTeachersViewController: UIViewController, UITableViewDelegate{
             view.endEditing(true)
         }
     
-    
+        
         // MARK: Установка кнопки открытия бокового меню
         func setupMenuButton(){
+            
+            let closeMenuTap = UITapGestureRecognizer(target: self, action: #selector(self.closeMenu(_:)))
+            self.view.addGestureRecognizer(closeMenuTap)
+            closeMenuTap.delegate = self
             
             self.menuButton.rx
                 .tapGesture()
                 .when(.recognized)
                 .subscribe(onNext: { [weak self] _ in
-                    let userInfo: [String: [UIView]] = ["listDisablers": [self!.tableTeachersView]]
+                    let userInfo: [String: [UIView]] = ["listDisablers": self!.listDisablers]
                     NotificationCenter.default.post(name: Notification.Name("SwitchLeftMenu"), object: nil, userInfo: userInfo)
+                    self?.isMenuOpen.toggle()
                 }).disposed(by: disposeBag)
             
             let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
@@ -223,11 +228,36 @@ class ListTeachersViewController: UIViewController, UITableViewDelegate{
             
             switch sender.direction {
             case .left:
-                AppDelegate.appDelegate.rootViewController.currentViewMoving(recognizer: sender, listDisablers: [tableTeachersView])
+                AppDelegate.appDelegate.rootViewController.currentViewMoving(recognizer: sender,
+                                                                             listDisablers: self.listDisablers)
+                self.isMenuOpen = false
             case .right:
-                AppDelegate.appDelegate.rootViewController.currentViewMoving(recognizer: sender, listDisablers: [tableTeachersView])
+                AppDelegate.appDelegate.rootViewController.currentViewMoving(recognizer: sender,
+                                                                             listDisablers: self.listDisablers)
+                self.isMenuOpen = true
             default:
                 return
+            }
+        }
+        
+    
+        // MARK: Отмена нажатия на экран при закрытом меню
+        func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+            if self.isMenuOpen {
+                return true
+            }
+            return false
+        }
+        
+    
+        // MARK: Закрытие меню
+        @objc func closeMenu(_ sender: UITapGestureRecognizer){
+            self.view.endEditing(true)
+            
+            if self.isMenuOpen{
+                let userInfo: [String: [UIView]] = ["listDisablers": self.listDisablers]
+                NotificationCenter.default.post(name: Notification.Name("SwitchLeftMenu"), object: nil, userInfo: userInfo)
+                self.isMenuOpen.toggle()
             }
         }
     

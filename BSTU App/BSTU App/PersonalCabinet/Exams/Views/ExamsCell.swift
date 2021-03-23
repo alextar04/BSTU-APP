@@ -167,7 +167,6 @@ class ExamsCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ExamsCellDropdownCellID", for: indexPath) as! ExamsCellDropdownCell
-        cell.layoutIfNeeded()
         cell.layoutMargins = UIEdgeInsets.zero
         
         if indexPath.row <= (self.dataExam.first?.disciplines.count)! - 1{
