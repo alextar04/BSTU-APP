@@ -58,7 +58,7 @@ class ListTeachersViewController: UIViewController, UITableViewDelegate, UIGestu
                 
             self!.setupTable(teachers)
             self!.connectTableAndSearchBar()
-            }, errorClosure: { [weak self] in
+            }, errorClosure: { [weak self] _ in
                 self!.statusLoadingLabel.text = "Ошибка загрузки данных"
                 self!.loadingWheel.isHidden = true
                 self!.reloadButton.isHidden = false
@@ -108,6 +108,7 @@ class ListTeachersViewController: UIViewController, UITableViewDelegate, UIGestu
                     self.navigationController?.pushViewController(groupsSheduleController, animated: true)
                     */
                     print("Выбран: \(selectedItem.name!)")
+                    print(selectedItem.link)
                     self!.searchGroupBar.endEditing(true)
                  }).disposed(by: disposeBag)
          }
@@ -132,7 +133,7 @@ class ListTeachersViewController: UIViewController, UITableViewDelegate, UIGestu
                         self!.setupTable(teachers)
                         self!.connectTableAndSearchBar()
                         self!.searchGroupBar.isUserInteractionEnabled = true
-                    }, errorClosure: {
+                    }, errorClosure: { _ in 
                         self!.statusLoadingLabel.text = "Ошибка загрузки данных"
                         self!.loadingWheel.isHidden = true
                         self!.reloadButton.isHidden = false

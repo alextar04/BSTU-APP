@@ -349,10 +349,10 @@
 			isa = PBXGroup;
 			children = (
 				CE04A3B525EF9B9600BE073D /* Storyboards */,
-				CE04A3B725EF9B9600BE073D /* InstitutionsViewController.swift */,
-				CE04A3B825EF9B9600BE073D /* InstitutionModel.swift */,
 				CE04A3B925EF9B9600BE073D /* images */,
 				CE04A3BA25EF9B9600BE073D /* Views */,
+				CE04A3B725EF9B9600BE073D /* InstitutionsViewController.swift */,
+				CE04A3B825EF9B9600BE073D /* InstitutionModel.swift */,
 				CE04A3BC25EF9B9600BE073D /* InstitutionsViewModel.swift */,
 			);
 			path = Institutions;
