@@ -122,7 +122,7 @@ class RootViewController: UIViewController {
                 self.currentNavigationController!.setNavigationBarHidden(true, animated: false)
                 
             case .teachers:
-                self.currentController = UIStoryboard(name: "ListTeachers", bundle: nil).instantiateViewController(withIdentifier: "ListTeachersID") as! ListTeachersViewController
+                self.currentController = UIStoryboard(name: "ListTeachersFirstLettersViewController", bundle: nil).instantiateViewController(withIdentifier: "ListTeachersFirstLettersViewControllerID") as! ListTeachersFirstLettersViewController
                 self.currentNavigationController = UINavigationController(rootViewController: self.currentController!)
                 
             case .cabinet:

@@ -13,20 +13,24 @@ import RxDataSources
 import UIKit
 
 
-class ListTeachersViewController: UIViewController, UITableViewDelegate, UIGestureRecognizerDelegate{
+class ListTeachersViewController: UIViewController, UITableViewDelegate{
     
     var isMenuOpen = false
+    var letter: String!
+    @IBOutlet weak var backButton: UIImageView!
+    @IBOutlet weak var firstLetterLabel: UILabel!
+    
     @IBOutlet weak var statusLoadingLabel: UILabel!
+    @IBOutlet weak var horizotalyStatusLoadingLabelConstraint: NSLayoutConstraint!
     @IBOutlet weak var reloadButton: UIButton!
     @IBOutlet weak var loadingWheel: UIActivityIndicatorView!
-        
-    @IBOutlet weak var menuButton: UIImageView!
+    
+    @IBOutlet weak var errorLoadingImage: UIImageView!
     @IBOutlet weak var tableTeachersView: UITableView!
     var searchGroupBar: UISearchBar!
     let viewModel = ListTeachersViewModel()
     let disposeBag = DisposeBag()
     var isShowAllTeachers = true
-         
         
     // Вспомогательная структура для отображения данных в виде секции
     var data = [SectionOfTeachers]()
@@ -35,41 +39,50 @@ class ListTeachersViewController: UIViewController, UITableViewDelegate, UIGestu
         var header: String
         var items: [Teacher]
     }
-
-    lazy var listDisablers: [UIView] = [self.menuButton,
-                                        self.tableTeachersView
-    ]
     
         
     override func viewDidLoad() {
+        
+        self.firstLetterLabel.text = letter
         self.tableTeachersView.isHidden = true
         self.reloadButton.isHidden = true
+        self.errorLoadingImage.isHidden = true
         self.setupSearchBar()
         self.setupReloadButton()
-        self.setupMenuButton()
+        self.setupBackButton()
         
         self.tableTeachersView.register(UINib(nibName: "ListTeachersTableCell", bundle: nil), forCellReuseIdentifier: "ListTeachersTableCellID")
             
-        viewModel.getTeachersList(completion: { [weak self] teachers in
-                
-            self!.statusLoadingLabel.isHidden = true
-            self!.loadingWheel.isHidden = true
-            self!.tableTeachersView.isHidden = false
-                
-            self!.setupTable(teachers)
-            self!.connectTableAndSearchBar()
+        let intedFirstLetter = Unicode.Scalar(letter)!.value
+        self.viewModel.getTeachersListByFirstLetter(firstLetter: intedFirstLetter,
+                                                    completion: { [weak self] teachers in
+                                                        
+                                                        if teachers.count != 0{
+                                                            self!.statusLoadingLabel.isHidden = true
+                                                            self!.loadingWheel.isHidden = true
+                                                            self!.tableTeachersView.isHidden = false
+                                                            
+                                                            self!.setupTable(teachers)
+                                                            self!.connectTableAndSearchBar()
+                                                        } else {
+                                                            self!.statusLoadingLabel.text = "Преподаватели не найдены"
+                                                            self!.horizotalyStatusLoadingLabelConstraint.constant = 40
+                                                            self!.errorLoadingImage.isHidden = false
+                                                            self!.loadingWheel.isHidden = true
+                                                            self!.reloadButton.isHidden = true
+                                                        }
             }, errorClosure: { [weak self] _ in
                 self!.statusLoadingLabel.text = "Ошибка загрузки данных"
                 self!.loadingWheel.isHidden = true
                 self!.reloadButton.isHidden = false
-            })
+        })
             
             self.navigationController?.setNavigationBarHidden(true, animated: true)
             self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
         }
         
     
-         // MARK: Установка таблицы с названиями групп
+        // MARK: Установка таблицы с названиями групп
         func setupTable(_ listTeachers: [Teacher]){
             
             // Установка делегата для установки кастомной шапки секции
@@ -108,7 +121,6 @@ class ListTeachersViewController: UIViewController, UITableViewDelegate, UIGestu
                     self.navigationController?.pushViewController(groupsSheduleController, animated: true)
                     */
                     print("Выбран: \(selectedItem.name!)")
-                    print(selectedItem.link)
                     self!.searchGroupBar.endEditing(true)
                  }).disposed(by: disposeBag)
          }
@@ -124,15 +136,25 @@ class ListTeachersViewController: UIViewController, UITableViewDelegate, UIGestu
                     self!.loadingWheel.isHidden = false
                     self!.reloadButton.isHidden = true
                     
-                    self!.viewModel.getTeachersList(completion: { teachers in
+                    let intedFirstLetter = Unicode.Scalar(self!.letter)!.value
+                    self!.viewModel.getTeachersListByFirstLetter(firstLetter: intedFirstLetter,
+                        completion: { teachers in
                         
-                        self!.statusLoadingLabel.isHidden = true
-                        self!.loadingWheel.isHidden = true
-                        self!.tableTeachersView.isHidden = false
-                        
-                        self!.setupTable(teachers)
-                        self!.connectTableAndSearchBar()
-                        self!.searchGroupBar.isUserInteractionEnabled = true
+                            if teachers.count != 0{
+                                self!.statusLoadingLabel.isHidden = true
+                                self!.loadingWheel.isHidden = true
+                                self!.tableTeachersView.isHidden = false
+                                
+                                self!.setupTable(teachers)
+                                self!.connectTableAndSearchBar()
+                            } else {
+                                self!.statusLoadingLabel.text = "Преподаватели не найдены"
+                                self!.horizotalyStatusLoadingLabelConstraint.constant = 40
+                                self!.errorLoadingImage.isHidden = false
+                                self!.loadingWheel.isHidden = true
+                                self!.reloadButton.isHidden = true
+                            }
+                            
                     }, errorClosure: { _ in 
                         self!.statusLoadingLabel.text = "Ошибка загрузки данных"
                         self!.loadingWheel.isHidden = true
@@ -147,7 +169,7 @@ class ListTeachersViewController: UIViewController, UITableViewDelegate, UIGestu
             let label = UILabel()
             label.backgroundColor = .white
             label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
-            (self.isShowAllTeachers) ? (label.text = " \(self.data[section].header)") : (label.text = "Результаты")
+            label.text = "Результаты"
             return label
         }
         
@@ -198,68 +220,16 @@ class ListTeachersViewController: UIViewController, UITableViewDelegate, UIGestu
             view.endEditing(true)
         }
     
-        
-        // MARK: Установка кнопки открытия бокового меню
-        func setupMenuButton(){
+    
+        // MARK: Установка кнопки перехода к предыдущему окну
+        func setupBackButton(){
             
-            let closeMenuTap = UITapGestureRecognizer(target: self, action: #selector(self.closeMenu(_:)))
-            self.view.addGestureRecognizer(closeMenuTap)
-            closeMenuTap.delegate = self
-            
-            self.menuButton.rx
+            self.backButton.rx
                 .tapGesture()
                 .when(.recognized)
                 .subscribe(onNext: { [weak self] _ in
-                    let userInfo: [String: [UIView]] = ["listDisablers": self!.listDisablers]
-                    NotificationCenter.default.post(name: Notification.Name("SwitchLeftMenu"), object: nil, userInfo: userInfo)
-                    self?.isMenuOpen.toggle()
+                    self?.navigationController?.popViewController(animated: true)
                 }).disposed(by: disposeBag)
-            
-            let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
-            let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
-            leftSwipe.direction = .left
-            rightSwipe.direction = .right
-            self.view.addGestureRecognizer(leftSwipe)
-            self.view.addGestureRecognizer(rightSwipe)
-        }
-        
-        
-        // MARK: Обработка свайпов экрана
-        @objc func handleSwipes(_ sender: UISwipeGestureRecognizer){
-            
-            switch sender.direction {
-            case .left:
-                AppDelegate.appDelegate.rootViewController.currentViewMoving(recognizer: sender,
-                                                                             listDisablers: self.listDisablers)
-                self.isMenuOpen = false
-            case .right:
-                AppDelegate.appDelegate.rootViewController.currentViewMoving(recognizer: sender,
-                                                                             listDisablers: self.listDisablers)
-                self.isMenuOpen = true
-            default:
-                return
-            }
-        }
-        
-    
-        // MARK: Отмена нажатия на экран при закрытом меню
-        func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-            if self.isMenuOpen {
-                return true
-            }
-            return false
-        }
-        
-    
-        // MARK: Закрытие меню
-        @objc func closeMenu(_ sender: UITapGestureRecognizer){
-            self.view.endEditing(true)
-            
-            if self.isMenuOpen{
-                let userInfo: [String: [UIView]] = ["listDisablers": self.listDisablers]
-                NotificationCenter.default.post(name: Notification.Name("SwitchLeftMenu"), object: nil, userInfo: userInfo)
-                self.isMenuOpen.toggle()
-            }
         }
     
         deinit {

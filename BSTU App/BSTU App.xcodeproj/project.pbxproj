@@ -52,6 +52,9 @@
 		CE04A3FF25EF9B9700BE073D /* EmptySheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A3DE25EF9B9700BE073D /* EmptySheduleView.swift */; };
 		CE04A40025EF9B9700BE073D /* TypeWeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A3DF25EF9B9700BE073D /* TypeWeekCell.swift */; };
 		CE04A40125EF9B9700BE073D /* GroupSheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A3E025EF9B9700BE073D /* GroupSheduleViewModel.swift */; };
+		CE04EF90260B575600D59DC3 /* ListTeachersFirstLettersViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE04EF8F260B575600D59DC3 /* ListTeachersFirstLettersViewController.storyboard */; };
+		CE04EF92260B59C400D59DC3 /* ListTeachersFirstLettersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04EF91260B59C400D59DC3 /* ListTeachersFirstLettersViewController.swift */; };
+		CE04EF96260B5A0400D59DC3 /* TeacherFirstLetterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04EF95260B5A0400D59DC3 /* TeacherFirstLetterCell.swift */; };
 		CE0E7C1C26080AC400705059 /* AttestationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0E7C1B26080AC400705059 /* AttestationViewModel.swift */; };
 		CE16978625C064F10040AE95 /* LabelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE16978525C064F10040AE95 /* LabelExtensions.swift */; };
 		CE16978825C151710040AE95 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE16978725C151710040AE95 /* ColorExtensions.swift */; };
@@ -128,6 +131,8 @@
 		CEE5B68225D674CB0023D640 /* CorpMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5B68125D674CB0023D640 /* CorpMapper.swift */; };
 		CEE5B68625D67AEC0023D640 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5B68525D67AEC0023D640 /* Database.swift */; };
 		CEE9D49725FFA74700D20C1A /* PersonalCabinetMainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9D49625FFA74600D20C1A /* PersonalCabinetMainPageViewController.swift */; };
+		CEEF74CC260B613600199173 /* ListTeachersFirstLettersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF74CB260B613600199173 /* ListTeachersFirstLettersViewModel.swift */; };
+		CEEF74CF260B6EC000199173 /* ListTeachersFirstLettersViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF74CE260B6EC000199173 /* ListTeachersFirstLettersViewExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -180,6 +185,9 @@
 		CE04A3DE25EF9B9700BE073D /* EmptySheduleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptySheduleView.swift; sourceTree = "<group>"; };
 		CE04A3DF25EF9B9700BE073D /* TypeWeekCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeWeekCell.swift; sourceTree = "<group>"; };
 		CE04A3E025EF9B9700BE073D /* GroupSheduleViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupSheduleViewModel.swift; sourceTree = "<group>"; };
+		CE04EF8F260B575600D59DC3 /* ListTeachersFirstLettersViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListTeachersFirstLettersViewController.storyboard; sourceTree = "<group>"; };
+		CE04EF91260B59C400D59DC3 /* ListTeachersFirstLettersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTeachersFirstLettersViewController.swift; sourceTree = "<group>"; };
+		CE04EF95260B5A0400D59DC3 /* TeacherFirstLetterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherFirstLetterCell.swift; sourceTree = "<group>"; };
 		CE0E7C1B26080AC400705059 /* AttestationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationViewModel.swift; sourceTree = "<group>"; };
 		CE16978525C064F10040AE95 /* LabelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelExtensions.swift; sourceTree = "<group>"; };
 		CE16978725C151710040AE95 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
@@ -256,6 +264,8 @@
 		CEE5B68125D674CB0023D640 /* CorpMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorpMapper.swift; sourceTree = "<group>"; };
 		CEE5B68525D67AEC0023D640 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		CEE9D49625FFA74600D20C1A /* PersonalCabinetMainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCabinetMainPageViewController.swift; sourceTree = "<group>"; };
+		CEEF74CB260B613600199173 /* ListTeachersFirstLettersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTeachersFirstLettersViewModel.swift; sourceTree = "<group>"; };
+		CEEF74CE260B6EC000199173 /* ListTeachersFirstLettersViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTeachersFirstLettersViewExtensions.swift; sourceTree = "<group>"; };
 		F96B8A8E8421A5DF88E0A7CF /* Pods_BSTU_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BSTU_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -470,6 +480,34 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		CE04EF8E260B572600D59DC3 /* ListTeachersFirstLetters */ = {
+			isa = PBXGroup;
+			children = (
+				CEEF74CD260B6EA400199173 /* Extensions */,
+				CE04EF94260B59E900D59DC3 /* Storyboards */,
+				CE04EF93260B59E100D59DC3 /* Views */,
+				CE04EF91260B59C400D59DC3 /* ListTeachersFirstLettersViewController.swift */,
+				CEEF74CB260B613600199173 /* ListTeachersFirstLettersViewModel.swift */,
+			);
+			path = ListTeachersFirstLetters;
+			sourceTree = "<group>";
+		};
+		CE04EF93260B59E100D59DC3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CE04EF95260B5A0400D59DC3 /* TeacherFirstLetterCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CE04EF94260B59E900D59DC3 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				CE04EF8F260B575600D59DC3 /* ListTeachersFirstLettersViewController.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		CE2B982B2601FB010008A2E1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -661,6 +699,7 @@
 		CE7F81B525FA071A00A70CCB /* Teachers */ = {
 			isa = PBXGroup;
 			children = (
+				CE04EF8E260B572600D59DC3 /* ListTeachersFirstLetters */,
 				CE7F81B625FA076700A70CCB /* ListTeachers */,
 				CE7F81B725FA077200A70CCB /* ScheduleTeacher */,
 			);
@@ -803,6 +842,14 @@
 			path = Tables;
 			sourceTree = "<group>";
 		};
+		CEEF74CD260B6EA400199173 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CEEF74CE260B6EC000199173 /* ListTeachersFirstLettersViewExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -882,6 +929,7 @@
 				CE380A1E25BC4F910028622B /* marker_pointer.png in Resources */,
 				CEA4C9BC2603435C00716C07 /* AttestationCellDropdownCell.xib in Resources */,
 				CE04A3E125EF9B9700BE073D /* InstitutionsScreen.storyboard in Resources */,
+				CE04EF90260B575600D59DC3 /* ListTeachersFirstLettersViewController.storyboard in Resources */,
 				CE380A1D25BC4F910028622B /* showMore.png in Resources */,
 				CE04A3EA25EF9B9700BE073D /* menu.png in Resources */,
 				CE36FEAD2605F6E70021D9F0 /* ExamsCell.xib in Resources */,
@@ -1000,6 +1048,7 @@
 				CEE5B67A25D66AB70023D640 /* MarkerDB.swift in Sources */,
 				CE04A3FF25EF9B9700BE073D /* EmptySheduleView.swift in Sources */,
 				CE36FEAA2605D71A0021D9F0 /* ExamsCellDropdownCell.swift in Sources */,
+				CE04EF96260B5A0400D59DC3 /* TeacherFirstLetterCell.swift in Sources */,
 				CE04A3F325EF9B9700BE073D /* GroupsViewController.swift in Sources */,
 				CE68297B2600D5CB008556FA /* PersonalCabinetMainPageViewModel.swift in Sources */,
 				CE04A3F525EF9B9700BE073D /* SheduleColorExtensions.swift in Sources */,
@@ -1010,12 +1059,14 @@
 				CE04A3F425EF9B9700BE073D /* GroupsViewCell.swift in Sources */,
 				CEE3AFC325D7D5D8007B1814 /* MapRoadDotMapper.swift in Sources */,
 				CE7F81C625FA0F8D00A70CCB /* ListTeachersModel.swift in Sources */,
+				CEEF74CF260B6EC000199173 /* ListTeachersFirstLettersViewExtensions.swift in Sources */,
 				CED0489725F006D500B7DD65 /* GroupSheduleModel.swift in Sources */,
 				CE6E65D02608966F002EBA3D /* ExamsViewModel.swift in Sources */,
 				CE009EEF25D6B35D00CA8604 /* PremiseMapper.swift in Sources */,
 				CEE5B67625D66A9D0023D640 /* MapDB.swift in Sources */,
 				CE380A2A25BC4F910028622B /* Marker.swift in Sources */,
 				CE04A3F725EF9B9700BE073D /* SheduleImageExtensions.swift in Sources */,
+				CE04EF92260B59C400D59DC3 /* ListTeachersFirstLettersViewController.swift in Sources */,
 				CE7F81C225FA0CC000A70CCB /* ListTeachersTableCell.swift in Sources */,
 				CEE3AFC525D7D699007B1814 /* MapMapper.swift in Sources */,
 				CE04A3E225EF9B9700BE073D /* InstitutionsViewController.swift in Sources */,
@@ -1028,6 +1079,7 @@
 				CE36FEB3260625E30021D9F0 /* PersonalCabinetMainPageModel.swift in Sources */,
 				CE37A08D25CBFC540046C1F1 /* MapViewModel.swift in Sources */,
 				CEC0C8BA25F6222D00760A0A /* MenuTableCell.swift in Sources */,
+				CEEF74CC260B613600199173 /* ListTeachersFirstLettersViewModel.swift in Sources */,
 				CE04A3F225EF9B9700BE073D /* GroupsViewModel.swift in Sources */,
 				CEE9D49725FFA74700D20C1A /* PersonalCabinetMainPageViewController.swift in Sources */,
 				CE5B3DFC25F539C700DC66E9 /* MenuViewController.swift in Sources */,

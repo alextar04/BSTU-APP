@@ -16,14 +16,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu" translatesAutoresizingMaskIntoConstraints="NO" id="8lM-rM-802">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="leftArrow" translatesAutoresizingMaskIntoConstraints="NO" id="8lM-rM-802">
                                 <rect key="frame" x="16" y="16" width="23" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="23" id="a0T-1M-6v5"/>
                                     <constraint firstAttribute="height" constant="23" id="n1P-0f-ZQH"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Преподаватели" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5hZ-9M-bm2">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="А" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5hZ-9M-bm2">
                                 <rect key="frame" x="56" y="5" width="202" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="HvL-q7-BDe"/>
@@ -45,6 +45,13 @@
                                 </constraints>
                                 <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="errorLoading" translatesAutoresizingMaskIntoConstraints="NO" id="RXj-vl-D4h">
+                                <rect key="frame" x="118.5" y="228.5" width="138" height="130"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="130" id="L3y-Qy-1CX"/>
+                                    <constraint firstAttribute="width" constant="138" id="tr4-3l-rsU"/>
+                                </constraints>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y7w-Vh-XP2">
                                 <rect key="frame" x="116" y="277" width="143" height="30"/>
                                 <constraints>
@@ -55,10 +62,10 @@
                                 <state key="normal" title="Повторить попытку"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Загрузка данных" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DJq-Dp-jh1">
-                                <rect key="frame" x="118" y="253" width="139.5" height="21"/>
+                                <rect key="frame" x="38.5" y="253" width="298" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="KGl-GL-dYU"/>
-                                    <constraint firstAttribute="width" constant="139.5" id="Nqv-tR-euW"/>
+                                    <constraint firstAttribute="width" constant="298" id="Nqv-tR-euW"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -68,11 +75,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="DJq-Dp-jh1" firstAttribute="centerY" secondItem="FCK-re-L3e" secondAttribute="centerY" constant="-70" id="6kM-nn-Mbi"/>
+                            <constraint firstItem="RXj-vl-D4h" firstAttribute="centerY" secondItem="FCK-re-L3e" secondAttribute="centerY" constant="-40" id="DXI-fX-eSn"/>
                             <constraint firstItem="acN-7W-cdJ" firstAttribute="centerY" secondItem="FCK-re-L3e" secondAttribute="centerY" constant="-41.5" id="GOn-Fb-W5X"/>
                             <constraint firstItem="8RZ-VB-cEi" firstAttribute="trailing" secondItem="mgY-Ll-goO" secondAttribute="trailing" constant="16" id="GaC-Ve-K1S"/>
                             <constraint firstItem="5hZ-9M-bm2" firstAttribute="leading" secondItem="8lM-rM-802" secondAttribute="trailing" constant="17" id="LJl-fW-sH8"/>
                             <constraint firstItem="mgY-Ll-goO" firstAttribute="bottom" secondItem="8RZ-VB-cEi" secondAttribute="bottom" id="Nn1-he-vsL"/>
                             <constraint firstItem="Y7w-Vh-XP2" firstAttribute="centerY" secondItem="FCK-re-L3e" secondAttribute="centerY" constant="-41.5" id="RRr-M4-WwO"/>
+                            <constraint firstItem="RXj-vl-D4h" firstAttribute="centerX" secondItem="FCK-re-L3e" secondAttribute="centerX" id="W3d-xy-lcE"/>
                             <constraint firstItem="8lM-rM-802" firstAttribute="top" secondItem="8RZ-VB-cEi" secondAttribute="top" constant="16" id="ZkO-z4-1tD"/>
                             <constraint firstItem="acN-7W-cdJ" firstAttribute="centerX" secondItem="FCK-re-L3e" secondAttribute="centerX" id="c3B-YE-gmd"/>
                             <constraint firstItem="DJq-Dp-jh1" firstAttribute="centerX" secondItem="FCK-re-L3e" secondAttribute="centerX" id="dUO-AC-0y8"/>
@@ -85,8 +94,11 @@
                         <viewLayoutGuide key="safeArea" id="8RZ-VB-cEi"/>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="8lM-rM-802" id="mp9-eJ-45P"/>
+                        <outlet property="errorLoadingImage" destination="RXj-vl-D4h" id="JBe-yS-esi"/>
+                        <outlet property="firstLetterLabel" destination="5hZ-9M-bm2" id="ZzB-rD-S9Y"/>
+                        <outlet property="horizotalyStatusLoadingLabelConstraint" destination="6kM-nn-Mbi" id="VUd-Aj-04C"/>
                         <outlet property="loadingWheel" destination="acN-7W-cdJ" id="ctQ-gj-TvR"/>
-                        <outlet property="menuButton" destination="8lM-rM-802" id="O8S-e9-Jal"/>
                         <outlet property="reloadButton" destination="Y7w-Vh-XP2" id="cFC-1a-eZK"/>
                         <outlet property="statusLoadingLabel" destination="DJq-Dp-jh1" id="QmX-Lg-IVe"/>
                         <outlet property="tableTeachersView" destination="mgY-Ll-goO" id="9fM-aT-Ui2"/>
@@ -98,6 +110,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="menu" width="100" height="100"/>
+        <image name="errorLoading" width="768" height="768"/>
+        <image name="leftArrow" width="100" height="100"/>
     </resources>
 </document>
