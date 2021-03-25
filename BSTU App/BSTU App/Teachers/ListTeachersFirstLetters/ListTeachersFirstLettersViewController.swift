@@ -115,6 +115,10 @@ class ListTeachersFirstLettersViewController: UIViewController, UIGestureRecogni
         self.view.addGestureRecognizer(closeMenuTap)
         closeMenuTap.delegate = self
         
+        let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(self.screenEdgeSwiped))
+        edgePan.edges = .left
+        self.view.addGestureRecognizer(edgePan)
+        
         self.menuButton.rx
             .tapGesture()
             .when(.recognized)
@@ -158,7 +162,19 @@ class ListTeachersFirstLettersViewController: UIViewController, UIGestureRecogni
         }
         return false
     }
-        
+    
+    
+    // MARK: Действия по открытию меню из-за пределов экрана
+    @objc func screenEdgeSwiped(_ recognizer: UIScreenEdgePanGestureRecognizer) {
+        if recognizer.state == .recognized {
+            if !self.isMenuOpen{
+                let userInfo: [String: [UIView]] = ["listDisablers": self.listDisablers]
+                NotificationCenter.default.post(name: Notification.Name("SwitchLeftMenu"), object: nil, userInfo: userInfo)
+                self.isMenuOpen.toggle()
+            }
+        }
+    }
+    
     
     // MARK: Закрытие меню
     @objc func closeMenu(_ sender: UITapGestureRecognizer){

@@ -58,8 +58,13 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
             self.setupTable(sortedCoursesGroups)
             self.connectTableAndSearchBar()
             
-            let recognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.didSwipe(_:)))
-            self.tableGroupsView.addGestureRecognizer(recognizer)
+            let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+            swipeRight.direction = .right
+            self.tableGroupsView.addGestureRecognizer(swipeRight)
+
+            let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+            swipeLeft.direction = .left
+            self.tableGroupsView.addGestureRecognizer(swipeLeft)
             
         }, errorClosure: {
             self.statusLoadingLabel.text = "Ошибка загрузки данных"
@@ -210,10 +215,12 @@ class GroupsViewController: UIViewController, UITableViewDelegate{
         view.endEditing(true)
     }
     
+    
     // MARK: Метод, перехватыватывающий свайп по таблице, расценивающийся как нажатие
-    @objc func didSwipe(_ recognizer: UISwipeGestureRecognizer) {
+    @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
         return
     }
+    
     
     deinit {
         print("Вызов деструктора страницы групп!")

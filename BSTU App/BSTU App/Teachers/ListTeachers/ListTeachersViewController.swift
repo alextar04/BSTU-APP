@@ -62,8 +62,19 @@ class ListTeachersViewController: UIViewController, UITableViewDelegate{
                                                             self!.loadingWheel.isHidden = true
                                                             self!.tableTeachersView.isHidden = false
                                                             
+                                                            
+                                                            let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self!.respondToSwipeGesture))
+                                                            swipeRight.direction = .right
+                                                            self!.tableTeachersView.addGestureRecognizer(swipeRight)
+
+                                                            let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self!.respondToSwipeGesture))
+                                                            swipeLeft.direction = .left
+                                                            self!.tableTeachersView.addGestureRecognizer(swipeLeft)
+                                                            
+                                                            
                                                             self!.setupTable(teachers)
                                                             self!.connectTableAndSearchBar()
+                                                            
                                                         } else {
                                                             self!.statusLoadingLabel.text = "Преподаватели не найдены"
                                                             self!.horizotalyStatusLoadingLabelConstraint.constant = 40
@@ -114,13 +125,13 @@ class ListTeachersViewController: UIViewController, UITableViewDelegate{
             self.tableTeachersView.rx
                  .modelSelected(Teacher.self)
                  .subscribe(onNext: { [weak self] selectedItem in
-                    /*
-                    let groupsSheduleController = UIStoryboard(name: "GroupSheduleViewController", bundle: nil)
-                        .instantiateViewController(withIdentifier: "GroupSheduleViewControllerID") as! GroupSheduleViewController
-                    groupsSheduleController.groupName = selectedItem.name
-                    self.navigationController?.pushViewController(groupsSheduleController, animated: true)
-                    */
+                    
                     print("Выбран: \(selectedItem.name!)")
+                    let teacherScheduleController = UIStoryboard(name: "TeacherScheduleViewController", bundle: nil)
+                        .instantiateViewController(withIdentifier: "TeacherScheduleViewControllerID") as! TeacherScheduleViewController
+                    teacherScheduleController.teacherName = selectedItem.name
+                    self!.navigationController?.pushViewController(teacherScheduleController, animated: true)
+                
                     self!.searchGroupBar.endEditing(true)
                  }).disposed(by: disposeBag)
          }
@@ -221,9 +232,15 @@ class ListTeachersViewController: UIViewController, UITableViewDelegate{
         }
     
     
+        // MARK: Метод, перехватыватывающий свайп по таблице, расценивающийся как нажатие
+        @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+            return
+        }
+    
+    
         // MARK: Установка кнопки перехода к предыдущему окну
         func setupBackButton(){
-            
+                
             self.backButton.rx
                 .tapGesture()
                 .when(.recognized)
@@ -232,10 +249,11 @@ class ListTeachersViewController: UIViewController, UITableViewDelegate{
                 }).disposed(by: disposeBag)
         }
     
+    
         deinit {
             print("Вызван деструктор ListTeachersViewController")
         }
-    }
+}
 
     extension ListTeachersViewController.SectionOfTeachers : SectionModelType{
         init(original: ListTeachersViewController.SectionOfTeachers, items: [Teacher]) {
