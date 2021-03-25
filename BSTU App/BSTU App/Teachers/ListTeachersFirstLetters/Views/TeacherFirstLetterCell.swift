@@ -21,8 +21,12 @@ class TeacherFirstLetterCell: UICollectionViewCell{
     func configureCell(name: String){
         self.shadowView.makeTeacherFirstLetterShadow(width: Int(self.shadowView.frame.width),
                                                      height: Int(self.shadowView.frame.height))
-        self.roundedView.makeRounding()
+        
         self.makeGradient()
+        self.roundedView.layer.backgroundColor = UIColor.white.cgColor
+        self.roundedView.layer.cornerRadius = 10.0
+        self.roundedView.layer.masksToBounds = false
+        
         self.firstLetterLabel.text = name
     }
     
@@ -30,6 +34,11 @@ class TeacherFirstLetterCell: UICollectionViewCell{
     // Градиент для фона ячейки таблицы
     func makeGradient(){
         let gradientLayer = CAGradientLayer()
+        
+        gradientLayer.backgroundColor = UIColor.white.cgColor
+        gradientLayer.cornerRadius = 10.0
+        gradientLayer.masksToBounds = false
+        
         gradientLayer.frame = self.roundedView.bounds
         gradientLayer.colors = [UIColor.firstCourseBackgroundColorStart.cgColor,
                                 UIColor.firstCourseBackgroundColorFinish.cgColor]

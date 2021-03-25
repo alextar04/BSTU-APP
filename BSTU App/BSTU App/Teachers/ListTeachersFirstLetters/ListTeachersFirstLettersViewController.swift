@@ -87,7 +87,7 @@ class ListTeachersFirstLettersViewController: UIViewController, UIGestureRecogni
     func setupFirstLetterCollection(_ listLetters: [String]){
         
         Observable.just(listLetters).bind(to: self.collectionFirstLetters.rx.items){
-            collection, row, item in
+            [weak self] collection, row, item in
             let cell = collection.dequeueReusableCell(withReuseIdentifier: "TeacherFirstLetterCell", for: IndexPath.init(row: row, section: 0)) as! TeacherFirstLetterCell
             
             cell.layoutIfNeeded()
@@ -97,12 +97,12 @@ class ListTeachersFirstLettersViewController: UIViewController, UIGestureRecogni
         
         
         self.collectionFirstLetters.rx.modelSelected(String.self).subscribe(
-                onNext: {selectedItem in
+                onNext: { [weak self] selectedItem in
                     
                     let teachersController = UIStoryboard(name: "ListTeachers", bundle: nil)
                         .instantiateViewController(withIdentifier: "ListTeachersID") as! ListTeachersViewController
                     teachersController.letter = selectedItem
-                    self.navigationController?.pushViewController(teachersController, animated: true)
+                    self!.navigationController?.pushViewController(teachersController, animated: true)
                     
         }).disposed(by: disposeBag)
      }

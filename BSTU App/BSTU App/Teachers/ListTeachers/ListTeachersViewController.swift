@@ -50,6 +50,8 @@ class ListTeachersViewController: UIViewController, UITableViewDelegate{
         self.setupSearchBar()
         self.setupReloadButton()
         self.setupBackButton()
+        self.view.isUserInteractionEnabled = false
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         
         self.tableTeachersView.register(UINib(nibName: "ListTeachersTableCell", bundle: nil), forCellReuseIdentifier: "ListTeachersTableCellID")
             
@@ -74,6 +76,8 @@ class ListTeachersViewController: UIViewController, UITableViewDelegate{
                                                             
                                                             self!.setupTable(teachers)
                                                             self!.connectTableAndSearchBar()
+                                                            self!.view.isUserInteractionEnabled = true
+                                                            self!.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
                                                             
                                                         } else {
                                                             self!.statusLoadingLabel.text = "Преподаватели не найдены"
@@ -81,11 +85,15 @@ class ListTeachersViewController: UIViewController, UITableViewDelegate{
                                                             self!.errorLoadingImage.isHidden = false
                                                             self!.loadingWheel.isHidden = true
                                                             self!.reloadButton.isHidden = true
+                                                            self!.view.isUserInteractionEnabled = true
+                                                            self!.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
                                                         }
             }, errorClosure: { [weak self] _ in
                 self!.statusLoadingLabel.text = "Ошибка загрузки данных"
                 self!.loadingWheel.isHidden = true
                 self!.reloadButton.isHidden = false
+                self!.view.isUserInteractionEnabled = true
+                self!.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         })
             
             self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -111,7 +119,7 @@ class ListTeachersViewController: UIViewController, UITableViewDelegate{
             
             // Конфигурация содержимого для ячеек таблицы
             let dataSource = RxTableViewSectionedReloadDataSource<SectionOfTeachers>(configureCell: {
-                dataSource, table, index, item in
+                [weak self] dataSource, table, index, item in
                 let cell = table.dequeueReusableCell(withIdentifier: "ListTeachersTableCellID", for: index) as! ListTeachersTableCell
                 cell.configureCell(name: item.name)
                 return cell
@@ -146,10 +154,12 @@ class ListTeachersViewController: UIViewController, UITableViewDelegate{
                     self!.statusLoadingLabel.text = "Загрузка данных"
                     self!.loadingWheel.isHidden = false
                     self!.reloadButton.isHidden = true
+                    self!.view.isUserInteractionEnabled = false
+                    self!.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
                     
                     let intedFirstLetter = Unicode.Scalar(self!.letter)!.value
                     self!.viewModel.getTeachersListByFirstLetter(firstLetter: intedFirstLetter,
-                        completion: { teachers in
+                        completion: { [weak self] teachers in
                         
                             if teachers.count != 0{
                                 self!.statusLoadingLabel.isHidden = true
@@ -158,18 +168,24 @@ class ListTeachersViewController: UIViewController, UITableViewDelegate{
                                 
                                 self!.setupTable(teachers)
                                 self!.connectTableAndSearchBar()
+                                self!.view.isUserInteractionEnabled = true
+                                self!.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
                             } else {
                                 self!.statusLoadingLabel.text = "Преподаватели не найдены"
                                 self!.horizotalyStatusLoadingLabelConstraint.constant = 40
                                 self!.errorLoadingImage.isHidden = false
                                 self!.loadingWheel.isHidden = true
                                 self!.reloadButton.isHidden = true
+                                self!.view.isUserInteractionEnabled = true
+                                self!.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
                             }
                             
-                    }, errorClosure: { _ in 
+                    }, errorClosure: { [weak self] _ in 
                         self!.statusLoadingLabel.text = "Ошибка загрузки данных"
                         self!.loadingWheel.isHidden = true
                         self!.reloadButton.isHidden = false
+                        self!.view.isUserInteractionEnabled = true
+                        self!.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
                     })
                     
                 }).disposed(by: disposeBag)
