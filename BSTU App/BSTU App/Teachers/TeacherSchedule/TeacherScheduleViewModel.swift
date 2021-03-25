@@ -57,6 +57,7 @@ class TeacherScheduleViewModel{
         completion()
         
         /*
+         
         let url = "http://cabinet.bstu.ru/api/1.0/timetable?role=student&groupName=\(groupName)&wholeWeek=true"
             .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         AF.request(url!, method: .get).validate().responseJSON{ response in
