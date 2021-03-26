@@ -120,6 +120,8 @@
 		CEA4C9C02603442200716C07 /* AttestationCellDropdownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4C9BF2603442200716C07 /* AttestationCellDropdownCell.swift */; };
 		CEA4C9C226034BF800716C07 /* AttestationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4C9C126034BF800716C07 /* AttestationModel.swift */; };
 		CEACB2D925C7F2F900F4ADD3 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEACB2D825C7F2F900F4ADD3 /* Map.swift */; };
+		CEBBBCF7260DD2EE0059097E /* template.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBBCF6260DD2EE0059097E /* template.swift */; };
+		CEBBBCF9260DD3960059097E /* htmltemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = CEBBBCF8260DD3950059097E /* htmltemplate.html */; };
 		CEC0C8BA25F6222D00760A0A /* MenuTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0C8B925F6222D00760A0A /* MenuTableCell.swift */; };
 		CECE8BA125FCB785008D7840 /* SigninViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECE8BA025FCB785008D7840 /* SigninViewController.storyboard */; };
 		CECE8BA325FCC12D008D7840 /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE8BA225FCC12D008D7840 /* SigninViewController.swift */; };
@@ -259,6 +261,8 @@
 		CEA4C9BF2603442200716C07 /* AttestationCellDropdownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationCellDropdownCell.swift; sourceTree = "<group>"; };
 		CEA4C9C126034BF800716C07 /* AttestationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationModel.swift; sourceTree = "<group>"; };
 		CEACB2D825C7F2F900F4ADD3 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
+		CEBBBCF6260DD2EE0059097E /* template.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = template.swift; sourceTree = "<group>"; };
+		CEBBBCF8260DD3950059097E /* htmltemplate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = htmltemplate.html; sourceTree = "<group>"; };
 		CEC0C8B925F6222D00760A0A /* MenuTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableCell.swift; sourceTree = "<group>"; };
 		CECE8BA025FCB785008D7840 /* SigninViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SigninViewController.storyboard; sourceTree = "<group>"; };
 		CECE8BA225FCC12D008D7840 /* SigninViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
@@ -738,6 +742,8 @@
 				CE9DA64D260C78F900524BE3 /* TeacherScheduleViewController.swift */,
 				CE9DA64B260C78E500524BE3 /* TeacherScheduleViewModel.swift */,
 				CE9DA649260C78D900524BE3 /* TeacherScheduleModel.swift */,
+				CEBBBCF6260DD2EE0059097E /* template.swift */,
+				CEBBBCF8260DD3950059097E /* htmltemplate.html */,
 			);
 			path = TeacherSchedule;
 			sourceTree = "<group>";
@@ -956,6 +962,7 @@
 				CE380A1A25BC4F910028622B /* rectangle.png in Resources */,
 				CE5B3DFA25F530F800DC66E9 /* MenuViewController.storyboard in Resources */,
 				CE7F81BB25FA07CD00A70CCB /* ListTeachersTableCell.xib in Resources */,
+				CEBBBCF9260DD3960059097E /* htmltemplate.html in Resources */,
 				CE04A3EB25EF9B9700BE073D /* dropdown.png in Resources */,
 				CE36FEAF2605F9E10021D9F0 /* ExamsCellDropdownCell.xib in Resources */,
 				CE009EF125D6C18100CA8604 /* admin_bstuDB.sqlite3 in Resources */,
@@ -1093,6 +1100,7 @@
 				CE47D67F26009499009D1CCA /* SigninViewModel.swift in Sources */,
 				CE04A40125EF9B9700BE073D /* GroupSheduleViewModel.swift in Sources */,
 				CE04A3F125EF9B9700BE073D /* GroupsModel.swift in Sources */,
+				CEBBBCF7260DD2EE0059097E /* template.swift in Sources */,
 				CE36FEB5260631CE0021D9F0 /* PersonalCabinetStringExtensions.swift in Sources */,
 				CE04A3F425EF9B9700BE073D /* GroupsViewCell.swift in Sources */,
 				CEE3AFC325D7D5D8007B1814 /* MapRoadDotMapper.swift in Sources */,

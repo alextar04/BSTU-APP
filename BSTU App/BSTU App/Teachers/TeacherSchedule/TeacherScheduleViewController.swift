@@ -17,6 +17,7 @@ import RxDataSources
 class TeacherScheduleViewController: UIViewController{
     
     var teacherName: String!
+    var teacherLink: URL!
     var dialogLoading: UIAlertController!
     var dialogLoadingIsNeeded = true
     @IBOutlet weak var teacherNameLabel: UILabel!
@@ -402,6 +403,7 @@ class TeacherScheduleViewController: UIViewController{
                                                object: nil)
         
         self.viewModel.getSheduleForTeacher(teacherName: self.teacherName,
+                                            teacherLink: self.teacherLink,
                                           completion: {
             // Расписание успешно загружно
             self.setSettingsWeekType()

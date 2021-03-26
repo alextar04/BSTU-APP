@@ -1,6 +1,9 @@
+import Alamofire
+import SwiftSoup
+
 // MARK: Получение расписания для группы
     // Входные параметры: id-группы
-    func getSheduleForGroup(idGroup: Int){
+    func templateGetSheduleForGroup(idGroup: Int){
         
         let link = "http://info.bstu.ru/schedule.php?gid=\(idGroup)"
         AF.request(link).responseString{ html in

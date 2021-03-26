@@ -138,6 +138,7 @@ class ListTeachersViewController: UIViewController, UITableViewDelegate{
                     let teacherScheduleController = UIStoryboard(name: "TeacherScheduleViewController", bundle: nil)
                         .instantiateViewController(withIdentifier: "TeacherScheduleViewControllerID") as! TeacherScheduleViewController
                     teacherScheduleController.teacherName = selectedItem.name
+                    teacherScheduleController.teacherLink = selectedItem.link
                     self!.navigationController?.pushViewController(teacherScheduleController, animated: true)
                 
                     self!.searchGroupBar.endEditing(true)

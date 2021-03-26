@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import SwiftSoup
 
 
 class TeacherScheduleViewModel{
@@ -20,12 +21,13 @@ class TeacherScheduleViewModel{
     
     // MARK: Получение расписания для группы
     // Входные параметры: id-группы
-    func getSheduleForTeacher(teacherName: String,
+    func getSheduleForTeacher(teacherName: String, teacherLink: URL,
                               completion: @escaping (()->Void), errorClosure: @escaping ()->Void){
         
         self.resultDaysCurrentWeek = [[TeacherScheduleModel]]()
         self.resultDaysNextWeek = [[TeacherScheduleModel]]()
         
+        /*
         for _ in 0...4{
             let a = TeacherScheduleModel()
             a.typeActivity = .lection
@@ -55,141 +57,149 @@ class TeacherScheduleViewModel{
         
         self.isCurrentWeekNumerator = false
         completion()
+        */
         
-        /*
-        let url = "http://cabinet.bstu.ru/api/1.0/timetable?role=student&groupName=\(groupName)&wholeWeek=true"
-            .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        AF.request(url!, method: .get).validate().responseJSON{ response in
-            
-            switch response.result{
-            case .success(let value):
-                let resultJson = JSON(value)
+        AF.request(teacherLink).responseString(encoding: String.Encoding.utf8) {
+            [weak self] html in
                 
-                let currentWeek = resultJson["current_week"]
-                let nextWeek = resultJson["next_week"]
-                (currentWeek["now_denom"].int == 1) ? (self.isCurrentWeekNumerator = false) : (self.isCurrentWeekNumerator = true)
-                
-                // Парсинг каждой неделе
-                for (index, week) in [currentWeek, nextWeek].enumerated(){
+                do{
+                    let document = try SwiftSoup.parse(html.result.get())
                     
-                    var resultDays: [[GroupSheduleModel]]!
-                    (isCorrespondenceGroup) ? (resultDays = [[GroupSheduleModel]].init(repeating: [GroupSheduleModel](), count: 1)) :
-                                              (resultDays = [[GroupSheduleModel]].init(repeating: [GroupSheduleModel](), count: 7))
+                    let notCorrespondenceGroupsSchedule = try document.select("table").tagName("schedule").first()
+                    let listLessons = try notCorrespondenceGroupsSchedule?.getElementsByClass("schedule_std")
+                    let timeArray = try self!.getTimeIntervalsArray(timeElements: try notCorrespondenceGroupsSchedule?.getElementsByClass("time") as! Elements)
                     
-                    // Парсинг каждого дня недели
-                    if let arrayDays = week["days"].array{
-                        for day in arrayDays{
-                            
-                            // Заполнение информации по дню
-                            let dayActivities = day["pairs"].array
-                            for activity in dayActivities!{
-                                let lesson = GroupSheduleModel()
-                                
-                                // Если в дисциплине есть разделение по подгруппам
-                                // Добавить информацию о подгруппе к строке названия дисциплины
-                                var additionalNameSubject = ""
-                                if let subGroupInfo = activity["group_part"].string{
-                                    let parsedSubgroupInfo = subGroupInfo.split(separator: "/").map{
-                                            return String($0)
+                    
+                    // Список занятий по дням
+                    var listLessonByDaysNumerator = [[TeacherScheduleModel]].init(repeating: [], count: 7)
+                    var listLessonByDaysDenomentor = [[TeacherScheduleModel]].init(repeating: [], count: 7)
+                    for (index, lesson) in listLessons!.enumerated(){
+                        
+                    var lessonParsed: Bool = false
+                    for cellType in [TypeLesson.schedule_half,
+                                    TypeLesson.schedule_std]{
+                        if !lessonParsed{
+                            switch cellType {
+                            // Обработка ячеек с занятиями числитель/знаменатель
+                            case .schedule_half:
+                                let notPermanentLesson = try lesson.getElementsByClass("schedule_half")
+                                if notPermanentLesson.count != 0{
+                                    let numeratorRecord = notPermanentLesson.first()
+                                    let denomenatorRecord = notPermanentLesson.last()
+                                    
+                                    for (indexIteration, record) in [numeratorRecord, denomenatorRecord].enumerated(){
+                                        
+                                        if try record?.text() != ""{
+                                            let typeLessonAndPlace = try record!.getElementsByClass("place_half").first()?.text()
+                                            let audience = try record!.getElementsByClass("a_style").first()?.text()
+                                            let subject = try record!.getElementsByClass("center_p").first()?.text()
+                                            let groups = try record!.getElementsByClass("sp_half").first()?.text()
+                                            
+                                            var timeStart = timeArray[index / 6].0
+                                            var timeFinish = timeArray[index / 6].1
+                                            if timeStart == "11:45"{
+                                                let breakTop = try record!.getElementsByClass("break_top")
+                                                let breakBottom = try record!.getElementsByClass("break_bottom")
+                                                if breakTop.count != 0{
+                                                    // Перерыв до часовика
+                                                    (timeStart, timeFinish) = self!.makeTimePairWithBreak(breakAtFirst: true,
+                                                                                                           unpreparedTime: (timeStart, timeFinish))
+                                                }
+                                                if breakBottom.count != 0{
+                                                    // Перерыв после часовика
+                                                    (timeStart, timeFinish) = self!.makeTimePairWithBreak(breakAtFirst: false,
+                                                                                                          unpreparedTime: (timeStart, timeFinish))
+                                                }
+                                            }
+                                            
+                                            let scheduleCell = TeacherScheduleModel()
+                                            scheduleCell.nameSubject = subject
+                                            scheduleCell.groups = [String](arrayLiteral: groups!)
+                                            scheduleCell.audiences = [String](arrayLiteral: audience!)
+                                            scheduleCell.typeActivity = self!.getTypeSubjectByStringName(name: String((typeLessonAndPlace?
+                                                .prefix(typeLessonAndPlace!.count - audience!.count))!))
+                                            scheduleCell.timeStart = timeStart
+                                            scheduleCell.timeEnd = timeFinish
+                                            
+                                            (indexIteration == 0) ? (listLessonByDaysNumerator[index % 6].append(scheduleCell)):
+                                                                     listLessonByDaysDenomentor[index % 6].append(scheduleCell)
+                                        }
                                     }
-                                    if parsedSubgroupInfo.last != "1"{
-                                        additionalNameSubject = " \(parsedSubgroupInfo.first!) гр."
-                                    }
-                                }
-                                lesson.nameSubject = "\(activity["subject_name_short"].string!)\(additionalNameSubject)"
-                                
-                                switch activity["event_type_name"].string {
-                                case "лек.":
-                                    lesson.typeActivity = .lection
-                                case "лаб.":
-                                    lesson.typeActivity = .laboratory
-                                case "практ.":
-                                    lesson.typeActivity = .practice
-                                case "зач.":
-                                    lesson.typeActivity = .test
-                                case "конс.":
-                                    lesson.typeActivity = .consultation
-                                case "экз.":
-                                    lesson.typeActivity = .examination
-                                default:
+                                    
+                                    lessonParsed = true
                                     break
                                 }
+                            // Обработка ячеек с постоянными занятиями
+                            case .schedule_std:
                                 
-                                if [TypeActivity.consultation, TypeActivity.examination].contains(lesson.typeActivity) || isCorrespondenceGroup{
+                                if try lesson.text() != ""{
                                     
-                                    lesson.timeStart = activity["ev_start"].string
-                                    var dateComponents = Array(String(lesson.timeStart.split(separator: " ").first!)
-                                        .split(separator: "-")
-                                        .reversed()
-                                        .map{
-                                        return String($0)
-                                    })
-                                    let indexYearShort1 = dateComponents[2].index(dateComponents[2].startIndex, offsetBy: 2)
-                                    let indexYearShort2 = dateComponents[2].index(indexYearShort1, offsetBy: 1)
-                                    dateComponents[2] = String(dateComponents[2][indexYearShort1...indexYearShort2])
-                                    let dateString = dateComponents.joined(separator: ".")
+                                    let typeLessonAndPlace = try lesson.getElementsByClass("place_std").first()?.text()
+                                    let audience = try lesson.getElementsByClass("a_style").first()?.text()
+                                    let subject = try lesson.getElementsByClass("center_p").first()?.text()
+                                    let groups = try lesson.getElementsByClass("sp_std").first()?.text()
                                     
-                                    let indexTimeStart1 = lesson.timeStart.index(lesson.timeStart.startIndex, offsetBy: 11)
-                                    let indexTimeStart2 = lesson.timeStart.index(indexTimeStart1, offsetBy: 4)
-                                    lesson.timeStart = "\(dateString) \(String(lesson.timeStart[indexTimeStart1...indexTimeStart2]))"
-                                    
-                                } else {
-                                    lesson.timeStart = activity["pair_time_start"].string
-                                    let indexTimeStart1 = lesson.timeStart.index(lesson.timeStart.startIndex, offsetBy: 11)
-                                    let indexTimeStart2 = lesson.timeStart.index(indexTimeStart1, offsetBy: 4)
-                                    lesson.timeStart = String(lesson.timeStart[indexTimeStart1...indexTimeStart2])
-                                    
-                                    lesson.timeEnd = activity["pair_time_end"].string
-                                    let indexTimeEnd1 = lesson.timeEnd.index(lesson.timeEnd.startIndex, offsetBy: 11)
-                                    let indexTimeEnd2 = lesson.timeEnd.index(indexTimeEnd1, offsetBy: 4)
-                                    lesson.timeEnd = String(lesson.timeEnd[indexTimeEnd1...indexTimeEnd2])
-                                }
-                                
-                                lesson.audiences = [String]()
-                                for item in activity["audiences"].array!{
-                                    if let value = item["name"].string{
-                                         lesson.audiences.append(value)
+                                    var timeStart = timeArray[index / 6].0
+                                    var timeFinish = timeArray[index / 6].1
+                                    if timeStart == "11:45"{
+                                        let breakTop = try lesson.getElementsByClass("break_top")
+                                        let breakBottom = try lesson.getElementsByClass("break_bottom")
+                                        if breakTop.count != 0{
+                                            // Перерыв до часовика
+                                            (timeStart, timeFinish) = self!.makeTimePairWithBreak(breakAtFirst: true,
+                                                                                                   unpreparedTime: (timeStart, timeFinish))
+                                        }
+                                        if breakBottom.count != 0{
+                                            // Перерыв после часовика
+                                            (timeStart, timeFinish) = self!.makeTimePairWithBreak(breakAtFirst: false,
+                                                                                                  unpreparedTime: (timeStart, timeFinish))
+                                        }
                                     }
+                                    
+                                    let scheduleCell = TeacherScheduleModel()
+                                    scheduleCell.nameSubject = subject
+                                    scheduleCell.groups = [String](arrayLiteral: groups!)
+                                    scheduleCell.audiences = [String](arrayLiteral: audience!)
+                                    scheduleCell.typeActivity = self!.getTypeSubjectByStringName(name: String((typeLessonAndPlace?
+                                        .prefix(typeLessonAndPlace!.count - audience!.count))!))
+                                    scheduleCell.timeStart = timeStart
+                                    scheduleCell.timeEnd = timeFinish
+                                    
+                                    listLessonByDaysNumerator[index % 6].append(scheduleCell)
+                                    listLessonByDaysDenomentor[index % 6].append(scheduleCell)
                                 }
-                                
-                                lesson.teachers = [String]()
-                                for item in activity["teachers"].array!{
-                                    if let value = item["name"].string{
-                                         lesson.teachers.append(value)
-                                    }
-                                }
-                                
-                                // Формирование контейнеров для очных групп
-                                if !isCorrespondenceGroup{
-                                    if [TypeActivity.consultation, TypeActivity.examination].contains(lesson.typeActivity){
-                                        self.resultExams.append(lesson)
-                                    } else {
-                                        let dayOfWeek = (day["num_day"].int)! - 1
-                                        resultDays[dayOfWeek].append(lesson)
-                                    }
-                                } else {
-                                    // Формирование контейнера для заочных групп
-                                    resultDays[0].append(lesson)
-                                }
+                                lessonParsed = true
+                                break
                             }
                         }
                     }
-    
-                    switch index {
-                    case 0:
-                        self.resultDaysCurrentWeek = resultDays
-                    case 1:
-                        self.resultDaysNextWeek = resultDays
-                    default:
-                        break
-                    }
                 }
-                completion()
-                
-            case .failure(let error):
-                errorClosure()
+                    
+                    
+                for day in listLessonByDaysNumerator{
+                    print("Новый день")
+                    for lesson in day{
+                        print(lesson.nameSubject!, terminator:" ")
+                        print(lesson.audiences!, terminator:" ")
+                        print(lesson.groups!, terminator:" ")
+                        print(lesson.typeActivity!, terminator:" ")
+                        print(lesson.timeStart!, terminator:" ")
+                        print(lesson.timeEnd!)
+                        print("///")
+                    }
+                    print("***")
+                }
+                    
+            } catch {
+                fatalError()
             }
-        }*/
+        }
+    }
+        
+        
+    enum TypeLesson{
+        case schedule_std
+        case schedule_half
     }
     
     
@@ -286,7 +296,6 @@ class TeacherScheduleViewModel{
     }
     
     
-    
     // Получение сокращенной записи для идентификации преподавателя
     func getShortTeacherRecord(teacher: String)->String{
         
@@ -307,4 +316,73 @@ class TeacherScheduleViewModel{
     }
     
     
+    // MARK: Получение типа предмета по названию
+    func getTypeSubjectByStringName(name: String)->TypeActivity{
+        
+        switch name {
+        case "лек ":
+            return TypeActivity.lection
+        case "лаб ":
+            return TypeActivity.laboratory
+        case "пр ":
+            return TypeActivity.practice
+        case "зач ":
+            return TypeActivity.test
+        case "конс ":
+            return TypeActivity.consultation
+        case "экз ":
+            return TypeActivity.examination
+        default:
+            return TypeActivity.test
+        }
+    }
+    
+    
+    // MARK: Получение списка временных интервалов
+    func getTimeIntervalsArray(timeElements: Elements) throws ->[(String, String)]{
+        var resultArray = [(String, String)]()
+        
+        for time in timeElements{
+            
+            var firstValue = ""
+            var secondValue = ""
+            
+            let timeCheckpoints = (try time.text()).split(separator: " ")
+            firstValue = String(timeCheckpoints.first!)
+            
+            var endDateComponents = DateComponents()
+            let endDate = String(timeCheckpoints.last!).split(separator: ":")
+            endDateComponents.hour = Int(endDate.first!)
+            endDateComponents.minute = Int(endDate.last!)
+            var calendaredDate = Calendar.current.date(from: endDateComponents)
+            calendaredDate = calendaredDate!.addingTimeInterval(45 * 60)
+            
+            secondValue = String(format: "%02ld:%02ld",
+                                 Calendar.current.component(.hour, from: calendaredDate!),
+                                 Calendar.current.component(.minute, from: calendaredDate!))
+            resultArray.append((firstValue, secondValue))
+        }
+        return resultArray
+    }
+    
+    
+    // MARK: Конструирование времени пары с учетом часовика
+    func makeTimePairWithBreak(breakAtFirst: Bool,
+                               unpreparedTime: (String, String)) -> (String, String){
+        
+        var neededCheckpoint: String!
+        (breakAtFirst) ? (neededCheckpoint = unpreparedTime.0) : (neededCheckpoint = unpreparedTime.1)
+        var neededDateComponents = DateComponents()
+        let neededDate = String(neededCheckpoint).split(separator: ":")
+        neededDateComponents.hour = Int(neededDate.first!)
+        neededDateComponents.minute = Int(neededDate.last!)
+        var calendaredDate = Calendar.current.date(from: neededDateComponents)
+        (breakAtFirst) ? (calendaredDate = calendaredDate!.addingTimeInterval(50 * 60)) :
+            (calendaredDate = calendaredDate!.addingTimeInterval(-50 * 60))
+        let newNeededValue = String(format: "%02ld:%02ld",
+                                Calendar.current.component(.hour, from: calendaredDate!),
+                                Calendar.current.component(.minute, from: calendaredDate!))
+        
+        return (breakAtFirst) ? (newNeededValue, unpreparedTime.1) : (unpreparedTime.0, newNeededValue)
+    }
 }
