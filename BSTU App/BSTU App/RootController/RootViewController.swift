@@ -65,6 +65,7 @@ class RootViewController: UIViewController {
     // MARK: Открыть/закрыть левое меню
     @objc func switchLeftMenu(_ notification: Notification){
         
+        self.leftMenuController.view.isUserInteractionEnabled = false
         if let listDisablers = notification.userInfo!["listDisablers"] as? [UIView]{
             UIView.animate(withDuration: 0.4,
                            delay: 0,
@@ -79,6 +80,7 @@ class RootViewController: UIViewController {
                         for view in listDisablers{
                             (self.isSlideInMenuPresented) ? (view.isUserInteractionEnabled = false) : (view.isUserInteractionEnabled = true)
                         }
+                    self.leftMenuController.view.isUserInteractionEnabled = true
             })
         }
     }
@@ -190,6 +192,7 @@ class RootViewController: UIViewController {
                         view.isUserInteractionEnabled = false
                     }
                 }
+                self.leftMenuController.view.isUserInteractionEnabled = false
                 UIView.animate(withDuration: 0.4, delay: 0,
                 usingSpringWithDamping: 0.75,
                 initialSpringVelocity: 0.9,
@@ -197,6 +200,7 @@ class RootViewController: UIViewController {
                     self.currentView!.frame = currentFrame
                 }, completion: { _ in
                     self.isSlideInMenuPresented.toggle()
+                    self.leftMenuController.view.isUserInteractionEnabled = true
                 })
             }
         default:
