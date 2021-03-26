@@ -27,38 +27,6 @@ class TeacherScheduleViewModel{
         self.resultDaysCurrentWeek = [[TeacherScheduleModel]]()
         self.resultDaysNextWeek = [[TeacherScheduleModel]]()
         
-        /*
-        for _ in 0...4{
-            let a = TeacherScheduleModel()
-            a.typeActivity = .lection
-            a.audiences = ["ГУК 555"]
-            a.groups = ["ПВ-31, ПВ-41, ПВ-51"]
-            a.nameSubject = "Филология"
-            a.timeStart = "15:55"
-            a.timeEnd = "17:55"
-            resultExams.append(a)
-        }
-        
-        for _ in 0...6{
-            var tempArray = [TeacherScheduleModel]()
-            for _ in 0...4{
-                let a = TeacherScheduleModel()
-                a.typeActivity = .lection
-                a.audiences = ["ГУК 555"]
-                a.groups = ["ПВ-31, ПВ-41, ПВ-51"]
-                a.nameSubject = "Филология"
-                a.timeStart = "15:55"
-                a.timeEnd = "17:55"
-                tempArray.append(a)
-            }
-            self.resultDaysCurrentWeek.append(tempArray)
-            self.resultDaysNextWeek.append(tempArray)
-        }
-        
-        self.isCurrentWeekNumerator = false
-        completion()
-        */
-        
         AF.request(teacherLink).responseString(encoding: String.Encoding.utf8) {
             [weak self] html in
                 
@@ -66,9 +34,13 @@ class TeacherScheduleViewModel{
                     let document = try SwiftSoup.parse(html.result.get())
                     
                     let notCorrespondenceGroupsSchedule = try document.select("table").tagName("schedule").first()
-                    let listLessons = try notCorrespondenceGroupsSchedule?.getElementsByClass("schedule_std")
+                    
                     let timeArray = try self!.getTimeIntervalsArray(timeElements: try notCorrespondenceGroupsSchedule?.getElementsByClass("time") as! Elements)
                     
+                    let typeWeekInformation = try notCorrespondenceGroupsSchedule?.getElementsByClass("bottom_banner").first()?.text()
+                    ((typeWeekInformation?.contains("числитель"))!) ? (self?.isCurrentWeekNumerator = true) : (self?.isCurrentWeekNumerator = false)
+                    
+                    let listLessons = try notCorrespondenceGroupsSchedule?.getElementsByClass("schedule_std")
                     
                     // Список занятий по дням
                     var listLessonByDaysNumerator = [[TeacherScheduleModel]].init(repeating: [], count: 7)
@@ -174,24 +146,18 @@ class TeacherScheduleViewModel{
                         }
                     }
                 }
-                    
-                    
-                for day in listLessonByDaysNumerator{
-                    print("Новый день")
-                    for lesson in day{
-                        print(lesson.nameSubject!, terminator:" ")
-                        print(lesson.audiences!, terminator:" ")
-                        print(lesson.groups!, terminator:" ")
-                        print(lesson.typeActivity!, terminator:" ")
-                        print(lesson.timeStart!, terminator:" ")
-                        print(lesson.timeEnd!)
-                        print("///")
-                    }
-                    print("***")
+                
+                if (self!.isCurrentWeekNumerator) {
+                    self!.resultDaysCurrentWeek = listLessonByDaysNumerator
+                    self!.resultDaysNextWeek = listLessonByDaysDenomentor
+                } else {
+                    self!.resultDaysCurrentWeek = listLessonByDaysDenomentor
+                    self!.resultDaysNextWeek = listLessonByDaysNumerator
                 }
                     
+                completion()
             } catch {
-                fatalError()
+                errorClosure()
             }
         }
     }

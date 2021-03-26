@@ -50,14 +50,14 @@ class TeacherScheduleCard: UIView{
             nameSubjectHeightConstraint.constant = 50
             nameSubjectBottomConstraint.constant = 8
             audienceTopConstraint.constant = 22
-            groupNamesTopConstraint.constant = 17
+            groupNamesTopConstraint.constant = 13
             nameSubject.numberOfLines = 2
         } else {
             nameSubjectTopConstraint.constant = 31
             nameSubjectHeightConstraint.constant = 20
             nameSubjectBottomConstraint.constant = 8
             audienceTopConstraint.constant = 8
-            groupNamesTopConstraint.constant = 24
+            groupNamesTopConstraint.constant = 20
             nameSubject.numberOfLines = 1
         }
         
@@ -70,58 +70,10 @@ class TeacherScheduleCard: UIView{
         } else {
             self.timeLabel.text = ""
         }
+        
         self.audienceLabel.text = activity.audiences.joined(separator: ", ")
-        
-        self.groupNames.text = "ПВ-31, ПВ-42, ПВ-21, ВТ-31"
-        
-        /*
-        if activity.teachers.count == 1{
-            let teacherParts = activity.teachers.first?.split(separator: " ").map{
-                return String($0)
-            }
-            if teacherParts != nil{
-                if teacherParts?.count == 3{
-                    self.nameAndPatronymicTeacher.text = "\(teacherParts![1]) \(teacherParts![2])"
-                    self.surnameTeacher.text = "\(teacherParts![0])"
-                } else{
-                    self.nameAndPatronymicTeacher.text = activity.teachers.first
-                    self.surnameTeacher.text = ""
-                }
-            }
-        }
-        
-        if activity.teachers.count > 1{
-            
-            self.nameAndPatronymicTeacher.text = self.getShortTeacherRecord(teacher: activity.teachers.first!)
-            self.surnameTeacher.text = activity.teachers[1..<activity.teachers.count].map{ (teacher: String)->String in
-                return self.getShortTeacherRecord(teacher: teacher)
-            }.joined(separator: ", ")
-        }
-        
-        self.photoTeacher.image = UIImage(named: "baseTeacher")
-        */
+        self.groupNames.text = activity.groups.first!
     }
-    
-    
-    /*
-    // Получение сокращенной записи для идентификации преподавателя
-    func getShortTeacherRecord(teacher: String)->String{
-        
-        if teacher == ""{
-            return teacher
-        }
-        
-        // Выделение инициалов преподавателя
-        let teacherParts = teacher.split(separator: " ").map{
-            return String($0)
-        }
-        // Сокращенные инициалы (без фамилии)
-        let notSurnamePart = teacherParts[1..<teacherParts.count].map{ names in
-            return ("\(names.first!).")
-        }.joined(separator: " ")
-        
-        return "\(teacherParts.first!) \(notSurnamePart)"
-    }*/
     
     
     // Градиент для карточки

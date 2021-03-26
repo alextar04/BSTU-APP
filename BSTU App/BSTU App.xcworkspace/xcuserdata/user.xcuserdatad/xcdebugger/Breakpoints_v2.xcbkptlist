@@ -6820,22 +6820,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "76F5B2A5-BCF3-4F0F-8847-E5AA2C924052"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BSTU App/Teachers/TeacherSchedule/TeacherScheduleViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
-            landmarkName = "getSheduleForTeacher(teacherName:teacherLink:completion:errorClosure:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "C6EEC795-7BA4-47FB-B055-62217EFF74A0"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -6843,8 +6827,8 @@
             filePath = "BSTU App/Teachers/TeacherSchedule/TeacherScheduleViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "getSheduleForTeacher(teacherName:teacherLink:completion:errorClosure:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -6859,8 +6843,24 @@
             filePath = "BSTU App/Teachers/TeacherSchedule/TeacherScheduleViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "getSheduleForTeacher(teacherName:teacherLink:completion:errorClosure:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D1FB06D1-F7B1-45D4-806B-918FFD91F3A7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BSTU App/Teachers/TeacherSchedule/TeacherScheduleViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "getSheduleForTeacher(teacherName:teacherLink:completion:errorClosure:)"
             landmarkType = "7">
          </BreakpointContent>

@@ -11,11 +11,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="er4-o9-aND" customClass="TeacherScheduleCard" customModule="BSTU_App" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="397" height="175"/>
+            <rect key="frame" x="0.0" y="0.0" width="397" height="150"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VWz-zi-vwb">
-                    <rect key="frame" x="0.0" y="0.0" width="397" height="175"/>
+                    <rect key="frame" x="0.0" y="0.0" width="397" height="150"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Физкультура" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1hL-kP-2fi">
                             <rect key="frame" x="22" y="31" width="190" height="20"/>
@@ -24,15 +24,6 @@
                                 <constraint firstAttribute="height" constant="20" id="gtW-tK-pTU"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Названия групп" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F3L-4Q-Mry">
-                            <rect key="frame" x="22" y="103" width="365" height="64"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="64" id="bfT-aU-eU6"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -71,14 +62,23 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Названия групп" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F3L-4Q-Mry">
+                            <rect key="frame" x="22" y="94" width="365" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="bfT-aU-eU6"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="5fW-GB-PLP" firstAttribute="leading" secondItem="VWz-zi-vwb" secondAttribute="leading" constant="22" id="9mL-kr-7r8"/>
                         <constraint firstItem="TsA-le-D0n" firstAttribute="top" secondItem="VWz-zi-vwb" secondAttribute="top" constant="31" id="BYI-XB-dol"/>
                         <constraint firstAttribute="trailing" secondItem="TsA-le-D0n" secondAttribute="trailing" constant="19" id="DAK-R3-Uus"/>
-                        <constraint firstAttribute="height" constant="175" id="EPD-GK-wPY"/>
-                        <constraint firstItem="F3L-4Q-Mry" firstAttribute="top" secondItem="5fW-GB-PLP" secondAttribute="bottom" constant="22" id="LkI-Bz-HWy"/>
+                        <constraint firstAttribute="height" constant="150" id="EPD-GK-wPY"/>
+                        <constraint firstItem="F3L-4Q-Mry" firstAttribute="top" secondItem="5fW-GB-PLP" secondAttribute="bottom" constant="13" id="LkI-Bz-HWy"/>
                         <constraint firstItem="TsA-le-D0n" firstAttribute="leading" secondItem="1hL-kP-2fi" secondAttribute="trailing" id="O45-ch-KU2"/>
                         <constraint firstItem="Wop-NF-Z6e" firstAttribute="top" secondItem="TsA-le-D0n" secondAttribute="bottom" constant="9" id="PHY-cw-03f"/>
                         <constraint firstAttribute="trailing" secondItem="Wop-NF-Z6e" secondAttribute="trailing" constant="19" id="SR8-6a-aFX"/>
@@ -123,7 +123,7 @@
                 <outlet property="timeLabel" destination="5fW-GB-PLP" id="DBx-ox-UjE"/>
                 <outlet property="typeActivity" destination="TsA-le-D0n" id="Odz-S2-l8J"/>
             </connections>
-            <point key="canvasLocation" x="672.79999999999995" y="4.9475262368815596"/>
+            <point key="canvasLocation" x="672.79999999999995" y="-6.2968515742128943"/>
         </view>
     </objects>
     <resources>
