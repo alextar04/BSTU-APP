@@ -111,6 +111,9 @@ class TeacherScheduleCard: UIView{
         case .lection:
             self.typeActivity.backgroundColor = .lectionsSubjectColor
             self.typeActivity.text = "Лекция"
+            if self.typeActivity.isTruncated(){
+                self.typeActivity.text = "Лек"
+            }
         case .laboratory:
             self.typeActivity.backgroundColor = .practiceSubjectColor
             self.typeActivity.text = "Лабораторная"
@@ -120,20 +123,26 @@ class TeacherScheduleCard: UIView{
         case .practice:
             self.typeActivity.backgroundColor = .laboratorySubjectColor
             self.typeActivity.text = "Практика"
+            if self.typeActivity.isTruncated(){
+                self.typeActivity.text = "Пр"
+            }
         case .test:
             self.typeActivity.backgroundColor = .examinationSubjectColor
             self.typeActivity.text = "Зачет"
+            if self.typeActivity.isTruncated(){
+                self.typeActivity.text = "Зач"
+            }
         case .consultation:
             self.typeActivity.backgroundColor = .consultationSubjectColor
             self.typeActivity.text = "Консультация"
             if self.typeActivity.isTruncated(){
-                self.typeActivity.text = "К"
+                self.typeActivity.text = "Конс"
             }
         case .examination:
             self.typeActivity.backgroundColor = .examinationSubjectColor
             self.typeActivity.text = "Экзамен"
             if self.typeActivity.isTruncated(){
-                self.typeActivity.text = "Э"
+                self.typeActivity.text = "Экз"
             }
         }
     }

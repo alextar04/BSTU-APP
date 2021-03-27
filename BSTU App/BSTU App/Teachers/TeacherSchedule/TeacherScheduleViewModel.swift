@@ -26,134 +26,169 @@ class TeacherScheduleViewModel{
         
         self.resultDaysCurrentWeek = [[TeacherScheduleModel]]()
         self.resultDaysNextWeek = [[TeacherScheduleModel]]()
+        self.resultExams = [TeacherScheduleModel]()
         
         AF.request(teacherLink).responseString(encoding: String.Encoding.utf8) {
             [weak self] html in
                 
-                do{
-                    let document = try SwiftSoup.parse(html.result.get())
-                    
-                    let notCorrespondenceGroupsSchedule = try document.select("table").tagName("schedule").first()
-                    
-                    let timeArray = try self!.getTimeIntervalsArray(timeElements: try notCorrespondenceGroupsSchedule?.getElementsByClass("time") as! Elements)
-                    
-                    let typeWeekInformation = try notCorrespondenceGroupsSchedule?.getElementsByClass("bottom_banner").first()?.text()
-                    ((typeWeekInformation?.contains("числитель"))!) ? (self?.isCurrentWeekNumerator = true) : (self?.isCurrentWeekNumerator = false)
-                    
-                    let listLessons = try notCorrespondenceGroupsSchedule?.getElementsByClass("schedule_std")
-                    
-                    // Список занятий по дням
-                    var listLessonByDaysNumerator = [[TeacherScheduleModel]].init(repeating: [], count: 7)
-                    var listLessonByDaysDenomentor = [[TeacherScheduleModel]].init(repeating: [], count: 7)
-                    for (index, lesson) in listLessons!.enumerated(){
+                    do{
+                        let document = try SwiftSoup.parse(html.result.get())
+                        let notCorrespondenceGroupsSchedule = try document.select("table").tagName("schedule").first()
                         
-                    var lessonParsed: Bool = false
-                    for cellType in [TypeLesson.schedule_half,
-                                    TypeLesson.schedule_std]{
-                        if !lessonParsed{
-                            switch cellType {
-                            // Обработка ячеек с занятиями числитель/знаменатель
-                            case .schedule_half:
-                                let notPermanentLesson = try lesson.getElementsByClass("schedule_half")
-                                if notPermanentLesson.count != 0{
-                                    let numeratorRecord = notPermanentLesson.first()
-                                    let denomenatorRecord = notPermanentLesson.last()
-                                    
-                                    for (indexIteration, record) in [numeratorRecord, denomenatorRecord].enumerated(){
+                        let timeArray = try self!.getTimeIntervalsArray(timeElements: try notCorrespondenceGroupsSchedule?.getElementsByClass("time") as! Elements)
+                        
+                        let typeWeekInformation = try notCorrespondenceGroupsSchedule?.getElementsByClass("bottom_banner").first()?.text()
+                        ((typeWeekInformation?.contains("числитель"))!) ? (self?.isCurrentWeekNumerator = true) : (self?.isCurrentWeekNumerator = false)
+                        
+                        let listLessons = try notCorrespondenceGroupsSchedule?.getElementsByClass("schedule_std")
+                        
+                        // Список занятий по дням
+                        var listLessonByDaysNumerator = [[TeacherScheduleModel]].init(repeating: [], count: 7)
+                        var listLessonByDaysDenomentor = [[TeacherScheduleModel]].init(repeating: [], count: 7)
+                        for (index, lesson) in listLessons!.enumerated(){
+                            
+                        var lessonParsed: Bool = false
+                        for cellType in [TypeLesson.schedule_half,
+                                        TypeLesson.schedule_std]{
+                            if !lessonParsed{
+                                switch cellType {
+                                // Обработка ячеек с занятиями числитель/знаменатель
+                                case .schedule_half:
+                                    let notPermanentLesson = try lesson.getElementsByClass("schedule_half")
+                                    if notPermanentLesson.count != 0{
+                                        let numeratorRecord = notPermanentLesson.first()
+                                        let denomenatorRecord = notPermanentLesson.last()
                                         
-                                        if try record?.text() != ""{
-                                            let typeLessonAndPlace = try record!.getElementsByClass("place_half").first()?.text()
-                                            let audience = try record!.getElementsByClass("a_style").first()?.text()
-                                            let subject = try record!.getElementsByClass("center_p").first()?.text()
-                                            let groups = try record!.getElementsByClass("sp_half").first()?.text()
+                                        for (indexIteration, record) in [numeratorRecord, denomenatorRecord].enumerated(){
                                             
-                                            var timeStart = timeArray[index / 6].0
-                                            var timeFinish = timeArray[index / 6].1
-                                            if timeStart == "11:45"{
-                                                let breakTop = try record!.getElementsByClass("break_top")
-                                                let breakBottom = try record!.getElementsByClass("break_bottom")
-                                                if breakTop.count != 0{
-                                                    // Перерыв до часовика
-                                                    (timeStart, timeFinish) = self!.makeTimePairWithBreak(breakAtFirst: true,
-                                                                                                           unpreparedTime: (timeStart, timeFinish))
+                                            if try record?.text() != ""{
+                                                let typeLessonAndPlace = try record!.getElementsByClass("place_half").first()?.text()
+                                                let audience = try record!.getElementsByClass("a_style").first()?.text()
+                                                let subject = try record!.getElementsByClass("center_p").first()?.text()
+                                                let groups = try record!.getElementsByClass("sp_half").first()?.text()
+                                                
+                                                var timeStart = timeArray[index / 6].0
+                                                var timeFinish = timeArray[index / 6].1
+                                                if timeStart == "11:45"{
+                                                    let breakTop = try record!.getElementsByClass("break_top")
+                                                    let breakBottom = try record!.getElementsByClass("break_bottom")
+                                                    if breakTop.count != 0{
+                                                        // Перерыв до часовика
+                                                        (timeStart, timeFinish) = self!.makeTimePairWithBreak(breakAtFirst: true,
+                                                                                                               unpreparedTime: (timeStart, timeFinish))
+                                                    }
+                                                    if breakBottom.count != 0{
+                                                        // Перерыв после часовика
+                                                        (timeStart, timeFinish) = self!.makeTimePairWithBreak(breakAtFirst: false,
+                                                                                                              unpreparedTime: (timeStart, timeFinish))
+                                                    }
                                                 }
-                                                if breakBottom.count != 0{
-                                                    // Перерыв после часовика
-                                                    (timeStart, timeFinish) = self!.makeTimePairWithBreak(breakAtFirst: false,
-                                                                                                          unpreparedTime: (timeStart, timeFinish))
-                                                }
+                                                
+                                                let scheduleCell = TeacherScheduleModel()
+                                                scheduleCell.nameSubject = subject
+                                                scheduleCell.groups = [String](arrayLiteral: groups!)
+                                                scheduleCell.audiences = [String](arrayLiteral: audience!)
+                                                scheduleCell.typeActivity = self!.getTypeSubjectByStringName(name: String((typeLessonAndPlace?
+                                                    .prefix(typeLessonAndPlace!.count - audience!.count))!))
+                                                scheduleCell.timeStart = timeStart
+                                                scheduleCell.timeEnd = timeFinish
+                                                
+                                                (indexIteration == 0) ? (listLessonByDaysNumerator[index % 6].append(scheduleCell)):
+                                                                         listLessonByDaysDenomentor[index % 6].append(scheduleCell)
                                             }
-                                            
-                                            let scheduleCell = TeacherScheduleModel()
-                                            scheduleCell.nameSubject = subject
-                                            scheduleCell.groups = [String](arrayLiteral: groups!)
-                                            scheduleCell.audiences = [String](arrayLiteral: audience!)
-                                            scheduleCell.typeActivity = self!.getTypeSubjectByStringName(name: String((typeLessonAndPlace?
-                                                .prefix(typeLessonAndPlace!.count - audience!.count))!))
-                                            scheduleCell.timeStart = timeStart
-                                            scheduleCell.timeEnd = timeFinish
-                                            
-                                            (indexIteration == 0) ? (listLessonByDaysNumerator[index % 6].append(scheduleCell)):
-                                                                     listLessonByDaysDenomentor[index % 6].append(scheduleCell)
                                         }
+                                        
+                                        lessonParsed = true
+                                        break
                                     }
+                                // Обработка ячеек с постоянными занятиями
+                                case .schedule_std:
                                     
+                                    if try lesson.text() != ""{
+                                        
+                                        let typeLessonAndPlace = try lesson.getElementsByClass("place_std").first()?.text()
+                                        let audience = try lesson.getElementsByClass("a_style").first()?.text()
+                                        let subject = try lesson.getElementsByClass("center_p").first()?.text()
+                                        let groups = try lesson.getElementsByClass("sp_std").first()?.text()
+                                        
+                                        var timeStart = timeArray[index / 6].0
+                                        var timeFinish = timeArray[index / 6].1
+                                        if timeStart == "11:45"{
+                                            let breakTop = try lesson.getElementsByClass("break_top")
+                                            let breakBottom = try lesson.getElementsByClass("break_bottom")
+                                            if breakTop.count != 0{
+                                                // Перерыв до часовика
+                                                (timeStart, timeFinish) = self!.makeTimePairWithBreak(breakAtFirst: true,
+                                                                                                       unpreparedTime: (timeStart, timeFinish))
+                                            }
+                                            if breakBottom.count != 0{
+                                                // Перерыв после часовика
+                                                (timeStart, timeFinish) = self!.makeTimePairWithBreak(breakAtFirst: false,
+                                                                                                      unpreparedTime: (timeStart, timeFinish))
+                                            }
+                                        }
+                                        
+                                        let scheduleCell = TeacherScheduleModel()
+                                        scheduleCell.nameSubject = subject
+                                        scheduleCell.groups = [String](arrayLiteral: groups!)
+                                        scheduleCell.audiences = [String](arrayLiteral: audience!)
+                                        scheduleCell.typeActivity = self!.getTypeSubjectByStringName(name: String((typeLessonAndPlace?
+                                            .prefix(typeLessonAndPlace!.count - audience!.count))!))
+                                        scheduleCell.timeStart = timeStart
+                                        scheduleCell.timeEnd = timeFinish
+                                        
+                                        listLessonByDaysNumerator[index % 6].append(scheduleCell)
+                                        listLessonByDaysDenomentor[index % 6].append(scheduleCell)
+                                    }
                                     lessonParsed = true
                                     break
                                 }
-                            // Обработка ячеек с постоянными занятиями
-                            case .schedule_std:
-                                
-                                if try lesson.text() != ""{
-                                    
-                                    let typeLessonAndPlace = try lesson.getElementsByClass("place_std").first()?.text()
-                                    let audience = try lesson.getElementsByClass("a_style").first()?.text()
-                                    let subject = try lesson.getElementsByClass("center_p").first()?.text()
-                                    let groups = try lesson.getElementsByClass("sp_std").first()?.text()
-                                    
-                                    var timeStart = timeArray[index / 6].0
-                                    var timeFinish = timeArray[index / 6].1
-                                    if timeStart == "11:45"{
-                                        let breakTop = try lesson.getElementsByClass("break_top")
-                                        let breakBottom = try lesson.getElementsByClass("break_bottom")
-                                        if breakTop.count != 0{
-                                            // Перерыв до часовика
-                                            (timeStart, timeFinish) = self!.makeTimePairWithBreak(breakAtFirst: true,
-                                                                                                   unpreparedTime: (timeStart, timeFinish))
-                                        }
-                                        if breakBottom.count != 0{
-                                            // Перерыв после часовика
-                                            (timeStart, timeFinish) = self!.makeTimePairWithBreak(breakAtFirst: false,
-                                                                                                  unpreparedTime: (timeStart, timeFinish))
-                                        }
-                                    }
-                                    
-                                    let scheduleCell = TeacherScheduleModel()
-                                    scheduleCell.nameSubject = subject
-                                    scheduleCell.groups = [String](arrayLiteral: groups!)
-                                    scheduleCell.audiences = [String](arrayLiteral: audience!)
-                                    scheduleCell.typeActivity = self!.getTypeSubjectByStringName(name: String((typeLessonAndPlace?
-                                        .prefix(typeLessonAndPlace!.count - audience!.count))!))
-                                    scheduleCell.timeStart = timeStart
-                                    scheduleCell.timeEnd = timeFinish
-                                    
-                                    listLessonByDaysNumerator[index % 6].append(scheduleCell)
-                                    listLessonByDaysDenomentor[index % 6].append(scheduleCell)
-                                }
-                                lessonParsed = true
-                                break
                             }
                         }
                     }
-                }
-                
-                if (self!.isCurrentWeekNumerator) {
-                    self!.resultDaysCurrentWeek = listLessonByDaysNumerator
-                    self!.resultDaysNextWeek = listLessonByDaysDenomentor
-                } else {
-                    self!.resultDaysCurrentWeek = listLessonByDaysDenomentor
-                    self!.resultDaysNextWeek = listLessonByDaysNumerator
-                }
+                    
+                    let documentSecondParse = try SwiftSoup.parse(html.result.get())
+                    let additionalSchedule = try documentSecondParse.getElementsByClass("schedule_post")
+                        
+                    // Обработка экзаменационного расписания
+                    // Обработка расписания заочных групп
+                    for schedule in additionalSchedule{
+                        
+                        let activities = try schedule.select("tr")
+                        
+                        // 0, 1, 2, 3 и последняя запись <tr> - заголовочные
+                        for activity in activities[4...activities.count-2]{
+                            
+                            if try activity.text() == ""{
+                                continue
+                            }
+                            
+                            let fields = try activity.getElementsByClass("schedule_post2")
+                            let dateTime = "\(try fields[0].text()) \(try fields[1].text())"
+                            let subject = try fields[3].text()
+                            let groups = try fields[4].text()
+                            
+                            let audienceAndTypeActivity = try fields[2].text()
+                            let typeActivity = String(audienceAndTypeActivity.split(separator: " ").first ?? "")
+                            let audience = try String(fields[2].text().suffix(audienceAndTypeActivity.count - typeActivity.count))
+                            
+                            let scheduleCell = TeacherScheduleModel()
+                            scheduleCell.nameSubject = subject
+                            scheduleCell.typeActivity = self!.getTypeSubjectByStringName(name: "\(String(typeActivity)) ")
+                            scheduleCell.groups = [String](arrayLiteral: groups)
+                            scheduleCell.audiences = [String](arrayLiteral: audience)
+                            scheduleCell.timeStart = dateTime
+                            self!.resultExams.append(scheduleCell)
+                        }
+                    }
+                        
+                    if (self!.isCurrentWeekNumerator) {
+                        self!.resultDaysCurrentWeek = listLessonByDaysNumerator
+                        self!.resultDaysNextWeek = listLessonByDaysDenomentor
+                    } else {
+                        self!.resultDaysCurrentWeek = listLessonByDaysDenomentor
+                        self!.resultDaysNextWeek = listLessonByDaysNumerator
+                    }
                     
                 completion()
             } catch {
