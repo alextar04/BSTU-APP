@@ -2912,8 +2912,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "694"
             endingLineNumber = "694"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "changeDay(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2928,8 +2928,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "158"
             endingLineNumber = "158"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "setSettingsWeekType()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2944,8 +2944,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "233"
             endingLineNumber = "233"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "setSettingsWeekType()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2960,8 +2960,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "220"
             endingLineNumber = "220"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "setSettingsWeekType()"
+            landmarkType = "7">
             <Locations>
                <Location
                   uuid = "D94029A9-1C57-4C06-B0CE-7160B1FD9E62 - a16c15d21bc209f5"
@@ -3008,8 +3008,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "182"
             endingLineNumber = "182"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "setSettingsWeekType()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3024,8 +3024,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "189"
             endingLineNumber = "189"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "setSettingsWeekType()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3040,8 +3040,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "206"
             endingLineNumber = "206"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "setSettingsWeekType()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3056,8 +3056,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "208"
             endingLineNumber = "208"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "setSettingsWeekType()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3072,8 +3072,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "292"
             endingLineNumber = "292"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "setSettingsWeekType()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3088,8 +3088,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "709"
             endingLineNumber = "709"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "changeDayText(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3104,8 +3104,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "710"
             endingLineNumber = "710"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "changeDayText(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3120,8 +3120,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "177"
             endingLineNumber = "177"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "setSettingsWeekType()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3136,8 +3136,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "181"
             endingLineNumber = "181"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "setSettingsWeekType()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3152,8 +3152,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "388"
             endingLineNumber = "388"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "setSettingsExamViews()"
+            landmarkType = "7">
             <Locations>
                <Location
                   uuid = "C9074F90-7AD5-4F21-9B1A-25B26A29D91E - 801a9c41ac9ea4f5"
@@ -3200,8 +3200,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "358"
             endingLineNumber = "358"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "setSettingsExamViews()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3216,8 +3216,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "553"
             endingLineNumber = "553"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "createViewForSheduleTable(data:frame:typeCard:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3232,8 +3232,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "636"
             endingLineNumber = "636"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "loadViewFromLeftSide()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3248,8 +3248,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "488"
             endingLineNumber = "488"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "createViewForSheduleTable(data:frame:typeCard:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3264,8 +3264,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "338"
             endingLineNumber = "338"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "setSettingsExamViews()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3584,8 +3584,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "631"
             endingLineNumber = "631"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "loadViewFromLeftSide()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3600,8 +3600,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "664"
             endingLineNumber = "664"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "loadViewFromRightSide()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3648,8 +3648,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "519"
             endingLineNumber = "519"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "createViewForSheduleTable(data:frame:typeCard:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3664,8 +3664,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "604"
             endingLineNumber = "604"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "handleSwipes(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3680,8 +3680,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "616"
             endingLineNumber = "616"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "handleSwipes(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3696,8 +3696,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "247"
             endingLineNumber = "247"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "setSettingsWeekType()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3712,8 +3712,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "261"
             endingLineNumber = "261"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "setSettingsWeekType()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3792,8 +3792,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "429"
             endingLineNumber = "429"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "setSettingsSheduleTable()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3824,8 +3824,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "443"
             endingLineNumber = "443"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "setSettingsSheduleTable()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3840,8 +3840,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "405"
             endingLineNumber = "405"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "setSettingsSheduleTable()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3920,8 +3920,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "18"
             endingLineNumber = "18"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4014,8 +4014,8 @@
             filePath = "BSTU App/RootController/RootViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
             landmarkName = "currentViewMoving(recognizer:listDisablers:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4030,8 +4030,8 @@
             filePath = "BSTU App/RootController/RootViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "192"
-            endingLineNumber = "192"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
             landmarkName = "currentViewMoving(recognizer:listDisablers:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4126,8 +4126,8 @@
             filePath = "BSTU App/RootController/RootViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
             landmarkName = "currentViewMoving(recognizer:listDisablers:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4416,8 +4416,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "183"
             endingLineNumber = "183"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "setSettingsWeekType()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4432,8 +4432,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "215"
             endingLineNumber = "215"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "setSettingsWeekType()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5196,8 +5196,8 @@
             filePath = "BSTU App/RootController/RootViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "249"
-            endingLineNumber = "249"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
             landmarkName = "successAccountChangeChapter(newPageType:personalCabinetData:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -5212,8 +5212,8 @@
             filePath = "BSTU App/RootController/RootViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "246"
-            endingLineNumber = "246"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
             landmarkName = "successAccountChangeChapter(newPageType:personalCabinetData:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -5582,8 +5582,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "602"
             endingLineNumber = "602"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "handleSwipes(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5598,8 +5598,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "110"
             endingLineNumber = "110"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "setupBackButton()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5614,8 +5614,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "76"
             endingLineNumber = "76"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5867,8 +5867,8 @@
             filePath = "BSTU App/RootController/RootViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "230"
-            endingLineNumber = "230"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
             landmarkName = "successAccountChangeChapter(newPageType:personalCabinetData:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -6381,8 +6381,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "454"
             endingLineNumber = "454"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "setSettingsSheduleTable()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6397,8 +6397,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "478"
             endingLineNumber = "478"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "setSettingsSheduleTable()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6429,8 +6429,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "86"
             endingLineNumber = "86"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "viewDidAppear(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6445,8 +6445,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "434"
             endingLineNumber = "434"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "setSettingsSheduleTable()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6811,8 +6811,8 @@
             filePath = "BSTU App/RootController/RootViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
             landmarkName = "currentViewMoving(recognizer:listDisablers:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -6990,6 +6990,86 @@
             startingLineNumber = "163"
             endingLineNumber = "163"
             landmarkName = "getSheduleForTeacher(teacherName:teacherLink:completion:errorClosure:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "688A2321-0FDF-4413-BEF3-1BC94DF8EE42"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BSTU App/FoodPoints/FoodPointsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "setupTableDisplay()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1E1AC424-624F-4A35-9F30-8DD8A16A871D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BSTU App/FoodPoints/FoodPointsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "viewDidAppear(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "573DC16A-1A00-4FE3-92B0-95E785060305"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BSTU App/FoodPoints/FoodPointsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
+            landmarkName = "setupTableRoomData()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "056B8DAE-777C-472A-85FB-666C6508182C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BSTU App/FoodPoints/FoodPointsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
+            landmarkName = "setupTableRoomData()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F8814076-5B24-4783-9710-A6C7D02B5F15"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BSTU App/FoodPoints/FoodPointsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
+            landmarkName = "setupTableRoomData()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

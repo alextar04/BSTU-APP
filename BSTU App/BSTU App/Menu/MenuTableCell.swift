@@ -25,8 +25,11 @@ class MenuTableCell: UITableViewCell{
             self.chapterIcon.image = UIImage(named: "navigationIcon")
         case .teachers:
             self.chapterName.text = "Преподаватели"
-            //self.chapterName.textColor = .lightGray
             self.chapterIcon.image = UIImage(named: "teachersIcon")
+        case .foodPoints:
+            self.chapterName.text = "Пункты питания"
+            //self.chapterName.textColor = .lightGray
+            self.chapterIcon.image = UIImage(named: "foodPoints")
             //self.isUserInteractionEnabled = false
         case .cabinet:
             self.chapterName.text = "Личный кабинет"
@@ -40,5 +43,6 @@ enum ChapterType: String{
     case schedule = "Расписание"
     case navigation = "Навигация"
     case teachers = "Преподаватели"
+    case foodPoints = "Пункты питания"
     case cabinet = "Личный кабинет"
 }

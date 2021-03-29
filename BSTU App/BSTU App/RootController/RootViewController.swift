@@ -126,6 +126,10 @@ class RootViewController: UIViewController {
             case .teachers:
                 self.currentController = UIStoryboard(name: "ListTeachersFirstLettersViewController", bundle: nil).instantiateViewController(withIdentifier: "ListTeachersFirstLettersViewControllerID") as! ListTeachersFirstLettersViewController
                 self.currentNavigationController = UINavigationController(rootViewController: self.currentController!)
+            
+            case .foodPoints:
+                self.currentController = UIStoryboard(name: "FoodPointsViewController", bundle: nil).instantiateViewController(withIdentifier: "FoodPointsViewControllerID") as! FoodPointsViewController
+                self.currentNavigationController = UINavigationController(rootViewController: self.currentController!)
                 
             case .cabinet:
                 

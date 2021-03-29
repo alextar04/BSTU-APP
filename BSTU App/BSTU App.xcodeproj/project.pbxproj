@@ -92,6 +92,8 @@
 		CE47D67B26009196009D1CCA /* PersonalCabinetMainPageViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE47D67A26009196009D1CCA /* PersonalCabinetMainPageViewController.storyboard */; };
 		CE47D67F26009499009D1CCA /* SigninViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE47D67E26009499009D1CCA /* SigninViewModel.swift */; };
 		CE51EE4A260223C300F6FFFB /* PersonalCabinetViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51EE49260223C300F6FFFB /* PersonalCabinetViewControllerExtensions.swift */; };
+		CE5AFBCD2611E25900D01077 /* FoodPointsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5AFBCC2611E25900D01077 /* FoodPointsViewModel.swift */; };
+		CE5AFBD02612131300D01077 /* FoodPointsColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5AFBCF2612131300D01077 /* FoodPointsColorExtension.swift */; };
 		CE5B3DFA25F530F800DC66E9 /* MenuViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE5B3DF925F530F800DC66E9 /* MenuViewController.storyboard */; };
 		CE5B3DFC25F539C700DC66E9 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B3DFB25F539C700DC66E9 /* MenuViewController.swift */; };
 		CE68297B2600D5CB008556FA /* PersonalCabinetMainPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68297A2600D5CB008556FA /* PersonalCabinetMainPageViewModel.swift */; };
@@ -103,6 +105,12 @@
 		CE7F81C425FA0F5400A70CCB /* ListTeachersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7F81C325FA0F5400A70CCB /* ListTeachersViewModel.swift */; };
 		CE7F81C625FA0F8D00A70CCB /* ListTeachersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7F81C525FA0F8D00A70CCB /* ListTeachersModel.swift */; };
 		CE81A73425F0FCA5007358F7 /* SheduleLabelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE81A73325F0FCA5007358F7 /* SheduleLabelExtensions.swift */; };
+		CE8F4D0F2611C04900632E9E /* FoodPointsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE8F4D0E2611C04900632E9E /* FoodPointsViewController.storyboard */; };
+		CE8F4D112611C3CD00632E9E /* FoodItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F4D102611C3CD00632E9E /* FoodItemCell.xib */; };
+		CE8F4D132611C64400632E9E /* FoodPointsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F4D122611C64400632E9E /* FoodPointsViewController.swift */; };
+		CE8F4D172611C6ED00632E9E /* FoodItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F4D162611C6ED00632E9E /* FoodItemCell.swift */; };
+		CE8F4D192611CC5300632E9E /* FoodPointsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F4D182611CC5300632E9E /* FoodPointsModel.swift */; };
+		CE8F4D1D2611D89D00632E9E /* FoodRoomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F4D1C2611D89D00632E9E /* FoodRoomCell.swift */; };
 		CE91140525C3FA020096AB29 /* NavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91140425C3FA020096AB29 /* NavigationViewModel.swift */; };
 		CE91140725C437740096AB29 /* StoreySwitcherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE91140625C437740096AB29 /* StoreySwitcherView.xib */; };
 		CE91140925C439460096AB29 /* StoreySwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91140825C439460096AB29 /* StoreySwitcherView.swift */; };
@@ -231,6 +239,8 @@
 		CE47D67A26009196009D1CCA /* PersonalCabinetMainPageViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PersonalCabinetMainPageViewController.storyboard; sourceTree = "<group>"; };
 		CE47D67E26009499009D1CCA /* SigninViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewModel.swift; sourceTree = "<group>"; };
 		CE51EE49260223C300F6FFFB /* PersonalCabinetViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCabinetViewControllerExtensions.swift; sourceTree = "<group>"; };
+		CE5AFBCC2611E25900D01077 /* FoodPointsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPointsViewModel.swift; sourceTree = "<group>"; };
+		CE5AFBCF2612131300D01077 /* FoodPointsColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPointsColorExtension.swift; sourceTree = "<group>"; };
 		CE5B3DF925F530F800DC66E9 /* MenuViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MenuViewController.storyboard; sourceTree = "<group>"; };
 		CE5B3DFB25F539C700DC66E9 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		CE68297A2600D5CB008556FA /* PersonalCabinetMainPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCabinetMainPageViewModel.swift; sourceTree = "<group>"; };
@@ -242,6 +252,12 @@
 		CE7F81C325FA0F5400A70CCB /* ListTeachersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTeachersViewModel.swift; sourceTree = "<group>"; };
 		CE7F81C525FA0F8D00A70CCB /* ListTeachersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTeachersModel.swift; sourceTree = "<group>"; };
 		CE81A73325F0FCA5007358F7 /* SheduleLabelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheduleLabelExtensions.swift; sourceTree = "<group>"; };
+		CE8F4D0E2611C04900632E9E /* FoodPointsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FoodPointsViewController.storyboard; sourceTree = "<group>"; };
+		CE8F4D102611C3CD00632E9E /* FoodItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodItemCell.xib; sourceTree = "<group>"; };
+		CE8F4D122611C64400632E9E /* FoodPointsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPointsViewController.swift; sourceTree = "<group>"; };
+		CE8F4D162611C6ED00632E9E /* FoodItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemCell.swift; sourceTree = "<group>"; };
+		CE8F4D182611CC5300632E9E /* FoodPointsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPointsModel.swift; sourceTree = "<group>"; };
+		CE8F4D1C2611D89D00632E9E /* FoodRoomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodRoomCell.swift; sourceTree = "<group>"; };
 		CE91140425C3FA020096AB29 /* NavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModel.swift; sourceTree = "<group>"; };
 		CE91140625C437740096AB29 /* StoreySwitcherView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreySwitcherView.xib; sourceTree = "<group>"; };
 		CE91140825C439460096AB29 /* StoreySwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreySwitcherView.swift; sourceTree = "<group>"; };
@@ -346,6 +362,7 @@
 				CE04A3B325EF9B9600BE073D /* Shedule */,
 				CE7F81B525FA071A00A70CCB /* Teachers */,
 				CE380A0025BC4F070028622B /* Navigation */,
+				CE8F4D0D2611BEFA00632E9E /* FoodPoints */,
 				CECE8B9E25FCB6E1008D7840 /* PersonalCabinet */,
 				CE037E6525BC425700C50C16 /* AppDelegate.swift */,
 				CE037E6E25BC425E00C50C16 /* Assets.xcassets */,
@@ -698,6 +715,14 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		CE5AFBCE261212FC00D01077 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CE5AFBCF2612131300D01077 /* FoodPointsColorExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		CE5B3DFD25F539CD00DC66E9 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -755,6 +780,37 @@
 			isa = PBXGroup;
 			children = (
 				CE7F81C125FA0CC000A70CCB /* ListTeachersTableCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CE8F4D0D2611BEFA00632E9E /* FoodPoints */ = {
+			isa = PBXGroup;
+			children = (
+				CE5AFBCE261212FC00D01077 /* Extensions */,
+				CE8F4D142611C6C700632E9E /* Storyboards */,
+				CE8F4D152611C6DE00632E9E /* Views */,
+				CE8F4D122611C64400632E9E /* FoodPointsViewController.swift */,
+				CE5AFBCC2611E25900D01077 /* FoodPointsViewModel.swift */,
+				CE8F4D182611CC5300632E9E /* FoodPointsModel.swift */,
+			);
+			path = FoodPoints;
+			sourceTree = "<group>";
+		};
+		CE8F4D142611C6C700632E9E /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				CE8F4D0E2611C04900632E9E /* FoodPointsViewController.storyboard */,
+				CE8F4D102611C3CD00632E9E /* FoodItemCell.xib */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		CE8F4D152611C6DE00632E9E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CE8F4D162611C6ED00632E9E /* FoodItemCell.swift */,
+				CE8F4D1C2611D89D00632E9E /* FoodRoomCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -944,6 +1000,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE8F4D112611C3CD00632E9E /* FoodItemCell.xib in Resources */,
 				CE9DA652260C796A00524BE3 /* TeacherScheduleCard.xib in Resources */,
 				CE04A3F825EF9B9700BE073D /* GroupSheduleViewController.storyboard in Resources */,
 				CE380A2D25BC6B590028622B /* UniversityCorpsView.xib in Resources */,
@@ -973,6 +1030,7 @@
 				CE7F81B925FA079000A70CCB /* ListTeachers.storyboard in Resources */,
 				CE9DA654260C7A1700524BE3 /* TeacherScheduleViewController.storyboard in Resources */,
 				CE04A3E925EF9B9700BE073D /* leftArrow.png in Resources */,
+				CE8F4D0F2611C04900632E9E /* FoodPointsViewController.storyboard in Resources */,
 				CE47D67B26009196009D1CCA /* PersonalCabinetMainPageViewController.storyboard in Resources */,
 				CE037E7225BC425E00C50C16 /* LaunchScreen.storyboard in Resources */,
 				CE04A3FA25EF9B9700BE073D /* EmptySheduleView.xib in Resources */,
@@ -1071,14 +1129,18 @@
 				CEA4C9BA2603403500716C07 /* AttestationViewController.swift in Sources */,
 				CEACB2D925C7F2F900F4ADD3 /* Map.swift in Sources */,
 				CE7F81BF25FA0C8800A70CCB /* ListTeachersViewController.swift in Sources */,
+				CE8F4D172611C6ED00632E9E /* FoodItemCell.swift in Sources */,
+				CE8F4D192611CC5300632E9E /* FoodPointsModel.swift in Sources */,
 				CE04A3FE25EF9B9700BE073D /* DateSegmentedControl.swift in Sources */,
 				CE009EF325D6F88B00CA8604 /* TypePremiseMapper.swift in Sources */,
 				CE009EED25D6AC8B00CA8604 /* MarkerMapper.swift in Sources */,
 				CEE5B67825D66AAB0023D640 /* MapRoadDotDB.swift in Sources */,
 				CE380A2325BC4F910028622B /* ImageExtensions.swift in Sources */,
+				CE8F4D1D2611D89D00632E9E /* FoodRoomCell.swift in Sources */,
 				CE380A2B25BC4F910028622B /* NavigationViewController.swift in Sources */,
 				CE2B982D2601FB1E0008A2E1 /* PersonalCabinetChapterCard.swift in Sources */,
 				CE01CCA125C2A4BB001388B9 /* SearchPremiseCellTable.swift in Sources */,
+				CE5AFBD02612131300D01077 /* FoodPointsColorExtension.swift in Sources */,
 				CE380A2425BC4F910028622B /* ButtonExtensions.swift in Sources */,
 				CE7F81C425FA0F5400A70CCB /* ListTeachersViewModel.swift in Sources */,
 				CE380A2F25BC6CF30028622B /* UniversityCorpsView.swift in Sources */,
@@ -1117,6 +1179,7 @@
 				CE36FEB3260625E30021D9F0 /* PersonalCabinetMainPageModel.swift in Sources */,
 				CE37A08D25CBFC540046C1F1 /* MapViewModel.swift in Sources */,
 				CEC0C8BA25F6222D00760A0A /* MenuTableCell.swift in Sources */,
+				CE8F4D132611C64400632E9E /* FoodPointsViewController.swift in Sources */,
 				CE9DA656260C7A3E00524BE3 /* TeacherScheduleCard.swift in Sources */,
 				CEEF74CC260B613600199173 /* ListTeachersFirstLettersViewModel.swift in Sources */,
 				CE04A3F225EF9B9700BE073D /* GroupsViewModel.swift in Sources */,
@@ -1125,6 +1188,7 @@
 				CE16978825C151710040AE95 /* ColorExtensions.swift in Sources */,
 				CEE5B68225D674CB0023D640 /* CorpMapper.swift in Sources */,
 				CE04A3E525EF9B9700BE073D /* InstitutionsViewModel.swift in Sources */,
+				CE5AFBCD2611E25900D01077 /* FoodPointsViewModel.swift in Sources */,
 				CE04A3F625EF9B9700BE073D /* SheduleViewExtensions.swift in Sources */,
 				CE9DA64E260C78F900524BE3 /* TeacherScheduleViewController.swift in Sources */,
 			);
