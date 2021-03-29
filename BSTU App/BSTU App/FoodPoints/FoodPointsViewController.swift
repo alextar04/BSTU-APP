@@ -291,6 +291,10 @@ class FoodPointsViewController: UIViewController, UIGestureRecognizerDelegate, U
     // MARK: Настройка отображения Dropdown - контейнера
     func setupDropdownContainerDisplay(){
         
+        // Для iPhone SE уменьшить размер шрифта на кнопке
+        if self.view.frame.width == 320{
+            self.nameRoomDropdownButton.font = UIFont.systemFont(ofSize: 13)
+        }
         self.dropdownContainerView.makeRounding()
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.dropdownContainerView.bounds

@@ -17,7 +17,7 @@ class FoodPointsViewModel{
         
         var result = [FoodRoom]()
         for i in 0...11{
-            result.append(FoodRoom(nameRoom: "Кафе п\(i)офессорско-преподавательское"))
+            result.append(FoodRoom(nameRoom: "Кафе профессорско-преподавательское"))
         }
         result.first?.isSelected = true
         

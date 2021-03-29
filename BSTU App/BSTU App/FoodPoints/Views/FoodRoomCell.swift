@@ -18,6 +18,10 @@ class FoodRoomCell: UITableViewCell{
         
         self.backgroundColor = .foodPointsLightGrayColor
         self.nameRoom.text = roomModel.nameRoom
+        // Для iPhone SE уменьшить размер шрифта написанного текста
+        if self.frame.width == 300{
+            self.nameRoom.font = UIFont.systemFont(ofSize: 12)
+        }
         self.selectionImage.isHidden = !roomModel.isSelected
     }
 }
