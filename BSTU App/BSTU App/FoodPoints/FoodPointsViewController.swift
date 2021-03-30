@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import RxSwift
 import RxCocoa
+import RxDataSources
 
 class FoodPointsViewController: UIViewController, UIGestureRecognizerDelegate, UITableViewDelegate{
     
@@ -22,9 +23,14 @@ class FoodPointsViewController: UIViewController, UIGestureRecognizerDelegate, U
     var roomDataBehavoirRelay: BehaviorRelay<[FoodRoom]>!
     @IBOutlet weak var tableRooms: UITableView!
     @IBOutlet weak var tableRoomsHeightConstraint: NSLayoutConstraint!
+    var gradientLayerTableRooms: CAGradientLayer!
     
-    var foodDataBehavoirRelay: BehaviorRelay<[FoodItem]>!
+    var foodDataBehavoirRelay: BehaviorRelay<[SectionOfFoodItems]>!
     @IBOutlet weak var tableFoods: UITableView!
+    struct SectionOfFoodItems{
+        var header: String
+        var items: [FoodItem]
+    }
     
     @IBOutlet weak var errorLoadingPicture: UIImageView!
     @IBOutlet weak var errorTextLabel: UILabel!
@@ -80,6 +86,8 @@ class FoodPointsViewController: UIViewController, UIGestureRecognizerDelegate, U
         self.tableRooms.rx
             .setDelegate(self)
             .disposed(by: disposeBag)
+        self.tableRooms.layoutMargins = UIEdgeInsets.zero
+        self.tableRooms.separatorInset = UIEdgeInsets.zero
         
         self.viewModel.getFoodRooms(completion: { [weak self] rooms in
             
@@ -128,7 +136,6 @@ class FoodPointsViewController: UIViewController, UIGestureRecognizerDelegate, U
                         }
                         self!.view.layoutIfNeeded()
                     }
-                    
                     let isHiddenTableRooms = self!.tableRooms.isHidden
                     self!.tableRooms.isHidden = false
                     
@@ -216,23 +223,32 @@ class FoodPointsViewController: UIViewController, UIGestureRecognizerDelegate, U
     // MARK: Установка информации о меню в таблицу
     func setupTableFoodData(){
         
+        self.tableFoods.rx
+            .setDelegate(self)
+            .disposed(by: disposeBag)
+        
         self.tableFoods.register(UINib(nibName: "FoodItemCell", bundle: nil),
                                    forCellReuseIdentifier: "FoodItemCellID")
         self.viewModel.getFoodMenuForRoom(idRoom: "1",
                                           completion: { [weak self] foods in
                                             
-                                            // Получение данных таблицы еды
-                                            self!.foodDataBehavoirRelay = BehaviorRelay<[FoodItem]>(value: foods)
-                                            self!.foodDataBehavoirRelay.bind(to: self!.tableFoods.rx.items){
-                                                [weak self] table, row, item in
-                                                let cellTable = table.dequeueReusableCell(withIdentifier: "FoodItemCellID", for: IndexPath.init(row: row, section: 0)) as! FoodItemCell
-                                                cellTable.layoutIfNeeded()
-                                                cellTable.configureCell(foodItem: item)
-                                                return cellTable
-                                            }.disposed(by: self!.disposeBag)
+                                            // Конфигурация содержимого для ячеек таблицы
+                                            let dataSource = RxTableViewSectionedReloadDataSource<SectionOfFoodItems>(configureCell: {
+                                                [weak self] dataSource, table, index, item in
+                                                let cell = table.dequeueReusableCell(withIdentifier: "FoodItemCellID", for: index) as! FoodItemCell
+                                                cell.layoutIfNeeded()
+                                                cell.configureCell(foodItem: item)
+                                                return cell
+                                            })
+                                            
+                                            // Связывание данных и таблицы
+                                            self!.foodDataBehavoirRelay = BehaviorRelay<[SectionOfFoodItems]>(value: foods)
+                                            self!.foodDataBehavoirRelay
+                                                .bind(to: self!.tableFoods.rx.items(dataSource: dataSource))
+                                                .disposed(by: self!.disposeBag)
+                                            
                                             self!.loadingDialogBar!.dismiss(animated: true, completion: nil)
                                             self!.loadingDialogBar = nil
-                                             
         },
                                           errorClosure: { [weak self] in
                                             for viewItem in [self!.errorLoadingPicture, self!.errorTextLabel] {
@@ -267,24 +283,63 @@ class FoodPointsViewController: UIViewController, UIGestureRecognizerDelegate, U
     
     
     // MARK: Настройка Header/Fotter для таблицы выбора помещения
+    //       Настройка Header для таблицы блюд
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 10))
-        headerView.backgroundColor = .foodPointsLightGrayColor
-        return headerView
+        
+        if tableView == self.tableRooms{
+            let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 10))
+            
+            headerView.backgroundColor = .clear
+            let gradientLayer = CAGradientLayer()
+            gradientLayer.frame = headerView.bounds
+            gradientLayer.colors = [UIColor.institutionBackgroundColorStart.cgColor,
+                                    UIColor.institutionBackgroundColorFinish.cgColor]
+            gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
+            gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+            
+            if self.gradientLayerTableRooms == nil{
+                self.gradientLayerTableRooms = gradientLayer
+                headerView.layer.insertSublayer(self.gradientLayerTableRooms, at: 0)
+            }
+            
+            headerView.layer.insertSublayer(gradientLayer, at: 0)
+            
+            return headerView
+        }
+        
+        if tableView == self.tableFoods{
+            let label = UILabel()
+            label.backgroundColor = .white
+            label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+            label.text = self.foodDataBehavoirRelay.value[section].header
+            return label
+        }
+        
+        return nil
     }
     
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10
+        if tableView == self.tableRooms{
+            return 10
+        }
+        return 30
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
-        footerView.backgroundColor = .lightGray
-        return footerView
+        if tableView == self.tableRooms{
+            let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
+            footerView.backgroundColor = .lightGray
+            return footerView
+        }
+        return nil
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 1
+        if tableView == self.tableRooms{
+            return 1
+        }
+        return 0
     }
     
     
@@ -296,14 +351,14 @@ class FoodPointsViewController: UIViewController, UIGestureRecognizerDelegate, U
             self.nameRoomDropdownButton.font = UIFont.systemFont(ofSize: 13)
         }
         self.dropdownContainerView.makeRounding()
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = self.dropdownContainerView.bounds
-        gradientLayer.colors = [UIColor.thirdCourseBackgroundColorStart.cgColor,
-                                UIColor.thirdCourseBackgroundColorFinish.cgColor]
-        gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
-        gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
         
-        self.dropdownContainerView.layer.insertSublayer(gradientLayer, at: 0)
+        let gradientLayerContainer = CAGradientLayer()
+        gradientLayerContainer.frame = self.dropdownContainerView.bounds
+        gradientLayerContainer.colors = [UIColor.thirdCourseBackgroundColorStart.cgColor,
+                                         UIColor.thirdCourseBackgroundColorFinish.cgColor]
+        gradientLayerContainer.startPoint = CGPoint(x: 0, y: 0.5)
+        gradientLayerContainer.endPoint = CGPoint(x: 1, y: 0.5)
+        self.dropdownContainerView.layer.insertSublayer(gradientLayerContainer, at: 0)
     }
     
     
@@ -384,5 +439,13 @@ class FoodPointsViewController: UIViewController, UIGestureRecognizerDelegate, U
     
     deinit {
         print("Вызов деструктора страницы Меню питания!")
+    }
+}
+
+
+extension FoodPointsViewController.SectionOfFoodItems: SectionModelType{
+    init(original: FoodPointsViewController.SectionOfFoodItems, items: [FoodItem]) {
+        self = original
+        self.items = items
     }
 }

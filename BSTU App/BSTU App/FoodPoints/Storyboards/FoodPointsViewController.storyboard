@@ -51,21 +51,22 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="baI-zK-zJP">
-                                <rect key="frame" x="10" y="106" width="355" height="561"/>
+                                <rect key="frame" x="10" y="101" width="355" height="566"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6Ui-95-PIq">
-                                <rect key="frame" x="10" y="91" width="355" height="234"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6Ui-95-PIq">
+                                <rect key="frame" x="8" y="91" width="359" height="234"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="234" id="dFA-xf-UGV"/>
                                 </constraints>
+                                <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FoodRoomCellID" rowHeight="44" id="z19-PY-PqY" customClass="FoodRoomCell" customModule="BSTU_App" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="355" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="359" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="z19-PY-PqY" id="hXS-BB-Jgr">
-                                            <rect key="frame" x="0.0" y="0.0" width="355" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="359" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Кафе профессорско-преподавательское" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kd-Y8-xOt">
@@ -78,8 +79,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="okSelection" translatesAutoresizingMaskIntoConstraints="NO" id="uh6-E8-Oiw">
-                                                    <rect key="frame" x="320" y="13" width="20" height="18"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ok" translatesAutoresizingMaskIntoConstraints="NO" id="uh6-E8-Oiw">
+                                                    <rect key="frame" x="324" y="13" width="20" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="JpY-dD-ScX"/>
                                                         <constraint firstAttribute="height" constant="18" id="Kmy-cm-2nM"/>
@@ -150,11 +151,11 @@
                             <constraint firstItem="Fa6-V2-e9g" firstAttribute="leading" secondItem="zDJ-Ub-KIl" secondAttribute="leading" constant="16" id="YI3-ca-85e"/>
                             <constraint firstItem="T7R-sn-IuM" firstAttribute="leading" secondItem="zDJ-Ub-KIl" secondAttribute="leading" constant="8" id="YUc-ne-k8E"/>
                             <constraint firstItem="FSD-Fn-yt2" firstAttribute="leading" secondItem="Fa6-V2-e9g" secondAttribute="trailing" constant="17" id="gXs-qs-3bn"/>
-                            <constraint firstItem="6Ui-95-PIq" firstAttribute="leading" secondItem="zDJ-Ub-KIl" secondAttribute="leading" constant="10" id="i0p-T2-PuV"/>
-                            <constraint firstItem="baI-zK-zJP" firstAttribute="top" secondItem="T7R-sn-IuM" secondAttribute="bottom" constant="5" id="np8-TA-h49"/>
+                            <constraint firstItem="6Ui-95-PIq" firstAttribute="leading" secondItem="zDJ-Ub-KIl" secondAttribute="leading" constant="8" id="i0p-T2-PuV"/>
+                            <constraint firstItem="baI-zK-zJP" firstAttribute="top" secondItem="T7R-sn-IuM" secondAttribute="bottom" id="np8-TA-h49"/>
                             <constraint firstItem="FSD-Fn-yt2" firstAttribute="top" secondItem="zDJ-Ub-KIl" secondAttribute="top" constant="5" id="q6y-IB-WvA"/>
                             <constraint firstItem="kH9-ee-WL6" firstAttribute="centerX" secondItem="QHb-hM-YxB" secondAttribute="centerX" id="wMI-Rr-PT4"/>
-                            <constraint firstItem="6Ui-95-PIq" firstAttribute="trailing" secondItem="zDJ-Ub-KIl" secondAttribute="trailing" constant="-10" id="xaA-Sp-hfU"/>
+                            <constraint firstItem="6Ui-95-PIq" firstAttribute="trailing" secondItem="zDJ-Ub-KIl" secondAttribute="trailing" constant="-8" id="xaA-Sp-hfU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zDJ-Ub-KIl"/>
                     </view>
@@ -179,6 +180,6 @@
         <image name="dropdown" width="96" height="96"/>
         <image name="errorLoading" width="768" height="768"/>
         <image name="menu" width="100" height="100"/>
-        <image name="okSelection" width="100" height="100"/>
+        <image name="ok" width="100" height="100"/>
     </resources>
 </document>

@@ -28,7 +28,7 @@ class FoodPointsViewModel{
     // MARK: Получение меню для точки питания
     // Входные параметры: ID-точки питания
     func getFoodMenuForRoom(idRoom: String,
-                            completion: @escaping ([FoodItem])->Void, errorClosure: @escaping ()->Void) -> Void{
+                            completion: @escaping ([FoodPointsViewController.SectionOfFoodItems])->Void, errorClosure: @escaping ()->Void) -> Void{
         
         var result = [FoodItem]()
         for _ in 0...9{
@@ -37,6 +37,8 @@ class FoodPointsViewModel{
                                    energyValueFood: "130 Ккал",
                                    costFood: "45 ₽"))
         }
-        completion(result)
+        completion([FoodPointsViewController.SectionOfFoodItems(header: "Арабская кухня", items: result),
+                    FoodPointsViewController.SectionOfFoodItems(header: "Китайская кухня", items: result),
+                    FoodPointsViewController.SectionOfFoodItems(header: "Индийская кухня", items: result)])
     }
 }

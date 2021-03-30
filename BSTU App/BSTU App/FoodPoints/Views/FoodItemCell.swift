@@ -39,7 +39,8 @@ class FoodItemCell: UITableViewCell{
     func makeGradient(){
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.roundedView.bounds
-        gradientLayer.colors = [UIColor.institutionBackgroundColorStart.cgColor, UIColor.institutionBackgroundColorFinish.cgColor]
+        gradientLayer.colors = [UIColor.institutionBackgroundColorStart.cgColor,
+                                UIColor.institutionBackgroundColorFinish.cgColor]
         gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
         
