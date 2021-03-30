@@ -28,10 +28,12 @@ class FoodItem{
 
 class FoodRoom{
     
+    var numberRoom: String!
     var nameRoom: String!
     var isSelected: Bool!
     
-    init(nameRoom: String) {
+    init(numberRoom: String, nameRoom: String) {
+        self.numberRoom = numberRoom
         self.nameRoom = nameRoom
         self.isSelected = false
     }

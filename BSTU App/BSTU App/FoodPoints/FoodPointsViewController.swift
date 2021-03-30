@@ -89,13 +89,15 @@ class FoodPointsViewController: UIViewController, UIGestureRecognizerDelegate, U
         self.tableRooms.layoutMargins = UIEdgeInsets.zero
         self.tableRooms.separatorInset = UIEdgeInsets.zero
         
-        self.viewModel.getFoodRooms(completion: { [weak self] rooms in
+        self.viewModel.getFoodRooms(completion: { [weak self] in
             
+            let rooms = self!.viewModel.totalRooms
             for viewItem in [self!.dropdownContainerView, self!.tableRooms,
                              self!.tableFoods] {
                                 viewItem?.isHidden = false
             }
             self?.tableRooms.isHidden = true
+            self?.nameRoomDropdownButton.text = self?.viewModel.totalRooms.first?.nameRoom
             self?.setupDropdownContainerDisplay()
             
             // Получение данных таблицей помещений
@@ -180,7 +182,24 @@ class FoodPointsViewController: UIViewController, UIGestureRecognizerDelegate, U
                         self!.dropdownImage.image = UIImage(named: "dropdown")
                         
                         if foodRoomTitle != self!.nameRoomDropdownButton.text{
-                            // Получить новые данные
+                            
+                            for viewItem in [self!.errorLoadingPicture, self!.errorTextLabel] {
+                                 viewItem?.isHidden = true
+                             }
+                            
+                            // Получить новые данные в таблицу
+                            let selectedRoomNumber = selectedItem.numberRoom
+                            let neededIndex = self?.viewModel.totalRooms.firstIndex(where: { room in
+                                return room.numberRoom == selectedRoomNumber
+                            })
+                            self?.foodDataBehavoirRelay.accept((self?.viewModel.totalMenus[neededIndex!])!)
+
+                            // Отобразить сообщение при пустом списке меню
+                            if (self?.viewModel.totalMenus[neededIndex!])!.count == 0{
+                                for viewItem in [self!.errorLoadingPicture, self!.errorTextLabel] {
+                                    viewItem?.isHidden = false
+                                }
+                            }
                         }
                         
                         self!.nameRoomDropdownButton.text = foodRoomTitle
@@ -203,16 +222,19 @@ class FoodPointsViewController: UIViewController, UIGestureRecognizerDelegate, U
                                 }
                             
                                 self!.roomDataBehavoirRelay.accept(currentRoomData!)
-                                //self!.foodDataBehavoirRelay.accept(data)
                         })
                 }).disposed(by: self!.disposeBag)
             self!.setupTableFoodData()
             
-        }, errorClosure: { [weak self] in
+        }, errorClosure: { [weak self] error in
             
             for viewItem in [self!.errorLoadingPicture, self!.errorTextLabel] {
                 viewItem?.isHidden = false
+                if error == .networkError{
+                    self?.errorTextLabel.text = "Ошибка подключения к интернету"
+                }
             }
+            
             self!.loadingDialogBar!.dismiss(animated: true, completion: nil)
             self!.loadingDialogBar = nil
         })
@@ -229,9 +251,8 @@ class FoodPointsViewController: UIViewController, UIGestureRecognizerDelegate, U
         
         self.tableFoods.register(UINib(nibName: "FoodItemCell", bundle: nil),
                                    forCellReuseIdentifier: "FoodItemCellID")
-        self.viewModel.getFoodMenuForRoom(idRoom: "1",
-                                          completion: { [weak self] foods in
-                                            
+        self.viewModel.getFoodMenuForRooms( completion: { [weak self] in
+                            
                                             // Конфигурация содержимого для ячеек таблицы
                                             let dataSource = RxTableViewSectionedReloadDataSource<SectionOfFoodItems>(configureCell: {
                                                 [weak self] dataSource, table, index, item in
@@ -242,7 +263,7 @@ class FoodPointsViewController: UIViewController, UIGestureRecognizerDelegate, U
                                             })
                                             
                                             // Связывание данных и таблицы
-                                            self!.foodDataBehavoirRelay = BehaviorRelay<[SectionOfFoodItems]>(value: foods)
+                                            self!.foodDataBehavoirRelay = BehaviorRelay<[SectionOfFoodItems]>(value: (self?.viewModel.totalMenus.first!)!)
                                             self!.foodDataBehavoirRelay
                                                 .bind(to: self!.tableFoods.rx.items(dataSource: dataSource))
                                                 .disposed(by: self!.disposeBag)
@@ -250,10 +271,12 @@ class FoodPointsViewController: UIViewController, UIGestureRecognizerDelegate, U
                                             self!.loadingDialogBar!.dismiss(animated: true, completion: nil)
                                             self!.loadingDialogBar = nil
         },
-                                          errorClosure: { [weak self] in
+                                          errorClosure: { [weak self] error in
                                             for viewItem in [self!.errorLoadingPicture, self!.errorTextLabel] {
                                                 viewItem?.isHidden = false
-                                                
+                                                if error == .networkError{
+                                                    self?.errorTextLabel.text = "Ошибка подключения к интернету"
+                                                }
                                             }
                                             self!.loadingDialogBar!.dismiss(animated: true, completion: nil)
                                             self!.loadingDialogBar = nil

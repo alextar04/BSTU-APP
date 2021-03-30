@@ -12,33 +12,123 @@ import SwiftSoup
 
 class FoodPointsViewModel{
     
+    var totalRooms = [FoodRoom]()
+    var totalMenus = [[FoodPointsViewController.SectionOfFoodItems]?]()
+    
+    
     // MARK: Получение всех точек питания университета
-    func getFoodRooms(completion: @escaping ([FoodRoom])->Void, errorClosure: @escaping ()->Void) -> Void{
-        
-        var result = [FoodRoom]()
-        for i in 0...11{
-            result.append(FoodRoom(nameRoom: "Кафе профессорско-преподавательское"))
+    func getFoodRooms(completion: @escaping ()->Void,
+                      errorClosure: @escaping (TypeError)->Void) -> Void{
+
+        let url = "http://menu.bstu.ru/"
+        AF.request(url).responseString{ [weak self] html in
+            
+            do {
+                let document = try SwiftSoup.parse(html.result.get())
+                if try document.title() != "Пункты питания БГТУ им. Шухова"{
+                    errorClosure(.serverError)
+                    return
+                }
+                
+                let pointsContainer = try document.getElementById("points_add")?.getElementsByTag("option")
+                var result = [FoodRoom]()
+                for point in pointsContainer!{
+                    let numberPoint = try point.attr("value")
+                    if numberPoint == ""{
+                        continue
+                    }
+                    let namePoint = try point.text().capitalizingFirstLetter()
+                    result.append(FoodRoom(numberRoom: numberPoint, nameRoom: namePoint))
+                }
+                
+                result.first?.isSelected = true
+                self!.totalRooms = result
+                completion()
+                
+                } catch{
+                    errorClosure(.networkError)
+            }
         }
-        result.first?.isSelected = true
-        
-        completion(result)
     }
     
     
-    // MARK: Получение меню для точки питания
-    // Входные параметры: ID-точки питания
-    func getFoodMenuForRoom(idRoom: String,
-                            completion: @escaping ([FoodPointsViewController.SectionOfFoodItems])->Void, errorClosure: @escaping ()->Void) -> Void{
+    // MARK: Получение меню для точек питания
+    // Входные параметры: [Точка питания]
+    func getFoodMenuForRooms(completion: @escaping ()->Void,
+                             errorClosure: @escaping (TypeError)->Void) -> Void{
         
-        var result = [FoodItem]()
-        for _ in 0...9{
-            result.append(FoodItem(nameFood: "Суп картофельный с горохом и копченостями",
-                                   weightFood: "300/15 грамм",
-                                   energyValueFood: "130 Ккал",
-                                   costFood: "45 ₽"))
+        var pointsViewed = 0
+        self.totalMenus = [[FoodPointsViewController.SectionOfFoodItems]?].init(repeating: nil,
+                                                                                count: self.totalRooms.count)
+        for (index, foodRoom) in self.totalRooms.enumerated(){
+            
+            let url = "http://menu.bstu.ru/"
+            let headers: HTTPHeaders = [
+                "Content-Type": "application/x-www-form-urlencoded"
+            ]
+            let parameters = [
+                "point": foodRoom.numberRoom
+            ]
+            
+            AF.request(url, method: .post, parameters: parameters, headers: headers)
+                .responseString{ [weak self] html in
+                    
+                    do{
+                        let document = try SwiftSoup.parse(html.result.get())
+                        var isEmpty = false
+                        
+                        if try document.title() != "Пункты питания БГТУ им. Шухова"{
+                            isEmpty = true
+                        }
+                        
+                        let table = try document.getElementById("empty_menu")?.getElementsByClass("table").first()
+                        if table == nil{
+                            isEmpty = true
+                        }
+                        
+                        var resultOnePlace = [FoodPointsViewController.SectionOfFoodItems]()
+                        var buffer = FoodPointsViewController.SectionOfFoodItems(header: "", items: [FoodItem]())
+                        
+                        if !isEmpty{
+                            let tableRows = try table?.getElementsByTag("tr")
+                            for row in tableRows!{
+                                let tableValues = try row.getElementsByTag("td")
+                                let name = try tableValues[0].text()
+                                let weight = try tableValues[1].text()
+                                let energyValue = try tableValues[2].text()
+                                let cost = try tableValues[3].text()
+                                
+                                if name == "Наименование"{
+                                    continue
+                                }
+                                
+                                if name != "" && weight == "" && energyValue == "" && cost == ""{
+                                    if buffer.header != ""{
+                                        resultOnePlace.append(buffer)
+                                        buffer.header = ""
+                                        buffer.items.removeAll()
+                                    }
+                                    buffer.header = name.lowercased().capitalizingFirstLetter()
+                                    continue
+                                } else {
+                                    buffer.items.append(FoodItem(nameFood: name,
+                                                                 weightFood: "\(weight) грамм",
+                                                                 energyValueFood: "\(energyValue) Ккал",
+                                                                 costFood: "\(cost) ₽"))
+                                }
+                            }
+                        }
+                        
+                        self!.totalMenus[index] = resultOnePlace
+                        pointsViewed += 1
+                        if pointsViewed == self!.totalRooms.count{
+                            completion()
+                        }
+                    
+                    } catch {
+                        errorClosure(.networkError)
+                    }
+            }
         }
-        completion([FoodPointsViewController.SectionOfFoodItems(header: "Арабская кухня", items: result),
-                    FoodPointsViewController.SectionOfFoodItems(header: "Китайская кухня", items: result),
-                    FoodPointsViewController.SectionOfFoodItems(header: "Индийская кухня", items: result)])
     }
 }
