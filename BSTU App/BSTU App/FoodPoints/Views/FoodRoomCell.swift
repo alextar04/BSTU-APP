@@ -17,12 +17,13 @@ class FoodRoomCell: UITableViewCell{
     
     func configureCell(roomModel: FoodRoom){
         
-        self.makeGradient()
         self.layoutMargins = UIEdgeInsets.zero
+        self.makeGradient()
         self.nameRoom.text = roomModel.nameRoom
+        
         // Для iPhone SE уменьшить размер шрифта написанного текста
         if self.frame.width == 304{
-            self.nameRoom.font = UIFont.systemFont(ofSize: 12)
+            self.nameRoom.font = UIFont.systemFont(ofSize: 12, weight: .medium)
         }
         self.selectionImage.isHidden = !roomModel.isSelected
     }
@@ -32,8 +33,8 @@ class FoodRoomCell: UITableViewCell{
     func makeGradient(){
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.bounds
-        gradientLayer.colors = [UIColor.institutionBackgroundColorStart.cgColor,
-                                UIColor.institutionBackgroundColorFinish.cgColor]
+        gradientLayer.colors = [UIColor.firstCourseBackgroundColorStart.cgColor,
+                                UIColor.firstCourseBackgroundColorFinish.cgColor]
         gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
         

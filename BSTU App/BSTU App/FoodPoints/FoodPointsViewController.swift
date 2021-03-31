@@ -82,7 +82,8 @@ class FoodPointsViewController: UIViewController, UIGestureRecognizerDelegate, U
     // MARK: Установка информации о помещениях в таблицу
     func setupTableRoomData(){
         
-        self.tableRooms.backgroundColor = .foodPointsLightGrayColor
+        self.tableRooms.makeRoundingSpecificCorners(arrayCorners: [.layerMinXMaxYCorner,
+                                                                   .layerMaxXMaxYCorner])
         self.tableRooms.rx
             .setDelegate(self)
             .disposed(by: disposeBag)
@@ -117,13 +118,13 @@ class FoodPointsViewController: UIViewController, UIGestureRecognizerDelegate, U
                     
                     // Таблица скрыта - бар закрыт
                     if self!.tableRooms.isHidden{
-                        self!.dropdownImage.image = UIImage(named: "dropup")
+                        self!.dropdownImage.image = UIImage(named: "blackDropup")
                         self!.tableRoomsHeightConstraint.constant = 0
                         self!.view.layoutIfNeeded()
                         
                     // Таблица открыта - бар открыт
                     } else {
-                        self!.dropdownImage.image = UIImage(named: "dropdown")
+                        self!.dropdownImage.image = UIImage(named: "blackDropdown")
                         let calculatedHeightTable = CGFloat(44 * rooms.count) + 11
                         if calculatedHeightTable + 91 > (self?.view.frame.height)!{
                             var fitRoomsCount = rooms.count - 1
@@ -142,6 +143,7 @@ class FoodPointsViewController: UIViewController, UIGestureRecognizerDelegate, U
                     self!.tableRooms.isHidden = false
                     
                     // Анимация движения таблицы
+                    self!.dropdownContainerView.isUserInteractionEnabled = false
                     UIView.animate(
                             withDuration: 0.4,
                             delay: 0,
@@ -169,6 +171,7 @@ class FoodPointsViewController: UIViewController, UIGestureRecognizerDelegate, U
                               },
                               completion: { _ in
                                 self!.tableRooms.isHidden = !isHiddenTableRooms
+                                self!.dropdownContainerView.isUserInteractionEnabled = true
                         })
                 }).disposed(by: self!.disposeBag)
             
@@ -179,7 +182,7 @@ class FoodPointsViewController: UIViewController, UIGestureRecognizerDelegate, U
                 .subscribe(
                     onNext: {[weak self] selectedItem in
                         let foodRoomTitle = selectedItem.nameRoom
-                        self!.dropdownImage.image = UIImage(named: "dropdown")
+                        self!.dropdownImage.image = UIImage(named: "blackDropdown")
                         
                         if foodRoomTitle != self!.nameRoomDropdownButton.text{
                             
@@ -192,7 +195,12 @@ class FoodPointsViewController: UIViewController, UIGestureRecognizerDelegate, U
                             let neededIndex = self?.viewModel.totalRooms.firstIndex(where: { room in
                                 return room.numberRoom == selectedRoomNumber
                             })
+                            
                             self?.foodDataBehavoirRelay.accept((self?.viewModel.totalMenus[neededIndex!])!)
+                            if self?.viewModel.totalMenus[neededIndex!]?.count != 0{
+                                let topIndex = IndexPath(row: 0, section: 0)
+                                self!.tableFoods.scrollToRow(at: topIndex, at: .top, animated: false)
+                            }
 
                             // Отобразить сообщение при пустом списке меню
                             if (self?.viewModel.totalMenus[neededIndex!])!.count == 0{
@@ -315,8 +323,8 @@ class FoodPointsViewController: UIViewController, UIGestureRecognizerDelegate, U
             headerView.backgroundColor = .clear
             let gradientLayer = CAGradientLayer()
             gradientLayer.frame = headerView.bounds
-            gradientLayer.colors = [UIColor.institutionBackgroundColorStart.cgColor,
-                                    UIColor.institutionBackgroundColorFinish.cgColor]
+            gradientLayer.colors = [UIColor.firstCourseBackgroundColorStart.cgColor,
+                                    UIColor.firstCourseBackgroundColorFinish.cgColor]
             gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
             gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
             
@@ -349,10 +357,10 @@ class FoodPointsViewController: UIViewController, UIGestureRecognizerDelegate, U
         return 30
     }
     
+    
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if tableView == self.tableRooms{
             let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
-            footerView.backgroundColor = .lightGray
             return footerView
         }
         return nil

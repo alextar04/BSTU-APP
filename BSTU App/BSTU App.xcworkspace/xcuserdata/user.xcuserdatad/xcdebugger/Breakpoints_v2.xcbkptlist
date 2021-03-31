@@ -7035,8 +7035,8 @@
             filePath = "BSTU App/FoodPoints/FoodPointsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
             landmarkName = "setupTableRoomData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -7051,8 +7051,8 @@
             filePath = "BSTU App/FoodPoints/FoodPointsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
             landmarkName = "setupTableRoomData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -7067,8 +7067,8 @@
             filePath = "BSTU App/FoodPoints/FoodPointsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
             landmarkName = "setupTableRoomData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -7083,8 +7083,8 @@
             filePath = "BSTU App/FoodPoints/FoodPointsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "373"
-            endingLineNumber = "373"
+            startingLineNumber = "381"
+            endingLineNumber = "381"
             landmarkName = "setupDropdownContainerDisplay()"
             landmarkType = "7">
          </BreakpointContent>
@@ -7099,8 +7099,8 @@
             filePath = "BSTU App/FoodPoints/FoodPointsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "374"
-            endingLineNumber = "374"
+            startingLineNumber = "382"
+            endingLineNumber = "382"
             landmarkName = "setupDropdownContainerDisplay()"
             landmarkType = "7">
          </BreakpointContent>
@@ -7115,8 +7115,8 @@
             filePath = "BSTU App/FoodPoints/FoodPointsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "334"
-            endingLineNumber = "334"
+            startingLineNumber = "342"
+            endingLineNumber = "342"
             landmarkName = "tableView(_:viewForHeaderInSection:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -7131,8 +7131,8 @@
             filePath = "BSTU App/FoodPoints/FoodPointsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "313"
-            endingLineNumber = "313"
+            startingLineNumber = "321"
+            endingLineNumber = "321"
             landmarkName = "tableView(_:viewForHeaderInSection:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -7147,8 +7147,8 @@
             filePath = "BSTU App/FoodPoints/Views/FoodRoomCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
             landmarkName = "configureCell(roomModel:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -7163,8 +7163,8 @@
             filePath = "BSTU App/FoodPoints/FoodPointsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "315"
-            endingLineNumber = "315"
+            startingLineNumber = "323"
+            endingLineNumber = "323"
             landmarkName = "tableView(_:viewForHeaderInSection:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -7230,6 +7230,38 @@
             startingLineNumber = "63"
             endingLineNumber = "63"
             landmarkName = "getFoodMenuForRooms(completion:errorClosure:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A3A20D40-D2BD-4198-A64E-6CD860898674"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BSTU App/Shedule/Extensions/SheduleLabelExtensions.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "isTruncated()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "13E27B38-3669-4C03-9EE1-CC3233E933F8"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BSTU App/Shedule/Extensions/SheduleLabelExtensions.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "countLabelLines()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

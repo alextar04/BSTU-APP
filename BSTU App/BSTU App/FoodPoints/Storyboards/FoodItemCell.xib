@@ -19,7 +19,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z1E-ud-sGq">
                         <rect key="frame" x="0.0" y="0.0" width="408" height="140"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Суп картофельный с горохом и копченостями" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0W3-Ho-6fY">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Суп картофельный с горохом и копченостями" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0W3-Ho-6fY">
                                 <rect key="frame" x="17" y="17" width="215" height="49"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="215" id="Dl2-Dn-003"/>
@@ -60,13 +60,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="om1-kA-J8V" secondAttribute="trailing" constant="33" id="3Lx-LJ-umf"/>
                             <constraint firstItem="0W3-Ho-6fY" firstAttribute="leading" secondItem="Z1E-ud-sGq" secondAttribute="leading" constant="17" id="6Y3-KZ-vNb"/>
                             <constraint firstItem="GWV-mu-Nm7" firstAttribute="leading" secondItem="Z1E-ud-sGq" secondAttribute="leading" constant="17" id="CEF-bk-dsm"/>
                             <constraint firstItem="0W3-Ho-6fY" firstAttribute="top" secondItem="Z1E-ud-sGq" secondAttribute="top" constant="17" id="EmA-pZ-BbA"/>
-                            <constraint firstAttribute="bottom" secondItem="GWV-mu-Nm7" secondAttribute="bottom" constant="16" id="HxY-Ik-oZL"/>
                             <constraint firstItem="sGe-nd-KiY" firstAttribute="leading" secondItem="Z1E-ud-sGq" secondAttribute="leading" constant="17" id="NLa-Yv-tNL"/>
                             <constraint firstAttribute="height" constant="140" id="S3B-wF-Zbm"/>
                             <constraint firstItem="sGe-nd-KiY" firstAttribute="top" secondItem="0W3-Ho-6fY" secondAttribute="bottom" constant="8" id="Tkj-Ru-a3t"/>
@@ -87,11 +86,15 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="costFood" destination="om1-kA-J8V" id="z54-cb-DaS"/>
+                <outlet property="energyFoodTopConstraint" destination="yN5-f8-9gE" id="MdR-ro-AZ2"/>
                 <outlet property="energyValueFood" destination="GWV-mu-Nm7" id="oE2-4P-EVD"/>
                 <outlet property="nameFood" destination="0W3-Ho-6fY" id="wwb-Wo-LzI"/>
+                <outlet property="nameFoodHeightConstraint" destination="WTg-2o-0Il" id="R3f-Jx-EQu"/>
+                <outlet property="nameFoodTopConstraint" destination="EmA-pZ-BbA" id="U3M-wQ-ouj"/>
                 <outlet property="roundedView" destination="Z1E-ud-sGq" id="KvA-kZ-hcy"/>
                 <outlet property="shadowView" destination="dv8-13-oKU" id="lcp-hu-v8Q"/>
                 <outlet property="weightFood" destination="sGe-nd-KiY" id="5mh-WN-OjD"/>
+                <outlet property="weightFoodTopConstraint" destination="Tkj-Ru-a3t" id="SAj-yU-mrO"/>
             </connections>
             <point key="canvasLocation" x="144" y="-276.1619190404798"/>
         </tableViewCell>
