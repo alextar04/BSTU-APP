@@ -52,7 +52,7 @@ class InstitutionsViewController: UIViewController, UIGestureRecognizerDelegate{
             self!.institutionsTable.isHidden = false
             
             let data = Observable.just(institutions)
-            data.bind(to: self!.institutionsTable.rx.items){ (tableView, row, element) in
+            data.bind(to: self!.institutionsTable.rx.items){ [weak self] (tableView, row, element) in
                 let cell = self!.institutionsTable.dequeueReusableCell(withIdentifier: "InstitutionCell") as! InstitutionsTableCell
                 cell.configureCell(name: element.name, url: element.link)
                 return cell
