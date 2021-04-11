@@ -278,6 +278,12 @@ class FoodPointsViewController: UIViewController, UIGestureRecognizerDelegate, U
                                             
                                             self!.loadingDialogBar!.dismiss(animated: true, completion: nil)
                                             self!.loadingDialogBar = nil
+            
+                                            if (self!.viewModel.totalMenus.first!)!.count == 0{
+                                                for viewItem in [self!.errorLoadingPicture, self!.errorTextLabel] {
+                                                    viewItem?.isHidden = false
+                                                }
+                                            }
         },
                                           errorClosure: { [weak self] error in
                                             for viewItem in [self!.errorLoadingPicture, self!.errorTextLabel] {
