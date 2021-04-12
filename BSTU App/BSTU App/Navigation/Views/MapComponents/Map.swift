@@ -129,7 +129,7 @@ class Map: UIScrollView, UIScrollViewDelegate{
     }
     
     
-    // MARK: Функция центровки изображения карты про уменьшении масштаба
+    // MARK: Функция центровки изображения карты при уменьшении масштаба
     func setCenterMapScheme(){
         let boundsSize = self.bounds.size
         var frameToCenter = self.mapScheme.frame ?? CGRect.zero
