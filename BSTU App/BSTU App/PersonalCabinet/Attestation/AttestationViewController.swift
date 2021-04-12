@@ -17,9 +17,6 @@ class AttestationViewController: UIViewController, UITableViewDelegate{
     var idUser: Int!
     @IBOutlet weak var backButton: UIImageView!
     @IBOutlet weak var contentView: ContentTableView!
-    weak var selectedCell: AttestationCell!
-    var selectedCellIndex: IndexPath!
-    var selectedCellHeight: Int!
     
     // Вспомогательная структура для отображения данных в виде секции
     var sectionedArrayRangeDates = [SectionOfDataRanges]()
