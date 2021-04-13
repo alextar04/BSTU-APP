@@ -128,6 +128,9 @@
 		CEA4C9C02603442200716C07 /* AttestationCellDropdownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4C9BF2603442200716C07 /* AttestationCellDropdownCell.swift */; };
 		CEA4C9C226034BF800716C07 /* AttestationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4C9C126034BF800716C07 /* AttestationModel.swift */; };
 		CEACB2D925C7F2F900F4ADD3 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEACB2D825C7F2F900F4ADD3 /* Map.swift */; };
+		CEBC118F26259811000CB268 /* MockServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC118E26259811000CB268 /* MockServer.swift */; };
+		CEBC11A22625A098000CB268 /* ScheduleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC11A12625A098000CB268 /* ScheduleTests.swift */; };
+		CEBC11A42625A18B000CB268 /* TeacherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC11A32625A18B000CB268 /* TeacherTests.swift */; };
 		CEC0C8BA25F6222D00760A0A /* MenuTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0C8B925F6222D00760A0A /* MenuTableCell.swift */; };
 		CECE8BA125FCB785008D7840 /* SigninViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECE8BA025FCB785008D7840 /* SigninViewController.storyboard */; };
 		CECE8BA325FCC12D008D7840 /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE8BA225FCC12D008D7840 /* SigninViewController.swift */; };
@@ -148,6 +151,16 @@
 		CEEF74CC260B613600199173 /* ListTeachersFirstLettersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF74CB260B613600199173 /* ListTeachersFirstLettersViewModel.swift */; };
 		CEEF74CF260B6EC000199173 /* ListTeachersFirstLettersViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF74CE260B6EC000199173 /* ListTeachersFirstLettersViewExtensions.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CEBC119C26259A2A000CB268 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE037E5A25BC425700C50C16 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE037E6125BC425700C50C16;
+			remoteInfo = "BSTU App";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		6D108528D00D09DA3E838396 /* Pods-BSTU App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BSTU App.release.xcconfig"; path = "Target Support Files/Pods-BSTU App/Pods-BSTU App.release.xcconfig"; sourceTree = "<group>"; };
@@ -275,6 +288,11 @@
 		CEA4C9BF2603442200716C07 /* AttestationCellDropdownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationCellDropdownCell.swift; sourceTree = "<group>"; };
 		CEA4C9C126034BF800716C07 /* AttestationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationModel.swift; sourceTree = "<group>"; };
 		CEACB2D825C7F2F900F4ADD3 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
+		CEBC118E26259811000CB268 /* MockServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockServer.swift; sourceTree = "<group>"; };
+		CEBC119726259A2A000CB268 /* BSTU App Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BSTU App Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEBC119B26259A2A000CB268 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEBC11A12625A098000CB268 /* ScheduleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTests.swift; sourceTree = "<group>"; };
+		CEBC11A32625A18B000CB268 /* TeacherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherTests.swift; sourceTree = "<group>"; };
 		CEC0C8B925F6222D00760A0A /* MenuTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableCell.swift; sourceTree = "<group>"; };
 		CECE8BA025FCB785008D7840 /* SigninViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SigninViewController.storyboard; sourceTree = "<group>"; };
 		CECE8BA225FCC12D008D7840 /* SigninViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
@@ -303,6 +321,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				149150BE2D4CA194A93C0868 /* Pods_BSTU_App.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEBC119426259A2A000CB268 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +364,7 @@
 			isa = PBXGroup;
 			children = (
 				CE037E6425BC425700C50C16 /* BSTU App */,
+				CEBC119826259A2A000CB268 /* BSTU App Tests */,
 				CE037E6325BC425700C50C16 /* Products */,
 				12DE6CC9B47DEE76BACDE641 /* Pods */,
 				A214570EA37C4166CABF5515 /* Frameworks */,
@@ -349,6 +375,7 @@
 			isa = PBXGroup;
 			children = (
 				CE037E6225BC425700C50C16 /* BSTU App.app */,
+				CEBC119726259A2A000CB268 /* BSTU App Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -883,6 +910,25 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		CEBC11902625982C000CB268 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				CEBC118E26259811000CB268 /* MockServer.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		CEBC119826259A2A000CB268 /* BSTU App Tests */ = {
+			isa = PBXGroup;
+			children = (
+				CEBC11902625982C000CB268 /* Mocks */,
+				CEBC11A12625A098000CB268 /* ScheduleTests.swift */,
+				CEBC11A32625A18B000CB268 /* TeacherTests.swift */,
+				CEBC119B26259A2A000CB268 /* Info.plist */,
+			);
+			path = "BSTU App Tests";
+			sourceTree = "<group>";
+		};
 		CECE8B9E25FCB6E1008D7840 /* PersonalCabinet */ = {
 			isa = PBXGroup;
 			children = (
@@ -962,6 +1008,24 @@
 			productReference = CE037E6225BC425700C50C16 /* BSTU App.app */;
 			productType = "com.apple.product-type.application";
 		};
+		CEBC119626259A2A000CB268 /* BSTU App Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CEBC119E26259A2A000CB268 /* Build configuration list for PBXNativeTarget "BSTU App Tests" */;
+			buildPhases = (
+				CEBC119326259A2A000CB268 /* Sources */,
+				CEBC119426259A2A000CB268 /* Frameworks */,
+				CEBC119526259A2A000CB268 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CEBC119D26259A2A000CB268 /* PBXTargetDependency */,
+			);
+			name = "BSTU App Tests";
+			productName = "BSTU App Tests";
+			productReference = CEBC119726259A2A000CB268 /* BSTU App Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -974,6 +1038,10 @@
 				TargetAttributes = {
 					CE037E6125BC425700C50C16 = {
 						CreatedOnToolsVersion = 11.4;
+					};
+					CEBC119626259A2A000CB268 = {
+						CreatedOnToolsVersion = 11.4;
+						TestTargetID = CE037E6125BC425700C50C16;
 					};
 				};
 			};
@@ -991,6 +1059,7 @@
 			projectRoot = "";
 			targets = (
 				CE037E6125BC425700C50C16 /* BSTU App */,
+				CEBC119626259A2A000CB268 /* BSTU App Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -1049,6 +1118,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CEBC119526259A2A000CB268 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -1102,6 +1178,7 @@
 				CEE5B67C25D66ACA0023D640 /* PremiseDB.swift in Sources */,
 				CECE8BA625FCD594008D7840 /* PersonalCabinetButtonExtensions.swift in Sources */,
 				CE037E6A25BC425700C50C16 /* RootViewController.swift in Sources */,
+				CEBC118F26259811000CB268 /* MockServer.swift in Sources */,
 				CE380A2925BC4F910028622B /* TopBarNavigation.swift in Sources */,
 				CE36FEA92605D71A0021D9F0 /* ExamsCell.swift in Sources */,
 				CE01CC9F25C2A496001388B9 /* SearchPremiseView.swift in Sources */,
@@ -1194,7 +1271,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CEBC119326259A2A000CB268 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEBC11A42625A18B000CB268 /* TeacherTests.swift in Sources */,
+				CEBC11A22625A098000CB268 /* ScheduleTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CEBC119D26259A2A000CB268 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE037E6125BC425700C50C16 /* BSTU App */;
+			targetProxy = CEBC119C26259A2A000CB268 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		CE037E7025BC425E00C50C16 /* LaunchScreen.storyboard */ = {
@@ -1365,6 +1459,46 @@
 			};
 			name = Release;
 		};
+		CEBC119F26259A2A000CB268 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S67VDJMK85;
+				INFOPLIST_FILE = "BSTU App Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Alexey-Taran.BSTU-App-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BSTU App.app/BSTU App";
+			};
+			name = Debug;
+		};
+		CEBC11A026259A2A000CB268 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S67VDJMK85;
+				INFOPLIST_FILE = "BSTU App Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Alexey-Taran.BSTU-App-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BSTU App.app/BSTU App";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1382,6 +1516,15 @@
 			buildConfigurations = (
 				CE037E7725BC425E00C50C16 /* Debug */,
 				CE037E7825BC425E00C50C16 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CEBC119E26259A2A000CB268 /* Build configuration list for PBXNativeTarget "BSTU App Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEBC119F26259A2A000CB268 /* Debug */,
+				CEBC11A026259A2A000CB268 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

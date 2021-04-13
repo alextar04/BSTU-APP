@@ -10,4 +10,5 @@ target 'BSTU App' do
   pod 'Alamofire', '~> 5.2'
   pod 'SwiftSoup'
   pod 'SwiftyJSON', '~> 4.0'
+  pod 'Hippolyte'
 end
