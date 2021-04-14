@@ -14,6 +14,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        // В случае Unit - тестирования - не запускать приложение
+        #if DEBUG
+        let isUnitTesting = ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
+        guard !isUnitTesting else {
+          return true
+        }
+        #endif
+        
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = RootViewController()
         self.window?.makeKeyAndVisible()

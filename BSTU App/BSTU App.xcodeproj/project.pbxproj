@@ -56,6 +56,12 @@
 		CE04EF92260B59C400D59DC3 /* ListTeachersFirstLettersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04EF91260B59C400D59DC3 /* ListTeachersFirstLettersViewController.swift */; };
 		CE04EF96260B5A0400D59DC3 /* TeacherFirstLetterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04EF95260B5A0400D59DC3 /* TeacherFirstLetterCell.swift */; };
 		CE0E7C1C26080AC400705059 /* AttestationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0E7C1B26080AC400705059 /* AttestationViewModel.swift */; };
+		CE141B83262626E400281494 /* FakeSuccessListCourseNumbersRequest.html in Resources */ = {isa = PBXBuildFile; fileRef = CE141B81262622D300281494 /* FakeSuccessListCourseNumbersRequest.html */; };
+		CE155C752625BE9C0075E6C7 /* MockScheduleServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC118E26259811000CB268 /* MockScheduleServer.swift */; };
+		CE155C782625BF1A0075E6C7 /* ScheduleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC11A12625A098000CB268 /* ScheduleTests.swift */; };
+		CE155C8A2625C5750075E6C7 /* FakeCreateSuccessListInstitutionsRequest.html in Resources */ = {isa = PBXBuildFile; fileRef = CE155C712625B4FD0075E6C7 /* FakeCreateSuccessListInstitutionsRequest.html */; };
+		CE155C8D2625EADB0075E6C7 /* FakeErrorListInstitutionsRequest.html in Resources */ = {isa = PBXBuildFile; fileRef = CE155C8B2625EAD50075E6C7 /* FakeErrorListInstitutionsRequest.html */; };
+		CE155C902625EF0C0075E6C7 /* FakeSuccessListGroupsRequest.html in Resources */ = {isa = PBXBuildFile; fileRef = CE155C8E2625EE5A0075E6C7 /* FakeSuccessListGroupsRequest.html */; };
 		CE16978625C064F10040AE95 /* LabelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE16978525C064F10040AE95 /* LabelExtensions.swift */; };
 		CE16978825C151710040AE95 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE16978725C151710040AE95 /* ColorExtensions.swift */; };
 		CE2B982A2601F3380008A2E1 /* PersonalCabinetChapterCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2B98292601F3380008A2E1 /* PersonalCabinetChapterCard.xib */; };
@@ -128,10 +134,12 @@
 		CEA4C9C02603442200716C07 /* AttestationCellDropdownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4C9BF2603442200716C07 /* AttestationCellDropdownCell.swift */; };
 		CEA4C9C226034BF800716C07 /* AttestationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4C9C126034BF800716C07 /* AttestationModel.swift */; };
 		CEACB2D925C7F2F900F4ADD3 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEACB2D825C7F2F900F4ADD3 /* Map.swift */; };
-		CEBC118F26259811000CB268 /* MockServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC118E26259811000CB268 /* MockServer.swift */; };
-		CEBC11A22625A098000CB268 /* ScheduleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC11A12625A098000CB268 /* ScheduleTests.swift */; };
 		CEBC11A42625A18B000CB268 /* TeacherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC11A32625A18B000CB268 /* TeacherTests.swift */; };
 		CEC0C8BA25F6222D00760A0A /* MenuTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0C8B925F6222D00760A0A /* MenuTableCell.swift */; };
+		CEC33F952626CE5B00F4E016 /* FakeErrorListGroupsRequest.html in Resources */ = {isa = PBXBuildFile; fileRef = CEC33F942626CE5B00F4E016 /* FakeErrorListGroupsRequest.html */; };
+		CEC33F972626D1F900F4E016 /* FakeSuccessScheduleFullTimeGroupRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = CEC33F962626D1F800F4E016 /* FakeSuccessScheduleFullTimeGroupRequest.json */; };
+		CEC33F992626D51C00F4E016 /* FakeSuccessScheduleCorrespondenceGroupRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = CEC33F982626D51C00F4E016 /* FakeSuccessScheduleCorrespondenceGroupRequest.json */; };
+		CEC33F9B2626D74700F4E016 /* FakeSuccessScheduleExamRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = CEC33F9A2626D74700F4E016 /* FakeSuccessScheduleExamRequest.json */; };
 		CECE8BA125FCB785008D7840 /* SigninViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECE8BA025FCB785008D7840 /* SigninViewController.storyboard */; };
 		CECE8BA325FCC12D008D7840 /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE8BA225FCC12D008D7840 /* SigninViewController.swift */; };
 		CECE8BA625FCD594008D7840 /* PersonalCabinetButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE8BA525FCD594008D7840 /* PersonalCabinetButtonExtensions.swift */; };
@@ -216,6 +224,10 @@
 		CE04EF91260B59C400D59DC3 /* ListTeachersFirstLettersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTeachersFirstLettersViewController.swift; sourceTree = "<group>"; };
 		CE04EF95260B5A0400D59DC3 /* TeacherFirstLetterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherFirstLetterCell.swift; sourceTree = "<group>"; };
 		CE0E7C1B26080AC400705059 /* AttestationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationViewModel.swift; sourceTree = "<group>"; };
+		CE141B81262622D300281494 /* FakeSuccessListCourseNumbersRequest.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = FakeSuccessListCourseNumbersRequest.html; sourceTree = "<group>"; };
+		CE155C712625B4FD0075E6C7 /* FakeCreateSuccessListInstitutionsRequest.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = FakeCreateSuccessListInstitutionsRequest.html; sourceTree = "<group>"; };
+		CE155C8B2625EAD50075E6C7 /* FakeErrorListInstitutionsRequest.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = FakeErrorListInstitutionsRequest.html; sourceTree = "<group>"; };
+		CE155C8E2625EE5A0075E6C7 /* FakeSuccessListGroupsRequest.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = FakeSuccessListGroupsRequest.html; sourceTree = "<group>"; };
 		CE16978525C064F10040AE95 /* LabelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelExtensions.swift; sourceTree = "<group>"; };
 		CE16978725C151710040AE95 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		CE2B98292601F3380008A2E1 /* PersonalCabinetChapterCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonalCabinetChapterCard.xib; sourceTree = "<group>"; };
@@ -288,12 +300,16 @@
 		CEA4C9BF2603442200716C07 /* AttestationCellDropdownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationCellDropdownCell.swift; sourceTree = "<group>"; };
 		CEA4C9C126034BF800716C07 /* AttestationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationModel.swift; sourceTree = "<group>"; };
 		CEACB2D825C7F2F900F4ADD3 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
-		CEBC118E26259811000CB268 /* MockServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockServer.swift; sourceTree = "<group>"; };
+		CEBC118E26259811000CB268 /* MockScheduleServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockScheduleServer.swift; sourceTree = "<group>"; };
 		CEBC119726259A2A000CB268 /* BSTU App Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BSTU App Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEBC119B26259A2A000CB268 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEBC11A12625A098000CB268 /* ScheduleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTests.swift; sourceTree = "<group>"; };
 		CEBC11A32625A18B000CB268 /* TeacherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherTests.swift; sourceTree = "<group>"; };
 		CEC0C8B925F6222D00760A0A /* MenuTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableCell.swift; sourceTree = "<group>"; };
+		CEC33F942626CE5B00F4E016 /* FakeErrorListGroupsRequest.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = FakeErrorListGroupsRequest.html; sourceTree = "<group>"; };
+		CEC33F962626D1F800F4E016 /* FakeSuccessScheduleFullTimeGroupRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FakeSuccessScheduleFullTimeGroupRequest.json; sourceTree = "<group>"; };
+		CEC33F982626D51C00F4E016 /* FakeSuccessScheduleCorrespondenceGroupRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FakeSuccessScheduleCorrespondenceGroupRequest.json; sourceTree = "<group>"; };
+		CEC33F9A2626D74700F4E016 /* FakeSuccessScheduleExamRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FakeSuccessScheduleExamRequest.json; sourceTree = "<group>"; };
 		CECE8BA025FCB785008D7840 /* SigninViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SigninViewController.storyboard; sourceTree = "<group>"; };
 		CECE8BA225FCC12D008D7840 /* SigninViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
 		CECE8BA525FCD594008D7840 /* PersonalCabinetButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCabinetButtonExtensions.swift; sourceTree = "<group>"; };
@@ -386,7 +402,7 @@
 				CE3B2B8625F67DC000DF7CC1 /* RootController */,
 				CE5B3DFD25F539CD00DC66E9 /* Menu */,
 				CE9E00CD25D3FFDB00CF13C0 /* Database */,
-				CE04A3B325EF9B9600BE073D /* Shedule */,
+				CE04A3B325EF9B9600BE073D /* Schedule */,
 				CE7F81B525FA071A00A70CCB /* Teachers */,
 				CE380A0025BC4F070028622B /* Navigation */,
 				CE8F4D0D2611BEFA00632E9E /* FoodPoints */,
@@ -399,7 +415,7 @@
 			path = "BSTU App";
 			sourceTree = "<group>";
 		};
-		CE04A3B325EF9B9600BE073D /* Shedule */ = {
+		CE04A3B325EF9B9600BE073D /* Schedule */ = {
 			isa = PBXGroup;
 			children = (
 				CE04A3D025EF9B9600BE073D /* Extensions */,
@@ -408,7 +424,7 @@
 				CE04A3C825EF9B9600BE073D /* Groups */,
 				CE04A3D425EF9B9600BE073D /* GroupShedule */,
 			);
-			path = Shedule;
+			path = Schedule;
 			sourceTree = "<group>";
 		};
 		CE04A3B425EF9B9600BE073D /* Institutions */ = {
@@ -562,6 +578,22 @@
 				CE04EF8F260B575600D59DC3 /* ListTeachersFirstLettersViewController.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		CE155C702625B4620075E6C7 /* MockSchedule */ = {
+			isa = PBXGroup;
+			children = (
+				CEC33F9A2626D74700F4E016 /* FakeSuccessScheduleExamRequest.json */,
+				CEC33F982626D51C00F4E016 /* FakeSuccessScheduleCorrespondenceGroupRequest.json */,
+				CEC33F962626D1F800F4E016 /* FakeSuccessScheduleFullTimeGroupRequest.json */,
+				CE155C8E2625EE5A0075E6C7 /* FakeSuccessListGroupsRequest.html */,
+				CEC33F942626CE5B00F4E016 /* FakeErrorListGroupsRequest.html */,
+				CE141B81262622D300281494 /* FakeSuccessListCourseNumbersRequest.html */,
+				CE155C8B2625EAD50075E6C7 /* FakeErrorListInstitutionsRequest.html */,
+				CE155C712625B4FD0075E6C7 /* FakeCreateSuccessListInstitutionsRequest.html */,
+				CEBC118E26259811000CB268 /* MockScheduleServer.swift */,
+			);
+			path = MockSchedule;
 			sourceTree = "<group>";
 		};
 		CE2B982B2601FB010008A2E1 /* Views */ = {
@@ -913,7 +945,7 @@
 		CEBC11902625982C000CB268 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
-				CEBC118E26259811000CB268 /* MockServer.swift */,
+				CE155C702625B4620075E6C7 /* MockSchedule */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -1079,6 +1111,7 @@
 				CE380A2725BC4F910028622B /* BottomBarView.xib in Resources */,
 				CEA4C9B72603401600716C07 /* AttestationCell.xib in Resources */,
 				CE04A3F925EF9B9700BE073D /* GroupSheduleCard.xib in Resources */,
+				CEC33F9B2626D74700F4E016 /* FakeSuccessScheduleExamRequest.json in Resources */,
 				CE380A1A25BC4F910028622B /* rectangle.png in Resources */,
 				CE5B3DFA25F530F800DC66E9 /* MenuViewController.storyboard in Resources */,
 				CE7F81BB25FA07CD00A70CCB /* ListTeachersTableCell.xib in Resources */,
@@ -1091,7 +1124,9 @@
 				CEA4C9BC2603435C00716C07 /* AttestationCellDropdownCell.xib in Resources */,
 				CE04A3E125EF9B9700BE073D /* InstitutionsScreen.storyboard in Resources */,
 				CE04EF90260B575600D59DC3 /* ListTeachersFirstLettersViewController.storyboard in Resources */,
+				CE155C8A2625C5750075E6C7 /* FakeCreateSuccessListInstitutionsRequest.html in Resources */,
 				CE380A1D25BC4F910028622B /* showMore.png in Resources */,
+				CEC33F992626D51C00F4E016 /* FakeSuccessScheduleCorrespondenceGroupRequest.json in Resources */,
 				CE04A3EA25EF9B9700BE073D /* menu.png in Resources */,
 				CE36FEAD2605F6E70021D9F0 /* ExamsCell.xib in Resources */,
 				CE380A2625BC4F910028622B /* TopBarView.xib in Resources */,
@@ -1099,6 +1134,8 @@
 				CE7F81B925FA079000A70CCB /* ListTeachers.storyboard in Resources */,
 				CE9DA654260C7A1700524BE3 /* TeacherScheduleViewController.storyboard in Resources */,
 				CE04A3E925EF9B9700BE073D /* leftArrow.png in Resources */,
+				CEC33F972626D1F900F4E016 /* FakeSuccessScheduleFullTimeGroupRequest.json in Resources */,
+				CE155C902625EF0C0075E6C7 /* FakeSuccessListGroupsRequest.html in Resources */,
 				CE8F4D0F2611C04900632E9E /* FoodPointsViewController.storyboard in Resources */,
 				CE47D67B26009196009D1CCA /* PersonalCabinetMainPageViewController.storyboard in Resources */,
 				CE037E7225BC425E00C50C16 /* LaunchScreen.storyboard in Resources */,
@@ -1111,10 +1148,13 @@
 				CECE8BA125FCB785008D7840 /* SigninViewController.storyboard in Resources */,
 				CE91140725C437740096AB29 /* StoreySwitcherView.xib in Resources */,
 				CEA4C9B526033A7900716C07 /* AttestationViewController.storyboard in Resources */,
+				CE155C8D2625EADB0075E6C7 /* FakeErrorListInstitutionsRequest.html in Resources */,
 				CE04A3E825EF9B9700BE073D /* books.png in Resources */,
 				CE380A3125BC70930028622B /* UniversityCorpCellTable.xib in Resources */,
 				CE04A3EC25EF9B9700BE073D /* dropup.png in Resources */,
+				CEC33F952626CE5B00F4E016 /* FakeErrorListGroupsRequest.html in Resources */,
 				CE2B982A2601F3380008A2E1 /* PersonalCabinetChapterCard.xib in Resources */,
+				CE141B83262626E400281494 /* FakeSuccessListCourseNumbersRequest.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1178,7 +1218,6 @@
 				CEE5B67C25D66ACA0023D640 /* PremiseDB.swift in Sources */,
 				CECE8BA625FCD594008D7840 /* PersonalCabinetButtonExtensions.swift in Sources */,
 				CE037E6A25BC425700C50C16 /* RootViewController.swift in Sources */,
-				CEBC118F26259811000CB268 /* MockServer.swift in Sources */,
 				CE380A2925BC4F910028622B /* TopBarNavigation.swift in Sources */,
 				CE36FEA92605D71A0021D9F0 /* ExamsCell.swift in Sources */,
 				CE01CC9F25C2A496001388B9 /* SearchPremiseView.swift in Sources */,
@@ -1228,6 +1267,7 @@
 				CE04EF96260B5A0400D59DC3 /* TeacherFirstLetterCell.swift in Sources */,
 				CE04A3F325EF9B9700BE073D /* GroupsViewController.swift in Sources */,
 				CE68297B2600D5CB008556FA /* PersonalCabinetMainPageViewModel.swift in Sources */,
+				CE155C752625BE9C0075E6C7 /* MockScheduleServer.swift in Sources */,
 				CE04A3F525EF9B9700BE073D /* SheduleColorExtensions.swift in Sources */,
 				CE47D67F26009499009D1CCA /* SigninViewModel.swift in Sources */,
 				CE04A40125EF9B9700BE073D /* GroupSheduleViewModel.swift in Sources */,
@@ -1275,8 +1315,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE155C782625BF1A0075E6C7 /* ScheduleTests.swift in Sources */,
 				CEBC11A42625A18B000CB268 /* TeacherTests.swift in Sources */,
-				CEBC11A22625A098000CB268 /* ScheduleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

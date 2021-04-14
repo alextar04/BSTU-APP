@@ -8,7 +8,7 @@
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
-            buildForRunning = "YES"
+            buildForRunning = "NO"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
             buildForAnalyzing = "NO">
@@ -17,6 +17,20 @@
                BlueprintIdentifier = "CEBC119626259A2A000CB268"
                BuildableName = "BSTU App Tests.xctest"
                BlueprintName = "BSTU App Tests"
+               ReferencedContainer = "container:BSTU App.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CE037E6125BC425700C50C16"
+               BuildableName = "BSTU App.app"
+               BlueprintName = "BSTU App"
                ReferencedContainer = "container:BSTU App.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -60,9 +74,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CEBC119626259A2A000CB268"
-            BuildableName = "BSTU App Tests.xctest"
-            BlueprintName = "BSTU App Tests"
+            BlueprintIdentifier = "CE037E6125BC425700C50C16"
+            BuildableName = "BSTU App.app"
+            BlueprintName = "BSTU App"
             ReferencedContainer = "container:BSTU App.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
