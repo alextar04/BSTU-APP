@@ -144,6 +144,10 @@
 		CEC33FA12626E88400F4E016 /* MockTeachersServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC33F9D2626E19900F4E016 /* MockTeachersServer.swift */; };
 		CEC33FA62626F02900F4E016 /* FakeSuccessExamRequest.html in Resources */ = {isa = PBXBuildFile; fileRef = CEC33FA42626F02900F4E016 /* FakeSuccessExamRequest.html */; };
 		CEC33FA72626F02900F4E016 /* FakeSuccessScheduleRequest.html in Resources */ = {isa = PBXBuildFile; fileRef = CEC33FA52626F02900F4E016 /* FakeSuccessScheduleRequest.html */; };
+		CEC33FAC2627040700F4E016 /* FoodPointsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC33FAB2627040700F4E016 /* FoodPointsTests.swift */; };
+		CEC33FAF2627072300F4E016 /* FakeSuccessPointsRequest.html in Resources */ = {isa = PBXBuildFile; fileRef = CEC33FAD2627072300F4E016 /* FakeSuccessPointsRequest.html */; };
+		CEC33FB02627072300F4E016 /* FakeSuccessMenuRequest.html in Resources */ = {isa = PBXBuildFile; fileRef = CEC33FAE2627072300F4E016 /* FakeSuccessMenuRequest.html */; };
+		CEC33FB1262707BB00F4E016 /* MockFoodPointsServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC33FA9262703C000F4E016 /* MockFoodPointsServer.swift */; };
 		CECE8BA125FCB785008D7840 /* SigninViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECE8BA025FCB785008D7840 /* SigninViewController.storyboard */; };
 		CECE8BA325FCC12D008D7840 /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE8BA225FCC12D008D7840 /* SigninViewController.swift */; };
 		CECE8BA625FCD594008D7840 /* PersonalCabinetButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE8BA525FCD594008D7840 /* PersonalCabinetButtonExtensions.swift */; };
@@ -318,6 +322,10 @@
 		CEC33F9F2626E7F900F4E016 /* FakeSuccessSurnameRequest.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = FakeSuccessSurnameRequest.html; sourceTree = "<group>"; };
 		CEC33FA42626F02900F4E016 /* FakeSuccessExamRequest.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = FakeSuccessExamRequest.html; sourceTree = "<group>"; };
 		CEC33FA52626F02900F4E016 /* FakeSuccessScheduleRequest.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = FakeSuccessScheduleRequest.html; sourceTree = "<group>"; };
+		CEC33FA9262703C000F4E016 /* MockFoodPointsServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFoodPointsServer.swift; sourceTree = "<group>"; };
+		CEC33FAB2627040700F4E016 /* FoodPointsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPointsTests.swift; sourceTree = "<group>"; };
+		CEC33FAD2627072300F4E016 /* FakeSuccessPointsRequest.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = FakeSuccessPointsRequest.html; sourceTree = "<group>"; };
+		CEC33FAE2627072300F4E016 /* FakeSuccessMenuRequest.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = FakeSuccessMenuRequest.html; sourceTree = "<group>"; };
 		CECE8BA025FCB785008D7840 /* SigninViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SigninViewController.storyboard; sourceTree = "<group>"; };
 		CECE8BA225FCC12D008D7840 /* SigninViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
 		CECE8BA525FCD594008D7840 /* PersonalCabinetButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCabinetButtonExtensions.swift; sourceTree = "<group>"; };
@@ -955,6 +963,7 @@
 			children = (
 				CE155C702625B4620075E6C7 /* MockSchedule */,
 				CEC33F9C2626E14A00F4E016 /* MockTeachers */,
+				CEC33FA82627038E00F4E016 /* MockFoodPoints */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -965,6 +974,7 @@
 				CEBC11902625982C000CB268 /* Mocks */,
 				CEBC11A12625A098000CB268 /* ScheduleTests.swift */,
 				CEBC11A32625A18B000CB268 /* TeacherTests.swift */,
+				CEC33FAB2627040700F4E016 /* FoodPointsTests.swift */,
 				CEBC119B26259A2A000CB268 /* Info.plist */,
 			);
 			path = "BSTU App Tests";
@@ -979,6 +989,16 @@
 				CEC33F9D2626E19900F4E016 /* MockTeachersServer.swift */,
 			);
 			path = MockTeachers;
+			sourceTree = "<group>";
+		};
+		CEC33FA82627038E00F4E016 /* MockFoodPoints */ = {
+			isa = PBXGroup;
+			children = (
+				CEC33FAE2627072300F4E016 /* FakeSuccessMenuRequest.html */,
+				CEC33FAD2627072300F4E016 /* FakeSuccessPointsRequest.html */,
+				CEC33FA9262703C000F4E016 /* MockFoodPointsServer.swift */,
+			);
+			path = MockFoodPoints;
 			sourceTree = "<group>";
 		};
 		CECE8B9E25FCB6E1008D7840 /* PersonalCabinet */ = {
@@ -1139,6 +1159,8 @@
 				CE36FEAF2605F9E10021D9F0 /* ExamsCellDropdownCell.xib in Resources */,
 				CE009EF125D6C18100CA8604 /* admin_bstuDB.sqlite3 in Resources */,
 				CE04A3EE25EF9B9700BE073D /* delete.png in Resources */,
+				CEC33FAF2627072300F4E016 /* FakeSuccessPointsRequest.html in Resources */,
+				CEC33FB02627072300F4E016 /* FakeSuccessMenuRequest.html in Resources */,
 				CEC33FA72626F02900F4E016 /* FakeSuccessScheduleRequest.html in Resources */,
 				CE36FEB12605FCEF0021D9F0 /* ExamsViewController.storyboard in Resources */,
 				CE380A1E25BC4F910028622B /* marker_pointer.png in Resources */,
@@ -1328,6 +1350,7 @@
 				CE5B3DFC25F539C700DC66E9 /* MenuViewController.swift in Sources */,
 				CE16978825C151710040AE95 /* ColorExtensions.swift in Sources */,
 				CEE5B68225D674CB0023D640 /* CorpMapper.swift in Sources */,
+				CEC33FB1262707BB00F4E016 /* MockFoodPointsServer.swift in Sources */,
 				CE04A3E525EF9B9700BE073D /* InstitutionsViewModel.swift in Sources */,
 				CE5AFBCD2611E25900D01077 /* FoodPointsViewModel.swift in Sources */,
 				CE04A3F625EF9B9700BE073D /* SheduleViewExtensions.swift in Sources */,
@@ -1339,6 +1362,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEC33FAC2627040700F4E016 /* FoodPointsTests.swift in Sources */,
 				CE155C782625BF1A0075E6C7 /* ScheduleTests.swift in Sources */,
 				CEBC11A42625A18B000CB268 /* TeacherTests.swift in Sources */,
 			);
