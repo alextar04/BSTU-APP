@@ -140,6 +140,10 @@
 		CEC33F972626D1F900F4E016 /* FakeSuccessScheduleFullTimeGroupRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = CEC33F962626D1F800F4E016 /* FakeSuccessScheduleFullTimeGroupRequest.json */; };
 		CEC33F992626D51C00F4E016 /* FakeSuccessScheduleCorrespondenceGroupRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = CEC33F982626D51C00F4E016 /* FakeSuccessScheduleCorrespondenceGroupRequest.json */; };
 		CEC33F9B2626D74700F4E016 /* FakeSuccessScheduleExamRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = CEC33F9A2626D74700F4E016 /* FakeSuccessScheduleExamRequest.json */; };
+		CEC33FA02626E7F900F4E016 /* FakeSuccessSurnameRequest.html in Resources */ = {isa = PBXBuildFile; fileRef = CEC33F9F2626E7F900F4E016 /* FakeSuccessSurnameRequest.html */; };
+		CEC33FA12626E88400F4E016 /* MockTeachersServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC33F9D2626E19900F4E016 /* MockTeachersServer.swift */; };
+		CEC33FA62626F02900F4E016 /* FakeSuccessExamRequest.html in Resources */ = {isa = PBXBuildFile; fileRef = CEC33FA42626F02900F4E016 /* FakeSuccessExamRequest.html */; };
+		CEC33FA72626F02900F4E016 /* FakeSuccessScheduleRequest.html in Resources */ = {isa = PBXBuildFile; fileRef = CEC33FA52626F02900F4E016 /* FakeSuccessScheduleRequest.html */; };
 		CECE8BA125FCB785008D7840 /* SigninViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECE8BA025FCB785008D7840 /* SigninViewController.storyboard */; };
 		CECE8BA325FCC12D008D7840 /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE8BA225FCC12D008D7840 /* SigninViewController.swift */; };
 		CECE8BA625FCD594008D7840 /* PersonalCabinetButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE8BA525FCD594008D7840 /* PersonalCabinetButtonExtensions.swift */; };
@@ -310,6 +314,10 @@
 		CEC33F962626D1F800F4E016 /* FakeSuccessScheduleFullTimeGroupRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FakeSuccessScheduleFullTimeGroupRequest.json; sourceTree = "<group>"; };
 		CEC33F982626D51C00F4E016 /* FakeSuccessScheduleCorrespondenceGroupRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FakeSuccessScheduleCorrespondenceGroupRequest.json; sourceTree = "<group>"; };
 		CEC33F9A2626D74700F4E016 /* FakeSuccessScheduleExamRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FakeSuccessScheduleExamRequest.json; sourceTree = "<group>"; };
+		CEC33F9D2626E19900F4E016 /* MockTeachersServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTeachersServer.swift; sourceTree = "<group>"; };
+		CEC33F9F2626E7F900F4E016 /* FakeSuccessSurnameRequest.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = FakeSuccessSurnameRequest.html; sourceTree = "<group>"; };
+		CEC33FA42626F02900F4E016 /* FakeSuccessExamRequest.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = FakeSuccessExamRequest.html; sourceTree = "<group>"; };
+		CEC33FA52626F02900F4E016 /* FakeSuccessScheduleRequest.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = FakeSuccessScheduleRequest.html; sourceTree = "<group>"; };
 		CECE8BA025FCB785008D7840 /* SigninViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SigninViewController.storyboard; sourceTree = "<group>"; };
 		CECE8BA225FCC12D008D7840 /* SigninViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
 		CECE8BA525FCD594008D7840 /* PersonalCabinetButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCabinetButtonExtensions.swift; sourceTree = "<group>"; };
@@ -946,6 +954,7 @@
 			isa = PBXGroup;
 			children = (
 				CE155C702625B4620075E6C7 /* MockSchedule */,
+				CEC33F9C2626E14A00F4E016 /* MockTeachers */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -959,6 +968,17 @@
 				CEBC119B26259A2A000CB268 /* Info.plist */,
 			);
 			path = "BSTU App Tests";
+			sourceTree = "<group>";
+		};
+		CEC33F9C2626E14A00F4E016 /* MockTeachers */ = {
+			isa = PBXGroup;
+			children = (
+				CEC33FA42626F02900F4E016 /* FakeSuccessExamRequest.html */,
+				CEC33FA52626F02900F4E016 /* FakeSuccessScheduleRequest.html */,
+				CEC33F9F2626E7F900F4E016 /* FakeSuccessSurnameRequest.html */,
+				CEC33F9D2626E19900F4E016 /* MockTeachersServer.swift */,
+			);
+			path = MockTeachers;
 			sourceTree = "<group>";
 		};
 		CECE8B9E25FCB6E1008D7840 /* PersonalCabinet */ = {
@@ -1119,6 +1139,7 @@
 				CE36FEAF2605F9E10021D9F0 /* ExamsCellDropdownCell.xib in Resources */,
 				CE009EF125D6C18100CA8604 /* admin_bstuDB.sqlite3 in Resources */,
 				CE04A3EE25EF9B9700BE073D /* delete.png in Resources */,
+				CEC33FA72626F02900F4E016 /* FakeSuccessScheduleRequest.html in Resources */,
 				CE36FEB12605FCEF0021D9F0 /* ExamsViewController.storyboard in Resources */,
 				CE380A1E25BC4F910028622B /* marker_pointer.png in Resources */,
 				CEA4C9BC2603435C00716C07 /* AttestationCellDropdownCell.xib in Resources */,
@@ -1148,6 +1169,7 @@
 				CECE8BA125FCB785008D7840 /* SigninViewController.storyboard in Resources */,
 				CE91140725C437740096AB29 /* StoreySwitcherView.xib in Resources */,
 				CEA4C9B526033A7900716C07 /* AttestationViewController.storyboard in Resources */,
+				CEC33FA02626E7F900F4E016 /* FakeSuccessSurnameRequest.html in Resources */,
 				CE155C8D2625EADB0075E6C7 /* FakeErrorListInstitutionsRequest.html in Resources */,
 				CE04A3E825EF9B9700BE073D /* books.png in Resources */,
 				CE380A3125BC70930028622B /* UniversityCorpCellTable.xib in Resources */,
@@ -1155,6 +1177,7 @@
 				CEC33F952626CE5B00F4E016 /* FakeErrorListGroupsRequest.html in Resources */,
 				CE2B982A2601F3380008A2E1 /* PersonalCabinetChapterCard.xib in Resources */,
 				CE141B83262626E400281494 /* FakeSuccessListCourseNumbersRequest.html in Resources */,
+				CEC33FA62626F02900F4E016 /* FakeSuccessExamRequest.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1225,6 +1248,7 @@
 				CE42A5AC25D41CD800CDDCA5 /* CorpDB.swift in Sources */,
 				CE380A2525BC4F910028622B /* TextFieldExtensions.swift in Sources */,
 				CE9DA64C260C78E500524BE3 /* TeacherScheduleViewModel.swift in Sources */,
+				CEC33FA12626E88400F4E016 /* MockTeachersServer.swift in Sources */,
 				CEA4C9C226034BF800716C07 /* AttestationModel.swift in Sources */,
 				CE0E7C1C26080AC400705059 /* AttestationViewModel.swift in Sources */,
 				CE36FEA82605D71A0021D9F0 /* ExamsModel.swift in Sources */,
