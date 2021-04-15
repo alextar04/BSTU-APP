@@ -74,6 +74,7 @@
 		CE27FA0526283C1700A851EC /* FakeSuccessExamRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = CE27FA0326283C1700A851EC /* FakeSuccessExamRequest.json */; };
 		CE27FA0826283F2700A851EC /* FakeErrorAttestationRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = CE27FA0626283F2600A851EC /* FakeErrorAttestationRequest.json */; };
 		CE27FA0926283F2700A851EC /* FakeErrorExamRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = CE27FA0726283F2600A851EC /* FakeErrorExamRequest.json */; };
+		CE27FA0B262852EB00A851EC /* NavigationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE27FA0A262852EB00A851EC /* NavigationTests.swift */; };
 		CE2B982A2601F3380008A2E1 /* PersonalCabinetChapterCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2B98292601F3380008A2E1 /* PersonalCabinetChapterCard.xib */; };
 		CE2B982D2601FB1E0008A2E1 /* PersonalCabinetChapterCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2B982C2601FB1D0008A2E1 /* PersonalCabinetChapterCard.swift */; };
 		CE36FEA82605D71A0021D9F0 /* ExamsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE36FEA02605D71A0021D9F0 /* ExamsModel.swift */; };
@@ -258,6 +259,7 @@
 		CE27FA0326283C1700A851EC /* FakeSuccessExamRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FakeSuccessExamRequest.json; sourceTree = "<group>"; };
 		CE27FA0626283F2600A851EC /* FakeErrorAttestationRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FakeErrorAttestationRequest.json; sourceTree = "<group>"; };
 		CE27FA0726283F2600A851EC /* FakeErrorExamRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FakeErrorExamRequest.json; sourceTree = "<group>"; };
+		CE27FA0A262852EB00A851EC /* NavigationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTests.swift; sourceTree = "<group>"; };
 		CE2B98292601F3380008A2E1 /* PersonalCabinetChapterCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonalCabinetChapterCard.xib; sourceTree = "<group>"; };
 		CE2B982C2601FB1D0008A2E1 /* PersonalCabinetChapterCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCabinetChapterCard.swift; sourceTree = "<group>"; };
 		CE36FEA02605D71A0021D9F0 /* ExamsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamsModel.swift; sourceTree = "<group>"; };
@@ -1013,6 +1015,7 @@
 				CEBC11A32625A18B000CB268 /* TeacherTests.swift */,
 				CEC33FAB2627040700F4E016 /* FoodPointsTests.swift */,
 				CE27F9F12627214900A851EC /* PersonalCabinetTests.swift */,
+				CE27FA0A262852EB00A851EC /* NavigationTests.swift */,
 				CEBC119B26259A2A000CB268 /* Info.plist */,
 			);
 			path = "BSTU App Tests";
@@ -1413,6 +1416,7 @@
 				CE155C782625BF1A0075E6C7 /* ScheduleTests.swift in Sources */,
 				CE27F9F22627214900A851EC /* PersonalCabinetTests.swift in Sources */,
 				CEBC11A42625A18B000CB268 /* TeacherTests.swift in Sources */,
+				CE27FA0B262852EB00A851EC /* NavigationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
