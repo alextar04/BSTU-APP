@@ -16,17 +16,20 @@ class PersonalCabinetMainPageViewModel{
     // MARK: Метод авторизации на сервере
     func autorizate(login: String, password: String,
                     completion: @escaping (PersonalCabinetMainPageModel)->Void,
-                    errorCallback: @escaping (TypeError)->Void){
+                    errorCallback: @escaping (TypeError)->Void,
+                    isTestConfiguration: Bool){
         
         let queryParameters: [String: String] = [
             "email" : login,
             "password" : password,
         ]
         
+        var encoding: ParameterEncoding!
+        (isTestConfiguration) ? (encoding = JSONEncoding.default) : (encoding = URLEncoding.httpBody)
         AF.request("http://cabinet.bstu.ru/auth/login",
                    method: .post,
                    parameters: queryParameters,
-                   encoding: URLEncoding.httpBody)
+                   encoding: encoding)
             .responseString{ [weak self] html in
                 do {
                     let document = try SwiftSoup.parse(html.result.get())
@@ -62,6 +65,7 @@ class PersonalCabinetMainPageViewModel{
                     
                     if try document.title() != ""{
                         errorCallback(.serverError)
+                        return
                     }
                     
                     let headScripts = try (document.head()?.select("script"))
@@ -76,6 +80,7 @@ class PersonalCabinetMainPageViewModel{
                     }
                     if neededScriptDefine == nil{
                         errorCallback(.serverError)
+                        return
                     }
                     
                     // Регулярное выражение для получения JSON c данными о вышедшем пользователе
@@ -94,8 +99,8 @@ class PersonalCabinetMainPageViewModel{
                         stringifyJSON = stringifyJSON.replacingOccurrences(of: "undefined", with: "-1")
                         let json = try! JSON(data: Data(stringifyJSON.utf8))
                         if json["currentUser"].int! == -1{
-                            completion()
                             self!.removeUserDataFromStorage()
+                            completion()
                             return
                         }
                     }

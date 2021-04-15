@@ -98,7 +98,7 @@ class SigninViewController: UIViewController, UIGestureRecognizerDelegate{
                     let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
                     dialogMessage.addAction(okButton)
                     self!.present(dialogMessage, animated: true, completion: nil)
-                })
+                    }, isTestConfiguration: false)
             }).disposed(by: disposeBag)
     }
     

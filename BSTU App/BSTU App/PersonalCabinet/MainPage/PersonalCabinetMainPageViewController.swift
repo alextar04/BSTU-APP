@@ -190,7 +190,7 @@ class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecogniz
                                         self!.makeAutorization()
                                     }).disposed(by: self!.disposeBagReloadingButton)
                                 }
-        })
+            }, isTestConfiguration: false)
     }
     
     

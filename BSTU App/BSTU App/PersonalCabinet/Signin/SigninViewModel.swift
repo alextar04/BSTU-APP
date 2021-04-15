@@ -15,17 +15,20 @@ class SigninViewModel{
     // MARK: Метод авторизации на сервере
     func autorizate(login: String, password: String,
                     completion: @escaping (PersonalCabinetMainPageModel)->Void,
-                    errorCallback: @escaping (TypeError)->Void){
+                    errorCallback: @escaping (TypeError)->Void,
+                    isTestConfiguration: Bool){
         
         let queryParameters: [String: String] = [
             "email" : login,
             "password" : password,
         ]
         
+        var encoding: ParameterEncoding!
+        (isTestConfiguration) ? (encoding = JSONEncoding.default) : (encoding = URLEncoding.httpBody)
         AF.request("http://cabinet.bstu.ru/auth/login",
                    method: .post,
-                   parameters: queryParameters,
-                   encoding: URLEncoding.httpBody)
+                    parameters: queryParameters,
+                    encoding: encoding)
             .responseString{ [weak self] html in
                 do {
                     let document = try SwiftSoup.parse(html.result.get())
