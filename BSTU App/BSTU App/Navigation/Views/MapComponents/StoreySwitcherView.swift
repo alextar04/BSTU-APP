@@ -28,32 +28,31 @@ class StoreySwitcherView: UIView{
         self.storeyUpButton.rx
             .tapGesture()
             .when(.recognized)
-            .subscribe(onNext: { _ in
-                var currentValue = Int(self.storeyNumberLabel.text!)
-                if self.noMoreUp{
-                    self.storeyUpButton.image = UIImage(named: "storeyUpNoMore")
+            .subscribe(onNext: { [weak self] _ in
+                var currentValue = Int(self!.storeyNumberLabel.text!)
+                if self!.noMoreUp{
+                    self!.storeyUpButton.image = UIImage(named: "storeyUpNoMore")
                 } else {
                     currentValue! += 1
-                    self.storeyNumberLabel.text = String(currentValue!)
+                    self!.storeyNumberLabel.text = String(currentValue!)
                     
                     // Загрузка карты этажа
                     let data: [String: Any] = ["storey": currentValue!, "needsOpenNewMap": true]
                     NotificationCenter.default.post(name: Notification.Name("ChangeStorey"), object: nil, userInfo: data)
                     // Удалить нарисованный путь
-                    //let parentVC = self.parentViewController as! NavigationViewController
                     if parentVC.topBarView.startPlaceTextField.text != "" && parentVC.topBarView.finishPlaceTextField.text != ""{
                         parentVC.topBarView.startPlaceTextField.text = ""
                         parentVC.topBarView.finishPlaceTextField.text = ""
                     }
                     
                     if (currentValue! + 1) > rangeStorey.max()!{
-                        self.storeyUpButton.image = UIImage(named: "storeyUpNoMore")
-                        self.noMoreUp = true
+                        self!.storeyUpButton.image = UIImage(named: "storeyUpNoMore")
+                        self!.noMoreUp = true
                     } else {
-                        self.storeyDownButton.image = UIImage(named: "storeyDown")
-                        self.noMoreDown = false
-                        self.storeyUpButton.image = UIImage(named: "storeyUp")
-                        self.noMoreUp = false
+                        self!.storeyDownButton.image = UIImage(named: "storeyDown")
+                        self!.noMoreDown = false
+                        self!.storeyUpButton.image = UIImage(named: "storeyUp")
+                        self!.noMoreUp = false
                     }
                 }
             }).disposed(by: disposeBag)
@@ -61,13 +60,13 @@ class StoreySwitcherView: UIView{
         self.storeyDownButton.rx
         .tapGesture()
         .when(.recognized)
-        .subscribe(onNext: { _ in
-            var currentValue = Int(self.storeyNumberLabel.text!)
-            if self.noMoreDown{
-                self.storeyDownButton.image = UIImage(named: "storeyDownNoMore")
+        .subscribe(onNext: { [weak self] _ in
+            var currentValue = Int(self!.storeyNumberLabel.text!)
+            if self!.noMoreDown{
+                self!.storeyDownButton.image = UIImage(named: "storeyDownNoMore")
             } else {
                 currentValue! -= 1
-                self.storeyNumberLabel.text = String(currentValue!)
+                self!.storeyNumberLabel.text = String(currentValue!)
                 
                 // Загрузка карты этажа
                 let data: [String: Any] = ["storey": currentValue!, "needsOpenNewMap": true]
@@ -80,13 +79,13 @@ class StoreySwitcherView: UIView{
                 }
                 
                 if (currentValue! - 1) < rangeStorey.min()!{
-                    self.storeyDownButton.image = UIImage(named: "storeyDownNoMore")
-                    self.noMoreDown = true
+                    self!.storeyDownButton.image = UIImage(named: "storeyDownNoMore")
+                    self!.noMoreDown = true
                 } else {
-                    self.storeyDownButton.image = UIImage(named: "storeyDown")
-                    self.noMoreDown = false
-                    self.storeyUpButton.image = UIImage(named: "storeyUp")
-                    self.noMoreUp = false
+                    self!.storeyDownButton.image = UIImage(named: "storeyDown")
+                    self!.noMoreDown = false
+                    self!.storeyUpButton.image = UIImage(named: "storeyUp")
+                    self!.noMoreUp = false
                 }
             }
         }).disposed(by: disposeBag)

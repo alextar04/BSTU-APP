@@ -113,8 +113,8 @@ class Marker: UIView{
     func setupTapContainerView() {
         self.rx.tapGesture()
             .when(.recognized)
-            .subscribe(onNext: { sender in
-                self.markerTapped(sender: sender)
+            .subscribe(onNext: { [weak self] sender in
+                self!.markerTapped(sender: sender)
         }).disposed(by: disposeBag)
     }
     
@@ -124,12 +124,12 @@ class Marker: UIView{
         self.paintingPriority = 1
         
         UIView.animate(withDuration: 0.2,
-            animations: {
-                self.transform = CGAffineTransform(scaleX: 0.9 * self.mapScale, y: 0.9 * self.mapScale)
+            animations: { [weak self] in
+                self!.transform = CGAffineTransform(scaleX: 0.9 * self!.mapScale, y: 0.9 * self!.mapScale)
             },
-            completion: { _ in
+            completion: { [weak self] _ in
                 UIView.animate(withDuration: 0.2) {
-                    self.transform = CGAffineTransform(scaleX: self.mapScale, y: self.mapScale)
+                    self!.transform = CGAffineTransform(scaleX: self!.mapScale, y: self!.mapScale)
                 }
         })
         

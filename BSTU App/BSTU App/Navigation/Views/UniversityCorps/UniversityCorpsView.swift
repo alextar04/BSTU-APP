@@ -46,16 +46,16 @@ class UniversityCorpsView: UIView, UITableViewDelegate{
         self.corpsCount = receivedData.count
         let section = [SectionOfCorps(header: "Корпуса", items: receivedData)]
         
-        let dataSource = RxTableViewSectionedReloadDataSource<SectionOfCorps>(configureCell: { dataSource, table, index, item in
+        let dataSource = RxTableViewSectionedReloadDataSource<SectionOfCorps>(configureCell: { [weak self] dataSource, table, index, item in
             table.register(UINib(nibName: "UniversityCorpCellTable", bundle: nil), forCellReuseIdentifier: "UniversityCell")
             let cell = table.dequeueReusableCell(withIdentifier: "UniversityCell", for: index) as! UniversityCorpCellTable
             cell.nameCorpLabel.text = item.name
-            cell.selectImageStatus.isHidden = (index.item != self.currentSelectedCorpsIndex.item) ? true : false
+            cell.selectImageStatus.isHidden = (index.item != self!.currentSelectedCorpsIndex.item) ? true : false
             
             let selectedCellView = UIView()
             selectedCellView.backgroundColor = .white
             cell.selectedBackgroundView = selectedCellView
-            self.heightTable.constant = CGFloat(self.cellHeigth) * CGFloat(receivedData.count) + CGFloat(self.headerHeigth)
+            self!.heightTable.constant = CGFloat(self!.cellHeigth) * CGFloat(receivedData.count) + CGFloat(self!.headerHeigth)
             return cell
         })
         
@@ -65,14 +65,14 @@ class UniversityCorpsView: UIView, UITableViewDelegate{
         
         self.corpsTable.rx
             .itemSelected
-            .subscribe(onNext: { selectedRowIndex in
+            .subscribe(onNext: { [weak self] selectedRowIndex in
                 
-                let oldSelectedCell = self.corpsTable.cellForRow(at: self.currentSelectedCorpsIndex) as! UniversityCorpCellTable
+                let oldSelectedCell = self!.corpsTable.cellForRow(at: self!.currentSelectedCorpsIndex) as! UniversityCorpCellTable
                 oldSelectedCell.selectImageStatus.isHidden = true
                 
-                let newSelectedCell = self.corpsTable.cellForRow(at: selectedRowIndex) as! UniversityCorpCellTable
+                let newSelectedCell = self!.corpsTable.cellForRow(at: selectedRowIndex) as! UniversityCorpCellTable
                 newSelectedCell.selectImageStatus.isHidden = false
-                self.currentSelectedCorpsIndex = selectedRowIndex
+                self!.currentSelectedCorpsIndex = selectedRowIndex
                 
                 let userInfo: [String: Any] = ["nameCorp": newSelectedCell.nameCorpLabel.text]
                 NotificationCenter.default.post(name: Notification.Name("ChangeCorp"), object: nil, userInfo: userInfo)

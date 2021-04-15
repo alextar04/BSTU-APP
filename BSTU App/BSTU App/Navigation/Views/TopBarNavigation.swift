@@ -49,35 +49,35 @@ class TopBarNavigation: UIView{
         
         self.chooseCorpButton.rx.tapGesture()
             .when(.recognized)
-            .subscribe(onNext: { _ in
+            .subscribe(onNext: { [weak self] _ in
                 
                 var delay = 0.0
-                if self.tablePremiseView != nil{
-                    self.endEditingData()
+                if self!.tablePremiseView != nil{
+                    self!.endEditingData()
                     delay = 0.3
                 }
                 
                 // Экран под окном выбора корпуса
-                self.setGrayScreenUnderCorpChoosenView(delay: delay)
+                self!.setGrayScreenUnderCorpChoosenView(delay: delay)
                     
-                if self.universityCorpView == nil{
-                    self.universityCorpView = Bundle.main.loadNibNamed("UniversityCorpsView", owner: self, options: nil)?.first as? UniversityCorpsView
-                    self.universityCorpView?.setupView()
+                if self!.universityCorpView == nil{
+                    self!.universityCorpView = Bundle.main.loadNibNamed("UniversityCorpsView", owner: self, options: nil)?.first as? UniversityCorpsView
+                    self!.universityCorpView?.setupView()
                 }
                 
-                let cellHeight = self.universityCorpView.cellHeigth
-                let headerHeight = self.universityCorpView.headerHeigth
-                let countCells = self.universityCorpView.corpsCount
+                let cellHeight = self!.universityCorpView.cellHeigth
+                let headerHeight = self!.universityCorpView.headerHeigth
+                let countCells = self!.universityCorpView.corpsCount
 
-                self.universityCorpView?.frame = CGRect(x: (Double((parentVC.view.frame.size.width)) / 2) - 150,
+                self!.universityCorpView?.frame = CGRect(x: (Double((parentVC.view.frame.size.width)) / 2) - 150,
                                                         y: Double((parentVC.view.frame.size.height)),
                                                        width: 300,
                                                        height: Double(cellHeight * countCells) + Double(headerHeight))
                 
-                parentVC.view.addSubview(self.universityCorpView!)
+                parentVC.view.addSubview(self!.universityCorpView!)
                     
                 let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
-                    self.universityCorpView?.frame = self.universityCorpView?.frame
+                    self!.universityCorpView?.frame = self!.universityCorpView?.frame
                         .offsetBy(dx: 0, dy: -CGFloat((cellHeight * countCells) + headerHeight + 30)) as! CGRect
                     }
                 animator.startAnimation(afterDelay: TimeInterval(delay))
@@ -106,23 +106,23 @@ class TopBarNavigation: UIView{
         
         chooseCorpBackground.rx.tapGesture()
             .when(.recognized)
-            .subscribe(onNext: { _ in
-                let cellHeight = self.universityCorpView.cellHeigth
-                let headerHeight = self.universityCorpView.headerHeigth
-                let countCells = self.universityCorpView.corpsCount
+            .subscribe(onNext: { [weak self] _ in
+                let cellHeight = self!.universityCorpView.cellHeigth
+                let headerHeight = self!.universityCorpView.headerHeigth
+                let countCells = self!.universityCorpView.corpsCount
                 let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
-                    self.universityCorpView?.frame = self.universityCorpView?.frame
+                    self!.universityCorpView?.frame = self!.universityCorpView?.frame
                         .offsetBy(dx: 0, dy: CGFloat((cellHeight * countCells) + headerHeight + 50)) as! CGRect
                 }
                 animator.startAnimation()
                 
                 UIView.animate(withDuration: 0.3,
-                               animations: {
-                                self.chooseCorpBackground.backgroundColor = .clear
+                               animations: { [weak self] in
+                                self!.chooseCorpBackground.backgroundColor = .clear
                 },
-                               completion: { _ in
-                                self.chooseCorpBackground.removeFromSuperview()
-                                self.universityCorpView.removeFromSuperview()
+                               completion: { [weak self] _ in
+                                self!.chooseCorpBackground.removeFromSuperview()
+                                self!.universityCorpView.removeFromSuperview()
                 })
             })
             .disposed(by: disposeBag)
@@ -132,11 +132,11 @@ class TopBarNavigation: UIView{
     // MARK: Закрытие экрана под окном выбора корпуса
     func closeGrayScreenUnderCorpChoosenView(){
         UIView.animate(withDuration: 0.3,
-                       animations: {
-                        self.chooseCorpBackground.backgroundColor = .clear
+                       animations: { [weak self] in
+                        self!.chooseCorpBackground.backgroundColor = .clear
         },
-                       completion: { _ in
-                        self.chooseCorpBackground.removeFromSuperview()
+                       completion: { [weak self] _ in
+                        self!.chooseCorpBackground.removeFromSuperview()
         })
     }
     
@@ -147,86 +147,86 @@ class TopBarNavigation: UIView{
             // Начало редактирования
             label!.rx.tapGesture()
                 .when(.recognized)
-                .subscribe(onNext: { _ in
+                .subscribe(onNext: { [weak self] _ in
 
-                    self.leftMenuButton.isHidden = true
-                    if self.startPlaceTextField.text == "Откуда"{
-                        self.startPlaceTextField.text = ""
+                    self!.leftMenuButton.isHidden = true
+                    if self!.startPlaceTextField.text == "Откуда"{
+                        self!.startPlaceTextField.text = ""
                     }
                     
-                    if self.finishPlaceTextField.text == "Куда"{
-                        self.finishPlaceTextField.text = ""
+                    if self!.finishPlaceTextField.text == "Куда"{
+                        self!.finishPlaceTextField.text = ""
                     }
                     
-                    self.oldStartPlaceText = self.startPlaceTextField.text
-                    self.oldFinishPlaceText = self.finishPlaceTextField.text
+                    self!.oldStartPlaceText = self!.startPlaceTextField.text
+                    self!.oldFinishPlaceText = self!.finishPlaceTextField.text
                     
-                    let timeForBindings = self.tablePremiseView == nil
+                    let timeForBindings = self!.tablePremiseView == nil
                     
                     // Инициализация таблицы
-                    if self.tablePremiseView == nil{
-                        self.tablePremiseView = Bundle.main.loadNibNamed("SearchPremiseView", owner: self, options: nil)?.first as? SearchPremiseView
+                    if self!.tablePremiseView == nil{
+                        self!.tablePremiseView = Bundle.main.loadNibNamed("SearchPremiseView", owner: self, options: nil)?.first as? SearchPremiseView
                         
                         var tableHeight: CGFloat = 0.0
                         var yStartTable: CGFloat = 0.0
-                        if !self.parentVC.isEnabledTopBarInInit{
-                            tableHeight = (self.parentVC?.view.frame.height)! - self.keyboardHeight - (self.frame.height + ((UIApplication.shared.windows.first?.safeAreaInsets.top)!))
-                            yStartTable = self.frame.height + (self.window?.safeAreaInsets.top)!
+                        if !self!.parentVC.isEnabledTopBarInInit{
+                            tableHeight = (self!.parentVC?.view.frame.height)! - self!.keyboardHeight - (self!.frame.height + ((UIApplication.shared.windows.first?.safeAreaInsets.top)!))
+                            yStartTable = self!.frame.height + (self!.window?.safeAreaInsets.top)!
                         } else {
-                            tableHeight = (UIApplication.shared.windows.first?.safeAreaLayoutGuide.layoutFrame.height)! - self.keyboardHeight - self.frame.height
-                            yStartTable = self.frame.height
+                            tableHeight = (UIApplication.shared.windows.first?.safeAreaLayoutGuide.layoutFrame.height)! - self!.keyboardHeight - self!.frame.height
+                            yStartTable = self!.frame.height
                         }
                         
-                        self.tablePremiseView?.setupView(height: tableHeight, parentController: self.parentVC)
-                        self.tablePremiseView?.frame = CGRect(x: 0, y: yStartTable,
-                                                          width: self.frame.width,
+                        self!.tablePremiseView?.setupView(height: tableHeight, parentController: self!.parentVC)
+                        self!.tablePremiseView?.frame = CGRect(x: 0, y: yStartTable,
+                                                          width: self!.frame.width,
                                                           height: tableHeight)
-                        self.parentVC?.view.addSubview(self.tablePremiseView!)
+                        self!.parentVC?.view.addSubview(self!.tablePremiseView!)
                         
                         // Базовая инициализация данными таблицы
-                        let data = self.parentVC
+                        let data = self!.parentVC
                             .viewModel
                             .loadArrayPremise(prefix: (label?.text)!)
-                        self.tablePremiseView?.sections.accept([SearchPremiseView.SectionOfPremise(header: "Кабинеты",
+                        self!.tablePremiseView?.sections.accept([SearchPremiseView.SectionOfPremise(header: "Кабинеты",
                                                                                                    items: data!)])
                     }
                     
                     // Кнопка "Назад"
-                    if self.backButton == nil{
-                        self.backButton = UIButton()
-                        self.backButton!.makeCancelPremiseInputtingView()
+                    if self!.backButton == nil{
+                        self!.backButton = UIButton()
+                        self!.backButton!.makeCancelPremiseInputtingView()
                         
                         var yStartBackButton: CGFloat = 0.0
-                        if !(self.parentVC).isEnabledTopBarInInit{
-                            yStartBackButton = (self.parentVC.view.frame.height) - self.keyboardHeight - 50
+                        if !(self!.parentVC).isEnabledTopBarInInit{
+                            yStartBackButton = (self!.parentVC.view.frame.height) - self!.keyboardHeight - 50
                         } else {
-                            yStartBackButton = (UIApplication.shared.windows.first?.safeAreaLayoutGuide.layoutFrame.height)! - self.keyboardHeight - 50
+                            yStartBackButton = (UIApplication.shared.windows.first?.safeAreaLayoutGuide.layoutFrame.height)! - self!.keyboardHeight - 50
                         }
-                        self.backButton!.frame = CGRect(x: self.center.x - 60, y: yStartBackButton,
+                        self!.backButton!.frame = CGRect(x: self!.center.x - 60, y: yStartBackButton,
                                                   width: 120, height: 40)
-                        self.parentVC?.view.addSubview(self.backButton!)
+                        self!.parentVC?.view.addSubview(self!.backButton!)
                     }
                     
                     if timeForBindings{
-                        self.backButton!.rx.tap.bind{
-                            if self.startPlaceTextField.text != ""{
-                                self.startPlaceTextField.text = self.oldStartPlaceText
+                        self!.backButton!.rx.tap.bind{
+                            if self!.startPlaceTextField.text != ""{
+                                self!.startPlaceTextField.text = self!.oldStartPlaceText
                             }
-                            if self.finishPlaceTextField.text != ""{
-                                self.finishPlaceTextField.text = self.oldFinishPlaceText
+                            if self!.finishPlaceTextField.text != ""{
+                                self!.finishPlaceTextField.text = self!.oldFinishPlaceText
                             }
-                            if self.startPlaceTextField.text == "" || self.finishPlaceTextField.text == ""{
+                            if self!.startPlaceTextField.text == "" || self!.finishPlaceTextField.text == ""{
                                 // Удаление старого нарисованного пути
                      
-                                if self.parentVC.map.pathLayer != nil{
-                                    self.parentVC.map.pathLayer.removeFromSuperlayer()
-                                    self.parentVC.map.pathLayer.removeAllAnimations()
+                                if self!.parentVC.map.pathLayer != nil{
+                                    self!.parentVC.map.pathLayer.removeFromSuperlayer()
+                                    self!.parentVC.map.pathLayer.removeAllAnimations()
                                 }
-                                self.parentVC.anotherStageButton.isHidden = true
-                                self.parentVC.storeySwitcherView.isHidden = false
+                                self!.parentVC.anotherStageButton.isHidden = true
+                                self!.parentVC.storeySwitcherView.isHidden = false
                             }
-                            self.endEditingData()
-                        }.disposed(by: self.disposeBag)
+                            self!.endEditingData()
+                        }.disposed(by: self!.disposeBag)
                     }
                     }).disposed(by: disposeBag)
             
@@ -234,12 +234,12 @@ class TopBarNavigation: UIView{
                     label?.rx
                         .controlEvent([.editingChanged])
                         .asObservable()
-                        .subscribe(onNext: { _ in
-                            let data = self.parentVC
+                        .subscribe(onNext: { [weak self] _ in
+                            let data = self!.parentVC
                                 .viewModel
                                 .loadArrayPremise(prefix: (label?.text)!)
                             
-                            self.tablePremiseView?.sections.accept([SearchPremiseView.SectionOfPremise(header: "Кабинеты",
+                            self!.tablePremiseView?.sections.accept([SearchPremiseView.SectionOfPremise(header: "Кабинеты",
                                                                                                        items: data!)])
                         }).disposed(by: disposeBag)
                     
@@ -247,9 +247,9 @@ class TopBarNavigation: UIView{
                     label?.rx
                         .controlEvent(.editingDidBegin)
                         .asObservable()
-                        .subscribe(onNext: { _ in
+                        .subscribe(onNext: { [weak self] _ in
                             UIView.setAnimationsEnabled(false)
-                            self.startPlaceTextField.isEditing ? (self.finishPlaceTextField.isUserInteractionEnabled = false) : (self.startPlaceTextField.isUserInteractionEnabled = false)
+                            self!.startPlaceTextField.isEditing ? (self!.finishPlaceTextField.isUserInteractionEnabled = false) : (self!.startPlaceTextField.isUserInteractionEnabled = false)
                         }).disposed(by: disposeBag)
             
                     label?.autocorrectionType = .no
@@ -359,16 +359,16 @@ class TopBarNavigation: UIView{
         self.leftMenuButton.rx
             .tapGesture()
             .when(.recognized)
-            .subscribe(onNext: { _ in
+            .subscribe(onNext: { [weak self] _ in
                 
-                var listDisablers: [UIView] = [self.parentVC.topBarView,
-                                               self.parentVC.map,
-                                               self.parentVC.storeySwitcherView]
-                (self.parentVC.bottomBarView != nil) ? listDisablers.append(self.parentVC.bottomBarView!) : ()
+                var listDisablers: [UIView] = [self!.parentVC.topBarView,
+                                               self!.parentVC.map,
+                                               self!.parentVC.storeySwitcherView]
+                (self!.parentVC.bottomBarView != nil) ? listDisablers.append(self!.parentVC.bottomBarView!) : ()
                 
                 let userInfo: [String: [UIView]] = ["listDisablers": listDisablers]
                 NotificationCenter.default.post(name: Notification.Name("SwitchLeftMenu"), object: nil, userInfo: userInfo)
-                self.parentVC.isMenuOpen.toggle()
+                self!.parentVC.isMenuOpen.toggle()
             }).disposed(by: disposeBag)
     }
     

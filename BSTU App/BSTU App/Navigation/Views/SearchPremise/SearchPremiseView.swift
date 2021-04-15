@@ -64,8 +64,8 @@ class SearchPremiseView: UIView{
         
         self.premiseTableView.rx
             .itemSelected
-            .subscribe(onNext: { selectedRowIndex in
-                let selectedCell = self.premiseTableView.cellForRow(at: selectedRowIndex) as! SearchPremiseCellTable
+            .subscribe(onNext: { [weak self] selectedRowIndex in
+                let selectedCell = self!.premiseTableView.cellForRow(at: selectedRowIndex) as! SearchPremiseCellTable
                 let userInfo: [String: Any] = ["idPremise": selectedCell.premiseId]
                 NotificationCenter.default.post(name: Notification.Name("ChangePremiseLabel"), object: nil, userInfo: userInfo)
             }

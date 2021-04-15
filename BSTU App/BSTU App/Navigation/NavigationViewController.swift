@@ -97,8 +97,8 @@ class NavigationViewController: UIViewController, UIGestureRecognizerDelegate {
         if !self.changeMarkerStatus || !self.bottomBarIsOpen{
             
             let offsetBottomBar = -heightBottomBar
-            let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
-                self.bottomBarView?.frame = self.bottomBarView?.frame
+            let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){ [weak self] in
+                self!.bottomBarView?.frame = self!.bottomBarView?.frame
                     .offsetBy(dx: 0, dy: offsetBottomBar) as! CGRect
             }
             animator.startAnimation()
@@ -137,8 +137,8 @@ class NavigationViewController: UIViewController, UIGestureRecognizerDelegate {
                     let heightBottomBar = (bottomBarView?.frame.height)! + (self.currentStartTopBarHeight - self.normalStartTopBarHeight)
                     
                     let offsetSwitcherStorey = heightBottomBar
-                    let animatorSwitcherStorey = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
-                        self.storeySwitcherView?.frame = self.storeySwitcherView?.frame
+                    let animatorSwitcherStorey = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){ [weak self] in
+                        self!.storeySwitcherView?.frame = self!.storeySwitcherView?.frame
                             .offsetBy(dx: 0, dy: offsetSwitcherStorey) as! CGRect
                     }
                     animatorSwitcherStorey.startAnimation(afterDelay: TimeInterval(0.3))
@@ -170,24 +170,24 @@ class NavigationViewController: UIViewController, UIGestureRecognizerDelegate {
         if self.bottomBarIsOpen{
             self.view.isUserInteractionEnabled = false
             let heightBottomBar = (bottomBarView?.frame.height)! + (self.currentStartTopBarHeight - self.normalStartTopBarHeight)
-            let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
-                self.bottomBarView?.frame = self.bottomBarView?.frame
+            let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){ [weak self] in
+                self!.bottomBarView?.frame = self!.bottomBarView?.frame
                     .offsetBy(dx: 0, dy: heightBottomBar) as! CGRect
             }
             animator.startAnimation()
-            animator.addCompletion{ _ in
-                self.bottomBarIsOpen = false
-                self.bottomBarView!.removeFromSuperview()
+            animator.addCompletion{ [weak self] _ in
+                self!.bottomBarIsOpen = false
+                self!.bottomBarView!.removeFromSuperview()
             }
             
             // Изменить положение переключателя этажей
             let offsetSwitcherStorey = heightBottomBar
-            let animatorSwitcherStorey = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
-                self.storeySwitcherView?.frame = self.storeySwitcherView?.frame
+            let animatorSwitcherStorey = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){ [weak self] in
+                self!.storeySwitcherView?.frame = self!.storeySwitcherView?.frame
                     .offsetBy(dx: 0, dy: offsetSwitcherStorey) as! CGRect
             }
-            animatorSwitcherStorey.addCompletion{ _ in
-                self.view.isUserInteractionEnabled = true
+            animatorSwitcherStorey.addCompletion{ [weak self] _ in
+                self!.view.isUserInteractionEnabled = true
             }
             animatorSwitcherStorey.startAnimation(afterDelay: TimeInterval(0.3))
         }
@@ -297,18 +297,18 @@ class NavigationViewController: UIViewController, UIGestureRecognizerDelegate {
             self.anotherStageButtonData = [(Int, Int, Int)].init(arrayLiteral: (inMapId, optimalWay.0, optimalWay.1),
                                                                                (outMapId, optimalWay.2, optimalWay.3))
             
-            let closure = {
-                self.storeySwitcherView.storeyNumberLabel.text! = String(inMapId)
+            let closure = { [weak self] in
+                self!.storeySwitcherView.storeyNumberLabel.text! = String(inMapId)
                 // Построение пути на карте пункта отправления
-                self.topBarView.cameraMovement(startPremiseId: self.viewModel.getIdPremiseByIdMapAndIdOnMap(inMapId, optimalWay.0),
-                                               finishPremiseId: self.viewModel.getIdPremiseByIdMapAndIdOnMap(inMapId, optimalWay.1),
+                self!.topBarView.cameraMovement(startPremiseId: self!.viewModel.getIdPremiseByIdMapAndIdOnMap(inMapId, optimalWay.0),
+                                               finishPremiseId: self!.viewModel.getIdPremiseByIdMapAndIdOnMap(inMapId, optimalWay.1),
                                                changeStorey: false)
-                self.map.drawPathBetweenAudience(v1: optimalWay.0, v2: optimalWay.1)
+                self!.map.drawPathBetweenAudience(v1: optimalWay.0, v2: optimalWay.1)
                 
                 // Кнопка для загрузки карты прибытия и построения пути
-                self.anotherStageButton.setTitle("На \(outMapId) этаж", for: .normal)
-                self.anotherStageButton.isHidden = false
-                self.storeySwitcherView.isHidden = true
+                self!.anotherStageButton.setTitle("На \(outMapId) этаж", for: .normal)
+                self!.anotherStageButton.isHidden = false
+                self!.storeySwitcherView.isHidden = true
                 }
             
             let data: [String: Any] = ["storey": inMapId, "closure": closure, "needsOpenNewMap": self.map.viewModel.idMap != inMapId]
@@ -330,22 +330,22 @@ class NavigationViewController: UIViewController, UIGestureRecognizerDelegate {
         self.anotherStageButton.isHidden = true
         self.view.addSubview(self.anotherStageButton)
         
-        self.anotherStageButton.rx.tap.bind{
+        self.anotherStageButton.rx.tap.bind{ [weak self] in
             // Загрузка карты пункта назначения/отправления
-            let data: [String: Any] = ["storey": (self.anotherStageButtonData.last?.0)!, "closure": {
+            let data: [String: Any] = ["storey": (self!.anotherStageButtonData.last?.0)!, "closure": {
                     
-                self.storeySwitcherView.storeyNumberLabel.text! = String((self.anotherStageButtonData.last?.0)!)
-                self.anotherStageButton.setTitle("На \((self.anotherStageButtonData.first?.0)!) этаж", for: .normal)
+                self!.storeySwitcherView.storeyNumberLabel.text! = String((self!.anotherStageButtonData.last?.0)!)
+                self!.anotherStageButton.setTitle("На \((self!.anotherStageButtonData.first?.0)!) этаж", for: .normal)
                 
                 // Построение пути на карте пункта назначения/отправления
-                self.topBarView.cameraMovement(startPremiseId: self.viewModel.getIdPremiseByIdMapAndIdOnMap((self.anotherStageButtonData.last?.0)!,
-                                                                                                            (self.anotherStageButtonData.last?.1)!),
-                                               finishPremiseId: self.viewModel.getIdPremiseByIdMapAndIdOnMap((self.anotherStageButtonData.last?.0)!,
-                                                                                                             (self.anotherStageButtonData.last?.2)!),
+                self!.topBarView.cameraMovement(startPremiseId: self!.viewModel.getIdPremiseByIdMapAndIdOnMap((self!.anotherStageButtonData.last?.0)!,
+                                                                                                            (self!.anotherStageButtonData.last?.1)!),
+                                               finishPremiseId: self!.viewModel.getIdPremiseByIdMapAndIdOnMap((self!.anotherStageButtonData.last?.0)!,
+                                                                                                             (self!.anotherStageButtonData.last?.2)!),
                                                changeStorey: true)
-                self.map.drawPathBetweenAudience(v1: (self.anotherStageButtonData.last?.1)!,
-                                                 v2: (self.anotherStageButtonData.last?.2)!)
-                self.anotherStageButtonData.swapAt(0, 1)
+                self!.map.drawPathBetweenAudience(v1: (self!.anotherStageButtonData.last?.1)!,
+                                                 v2: (self!.anotherStageButtonData.last?.2)!)
+                self!.anotherStageButtonData.swapAt(0, 1)
                 }, "needsOpenNewMap": true]
             
             NotificationCenter.default.post(name: Notification.Name("ChangeStorey"), object: nil, userInfo: data)
@@ -358,8 +358,8 @@ class NavigationViewController: UIViewController, UIGestureRecognizerDelegate {
         let heightBottomBar = (bottomBarView?.frame.height)! + (self.currentStartTopBarHeight - self.normalStartTopBarHeight)
         self.bottomBarIsOpen = false
         
-        let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
-            self.bottomBarView?.frame = self.bottomBarView?.frame
+        let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){ [weak self] in
+            self!.bottomBarView?.frame = self!.bottomBarView?.frame
                 .offsetBy(dx: 0, dy: heightBottomBar) as! CGRect
         }
         animator.startAnimation()
@@ -369,8 +369,8 @@ class NavigationViewController: UIViewController, UIGestureRecognizerDelegate {
         
         // Изменить положение переключателя этажей
         let offsetSwitcherStorey = heightBottomBar
-        let animatorSwitcherStorey = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
-            self.storeySwitcherView?.frame = self.storeySwitcherView?.frame
+        let animatorSwitcherStorey = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){ [weak self] in
+            self!.storeySwitcherView?.frame = self!.storeySwitcherView?.frame
                 .offsetBy(dx: 0, dy: offsetSwitcherStorey) as! CGRect
         }
         animatorSwitcherStorey.startAnimation(afterDelay: TimeInterval(0.3))
@@ -400,9 +400,9 @@ class NavigationViewController: UIViewController, UIGestureRecognizerDelegate {
                 }
                 animator.startAnimation(afterDelay: 1)
                 
-                animator.addCompletion({ _ in
-                    self.topBarView.closeGrayScreenUnderCorpChoosenView()
-                    self.topBarView.chooseCorpBackground.isUserInteractionEnabled = true
+                animator.addCompletion({ [weak self] _ in
+                    self!.topBarView.closeGrayScreenUnderCorpChoosenView()
+                    self!.topBarView.chooseCorpBackground.isUserInteractionEnabled = true
                     universityCorpsView.removeFromSuperview()
                 })
             }
@@ -598,4 +598,9 @@ class NavigationViewController: UIViewController, UIGestureRecognizerDelegate {
             self.currentTopBarHeight = (UIApplication.shared.windows.first?.safeAreaInsets.top)!
         }
     }
+    
+    deinit {
+        print("Вызван деструктор NavigationViewController")
+    }
+    
 }

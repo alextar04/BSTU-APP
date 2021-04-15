@@ -40,8 +40,8 @@ class BottomBarNavigation: UIView{
     }
     
     func initAnimationObject(){
-        self.animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){
-            self.frame = self.frame.offsetBy(dx: 0, dy: self.maxHeightBar)
+        self.animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 12.0){ [weak self] in
+            self!.frame = self!.frame.offsetBy(dx: 0, dy: self!.maxHeightBar)
         }
     }
     

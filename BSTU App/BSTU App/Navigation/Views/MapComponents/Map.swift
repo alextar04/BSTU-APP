@@ -42,9 +42,9 @@ class Map: UIScrollView, UIScrollViewDelegate{
         self.contentSize = CGSize(width: mapScheme.frame.width, height: mapScheme.frame.height)
         
         // Стартовая позиция камеры
-        UIView.animate(withDuration: 0.6, animations: {
-        self.setContentOffset(CGPoint(x: 1000,
-                                      y: 1000), animated: false)
+        UIView.animate(withDuration: 0.6, animations: { [weak self] in
+        self!.setContentOffset(CGPoint(x: 1000,
+                                       y: 1000), animated: false)
         })
         
         self.markers = self.viewModel.markerList
@@ -64,27 +64,27 @@ class Map: UIScrollView, UIScrollViewDelegate{
         setCurrentScale()
         
         // Пересчет координат при зуме
-        self.rx.didZoom.subscribe(onNext: {
-            for marker in self.markers{
-                marker.transform = CGAffineTransform(scaleX: 1.0/self.zoomScale, y: 1.0/self.zoomScale)
-                marker.mapScale = 1.0/self.zoomScale
+        self.rx.didZoom.subscribe(onNext: { [weak self] in
+            for marker in self!.markers{
+                marker.transform = CGAffineTransform(scaleX: 1.0/self!.zoomScale, y: 1.0/self!.zoomScale)
+                marker.mapScale = 1.0/self!.zoomScale
             }
-                self.setCenterMapScheme()
+                self!.setCenterMapScheme()
             }).disposed(by: disposeBag)
         
         // Закрытие маркеров при нажатии на экран
         self.mapScheme.rx.tapGesture()
             .when(.recognized)
-            .subscribe(onNext: { sender in
+            .subscribe(onNext: { [weak self] sender in
                 
-                let touchPoint = sender.location(in: self)
+                let touchPoint = sender.location(in: self!)
                 
                 var isButton = false
                 var existSelectedMarker = false
                 
-                for marker in self.markers{
-                    if (marker.frame.minX * self.zoomScale) <= touchPoint.x && (marker.frame.maxX * self.zoomScale) >= touchPoint.x
-                        && (marker.frame.minY * self.zoomScale) <= touchPoint.y && (marker.frame.maxY * self.zoomScale) >= touchPoint.y{
+                for marker in self!.markers{
+                    if (marker.frame.minX * self!.zoomScale) <= touchPoint.x && (marker.frame.maxX * self!.zoomScale) >= touchPoint.x
+                        && (marker.frame.minY * self!.zoomScale) <= touchPoint.y && (marker.frame.maxY * self!.zoomScale) >= touchPoint.y{
                         if !marker.isHidden{
                             isButton = true
                         }
