@@ -28,8 +28,8 @@
 
 
 <p align="center">
-    <img align="left" src="https://github.com/alextar04/BSTU-APP/blob/main/Github%20Images/improved_18.png" alt="centered image" width="40%">
-    <img align="right" src="https://github.com/alextar04/BSTU-APP/blob/main/Github%20Images/improved_20.png" alt="centered image" width="40%">
+    <img align="left" src="https://github.com/alextar04/BSTU-APP/blob/main/Github%20Images/improved_20.png" alt="centered image" width="40%">
+    <img align="right" src="https://github.com/alextar04/BSTU-APP/blob/main/Github%20Images/improved_18.png" alt="centered image" width="40%">
 </p>
 
 
