@@ -21,9 +21,7 @@
 - iOS 12.0 и новее 
 
 Скриншоты:
-<p align="left">
-    <img src="https://github.com/alextar04/BSTU-APP/blob/main/Github%20Images/improved_9.png" alt="centered image" width="40%">
-</p>
-<p align="left">
-    <img src="https://github.com/alextar04/BSTU-APP/blob/main/Github%20Images/improved_12.png" alt="centered image" width="40%">
+<p align="center">
+    <img align="left" src="https://github.com/alextar04/BSTU-APP/blob/main/Github%20Images/improved_9.png" alt="centered image" width="40%">
+    <img align="right" src="https://github.com/alextar04/BSTU-APP/blob/main/Github%20Images/improved_12.png" alt="centered image" width="40%">
 </p>
