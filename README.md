@@ -8,8 +8,7 @@
 
 Использованные технологии и фреймворки (Версия 1.0.0):
 - Swift 5
-- UIKit
-- CocoaPods
+- MVVM
 - RxSwift, RxCocoa, RxDataSources
 - Alamofire
 - SwiftyJSON
