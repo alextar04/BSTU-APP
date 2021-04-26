@@ -12,7 +12,7 @@ import RxCocoa
 import UIKit
 
 
-class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecognizerDelegate{
+class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecognizerDelegate, UITableViewDelegate{
     
     var needAutorization = false
     var idUser: Int!
@@ -341,7 +341,7 @@ class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecogniz
                 }
             }).disposed(by: self.disposeBag)
     }
-    
+
     
     // MARK: Установка кнопки открытия бокового меню
     func setupMenuButton(){
@@ -369,6 +369,9 @@ class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecogniz
         rightSwipe.direction = .right
         self.view.addGestureRecognizer(leftSwipe)
         self.view.addGestureRecognizer(rightSwipe)
+        self.chaptersTable.rx
+            .setDelegate(self)
+            .disposed(by: disposeBag)
     }
     
     
@@ -385,6 +388,12 @@ class PersonalCabinetMainPageViewController: UIViewController, UIGestureRecogniz
         default:
             return
         }
+    }
+    
+    
+    // MARK: Защита от случайного нажатия при свайпе ячейки раздела
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.chaptersTable.contentOffset = CGPoint(x: 0, y: 0)
     }
     
     
