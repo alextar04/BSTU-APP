@@ -58,6 +58,7 @@ class NavigationViewController: UIViewController, UIGestureRecognizerDelegate {
         self.addStoreySwitcherView()
         self.setupSwapStoreyButtonAfterCreateWay()
         self.addReturnToNavigationFromMenuByTap()
+        self.addReturnToNavigationMenuBySwipe()
     }
     
     
@@ -483,7 +484,40 @@ class NavigationViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
+    
+    // MARK: Вернуться к экрану навигации при свайпе
+    func addReturnToNavigationMenuBySwipe(){
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+        leftSwipe.direction = .left
+        self.view.addGestureRecognizer(leftSwipe)
+    }
+    
+    
+    // MARK: Обработка свайпа
+    @objc func handleSwipes(_ sender: UISwipeGestureRecognizer){
+        if self.isMenuOpen{
+            switch sender.direction {
+            case .left:
+                
+                var listDisablers: [UIView] = [
+                    self.topBarView,
+                    self.map,
+                    self.storeySwitcherView
+                ]
+                (self.bottomBarView != nil) ? listDisablers.append(self.bottomBarView!) : ()
+                
+                AppDelegate.appDelegate
+                    .rootViewController
+                    .currentViewMoving(recognizer: sender,
+                                       listDisablers: listDisablers)
+                self.isMenuOpen = false
+            default:
+                return
+            }
+        }
+    }
 
+    
     // MARK: Отмена нажатия на экран невключенном меню
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if self.isMenuOpen{
