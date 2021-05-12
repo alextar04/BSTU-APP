@@ -42,6 +42,8 @@ def PremiseAdd():
     Premise.create(id=269, idMap=0, idTypePremise=0, name="019", description="ГУК 019")
     Premise.create(id=270, idMap=0, idTypePremise=0, name="020", description="ГУК 020")
 
+    Premise.create(id=271, idMap=0, idTypePremise=4, name="Вход", description="Вход 1")
+
 
 def PremiseRemove():
     query = Premise.delete().where(Premise.idMap == 0)

@@ -41,6 +41,9 @@ def MarkerAdd():
     Marker.create(id=268, idMap=0, idPremise=269, x=1085, y=841) #019
     Marker.create(id=269, idMap=0, idPremise=270, x=1085, y=916) #020
 
+    Marker.create(id=270, idMap=0, idPremise=271, x=1975, y=990)  #Вход1
+    Marker.create(id=271, idMap=0, idPremise=255, x=1680, y=1107) #Лифт
+
 def MarkerRemove():
     query = Marker.delete().where(Marker.idMap == 0)
     query.execute()
